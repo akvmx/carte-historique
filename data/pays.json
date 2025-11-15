@@ -1,0 +1,66 @@
+[
+  {
+    "pays": "République tchèque",
+    "continent": "europe",
+    "coordonnees": [
+      49.1281,
+      16.9118
+    ]
+  },
+  {
+    "pays": "Russie",
+    "continent": "europe",
+    "coordonnees": [
+      54.71467,
+      20.43912
+    ]
+  },
+  {
+    "pays": "France",
+    "continent": "europe",
+    "coordonnees": [
+      46.2276,
+      2.2137
+    ]
+  },
+  {
+    "pays": "Empire ottoman",
+    "continent": "afrique",
+    "coordonnees": [
+      37.0,
+      15.0
+    ]
+  },
+  {
+    "pays": "Syrie",
+    "continent": "afrique",
+    "coordonnees": [
+      34.96176,
+      38.20598
+    ]
+  },
+  {
+    "pays": "Sultanat mamluk d'Egypte",
+    "continent": "afrique",
+    "coordonnees": [
+      30.02399,
+      31.25946
+    ]
+  },
+  {
+    "pays": "Empire Seljuk",
+    "continent": "afrique",
+    "coordonnees": [
+      35.73834183660386,
+      51.357234044865045
+    ]
+  },
+  {
+    "pays": "Etat indépendant du Congo",
+    "continent": "afrique",
+    "coordonnees": [
+      5.51,
+      13.03
+    ]
+  }
+]

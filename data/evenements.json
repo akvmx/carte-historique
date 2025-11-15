@@ -1,0 +1,142 @@
+[
+  {
+    "titre": "La bataille d'Austerlitz",
+    "date": "1805-12-02",
+    "date_fin": null,
+    "perpetuel": false,
+    "pays": "République tchèque",
+    "coords": [
+      49.1281,
+      16.9118
+    ],
+    "description": "L’affrontement qui s’annonce n’est pas seulement militaire : il est avant tout idéologique. D’un côté, la France napoléonienne porte les valeurs révolutionnaires — souveraineté nationale, égalité civile, modernisation administrative. De l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien. Depuis 1793, la peur de la contagion révolutionnaire a justifié la constitution successive de coalitions hostiles à Paris.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-austerlitz.html"
+  },
+  {
+    "titre": "La bataille d'Eylau",
+    "date": "1809-10-01",
+    "date_fin": "1807-02-01",
+    "perpetuel": false,
+    "pays": "Russie",
+    "coords": [
+      54.71467,
+      20.43912
+    ],
+    "description": "Description courte en une phrase",
+    "categorie": "politique",
+    "lien": "fiches/bataille-eylau.html"
+  },
+  {
+    "titre": "L'après Eylau",
+    "date": "1807-02-01",
+    "date_fin": "1808-01-01",
+    "perpetuel": false,
+    "pays": "Russie",
+    "coords": [
+      54.44668,
+      21.01586
+    ],
+    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de « clore » les guerres de la Révolution.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-friedland.html"
+  },
+  {
+    "titre": "Croisades de secours",
+    "date": "1100-01-01",
+    "date_fin": null,
+    "perpetuel": false,
+    "pays": "France",
+    "coords": [
+      46.2276,
+      2.2137
+    ],
+    "description": "la lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem.",
+    "categorie": "politique",
+    "lien": "fiches/croisades-de-secours.html"
+  },
+  {
+    "titre": "Le déclin de l'Empire ottoman",
+    "date": "1900-01-01",
+    "date_fin": null,
+    "perpetuel": false,
+    "pays": "Empire ottoman",
+    "coords": [
+      37.0,
+      15.0
+    ],
+    "description": "pourquoi l'Empire ottoman a décliné",
+    "categorie": "politique",
+    "lien": "fiches/déclin-ottoman.html"
+  },
+  {
+    "titre": "Les origines de l'Empire Ottoman",
+    "date": "1299-01-01",
+    "date_fin": "1453-01-01",
+    "perpetuel": false,
+    "pays": "Empire Ottoman",
+    "coords": [
+      37.0,
+      15.0
+    ],
+    "description": "les origines de l'Empire Ottoman",
+    "categorie": "politique",
+    "lien": "fiches/origines-ottoman.html"
+  },
+  {
+    "titre": "Le siège d'Antioche",
+    "date": "1097-01-01",
+    "date_fin": null,
+    "perpetuel": false,
+    "pays": "Syrie",
+    "coords": [
+      34.96176,
+      38.20598
+    ],
+    "description": "Description courte en une phrase",
+    "categorie": "politique",
+    "lien": "fiches/siège-antioche.html"
+  },
+  {
+    "titre": "Montée au pouvoir du Sultanat Mamluk",
+    "date": "1250-01-01",
+    "date_fin": "1580-01-01",
+    "perpetuel": false,
+    "pays": "Sultanat mamluk d'Egypte",
+    "coords": [
+      30.02399,
+      31.25946
+    ],
+    "description": "comment les Mamluks ont dead ça",
+    "categorie": "politique",
+    "lien": "fiches/sultanat-mamluk.html"
+  },
+  {
+    "titre": "Les Turcs seljukides dans le contexte des croisades",
+    "date": "0990-01-01",
+    "date_fin": "1081-01-01",
+    "perpetuel": false,
+    "pays": "Empire Seljuk",
+    "coords": [
+      35.73834183660386,
+      51.357234044865045
+    ],
+    "description": "L'expansion de l'Empire seljuk",
+    "categorie": "politique",
+    "lien": "fiches/turcs-seljukides-croisades.html"
+  },
+  {
+    "titre": "Léopold II dans l'Etat indépendant du Congo",
+    "date": "1885-01-01",
+    "date_fin": "1908-01-01",
+    "perpetuel": false,
+    "pays": "Etat indépendant du Congo",
+    "coords": [
+      5.51,
+      13.03
+    ],
+    "description": "les ravages de Léopold II au Congo",
+    "categorie": "politique",
+    "lien": "fiches/état-indépendant-du-congo.html"
+  }
+]

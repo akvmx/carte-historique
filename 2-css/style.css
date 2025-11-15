@@ -1,0 +1,279 @@
+/* ========================================
+   VARIABLES CSS (notre palette de couleurs)
+   ======================================== */
+:root {
+    /* Couleurs principales */
+    --couleur-fond: #ffffff;
+    --couleur-texte: #333333;
+    --couleur-accent: #3b82f6;
+    --couleur-bordure: #e2e8f0;
+    --couleur-panneau: #f8fafc;
+    
+    /* Tailles et espacements */
+    --espacement-petit: 8px;
+    --espacement-moyen: 16px;
+    --espacement-grand: 24px;
+    
+    /* Bordures arrondies */
+    --arrondi: 8px;
+    
+    /* Ombres */
+    --ombre-legere: 0 2px 4px rgba(0,0,0,0.1);
+    --ombre-moyenne: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Thème sombre (quand on ajoute la classe 'theme-sombre' au body) */
+body.theme-sombre {
+    --couleur-fond: #1a202c;
+    --couleur-texte: #e2e8f0;
+    --couleur-accent: #60a5fa;
+    --couleur-bordure: #4a5568;
+    --couleur-panneau: #2d3748;
+}
+
+/* ========================================
+   STYLES DE BASE
+   ======================================== */
+
+/* Réinitialisation et base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ========================================
+   EN-TÊTE
+   ======================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--espacement-moyen);
+    background: var(--couleur-panneau);
+    border-bottom: 1px solid var(--couleur-bordure);
+    box-shadow: var(--ombre-legere);
+}
+
+header h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+#theme-btn {
+    background: var(--couleur-accent);
+    color: white;
+    border: none;
+    padding: var(--espacement-petit) var(--espacement-moyen);
+    border-radius: var(--arrondi);
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+#theme-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   CONTENU PRINCIPAL
+   ======================================== */
+main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* PANNEAU DE CONTRÔLE (sidebar) */
+#panneau-controle {
+    width: 280px;
+    background: var(--couleur-panneau);
+    border-right: 1px solid var(--couleur-bordure);
+    padding: var(--espacement-grand);
+    overflow-y: auto;
+}
+
+#panneau-controle h2,
+#panneau-controle h3 {
+    margin-bottom: var(--espacement-moyen);
+    color: var(--couleur-accent);
+}
+
+/* Filtre année */
+.filtre-annee {
+    margin-bottom: var(--espacement-grand);
+    padding: var(--espacement-moyen);
+    background: var(--couleur-fond);
+    border-radius: var(--arrondi);
+    border: 1px solid var(--couleur-bordure);
+}
+
+.filtre-annee label {
+    display: block;
+    margin-bottom: var(--espacement-petit);
+    font-weight: 500;
+}
+
+#slider-annee {
+    width: 100%;
+    margin-top: var(--espacement-petit);
+}
+
+/* Boutons continents */
+.boutons-continents {
+    margin-bottom: var(--espacement-grand);
+}
+
+.btn-continent {
+    display: block;
+    width: 100%;
+    margin-bottom: var(--espacement-petit);
+    padding: var(--espacement-moyen);
+    background: var(--couleur-fond);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: var(--arrondi);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.btn-continent:hover {
+    background: var(--couleur-accent);
+    color: white;
+    transform: translateX(4px);
+}
+
+.btn-continent.actif {
+    background: var(--couleur-accent);
+    color: white;
+    border-color: var(--couleur-accent);
+}
+
+/* Statistiques */
+.stats {
+    padding: var(--espacement-moyen);
+    background: var(--couleur-fond);
+    border-radius: var(--arrondi);
+    border: 1px solid var(--couleur-bordure);
+}
+
+.stats p {
+    margin-bottom: var(--espacement-petit);
+}
+
+.stats span {
+    font-weight: bold;
+    color: var(--couleur-accent);
+}
+
+/* ========================================
+   ZONE CARTE
+   ======================================== */
+#zone-carte {
+    flex: 1;
+    position: relative;
+}
+
+#carte {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--arrondi);
+    overflow: hidden;
+}
+
+/* ========================================
+   TIMELINE (en bas)
+   ======================================== */
+#timeline {
+    height: 200px;
+    background: var(--couleur-panneau);
+    border-top: 1px solid var(--couleur-bordure);
+    padding: var(--espacement-moyen);
+    overflow-y: auto;
+    transition: height 0.3s ease;
+}
+
+#timeline h2 {
+    margin-bottom: var(--espacement-moyen);
+    color: var(--couleur-accent);
+}
+
+#contenu-timeline {
+    line-height: 1.8;
+}
+
+/* ========================================
+   RESPONSIVE (adaptation mobile)
+   ======================================== */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+    
+    #panneau-controle {
+        width: 100%;
+        height: auto;
+        max-height: 300px;
+    }
+    
+    #timeline {
+        height: 150px;
+    }
+    
+    .boutons-continents {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--espacement-petit);
+    }
+    
+    .btn-continent {
+        margin-bottom: 0;
+    }
+}
+
+/* ========================================
+   ANIMATIONS ET EFFETS
+   ======================================== */
+
+/* Animation de chargement */
+.chargement {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--espacement-grand);
+}
+
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--couleur-bordure);
+    border-top: 3px solid var(--couleur-accent);
+    border-radius: 50%;
+    animation: rotation 1s linear infinite;
+    margin-right: var(--espacement-petit);
+}
+
+@keyframes rotation {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Effet de focus pour l'accessibilité */
+button:focus,
+input:focus {
+    outline: 2px solid var(--couleur-accent);
+    outline-offset: 2px;
+}
+

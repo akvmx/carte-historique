@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Fiches Historiques - Index</title>
+    <link rel="stylesheet" href="style-fiche.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        .fiches-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .fiche-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .fiche-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            text-decoration: none;
+        }
+        
+        .card-header {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .card-date {
+            background: var(--accent-primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .card-categorie {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .card-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .theme-section {
+            margin-bottom: 3rem;
+        }
+        
+        .theme-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .stats-overview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .stat-card {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-primary);
+            display: block;
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="../index.html" class="nav-home">🗺️ Retour à la carte</a>
+            <button id="theme-toggle" class="nav-theme">🌓</button>
+        </div>
+    </nav>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="fiche-container" style="max-width: 1200px;">
+        <!-- EN-TÊTE -->
+        <header class="fiche-header">
+            <h1 class="fiche-titre">📚 Mes Fiches Historiques</h1>
+            <p class="fiche-resume">Collection personnelle de mes recherches et analyses historiques, organisées par thème et époque.</p>
+        </header>
+
+        <!-- STATISTIQUES -->
+        <div class="stats-overview">
+            <div class="stat-card">
+                <span class="stat-number">17</span>
+                <div class="stat-label">Fiches créées</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">4</span>
+                <div class="stat-label">Thèmes d'étude</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">1123</span>
+                <div class="stat-label">Années d'histoire</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">8</span>
+                <div class="stat-label">Pays étudiés</div>
+            </div>
+        </div>
+
+        <!-- FICHES PAR THÈME -->
+        
+        <!-- EMPIRE OTTOMAN -->
+        <section class="theme-section">
+            <h2 class="theme-title">🏰 Empire Ottoman</h2>
+            <div class="fiches-grid">
+                <a href="ottoman/fondation-empire.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1299</span>
+                        <span class="card-categorie">Politique</span>
+                    </div>
+                    <h3 class="card-title">Fondation de l'Empire Ottoman</h3>
+                    <p class="card-description">Osman Ier fonde la dynastie ottomane en Anatolie, début d'un empire qui durera 623 ans.</p>
+                </a>
+                
+                <a href="ottoman/prise-constantinople.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1453</span>
+                        <span class="card-categorie">Militaire</span>
+                    </div>
+                    <h3 class="card-title">Prise de Constantinople</h3>
+                    <p class="card-description">Mehmed II conquiert Constantinople, marquant l'apogée ottomane et la fin de Byzance.</p>
+                </a>
+                
+                <a href="ottoman/soliman-magnifique.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1520-1566</span>
+                        <span class="card-categorie">Politique</span>
+                    </div>
+                    <h3 class="card-title">Soliman le Magnifique</h3>
+                    <p class="card-description">Règne du plus célèbre sultan ottoman, apogée territorial et culturel de l'Empire.</p>
+                </a>
+                
+                <a href="ottoman/siege-vienne.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1683</span>
+                        <span class="card-categorie">Militaire</span>
+                    </div>
+                    <h3 class="card-title">Siège de Vienne</h3>
+                    <p class="card-description">Échec ottoman face aux Habsbourg, début du déclin de l'Empire.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- CROISADES -->
+        <section class="theme-section">
+            <h2 class="theme-title">⚔️ Croisades</h2>
+            <div class="fiches-grid">
+                <a href="croisades/premiere-croisade.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1095</span>
+                        <span class="card-categorie">Religieux</span>
+                    </div>
+                    <h3 class="card-title">Première Croisade</h3>
+                    <p class="card-description">Urbain II lance l'appel de Clermont, début de deux siècles d'expéditions.</p>
+                </a>
+                
+                <a href="croisades/prise-jerusalem.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1099</span>
+                        <span class="card-categorie">Militaire</span>
+                    </div>
+                    <h3 class="card-title">Prise de Jérusalem</h3>
+                    <p class="card-description">Les Croisés s'emparent de la Ville sainte et fondent le Royaume de Jérusalem.</p>
+                </a>
+                
+                <a href="croisades/saladin-jerusalem.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1187</span>
+                        <span class="card-categorie">Militaire</span>
+                    </div>
+                    <h3 class="card-title">Saladin reprend Jérusalem</h3>
+                    <p class="card-description">Le sultan ayyoubide reconquiert Jérusalem, déclenchant la Troisième Croisade.</p>
+                </a>
+                
+                <a href="croisades/chute-acre.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1291</span>
+                        <span class="card-categorie">Militaire</span>
+                    </div>
+                    <h3 class="card-title">Chute de Saint-Jean-d'Acre</h3>
+                    <p class="card-description">Fin des États latins d'Orient avec la prise de la dernière forteresse croisée.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- DÉCOLONISATION -->
+        <section class="theme-section">
+            <h2 class="theme-title">🌍 Décolonisation Africaine</h2>
+            <div class="fiches-grid">
+                <a href="congo/etat-independant-congo.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1885</span>
+                        <span class="card-categorie">Politique</span>
+                    </div>
+                    <h3 class="card-title">État Indépendant du Congo</h3>
+                    <p class="card-description">Léopold II crée son État privé au cœur de l'Afrique, exploitation coloniale brutale.</p>
+                </a>
+                
+                <a href="congo/independance-congo.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1960</span>
+                        <span class="card-categorie">Politique</span>
+                    </div>
+                    <h3 class="card-title">Indépendance du Congo</h3>
+                    <p class="card-description">Le Congo belge devient indépendant dans un contexte de Guerre froide.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- MONDE MÉDIÉVAL -->
+        <section class="theme-section">
+            <h2 class="theme-title">🛡️ Monde Médiéval</h2>
+            <div class="fiches-grid">
+                <a href="mamelouks/sultanat-mamelouk.html" class="fiche-card">
+                    <div class="card-header">
+                        <span class="card-date">1250</span>
+                        <span class="card-categorie">Politique</span>
+                    </div>
+                    <h3 class="card-title">Sultanat Mamelouk</h3>
+                    <p class="card-description">Les esclaves-soldats prennent le pouvoir en Égypte et deviennent une puissance régionale.</p>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- SCRIPT -->
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        
+        document.body.setAttribute('data-theme', currentTheme);
+        
+        themeToggle.addEventListener('click', () => {
+            const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+    </script>
+</body>
+</html>

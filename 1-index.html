@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Historique - Synchronisée avec Obsidian</title>
+    
+    <!-- Leaflet CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    
+    <style>
+        /* Variables CSS optimisées */
+        :root {
+            --couleur-fond: #ffffff;
+            --couleur-texte: #2d3748;
+            --couleur-accent: #3b82f6;
+            --couleur-accent-hover: #2563eb;
+            --couleur-bordure: #e2e8f0;
+            --couleur-panneau: #f8fafc;
+            --couleur-succes: #10b981;
+            --couleur-attention: #f59e0b;
+            --couleur-erreur: #ef4444;
+            
+            --espacement-xs: 4px;
+            --espacement-sm: 8px;
+            --espacement-md: 16px;
+            --espacement-lg: 24px;
+            --espacement-xl: 32px;
+            
+            --arrondi-sm: 6px;
+            --arrondi-md: 8px;
+            --arrondi-lg: 12px;
+            
+            --ombre-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --ombre-md: 0 4px 6px rgba(0,0,0,0.07);
+            --ombre-lg: 0 10px 15px rgba(0,0,0,0.1);
+            
+            --transition-rapide: 0.15s ease;
+            --transition-normale: 0.25s ease;
+        }
+
+        body.theme-sombre {
+            --couleur-fond: #1a202c;
+            --couleur-texte: #e2e8f0;
+            --couleur-accent: #60a5fa;
+            --couleur-accent-hover: #3b82f6;
+            --couleur-bordure: #4a5568;
+            --couleur-panneau: #2d3748;
+        }
+
+        /* Reset et base */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--couleur-fond);
+            color: var(--couleur-texte);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            transition: background-color var(--transition-normale), color var(--transition-normale);
+            overflow: hidden;
+        }
+
+        /* Header avec indicateur de synchronisation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--espacement-md);
+            background: var(--couleur-panneau);
+            border-bottom: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-sm);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: var(--espacement-sm);
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+        }
+
+        .sync-indicator {
+            display: flex;
+            align-items: center;
+            gap: var(--espacement-xs);
+            padding: var(--espacement-xs) var(--espacement-sm);
+            background: var(--couleur-succes);
+            color: white;
+            border-radius: var(--arrondi-sm);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .sync-indicator.syncing {
+            background: var(--couleur-attention);
+        }
+
+        .sync-indicator.error {
+            background: var(--couleur-erreur);
+        }
+
+        .sync-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .header-controls {
+            display: flex;
+            gap: var(--espacement-sm);
+            align-items: center;
+        }
+
+        .btn {
+            background: var(--couleur-accent);
+            color: white;
+            border: none;
+            padding: var(--espacement-sm) var(--espacement-md);
+            border-radius: var(--arrondi-sm);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all var(--transition-rapide);
+            display: flex;
+            align-items: center;
+            gap: var(--espacement-xs);
+        }
+
+        .btn:hover {
+            background: var(--couleur-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .btn-secondary {
+            background: var(--couleur-panneau);
+            color: var(--couleur-texte);
+            border: 1px solid var(--couleur-bordure);
+        }
+
+        .btn-secondary:hover {
+            background: var(--couleur-bordure);
+        }
+
+        /* Layout principal */
+        main {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Sidebar avec section Obsidian */
+        .sidebar {
+            width: 320px;
+            background: var(--couleur-panneau);
+            border-right: 1px solid var(--couleur-bordure);
+            overflow-y: auto;
+            transition: transform var(--transition-normale);
+            position: relative;
+            z-index: 100;
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+        }
+
+        .sidebar-content {
+            padding: var(--espacement-lg);
+        }
+
+        .control-section {
+            margin-bottom: var(--espacement-xl);
+        }
+
+        .control-section h3 {
+            margin-bottom: var(--espacement-md);
+            color: var(--couleur-accent);
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: var(--espacement-sm);
+        }
+
+        /* Section spéciale Obsidian */
+        .obsidian-section {
+            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            color: white;
+            padding: var(--espacement-lg);
+            border-radius: var(--arrondi-lg);
+            margin-bottom: var(--espacement-xl);
+        }
+
+        .obsidian-section h3 {
+            color: white;
+            margin-bottom: var(--espacement-md);
+        }
+
+        .obsidian-status {
+            display: flex;
+            align-items: center;
+            gap: var(--espacement-sm);
+            margin-bottom: var(--espacement-md);
+        }
+
+        .obsidian-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--espacement-sm);
+        }
+
+        .btn-obsidian {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-obsidian:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* Contrôles de filtre */
+        .range-control {
+            background: var(--couleur-fond);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            padding: var(--espacement-lg);
+        }
+
+        .range-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--espacement-md);
+            font-weight: 500;
+        }
+
+        .year-display {
+            background: var(--couleur-accent);
+            color: white;
+            padding: var(--espacement-xs) var(--espacement-sm);
+            border-radius: var(--arrondi-sm);
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+        }
+        
+        .year-input {
+            background: var(--couleur-accent);
+            color: white;
+            border: none;
+            padding: var(--espacement-xs) var(--espacement-sm);
+            border-radius: var(--arrondi-sm);
+            font-weight: 600;
+            min-width: 80px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+.year-input:focus {
+    outline: 2px solid white;
+    outline-offset: 2px;
+}
+
+.year-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+        .range-slider {
+            width: 100%;
+            height: 6px;
+            background: var(--couleur-bordure);
+            border-radius: 3px;
+            outline: none;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .range-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            background: var(--couleur-accent);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: var(--ombre-md);
+            transition: all var(--transition-rapide);
+        }
+
+        .range-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+        }
+
+        /* Boutons de filtre d'affichage */
+        .filter-buttons {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--espacement-sm);
+        }
+
+        .btn-filter {
+            padding: var(--espacement-sm) var(--espacement-md);
+            background: var(--couleur-fond);
+            border: 2px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-md);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition-rapide);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .btn-filter:hover {
+            border-color: var(--couleur-accent);
+            transform: translateY(-1px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .btn-filter.active {
+            background: var(--couleur-accent);
+            color: white;
+            border-color: var(--couleur-accent);
+        }
+
+        /* Boutons continents */
+        .continent-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--espacement-sm);
+        }
+
+        .btn-continent {
+            padding: var(--espacement-md);
+            background: var(--couleur-fond);
+            border: 2px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-md);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition-rapide);
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-continent:hover {
+            border-color: var(--couleur-accent);
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .btn-continent.active {
+            background: var(--couleur-accent);
+            color: white;
+            border-color: var(--couleur-accent);
+        }
+
+
+        /* Statistiques */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--espacement-md);
+        }
+
+        .stat-card {
+            background: var(--couleur-fond);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            padding: var(--espacement-lg);
+            text-align: center;
+            transition: all var(--transition-rapide);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--couleur-accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--couleur-texte);
+            margin-top: var(--espacement-xs);
+        }
+
+        /* Zone carte */
+        .map-container {
+            flex: 1;
+            position: relative;
+            background: var(--couleur-bordure);
+        }
+
+        #carte {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .toggle-sidebar {
+            position: absolute;
+            top: var(--espacement-md);
+            left: var(--espacement-md);
+            z-index: 1001;
+            background: var(--couleur-panneau);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-sm);
+            padding: var(--espacement-sm);
+            cursor: pointer;
+            box-shadow: var(--ombre-md);
+            transition: all var(--transition-rapide);
+        }
+
+        .toggle-sidebar:hover {
+            background: var(--couleur-accent);
+            color: white;
+        }
+
+        /* Timeline */
+        .timeline {
+            height: 250px;
+            background: var(--couleur-panneau);
+            border-top: 1px solid var(--couleur-bordure);
+            display: flex;
+            flex-direction: column;
+            transition: height var(--transition-normale);
+            position: relative;
+        }
+
+        .timeline.collapsed {
+            height: 50px;
+        }
+
+        .timeline-header {
+            padding: var(--espacement-md);
+            border-bottom: 1px solid var(--couleur-bordure);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--couleur-panneau);
+        }
+
+        .timeline-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--espacement-md);
+        }
+
+        .timeline-event {
+            margin-bottom: var(--espacement-md);
+            padding: var(--espacement-md);
+            background: var(--couleur-fond);
+            border-left: 4px solid var(--couleur-accent);
+            border-radius: var(--arrondi-md);
+            transition: all var(--transition-rapide);
+        }
+
+        .timeline-event:hover {
+            transform: translateX(4px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .event-date {
+            font-weight: 600;
+            color: var(--couleur-accent);
+            font-size: 0.9rem;
+        }
+
+        .event-title {
+            font-weight: 600;
+            margin: var(--espacement-xs) 0;
+        }
+
+        .event-description {
+            font-size: 0.9rem;
+            color: var(--couleur-texte);
+            opacity: 0.8;
+        }
+
+        /* Notifications */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--couleur-succes);
+            color: white;
+            padding: var(--espacement-md) var(--espacement-lg);
+            border-radius: var(--arrondi-md);
+            box-shadow: var(--ombre-lg);
+            z-index: 10000;
+            font-weight: 500;
+            transform: translateX(100%);
+            transition: transform var(--transition-normale);
+            max-width: 300px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: var(--couleur-erreur);
+        }
+
+        .notification.warning {
+            background: var(--couleur-attention);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                z-index: 2000;
+            }
+            
+            .continent-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline {
+                height: 200px;
+            }
+        }
+
+        /* Popup personnalisée pour Leaflet */
+        .leaflet-popup-content-wrapper {
+            border-radius: var(--arrondi-lg) !important;
+            box-shadow: var(--ombre-lg) !important;
+        }
+
+        .leaflet-popup-content {
+            margin: var(--espacement-md) !important;
+            line-height: 1.6 !important;
+        }
+
+        /* Indicateur de chargement */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--transition-normale);
+        }
+
+        .loading-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--couleur-bordure);
+            border-top: 4px solid var(--couleur-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Styles pour la liste des événements */
+        .events-list {
+            background: var(--couleur-fond);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            padding: var(--espacement-md);
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .event-item {
+            padding: var(--espacement-sm);
+            margin-bottom: var(--espacement-sm);
+            background: var(--couleur-panneau);
+            border-radius: var(--arrondi-sm);
+            cursor: pointer;
+            transition: all var(--transition-rapide);
+            border-left: 3px solid var(--couleur-accent);
+        }
+
+        .event-item:hover {
+            background: var(--couleur-accent);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        .event-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-date {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--couleur-accent);
+            margin-bottom: 2px;
+        }
+
+        .event-item:hover .event-date {
+            color: white;
+        }
+
+        .event-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .event-country {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .no-events {
+            text-align: center;
+            color: var(--couleur-texte);
+            opacity: 0.6;
+            font-style: italic;
+            padding: var(--espacement-lg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Overlay de chargement -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header avec indicateur de sync -->
+    <header>
+        <div class="logo">
+            <h1>🗺️ Carte Historique</h1>
+            <div class="sync-indicator" id="sync-indicator">
+                <div class="sync-dot"></div>
+                <span>Synchronisé</span>
+            </div>
+        </div>
+        <div class="header-controls">
+            <button id="refresh-btn" class="btn btn-secondary" title="Actualiser les données">
+                🔄 Actualiser
+            </button>
+            <button id="export-btn" class="btn btn-secondary" title="Exporter les données">
+                📁 Exporter
+            </button>
+            <button id="theme-btn" class="btn" title="Changer le thème">
+                🌓 Thème
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+                <!-- Section Obsidian -->
+                <section class="obsidian-section">
+                    <h3>🔮 Synchronisation Obsidian</h3>
+                    <div class="obsidian-status">
+                        <span>📊 Dernière sync:</span>
+                        <span id="last-sync">Jamais</span>
+                    </div>
+                    <div class="obsidian-actions">
+                        <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
+                            🔄 Sync
+                        </button>
+                        <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
+                            👁️ Watch
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Filtre année -->
+                <section class="control-section">
+                    <h3>📅 Période</h3>
+                    <div class="range-control">
+                        <div class="range-label">
+                            <span>Année</span>
+                            <input type="number" 
+                                id="input-annee" 
+                                class="year-input"
+                                min="-2000" 
+                                max="2024" 
+                                value="2024"
+                                placeholder="Tapez une année">
+                        </div>
+                        <input type="range" 
+                            id="slider-annee" 
+                            class="range-slider"
+                            min="-2000" 
+                            max="2024" 
+                            value="2024"
+                            aria-label="Sélecteur d'année">
+                    </div>
+                </section>
+
+                <!-- Continents -->
+                <section class="control-section">
+                    <h3>🌍 Continents</h3>
+                    <div class="continent-grid" role="group" aria-label="Filtres par continent">
+                        <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
+                        <button class="btn-continent" data-continent="europe">🇪🇺 Europe</button>
+                        <button class="btn-continent" data-continent="asie">🌏 Asie</button>
+                        <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
+                        <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
+                        <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
+                    </div>
+                </section>
+
+                <!-- Filtre d'affichage des événements -->
+                <section class="control-section">
+                    <h3>🔍 Affichage</h3>
+                    <div class="filter-buttons">
+                        <button class="btn-filter active" data-filter="year">📅 Année courante</button>
+                        <button class="btn-filter" data-filter="all">📜 Tous les événements</button>
+                    </div>
+                </section>
+
+                <!-- Statistiques -->
+                <section class="control-section">
+                    <h3>📊 Statistiques</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="nb-pays">0</div>
+                            <div class="stat-label">Pays</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="nb-evenements">0</div>
+                            <div class="stat-label">Événements</div>
+                        </div>
+                    </div>
+                </section>
+                <!-- Liste des événements de l'année -->
+                <section class="control-section">
+                <h3>📅 Événements de l'année</h3>
+                <div class="events-list" id="events-list">
+                    <p class="no-events">Aucun événement pour cette année</p>
+                </div>
+                </section>
+            </div>
+        </aside>
+
+        <!-- Zone carte -->
+        <section class="map-container">
+            <button class="toggle-sidebar" id="toggle-sidebar" title="Afficher/Masquer le panneau">
+                ☰
+            </button>
+            <div id="carte"></div>
+        </section>
+    </main>
+
+    <!-- Timeline -->
+    <footer class="timeline" id="timeline">
+        <div class="timeline-header">
+            <h2>📜 Timeline</h2>
+            <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
+                ▼
+            </button>
+        </div>
+        <div class="timeline-content" id="timeline-content">
+            <p>Cliquez sur un pays pour voir sa timeline...</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        // ========================================
+        // CLASSE PRINCIPALE AVEC SYNC OBSIDIAN
+        // ========================================
+        
+        class HistoricalMapWithSync {
+            constructor() {
+                this.map = null;
+                this.markers = null;
+                this.selectedYear = 2024;
+                this.selectedContinent = "tous";
+                this.eventDisplayMode = "year"; // "year" ou "all"
+                this.isDarkTheme = localStorage.getItem('theme-sombre') === 'true';
+                this.isLoading = false;
+                this.watchMode = false;
+                
+                // Cache et données
+                this.cache = {
+                    countries: [],
+                    events: [],
+                    lastSync: null
+                };
+                
+                // URLs des données (adaptez selon votre structure)
+                this.dataUrls = {
+                    events: 'data/evenements.json',
+                    countries: 'data/pays.json'
+                };
+                
+                this.init();
+            }
+            
+            async init() {
+                console.log("🚀 Initialisation avec synchronisation Obsidian");
+                
+                // Appliquer le thème
+                if (this.isDarkTheme) {
+                    document.body.classList.add('theme-sombre');
+                }
+                
+                // Initialiser les composants
+                this.initMap();
+                this.initControls();
+                this.initObsidianSync();
+                
+                // Charger les données
+                await this.loadData();
+                this.updateDisplay();
+                
+                console.log("✅ Carte avec sync Obsidian initialisée");
+            }
+            
+            initMap() {
+                this.map = L.map('carte', {
+                    center: [20, 0],
+                    zoom: 2,
+                    zoomControl: false
+                });
+                
+                L.control.zoom({
+                    position: 'bottomright'
+                }).addTo(this.map);
+                
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© OpenStreetMap contributors',
+                    maxZoom: 18
+                }).addTo(this.map);
+                
+                this.markers = L.layerGroup().addTo(this.map);
+            }
+            
+            initControls() {
+                // Contrôles de base
+                document.getElementById('theme-btn').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                // Boutons de filtre d'affichage
+                document.querySelectorAll('.btn-filter').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.btn-filter').forEach(b => 
+                            b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        
+                        this.eventDisplayMode = e.target.dataset.filter;
+                        this.updateDisplay();
+                    });
+                });
+                
+                // Slider année avec champ de saisie synchronisé
+                const yearSlider = document.getElementById('slider-annee');
+                const yearInput = document.getElementById('input-annee');
+
+                let debounceTimer;
+
+                // Fonction pour mettre à jour l'année
+                const updateYear = (newYear) => {
+                    clearTimeout(debounceTimer);
+                    debounceTimer = setTimeout(() => {
+                        this.selectedYear = newYear;
+                        this.updateDisplay();
+                    }, 100);
+                };
+
+                // Synchronisation slider → input
+                yearSlider.addEventListener('input', (e) => {
+                    const year = parseInt(e.target.value);
+                    yearInput.value = year;
+                    updateYear(year);
+                });
+
+                // Synchronisation input → slider
+                yearInput.addEventListener('input', (e) => {
+                    const year = parseInt(e.target.value);
+                    
+                    // Validation de l'année
+                    if (year >= -2000 && year <= 2024) {
+                        yearSlider.value = year;
+                        updateYear(year);
+                    }
+                });
+
+                // Validation quand on appuie sur Entrée
+                yearInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        const year = parseInt(e.target.value);
+                        
+                        if (year >= -2000 && year <= 2024) {
+                            yearSlider.value = year;
+                            updateYear(year);
+                            yearInput.blur(); // Enlever le focus
+                        } else {
+                            alert('Veuillez entrer une année entre -2000 et 2024');
+                            yearInput.value = this.selectedYear; // Revenir à l'ancienne valeur
+                        }
+                    }
+                });
+                
+                // Boutons continents
+                document.querySelectorAll('.btn-continent').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.btn-continent').forEach(b => 
+                            b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        
+                        this.selectedContinent = e.target.dataset.continent;
+                        this.updateDisplay();
+                    });
+                });
+                
+                // Toggle sidebar et timeline
+                document.getElementById('toggle-sidebar').addEventListener('click', () => {
+                    document.getElementById('sidebar').classList.toggle('collapsed');
+                });
+                
+                document.getElementById('toggle-timeline').addEventListener('click', () => {
+                    const timeline = document.getElementById('timeline');
+                    const button = document.getElementById('toggle-timeline');
+                    timeline.classList.toggle('collapsed');
+                    button.textContent = timeline.classList.contains('collapsed') ? '▲' : '▼';
+                });
+                
+                // Export
+                document.getElementById('export-btn').addEventListener('click', () => {
+                    this.exportData();
+                });
+                
+                // Actualiser
+                document.getElementById('refresh-btn').addEventListener('click', () => {
+                    this.loadData(true);
+                });
+            }
+            
+            initObsidianSync() {
+                // Bouton sync manuel
+                document.getElementById('sync-now').addEventListener('click', () => {
+                    this.triggerSync();
+                });
+                
+                // Toggle surveillance
+                document.getElementById('watch-toggle').addEventListener('click', () => {
+                    this.toggleWatch();
+                });
+                
+                // Polling pour vérifier les mises à jour
+                this.startPolling();
+                
+                // Mettre à jour l'affichage de la dernière sync
+                this.updateLastSyncDisplay();
+            }
+            
+            async loadData(forceReload = false) {
+                if (this.isLoading && !forceReload) return;
+                
+                this.isLoading = true;
+                this.showLoading(true);
+                this.setSyncStatus('syncing', 'Chargement...');
+                
+                try {
+                    console.log("📦 Chargement des données...");
+                    
+                    // Charger événements et pays en parallèle
+                    const [eventsResponse, countriesResponse] = await Promise.all([
+                        fetch(this.dataUrls.events + (forceReload ? '?t=' + Date.now() : '')),
+                        fetch(this.dataUrls.countries + (forceReload ? '?t=' + Date.now() : ''))
+                    ]);
+                    
+                    if (eventsResponse.ok && countriesResponse.ok) {
+                        this.cache.events = await eventsResponse.json();
+                        this.cache.countries = await countriesResponse.json();
+                        this.cache.lastSync = new Date();
+                        
+                        console.log(`✅ ${this.cache.events.length} événements et ${this.cache.countries.length} pays chargés`);
+                        this.setSyncStatus('success', 'Synchronisé');
+                        this.showNotification('📦 Données mises à jour', 'success');
+                    } else {
+                        throw new Error('Erreur de chargement des données');
+                    }
+                    
+                } catch (error) {
+                    console.error("❌ Erreur de chargement:", error);
+                    this.setSyncStatus('error', 'Erreur');
+                    this.showNotification('❌ Erreur de chargement des données', 'error');
+                    
+                    // Données de fallback si aucune donnée n'est disponible
+                    if (this.cache.events.length === 0) {
+                        this.loadFallbackData();
+                    }
+                } finally {
+                    this.isLoading = false;
+                    this.showLoading(false);
+                    this.updateLastSyncDisplay();
+                }
+            }
+            
+            loadFallbackData() {
+                console.log("🔄 Chargement des données de test");
+                
+                this.cache.countries = [
+                    { pays: "France", continent: "europe", coordonnees: [46.603354, 1.888334] },
+                    { pays: "Allemagne", continent: "europe", coordonnees: [51.165691, 10.451526] },
+                    { pays: "États-Unis", continent: "amerique", coordonnees: [37.09024, -95.712891] },
+                    { pays: "Chine", continent: "asie", coordonnees: [35.86166, 104.195397] },
+                    { pays: "Égypte", continent: "afrique", coordonnees: [26.820553, 30.802498] }
+                ];
+                
+                this.cache.events = [
+                    {
+                        pays: "France",
+                        date: "1789-07-14",
+                        titre: "Prise de la Bastille",
+                        description: "Début de la Révolution française",
+                        categorie: "politique",
+                        lien: "#"
+                    },
+                    {
+                        pays: "États-Unis",
+                        date: "1776-07-04",
+                        titre: "Déclaration d'indépendance",
+                        description: "Naissance des États-Unis",
+                        categorie: "politique",
+                        lien: "#"
+                    }
+                ];
+                
+                this.showNotification('⚠️ Données de test chargées', 'warning');
+            }
+            
+            updateDisplay() {
+                if (this.isLoading) return;
+                
+                requestAnimationFrame(() => {
+                    this.updateMarkers();
+                    this.updateStats();
+                    this.updateEventsList();
+                });
+            }
+            
+            updateMarkers() {
+                this.markers.clearLayers();
+                
+                // Filtrer les pays
+                let filteredCountries = this.cache.countries;
+                if (this.selectedContinent !== "tous") {
+                    filteredCountries = this.cache.countries.filter(
+                        country => country.continent === this.selectedContinent
+                    );
+                }
+                
+                // Créer les marqueurs
+                filteredCountries.forEach(country => {
+                    const events = this.getEventsForCountry(country.pays);
+                    if (events.length > 0) {
+                        this.createMarker(country, events);
+                    }
+                });
+            }
+            
+            isEventVisibleForYear(event, year) {
+                const eventStartYear = parseInt(event.date.split('-')[0]);
+
+                // 1) PÉRIODE DÉTERMINÉE : visible entre début et fin inclus
+                if (event.date_fin) {
+                    const eventEndYear = parseInt(event.date_fin.split('-')[0]);
+                    return eventStartYear <= year && year <= eventEndYear;
+                }
+
+                // 2) PERPÉTUEL : visible à partir de la date de début
+                if (event.perpetuel) {
+                    return eventStartYear <= year;
+                }
+
+                // 3) PONCTUEL : visible UNIQUEMENT l'année où il a lieu
+                return eventStartYear === year;
+            }
+
+            getEventsForCountry(countryName) {
+                return this.cache.events.filter(event => {
+                    // 1) On vérifie d'abord le pays
+                    if (event.pays.toLowerCase() !== countryName.toLowerCase()) {
+                        return false;
+                    }
+
+                    // 2) Mode "Tous les événements" :
+                    //    on ignore complètement l'année sélectionnée.
+                    if (this.eventDisplayMode === "all") {
+                        return true;
+                    }
+
+                    // 3) Mode "Année courante" :
+                    //    on utilise la logique commune de visibilité.
+                    return this.isEventVisibleForYear(event, this.selectedYear);
+                });
+            }
+            
+            createMarker(country, events) {
+                // 1️⃣ Vérification de base : est-ce qu'on a bien un tableau de 2 éléments ?
+                if (!country.coordonnees || 
+                    !Array.isArray(country.coordonnees) || 
+                    country.coordonnees.length !== 2) {
+                    console.warn(`❌ Coordonnées invalides pour ${country.pays}:`, country.coordonnees);
+                    return;
+                }
+                
+                // 2️⃣ Conversion en nombres (même si c'était des strings)
+                const lat = parseFloat(country.coordonnees[0]);
+                const lng = parseFloat(country.coordonnees[1]);
+                
+                // 3️⃣ Vérification que la conversion a fonctionné
+                if (isNaN(lat) || isNaN(lng)) {
+                    console.warn(`❌ Impossible de convertir en nombres pour ${country.pays}: [${country.coordonnees[0]}, ${country.coordonnees[1]}]`);
+                    return;
+                }
+                
+                // 4️⃣ Vérification que les coordonnées sont réalistes
+                if (lat < -90 || lat > 90 || lng < -180 || lng > 180) {
+                    console.warn(`❌ Coordonnées hors limites pour ${country.pays}: [${lat}, ${lng}]`);
+                    return;
+                }
+
+                const iconSize = Math.min(15 + events.length * 2, 30);
+                const customIcon = L.divIcon({
+                    html: `<div style="
+                        width: ${iconSize}px;
+                        height: ${iconSize}px;
+                        background: var(--couleur-accent);
+                        border: 3px solid white;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: white;
+                        font-weight: bold;
+                        font-size: ${Math.max(8, iconSize/3)}px;
+                        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+                    ">${events.length}</div>`,
+                    className: 'custom-marker',
+                    iconSize: [iconSize, iconSize],
+                    iconAnchor: [iconSize/2, iconSize/2]
+                });
+                
+                let popupContent = `
+                    <div style="min-width: 250px;">
+                        <h3 style="margin: 0 0 12px 0; color: var(--couleur-accent);">${country.pays}</h3>
+                        <p><strong>${events.length}</strong> événement(s)</p>
+                `;
+                
+                events.slice(0, 3).forEach(event => {
+                    const categoryIcon = this.getCategoryIcon(event.categorie);
+                    popupContent += `
+                        <div style="margin: 8px 0; padding: 12px; background: #f0f0f0; border-radius: 6px;">
+                            <div style="color: #3b82f6; font-weight: 600; margin-bottom: 4px;">
+                                ${categoryIcon} ${event.date}
+                            </div>
+                            <div style="font-weight: 600;">
+                                ${event.lien && event.lien !== '#' 
+                                    ? `<a href="${event.lien}" target="_blank" style="color: #1e40af; text-decoration: underline;">${event.titre}</a>`
+                                    : event.titre
+                                }
+                            </div>
+            <div style="font-size: 0.9rem; opacity: 0.8;">${event.description}</div>
+        </div>
+                    `;
+                });
+                
+                if (events.length > 3) {
+                    popupContent += `<p><em>... et ${events.length - 3} autre(s)</em></p>`;
+                }
+                popupContent += '</div>';
+                
+                const marker = L.marker([lat, lng], { icon: customIcon })
+                    .bindPopup(popupContent, { maxWidth: 350 })
+                    .addTo(this.markers);
+                
+                marker.on('click', () => {
+                    this.showTimeline(country.pays, events);
+                });
+
+                this.markers[country.pays] = marker;
+            }
+            
+            getCategoryIcon(category) {
+                const icons = {
+                    'politique': '🏛️',
+                    'science': '🔬',
+                    'social': '👥',
+                    'economie': '💰',
+                    'culture': '🎨',
+                    'guerre': '⚔️',
+                    'default': '📅'
+                };
+                return icons[category] || icons.default;
+            }
+            
+            showTimeline(countryName, events) {
+                const timelineContent = document.getElementById('timeline-content');
+                const timeline = document.getElementById('timeline');
+                
+                timeline.classList.remove('collapsed');
+                document.getElementById('toggle-timeline').textContent = '▼';
+                
+                let html = `<h3 style="color: var(--couleur-accent); margin-bottom: 20px;">📜 Timeline - ${countryName}</h3>`;
+                
+                if (events.length === 0) {
+                    html += `<p>Aucun événement trouvé pour ${countryName} avant ${this.selectedYear}.</p>`;
+                } else {
+                    const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    
+                    sortedEvents.forEach(event => {
+                        const categoryIcon = this.getCategoryIcon(event.categorie);
+                        html += `
+                            <div class="timeline-event">
+                                <div class="event-date">${categoryIcon} ${event.date}</div>
+                                <div class="event-title">${event.titre}</div>
+                                <div class="event-description">${event.description}</div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                timelineContent.innerHTML = html;
+            }
+            
+            updateStats() {
+                const nbPaysElement = document.getElementById('nb-pays');
+                const nbEvenementsElement = document.getElementById('nb-evenements');
+                
+                let countriesWithEvents = 0;
+                let totalEvents = 0;
+                
+                let filteredCountries = this.cache.countries;
+                if (this.selectedContinent !== "tous") {
+                    filteredCountries = this.cache.countries.filter(
+                        country => country.continent === this.selectedContinent
+                    );
+                }
+                
+                filteredCountries.forEach(country => {
+                    const events = this.getEventsForCountry(country.pays);
+                    if (events.length > 0) {
+                        countriesWithEvents++;
+                        totalEvents += events.length;
+                    }
+                });
+                
+                nbPaysElement.textContent = countriesWithEvents;
+                nbEvenementsElement.textContent = totalEvents; 
+            }
+
+            updateEventsList() {
+                const eventsList = document.getElementById('events-list');
+                let currentYearEvents = [];
+
+                if (this.eventDisplayMode === "all") {
+                    // Mode "Tous les événements" : afficher TOUS les événements de TOUTES les années
+                    currentYearEvents = [...this.cache.events];
+                    
+                    // Filtrer par continent uniquement (pas d'année)
+                    if (this.selectedContinent !== "tous") {
+                        const countriesInContinent = this.cache.countries
+                            .filter(country => country.continent === this.selectedContinent)
+                            .map(country => country.pays.toLowerCase());
+                        
+                        currentYearEvents = currentYearEvents.filter(event => 
+                            countriesInContinent.includes(event.pays.toLowerCase())
+                        );
+                    }
+                } else {
+                    // Mode "Année courante" : filtrer les événements pour l'année sélectionnée
+                    currentYearEvents = this.cache.events.filter(event => 
+                        this.isEventVisibleForYear(event, this.selectedYear)
+                    );
+
+                    // Filtrer par continent si nécessaire
+                    if (this.selectedContinent !== "tous") {
+                        const countriesInContinent = this.cache.countries
+                            .filter(country => country.continent === this.selectedContinent)
+                            .map(country => country.pays.toLowerCase());
+                        
+                        currentYearEvents = currentYearEvents.filter(event => 
+                            countriesInContinent.includes(event.pays.toLowerCase())
+                        );
+                    }
+                }
+                
+                if (currentYearEvents.length === 0) {
+                    const message = this.eventDisplayMode === "all" 
+                        ? 'Aucun événement trouvé' 
+                        : 'Aucun événement pour cette année';
+                    eventsList.innerHTML = `<p class="no-events">${message}</p>`;
+                    return;
+                }
+
+                // Trier par date
+                currentYearEvents.sort((a, b) => new Date(a.date) - new Date(b.date));
+                
+                let html = '';
+                currentYearEvents.forEach(event => {
+                    const categoryIcon = this.getCategoryIcon(event.categorie);
+                    
+                    html += `
+                        <div class="event-item" onclick="historicalMap.focusOnCountry('${event.pays}')">
+                            <div class="event-date">${categoryIcon} ${event.date}</div>
+                            <div class="event-title">${event.titre}</div>
+                            <div class="event-country">${event.pays}</div>
+                        </div>
+                    `;
+                });
+                
+                eventsList.innerHTML = html;
+            }
+
+            focusOnCountry(countryName) {
+                // Trouver le pays
+                const country = this.cache.countries.find(c => 
+                    c.pays.toLowerCase() === countryName.toLowerCase()
+                );
+                
+                if (country && country.coordonnees) {
+                    // Centrer la carte sur le pays
+                    this.map.setView(country.coordonnees, 6);
+                    
+                    // Montrer les événements du pays dans la timeline
+                    const events = this.getEventsForCountry(country.pays);
+                    this.showTimeline(country.pays, events);
+                    
+                    // Fermer la sidebar sur mobile
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('sidebar').classList.add('collapsed');
+                    }
+                }
+            }
+                        
+                        animateNumber(element, targetValue) {
+                            const currentValue = parseInt(element.textContent) || 0;
+                            const increment = Math.ceil((targetValue - currentValue) / 10);
+                            
+                            if (currentValue !== targetValue) {
+                                element.textContent = Math.max(0, currentValue + increment);
+                                setTimeout(() => this.animateNumber(element, targetValue), 50);
+                            } else {
+                                element.textContent = targetValue;
+                            }
+                        }
+            
+            // ========================================
+            // FONCTIONS SYNCHRONISATION OBSIDIAN
+            // ========================================
+            
+            async triggerSync() {
+                this.setSyncStatus('syncing', 'Synchronisation...');
+                this.showNotification('🔄 Synchronisation en cours...', 'info');
+                
+                try {
+                    // Simplement recharger les données depuis les fichiers JSON locaux
+                    await this.loadData(true);
+                    this.setSyncStatus('success', 'Synchronisé');
+                    this.showNotification('✅ Données rechargées', 'success');
+        
+                    // Mettre à jour l'affichage de la dernière sync
+                    this.cache.lastSync = new Date();
+                    this.updateLastSyncDisplay();
+
+                } catch (error) {
+                    console.error("❌ Erreur de synchronisation:", error);
+                    this.setSyncStatus('error', 'Erreur sync');
+                    this.showNotification('❌ Erreur de synchronisation', 'error');
+                }
+            }
+            
+            toggleWatch() {
+                this.watchMode = !this.watchMode;
+                const button = document.getElementById('watch-toggle');
+                
+                if (this.watchMode) {
+                    button.textContent = '👁️ Stop';
+                    button.style.background = 'rgba(239, 68, 68, 0.2)';
+                    this.startPolling(5000); // Poll plus fréquent
+                    this.showNotification('👁️ Surveillance activée', 'success');
+                } else {
+                    button.textContent = '👁️ Watch';
+                    button.style.background = 'rgba(255, 255, 255, 0.2)';
+                    this.startPolling(30000); // Poll normal
+                    this.showNotification('⏹️ Surveillance désactivée', 'info');
+                }
+            }
+            
+            startPolling(interval = 30000) {
+                if (this.pollInterval) {
+                    clearInterval(this.pollInterval);
+                }
+                
+                this.pollInterval = setInterval(() => {
+                    this.checkForUpdates();
+                }, interval);
+            }
+            
+            async checkForUpdates() {
+                // Mode local - pas de vérification serveur
+                console.debug("Mode local actif - pas de vérification serveur");
+                return;
+            }
+            
+            setSyncStatus(status, text) {
+                const indicator = document.getElementById('sync-indicator');
+                const statusText = indicator.querySelector('span');
+                
+                indicator.className = `sync-indicator ${status}`;
+                statusText.textContent = text;
+            }
+            
+            updateLastSyncDisplay() {
+                const lastSyncElement = document.getElementById('last-sync');
+                if (this.cache.lastSync) {
+                    const time = this.cache.lastSync.toLocaleTimeString('fr-FR', {
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    lastSyncElement.textContent = time;
+                } else {
+                    lastSyncElement.textContent = 'Jamais';
+                }
+            }
+            
+            // ========================================
+            // FONCTIONS UTILITAIRES
+            // ========================================
+            
+            toggleTheme() {
+                this.isDarkTheme = !this.isDarkTheme;
+                
+                if (this.isDarkTheme) {
+                    document.body.classList.add('theme-sombre');
+                } else {
+                    document.body.classList.remove('theme-sombre');
+                }
+                
+                localStorage.setItem('theme-sombre', this.isDarkTheme);
+            }
+            
+            showLoading(show) {
+                const overlay = document.getElementById('loading-overlay');
+                if (show) {
+                    overlay.classList.add('show');
+                } else {
+                    overlay.classList.remove('show');
+                }
+            }
+            
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification ${type}`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => notification.classList.add('show'), 10);
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => document.body.removeChild(notification), 300);
+                }, 3000);
+            }
+            
+            exportData() {
+                const data = {
+                    countries: this.cache.countries,
+                    events: this.cache.events,
+                    metadata: {
+                        exportDate: new Date().toISOString(),
+                        selectedYear: this.selectedYear,
+                        selectedContinent: this.selectedContinent,
+                        lastSync: this.cache.lastSync
+                    }
+                };
+                
+                const dataStr = JSON.stringify(data, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `carte-historique-${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                this.showNotification('📁 Données exportées', 'success');
+            }
+        }
+        
+        // ========================================
+        // API PUBLIQUE POUR COMPATIBILITÉ
+        // ========================================
+        
+        let historicalMap;
+        
+        function ajouterPays(nom, continent, latitude, longitude) {
+            if (historicalMap) {
+                const newCountry = {
+                    pays: nom,
+                    continent: continent,
+                    coordonnees: [latitude, longitude]
+                };
+                historicalMap.cache.countries.push(newCountry);
+                historicalMap.updateDisplay();
+                historicalMap.showNotification(`✅ Pays ajouté : ${nom}`, 'success');
+            }
+        }
+        
+        function ajouterEvenement(pays, date, titre, description, categorie = 'general') {
+            if (historicalMap) {
+                const newEvent = {
+                    pays: pays,
+                    date: date,
+                    titre: titre,
+                    description: description,
+                    categorie: categorie,
+                    lien: '#'
+                };
+                historicalMap.cache.events.push(newEvent);
+                historicalMap.updateDisplay();
+                historicalMap.showNotification(`✅ Événement ajouté : ${titre}`, 'success');
+            }
+        }
+        
+        function synchroniserMaintenant() {
+            if (historicalMap) {
+                historicalMap.triggerSync();
+            }
+        }
+        
+        function activerSurveillance() {
+            if (historicalMap && !historicalMap.watchMode) {
+                historicalMap.toggleWatch();
+            }
+        }
+        
+        // ========================================
+        // INITIALISATION
+        // ========================================
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("🚀 Initialisation de la carte avec synchronisation Obsidian");
+            
+            historicalMap = new HistoricalMapWithSync();
+            
+            // Exposer pour le debugging
+            window.historicalMap = historicalMap;
+            window.ajouterPays = ajouterPays;
+            window.ajouterEvenement = ajouterEvenement;
+            window.synchroniserMaintenant = synchroniserMaintenant;
+            window.activerSurveillance = activerSurveillance;
+            
+            console.log("✅ Application avec sync Obsidian initialisée !");
+            console.log("💡 Nouvelles commandes disponibles :");
+            console.log("- synchroniserMaintenant()");
+            console.log("- activerSurveillance()");
+        });
+        
+        // Gestion des erreurs globales
+        window.addEventListener('error', function(e) {
+            console.error('Erreur JavaScript:', e.error);
+            if (historicalMap) {
+                historicalMap.showNotification('❌ Une erreur est survenue', 'error');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+---
+type: évènement
+titre: "Croisades de secours"
+date: "1100"
+pays: "France"
+coords: [46.2276,2.2137]
+description: "la lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem."
+categorie: "politique"
+lien: "fiches/croisades de secours.html"
+---
+
+## La nécessité des renforts
+
+Suite à la conquête de Jérusalem, les États latins d'Orient se retrouvent dans une position précaire. Avec seulement 2 à 3000 hommes à Jérusalem, entourés par un monde musulman certes désuni mais numériquement bien supérieur, leur survie est loin d'être assurée. Les autres possessions franques - la principauté d'Antioche, le comté d'Édesse et le futur comté de Tripoli - sont dans une situation tout aussi délicate.
+
+Ces établissements francs ont un besoin urgent de renforts, non seulement pour défendre leurs forteresses, mais aussi pour peupler et cultiver les terres environnantes. Cette faiblesse n'échappe pas au monde musulman : dès 1105, le damascène al-Sulami évoque leur petit nombre, leur manque de ravitaillement et d'équipement.
+
+## L'enthousiasme en Europe
+
+Quand la nouvelle de la délivrance de Jérusalem arrive en Europe durant l'été 1099, c'est l'euphorie. Le retour progressif des croisés comme Robert de Normandie, Robert de Flandre, Eustache de Boulogne et Gaston de Béarn alimente l'engouement. Ces vétérans, fidèles à leurs promesses envers Godefroy de Bouillon et Tancrède de leur envoyer des renforts, racontent des récits souvent embellis de leurs aventures et de la splendeur des contrées orientales.
+
+Le message se répand : les États latins d'Orient ont besoin de bras vaillants pour les défendre et de familles pour les peupler. Tout reste à conquérir pour les audacieux. Ce message est d'autant mieux reçu que le pape Urbain II (mort avant d'apprendre la prise de Jérusalem) n'avait cessé d'encourager l'envoi de renforts en hommes, navires, vivres, matériel et argent vers l'Orient.
+
+## La première expédition : les Lombards (1100-1101)
+
+La première expédition quitte l'Europe le 13 septembre 1100. Elle est majoritairement composée de Lombards dirigés par l'archevêque de Milan, Anselme de Buis, accompagné des comtes Albert de Biandrate et Guibert de Parme, ainsi que de Hugues de Montebello.
+
+Ces Lombards avaient déjà participé aux croisades populaires et s'étaient associés aux croisés allemands contre les croisés français, contribuant au désastre de ces expéditions près de Nicée. Majoritairement composée de personnes peu disciplinées et d'une minorité de véritables chevaliers, cette troupe pose rapidement problème lors de sa traversée des territoires byzantins.
+
+Malgré les tentatives de l'empereur Alexis Ier Comnène de la diviser en trois contingents solidement encadrés, cette foule indisciplinée ravage la campagne environnante. L'empereur parvient finalement à les cantonner à Constantinople en mars 1101, espérant les faire traverser le Bosphore rapidement. Mais les Lombards refusent de partir, préférant attendre l'arrivée d'autres croisés dont ils ont appris le départ récent.
+
+Lorsque l'empereur tente de les presser en leur coupant les vivres, ils attaquent les murailles de Constantinople par la porte de Gyrolimne et réussissent même à pénétrer dans la cour du palais des Blachernes où réside l'empereur. Heureusement, leurs chefs Anselme de Buis et Albert de Biandrate, présents au palais, parviennent à les calmer. Raymond de Saint-Gilles, arrivé à Constantinople durant l'été 1100, dissuade l'empereur de massacrer ces trouble-fête et convainc les Lombards de s'installer fin avril dans un camp près de Nicomédie pour attendre les autres croisés.
+
+## La deuxième expédition : Étienne de Blois et les Français
+
+Parmi ces autres croisés figure Étienne de Blois, que certains accusent d'avoir fui à Antioche pendant la première croisade. Rentré chez lui, il est pressé par sa femme Adèle de retourner en Orient pour accomplir son vœu, sous peine d'excommunication.
+
+Il repart donc au printemps 1101 et rencontre en chemin d'autres croisés français menés par Étienne de Bourgogne, l'évêque de Soissons Hugues de Pierrefonds, et Hugues de Bourgogne. Ils sont rejoints par un petit contingent allemand dirigé par le connétable de l'empereur Henri IV, Conrad, avec qui ils traversent l'Italie puis l'Adriatique avant d'arriver à Constantinople en mai 1101.
+
+Ils sont bien accueillis par l'empereur et retrouvent Raymond de Saint-Gilles, vétéran respecté de la première croisade, qui est désigné comme guide de cette nouvelle expédition. Tous acceptent sans problème son leadership, y compris les Lombards, ce qui témoigne de sa bonne réputation à l'époque.
+
+Fin mai, cette troupe estimée à environ 60 000 personnes (chiffre probablement exagéré) part de Nicomédie vers Dorylée, accompagnée par 500 Petchénègues envoyés par Alexis sous le commandement du général Tzitas.
+
+## Le choix fatal : la route vers Mélitène
+
+Étienne et Raymond suggèrent d'emprunter la route via Dorylée puis Konya, déjà utilisée par la première croisade. Mais les Lombards, admirateurs de Bohémond de Tarente, refusent. Ils veulent aller délivrer leur héros, emprisonné depuis août 1100 par l'émir danishmendide Malik Ghazi Gümüshtekin à Niksar, au nord-est de l'Anatolie.
+
+Plutôt que de suivre la route directe vers la Syrie, ils insistent pour faire un détour de plus de 1000 kilomètres en terrain inconnu, aride et hostile. Certains se sentent tellement invincibles qu'ils envisagent même, après avoir libéré Bohémond, de marcher jusqu'au nord de l'Irak pour ensuite descendre et prendre Bagdad.
+
+Malgré les avertissements de Raymond et d'Étienne sur les dangers de s'attarder en Anatolie avec les Turcs à leurs trousses, la décision est prise de partir vers l'est, au-delà de la rivière Sangarius (Sakarya) et à travers le massif de l'Ala Dağ en direction d'Ankara. Ils prennent cette ville le 23 juin, peu défendue, et la remettent à Alexis comme convenu.
+
+Ensuite, ils se dirigent vers le nord-est, vers Gangra (l'actuelle Çankırı) en Paphlagonie méridionale, puis vers Amasya et Niksar, possessions des Danishmendides. Mais le terrain est inhospitalier et le sultan de Rum, Kılıç Arslan, a ravagé le pays devant eux, ne laissant ni nourriture ni eau. De plus, il a prévenu Malik Ghazi qui, oubliant leurs querelles, s'allie à lui et demande même l'aide de Ridwan d'Alep.
+
+## La défaite à Merzifon
+
+Début juillet, les croisés tentent de s'emparer de Gangra mais échouent face à la forteresse bien défendue. Souffrant déjà de la faim et de la soif, ils commencent à écouter Raymond qui, pressentant le désastre, propose de se diriger vers Kastamonu puis vers un port byzantin comme Amasra ou Sinop.
+
+Le chemin vers Kastamonu est éprouvant, d'autant plus que les Turcs de Kılıç Arslan les harcèlent constamment, frappant alternativement l'avant et l'arrière de la colonne. À l'avant, 700 chevaliers lombards tombent dans une embuscade et cèdent à la panique, abandonnant l'infanterie jusqu'à ce qu'Étienne de Blois les rallie pour une contre-attaque. À l'arrière, Raymond assure comme d'habitude cette position difficile, protégeant les traînards.
+
+Le harcèlement turc est tel que les croisés doivent avancer en formation compacte, renonçant aux équipes de ravitaillement et d'éclaireurs. Près de Kastamonu, les chefs prennent conscience de l'urgence de rejoindre rapidement la côte, mais les Lombards s'y opposent encore, voulant toujours marcher vers l'est pour délivrer Bohémond.
+
+Forcés par cet entêtement, ils traversent le fleuve Halys (Kızılırmak), entrant en territoire danishmendide. Ils brûlent par erreur le premier village qu'ils rencontrent, qui est chrétien. Près de la ville de Merzifon, entre le fleuve et Amasya, le connétable Conrad tombe dans une embuscade majeure où il perd plusieurs centaines de chevaliers allemands.
+
+Raymond, comprenant que l'ennemi se prépare à une bataille décisive, dispose ses troupes en conséquence vers le 5 août. Les forces turques combinées de Kılıç Arslan, Malik Ghazi et Ridwan attaquent alors avec leur tactique habituelle : volées de flèches à distance, feintes de retraite et contre-attaques fulgurantes.
+
+Les Lombards sont les premiers à paniquer et à fuir, avec le comte Albert de Biandrate en tête, suivis des Petchénègues du général Tzitas. Raymond, avec une mince garde provençale, se réfugie sur une colline où il résiste vaillamment jusqu'à l'arrivée d'Étienne de Blois et d'un autre chef à son secours. Pendant ce temps, privés des Lombards, Français et Allemands tiennent jusqu'au soir.
+
+À ce moment-là, épuisé, Raymond déclare forfait et s'enfuit dans la nuit avec ce qui lui reste de garde provençale et d'escorte byzantine jusqu'au port de Bafra, à l'embouchure du Halys, d'où il prendra un navire pour Constantinople. Cette fuite nuira considérablement à sa réputation. Les autres barons fuient à leur tour, repassant le Halys avant de longer progressivement la côte jusqu'à Constantinople, où ils retrouveront Raymond à l'automne.
+
+Cette version des faits, défavorable à Raymond, est rapportée par la plupart des chroniqueurs influencés par la propagande normande contre l'empereur byzantin. Anne Comnène, dans l'Alexiade, donne une version différente : les barons, voyant la bataille perdue, se tournent ensemble vers Raymond et Tzitas pour qu'ils les guident vers la ville byzantine la plus proche, avant de fuir tous ensemble.
+
+Quoi qu'il en soit, c'est un désastre complet. Seuls les chevaliers montés peuvent s'échapper, les fantassins étant massacrés ou réduits en esclavage, notamment les Lombards. Les chroniqueurs parlent de dizaines de milliers de morts.
+
+## La deuxième défaite : le comte de Nevers
+
+Pendant que les survivants de cette première expédition se réfugient à Constantinople, une deuxième armée arrive. Partie avant Étienne de Blois en février 1101, elle est dirigée par Guillaume Ier de Nevers avec environ 15 000 hommes. Cette troupe, remarquablement disciplinée, est bien accueillie par Alexis à Constantinople entre fin mai et mi-juin.
+
+S'arrêtant peu à Constantinople, Guillaume talonne ses prédécesseurs. Apprenant à Nicomédie leur prise d'Ankara (23 juin), il débarque fin juillet mais perd leur trace, personne ne pouvant lui dire où ils sont allés. Il prend donc logiquement la route de la première croisade vers Konya, toujours dans un ordre impeccable malgré le peu de ravitaillement disponible.
+
+Konya étant bien défendue, Guillaume ne s'y attarde pas et continue sa route. Mais Gümüshtekin et Kılıç Arslan, forts de leur récent succès, descendent rapidement vers le sud pour lui couper la route à Héraclée (l'actuelle Ereğli). Malgré leur discipline impressionnante, les Nivernais, épuisés par la faim, la soif et la chaleur, sont encerclés et massacrés vers fin août, alors qu'ils étaient presque arrivés en Cilicie.
+
+Seul le comte et quelques chevaliers réussissent à briser l'encerclement pour atteindre quelques jours plus tard Germanicopolis (l'actuelle Ermenek), une forteresse byzantine. Le gouverneur leur offre une escorte petchénègue pour les conduire à Antioche, mais ces mercenaires les abandonnent dans le désert après les avoir détroussés.
+
+## La troisième défaite : Aquitains et Bavarois
+
+Une troisième et dernière armée arrive près de Constantinople. Composée d'environ 60 000 pèlerins aquitains et bavarois, elle est menée par des personnages importants : le duc Guillaume IX d'Aquitaine, célèbre troubadour et neveu par alliance de Raymond ; l'archevêque de Lyon, Hugues de Die ; Hugues de Vermandois, revenu pour accomplir son vœu de pèlerinage ; le duc de Bavière Welf IV, redoutable guerrier ; l'archevêque Thiémon de Salzbourg ; et la margravine douairière Ida d'Autriche, qui dirige sa propre armée.
+
+Cette troupe descend le Danube avant de traverser les Balkans, mais contrairement aux Nivernais, elle cause tant de désordres aux environs d'Andrinople qu'Alexis doit envoyer son armée pour les contenir. Il faut toute la diplomatie des deux ducs pour calmer leurs troupes. Bien reçus à Constantinople vers fin mai ou début juin 1101, ils sont rapidement envoyés au-delà du Bosphore, tandis qu'une bonne partie des non-combattants est directement dirigée vers la Palestine par bateau.
+
+Au lieu de se hâter pour rattraper le comte de Nevers, les ducs Guillaume d'Aquitaine et Welf de Bavière préfèrent éviter ce rapprochement. Guillaume, en tant que neveu par alliance de Raymond, a des griefs contre lui concernant l'héritage du comté de Toulouse. Quant à Welf, fervent soutien du pape Grégoire VII et opposant à l'empereur Henri IV, il ne souhaite pas chevaucher aux côtés du connétable Conrad.
+
+Cette armée préfère donc s'attarder cinq semaines sur le Bosphore avant de se diriger vers Dorylée puis Konya, suivant la route de la première croisade et des Nivernais. Le ravitaillement est encore plus difficile qu'auparavant. Ils passent par Philomelion (l'actuelle Akşehir), complètement déserte, puis avancent vers Konya, toujours affamés.
+
+À Konya, la ville est également déserte : devant cette armée bien plus grande que celle de Nevers, la garnison turque s'est enfuie en prenant soin de ne rien laisser à manger. C'est pendant que ces Franco-Allemands affamés cherchent de la nourriture que les Turcs massacrent les Nivernais un peu plus loin à Héraclée.
+
+Affamés, assoiffés et épuisés, les troupes aquitano-bavaroises avancent ensuite vers Héraclée, sans cesse harcelées par des Turcs de plus en plus nombreux. Début septembre, ils arrivent à Héraclée, déserte elle aussi, mais aperçoivent derrière elle l'une des rares rivières pérennes d'Anatolie, l'Iris. Assoiffés, ils s'y précipitent en désordre.
+
+Les Turcs, embusqués sur l'autre rive, les encerclent. Dans la panique, les croisés se gênent mutuellement, les fantassins incapables de se déplacer à cause des cavaliers, et vice-versa. Le massacre est inévitable.
+
+Quelques chefs réussissent néanmoins à s'échapper. Guillaume IX d'Aquitaine et son écuyer atteignent Tarse en Cilicie après plusieurs jours d'errance. Hugues de Vermandois, grièvement blessé, est transporté à Tarse où il agonise avant de mourir le 18 octobre. Welf de Bavière s'en sort avec très peu d'écuyers en abandonnant son armure. L'archevêque Thiémon est probablement exécuté. Quant à la margravine Ida d'Autriche, elle disparaît, donnant naissance à des légendes selon lesquelles elle aurait fini dans un harem oriental.
+
+## Conséquences et bilan
+
+Les survivants se retrouvent à l'automne 1101 : Guillaume d'Aquitaine, Welf de Bavière et Guillaume de Nevers à Antioche, bien accueillis par Tancrède qui gouverne en l'absence de Bohémond ; Étienne de Blois, Étienne de Bourgogne, Albert de Biandrate et Conrad à Constantinople autour de Raymond et d'Alexis. Ce dernier, malgré son amertume face à leur échec, leur fournit des navires entre novembre 1101 et janvier 1102 pour qu'ils puissent rejoindre la Syrie.
+
+Tous arrivent à Saint-Siméon, bien accueillis par Tancrède, sauf Raymond dont le navire est mystérieusement détourné vers Tarse où un chevalier normand, Bernard l'Étranger, l'arrête au nom de la chrétienté pour l'avoir trahie en fuyant à Merzifon.
+
+Ces croisades de renfort se soldent par un échec retentissant : les relations latino-byzantines sont au plus bas, les Turcs reprennent confiance pour la première fois depuis cinq ans, et la route terrestre vers la Syrie est définitivement bloquée. Comme le dit Michel Balard, "l'échec retentissant de la croisade de 1101 souligne par contraste le caractère miraculeux des succès obtenus en 1097-1099".
+
+Au lieu des nombreux renforts espérés, les États latins d'Orient n'accueillent qu'une poignée de survivants, estimée à 3 000 hommes - ce qui double néanmoins les effectifs de Jérusalem. Ces survivants sont dirigés par des chefs ambitieux et rivaux, s'ajoutant aux tensions déjà existantes sur place.
+
+## L'ampleur des pertes
+
+L'ampleur de ces croisades de renfort est considérable. Si les chroniqueurs avancent des chiffres souvent exagérés (jusqu'à 200 000 à 300 000 participants), les estimations modernes sont plus mesurées : environ 50 000 personnes pour le premier convoi, 15 000 pour le second et 50 000 à 60 000 pour le troisième, soit un total d'environ 100 000 à 125 000 personnes, comparable à la première croisade estimée à 60 000-100 000 croisés au moment du franchissement du Bosphore.
+
+Comme le note Joshua Prawer, "ces nouvelles croisades ne furent pas numériquement inférieures à la première, mais leur échec les priva de la gloire et de la renommée qu'avait obtenues celle-ci".
+
+## Impact à long terme sur les États latins d'Orient
+
+Avec l'échec de ces croisades de renfort, le quotidien des États latins d'Orient jusqu'à leur fin prend forme : ils seront maintenus par un petit nombre de combattants compensant leur infériorité numérique par une prodigieuse maîtrise de l'architecture militaire, une supériorité au corps à corps grâce à leur cavalerie lourde, et une exploitation habile de la désunion du monde musulman et de son désintérêt relatif pour la côte méditerranéenne.
+
+La route terrestre étant bloquée, seule la voie maritime reste disponible, comme le note Prawer : "les croisés ne pouvaient plus attendre d'être secourus que par la mer, et les bateaux du temps n'étaient en mesure de transporter que des effectifs limités, incapables de modifier le rapport des forces sinon au prix d'un immense effort" financier et logistique.
+
+Cette situation profite à certains : les Pisans, les Génois et les Vénitiens qui s'enrichissent grâce au monopole des voies maritimes et étendent leur influence (ce qui aboutira plus tard à des catastrophes comme le sac de Constantinople en 1204) ; certaines principautés arméniennes qui échappent à la tutelle byzantine tout en redoutant les Turcs ; et les Normands d'Antioche sous Tancrède, qui profitent de l'occasion pour remettre la main sur la Cilicie en toute impunité, ce qui explique la présence de Bernard l'Étranger à Tarse et l'arrestation de Raymond.

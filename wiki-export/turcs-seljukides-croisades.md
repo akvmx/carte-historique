@@ -1,0 +1,65 @@
+---
+type: évènement
+titre: "Les Turcs seljukides dans le contexte des croisades"
+date: "990"
+date_fin: "1081"  # ← Optionnel : pour événements avec durée
+pays: "Empire Seljuk"
+coords: [35.73834183660386, 51.357234044865045]  # ← Trouvez sur Google Maps
+description: "L'expansion de l'Empire seljuk"
+categorie: "politique"  # ← politique, guerre, science, culture, economie, social
+lien: fiches/turcs-seljukides-croisades.html
+---
+
+# Titre principal de votre article
+
+## Déroulement des événements
+
+## L'ascension des Turcs en Asie centrale (990)
+
+Après les conquêtes arabes en Transoxiane, dans l'actuel Ouzbékistan et Afghanistan, la dynastie iranienne locale des Samanides a pris le contrôle de la région au IXe siècle. Agissant officiellement pour le compte du calife de Bagdad, ils exerçaient dans les faits un pouvoir quasi indépendant. Leur territoire s'étendait également sur le Khorasan, englobant une grande partie de l'Afghanistan, de l'Ouzbékistan, du Tadjikistan, du Turkménistan et de l'Iran oriental.
+
+Ces Samanides menaient de rudes combats à leurs frontières contre les invasions venues des steppes et, pour sacraliser leur lutte, entreprirent de convertir ces peuples à l'islam. Certains chefs barbares acceptèrent cette conversion, devenant mercenaires au service des Samanides et comprenant rapidement le potentiel politique considérable que leur offrait cette nouvelle religion.
+
+Dans les années 990, alors que la dynastie samanide déclinait, elle engagea des mercenaires turcs convertis, les Ghaznévides, pour faire face à l'invasion d'autres Turcs convertis, les Karakhanides. La situation se détériora rapidement : en 999, les Karakhanides occupèrent la Transoxiane tandis que les Ghaznévides s'emparèrent de l'intégralité du Khorasan, condamnant les Samanides à disparaître.
+
+## L'émergence de l'Empire seldjoukide (1040)
+
+Parallèlement à ces événements, d'autres Turcs convertis, les Seldjoukides, tirant leur nom de leur premier chef quasi mythologique Seljuk, avaient combattu pour les Samanides avant de nomadiser en Transoxiane. Leur destin bascula lorsque leur chef Toghrul Beg, futur fondateur de l'Empire, vainquit les Ghaznévides à Merv en 1040, s'emparant ainsi de l'intégralité du Khorasan.
+
+L'intelligence politique de Toghrul Beg se révéla déterminante : il comprit rapidement l'intérêt de se "civiliser" en adoptant la culture et l'administration arabo-persane, transformant ainsi son statut de chef de bande en véritable chef d'État. Sa stratégie s'avéra fructueuse lorsque le calife abbasside de Bagdad, chef religieux sunnite, l'appela à son secours pour se libérer de la tutelle des émirs iraniens Bouyides, de confession chiite.
+
+Toghrul Beg saisit cette opportunité, écrasa ses adversaires ainsi que quelques révoltes parmi ses opposants et cousins, et accéda au prestigieux titre de "Sultan, roi de l'Orient et de l'Occident", devenant ainsi le champion officiel du sunnisme. Cette consécration lui permit de légitimer ses futures conquêtes par la notion de guerre sainte musulmane, transformant un chef nomade qui "élevait trois moutons dans le désert" en souverain d'un empire immense.
+
+## La consolidation et l'expansion
+
+L'Empire seldjoukide se substitua progressivement à l'ancien empire arabe, combinant conquêtes militaires et administration efficace. Les sultans, bien meilleurs guerriers qu'administrateurs, confièrent la gestion de l'empire à des hommes compétents comme Nizam al-Mulk, pendant qu'ils poursuivaient leurs campagnes militaires pour étendre ou consolider leur pouvoir.
+
+Alp Arslan, le "lion héroïque", neveu et successeur de Toghrul Beg, illustra parfaitement cette dynamique. Accusé par certains d'être "un poil efféminé", il répondit en menant de vigoureuses campagnes contre ses cousins et ses oncles, contre la dynastie Mirdaside d'Alep, et en Transoxiane où il finit par périr.
+
+## La bataille décisive de Manzikert (1071)
+
+Des bandes turques menaient depuis longtemps des incursions en Anatolie, harcelant l'Empire byzantin qui, pour se protéger, avait annexé les royaumes arméniens d'extrême Anatolie, provoquant le mécontentement de ces derniers. La situation de Byzance s'était considérablement détériorée depuis le début du XIe siècle : l'Empire était grignoté de toutes parts par des aventuriers turcs en Anatolie, des Normands en Italie du Sud, et d'autres groupes dans les Balkans. Les relations religieuses entre Rome et Constantinople avaient atteint leur point le plus bas, tandis que des factions internes se disputaient le pouvoir.
+
+La puissance excessive de l'armée et le trésor vide poussèrent l'empereur Constantin X Doukas à réduire les effectifs militaires malgré les problèmes aux frontières, offrant aux Turcs une occasion inespérée d'intensifier leurs raids. Romain IV Diogène, ancien général devenu empereur, tenta de redresser la situation en réunissant une armée composée principalement de mercenaires étrangers, turcs et normands, pour consolider l'Arménie et punir les raids turcs.
+
+Le 19 août 1071, à Manzikert, il affronta les troupes d'Alp Arslan venues spécialement pour l'occasion. Abandonné par ses généraux et mercenaires, il combattit seul avec héroïsme, mais fut défait et capturé. Renvoyé à Constantinople, il fut déposé, aveuglé et mourut de ses blessures, illustrant la cruauté des luttes de pouvoir byzantines.
+
+## Les conséquences géopolitiques
+
+L'historien Emmanuel Sivan suggère qu'Alp Arslan ne visait pas nécessairement la conquête de l'Anatolie, mais plutôt la destruction du califat fatimide d'Égypte, puissance chiite par excellence. Cette théorie s'appuie sur le fait qu'Alp Arslan n'exploita jamais pleinement sa victoire à Manzikert, et que ni lui ni son fils Malik Shah n'entreprirent personnellement la conquête systématique de l'Anatolie, préférant confier cette tâche à des cadets de famille turbulents.
+
+Après la mort d'Alp Arslan, assassiné un an seulement après Manzikert, son fils Malik Shah confia la conquête de l'Anatolie à son parent Suleiman ibn Qutulmish et à d'autres généraux, créant ainsi un nouveau sultanat vassal de l'Empire seldjoukide. Cependant, chacun de ces généraux chercha rapidement à établir son propre émirat, engendrant un chaos politique qui entrava les communications entre les places byzantines restantes.
+
+La situation byzantine n'était guère meilleure : le traitement infligé à Romain IV Diogène avait choqué, et l'incompétence du nouvel empereur Michel VII Doukas provoqua de multiples révoltes. De nombreux généraux se proclamèrent empereurs et s'emparèrent successivement de plusieurs villes, mais faute d'armée byzantine, ils durent recourir à des mercenaires turcs, facilitant involontairement les conquêtes turques. Ainsi, Suleiman ibn Qutulmish reçut Nicée des mains des mercenaires turcs du général Botaniatès et en fit la capitale de son nouveau sultanat de Roum (sultanat des "Romains").
+
+## La fragmentation du Moyen-Orient
+
+En Syrie-Palestine, où la situation était relativement stable entre les Arabes locaux, les Byzantins et les Fatimides, tout bascula en 1078 lorsque l'aventurier turc Atsiz s'empara de Jérusalem et de Damas au détriment des Fatimides. Malik Shah envoya alors son frère Tutush, qui s'empara avec son lieutenant Ortok de Jérusalem, Damas et Alep.
+
+Au nord, Suleiman ibn Qutulmish prit Antioche aux Arméniens en 1085, cherchant à agrandir son sultanat de Roum. Le conflit entre Suleiman et Tutush s'acheva par la mort du premier, déstabilisant le sultanat de Roum, tandis que Tutush récupérait Antioche et toute la Syrie.
+
+La mort de Malik Shah en 1092 plongea l'Empire dans dix ans de guerres fratricides entre ses fils. Tutush mourut à son tour en 1095, provoquant un nouveau morcellement de la Syrie-Palestine : ses fils Ridwan et Duqaq régnèrent respectivement à Alep et à Damas, pendant que des émirs arabes et des seigneurs turcs créaient leurs propres principautés indépendantes, et que les Fatimides reconquéraient la Palestine.
+
+## Les prémices des croisades
+
+Ce chaos politique au Moyen-Orient n'échappa pas à l'Occident, particulièrement aux papes Grégoire VII et Urbain II qui, en pleine réforme grégorienne, y virent matière à réflexion. Lorsque l'empereur byzantin Alexis Ier Comnène, au pouvoir depuis 1081, leur demanda, comme cela s'était déjà produit par le passé, de lui procurer des mercenaires, ils trouvèrent là un prétexte supplémentaire pour intervenir. Cette conjonction de facteurs allait bientôt conduire au lancement des croisades, transformant profondément les relations entre Orient et Occident pour les siècles à venir.

@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[TITRE] - Mes Fiches Historiques</title>
+    
+    <!-- SCRIPT AUTO-LIAISON -->
+    <script>
+        // Auto-analyser cette fiche au chargement
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Gestion du thème
+            const themeToggle = document.getElementById('theme-toggle');
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            
+            document.body.setAttribute('data-theme', currentTheme);
+            
+            themeToggle.addEventListener('click', () => {
+                const newTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Auto-analyse si activée
+            if (document.body.getAttribute('data-auto-analyse') === 'true') {
+                await autoAnalyserCetteFiche();
+            }
+
+            // Bouton d'analyse manuelle
+            const btnAutoAnalyse = document.getElementById('auto-analyse');
+            if (btnAutoAnalyse) {
+                btnAutoAnalyse.addEventListener('click', () => {
+                    autoAnalyserCetteFiche();
+                });
+            }
+        });
+
+        // Fonction d'auto-analyse de cette fiche
+        async function autoAnalyserCetteFiche() {
+            console.log('🤖 Auto-analyse de cette fiche...');
+            
+            try {
+                // Récupérer le chemin de cette fiche
+                const cheminFiche = window.location.pathname;
+                
+                // Envoyer vers la carte principale pour traitement
+                const message = {
+                    type: 'analyser-fiche',
+                    chemin: cheminFiche,
+                    origine: 'fiche'
+                };
+                
+                // Stocker dans localStorage pour que la carte principale puisse récupérer
+                localStorage.setItem('fiche-a-analyser', JSON.stringify(message));
+                
+                // Analyser localement aussi
+                await analyserFicheLocalement();
+                
+                console.log('✅ Fiche analysée et signalée à la carte principale');
+                
+            } catch (erreur) {
+                console.error('❌ Erreur lors de l\'auto-analyse:', erreur);
+            }
+        }
+
+        // Analyse locale de la fiche
+        async function analyserFicheLocalement() {
+            // Extraire les métadonnées
+            const metadonnees = {
+                titre: document.querySelector('.fiche-titre').textContent,
+                pays: document.querySelector('.pays-tag').dataset.pays,
+                date: document.querySelector('.date-tag').dataset.date,
+                categorie: document.querySelector('.categorie-tag').dataset.categorie,
+                resume: document.querySelector('.fiche-resume').textContent
+            };
+
+            // Extraire les personnages
+            const personnages = [];
+            document.querySelectorAll('.personnage-card').forEach(card => {
+                personnages.push({
+                    nom: card.querySelector('h3').textContent,
+                    role: card.querySelector('.role').textContent,
+                    nationalite: card.querySelector('.nationalite')?.textContent || '',
+                    dates: card.querySelector('.dates-vie')?.textContent || ''
+                });
+            });
+
+            // Extraire les lieux
+            const lieux = [];
+            document.querySelectorAll('.lieu-card').forEach(card => {
+                lieux.push({
+                    nom: card.querySelector('h3').textContent,
+                    pays: card.querySelector('.pays-lieu')?.textContent || '',
+                    coordonnees: card.querySelector('.coordonnees')?.textContent || ''
+                });
+            });
+
+            // Générer les liens automatiques
+            await genererLiensAutomatiques(metadonnees, personnages, lieux);
+        }
+
+        // Générer les liens vers d'autres fiches
+        async function genererLiensAutomatiques(metadonnees, personnages, lieux) {
+            const sectionLiens = document.getElementById('evenements-lies');
+            const contenuLiens = sectionLiens.querySelector('.liens-auto');
+            
+            let html = '<h3>🔗 Liens générés automatiquement</h3>';
+            
+            // Liens par période (simulation)
+            html += '<div class="liens-periode"><h4>📅 Même période</h4><ul>';
+            html += '<li><a href="#">Événements contemporains</a> <small>(à générer)</small></li>';
+            html += '</ul></div>';
+            
+            // Liens par personnages
+            if (personnages.length > 0) {
+                html += '<div class="liens-personnages"><h4>👤 Personnages liés</h4><ul>';
+                personnages.forEach(p => {
+                    html += `<li><a href="#">Autres événements de ${p.nom}</a> <small>(à rechercher)</small></li>`;
+                });
+                html += '</ul></div>';
+            }
+            
+            // Liens par pays
+            html += '<div class="liens-pays"><h4>🌍 Même région</h4><ul>';
+            html += `<li><a href="#">Histoire de ${metadonnees.pays}</a> <small>(à générer)</small></li>`;
+            html += '</ul></div>';
+            
+            contenuLiens.innerHTML = html;
+        }
+
+        // Fonction utilitaire pour envoyer des données à la carte
+        function envoyerVersCartePrincipale(donnees) {
+            // Utilisation de localStorage comme canal de communication
+            const timestamp = Date.now();
+            const message = {
+                ...donnees,
+                timestamp: timestamp,
+                origine: window.location.pathname
+            };
+            
+            localStorage.setItem(`fiche-update-${timestamp}`, JSON.stringify(message));
+            
+            // Nettoyer les anciens messages
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('fiche-update-') && 
+                    parseInt(key.split('-')[2]) < timestamp - 300000) { // 5 minutes
+                    localStorage.removeItem(key);
+                }
+            });
+        }
+    </script>
+</body>
+</html> MÉTADONNÉES AUTO-DETECTABLES -->
+    <meta name="fiche-pays" content="[PAYS_PRINCIPAL]">
+    <meta name="fiche-date" content="[DATE_YYYY-MM-DD]">
+    <meta name="fiche-categorie" content="[CATEGORIE]">
+    <meta name="fiche-periode" content="[PERIODE_HISTORIQUE]">
+    
+    <link rel="stylesheet" href="../style-fiche.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+</head>
+<body data-auto-analyse="true">
+    <!-- NAVIGATION -->
+    <nav class="navigation">
+        <div class="nav-container">
+            <a href="../../index.html" class="nav-home">🗺️ Retour à la carte</a>
+            <a href="../index.html" class="nav-fiches">📚 Toutes mes fiches</a>
+            <button id="theme-toggle" class="nav-theme">🌓</button>
+            <!-- BOUTON AUTO-LIAISON -->
+            <button id="auto-analyse" class="nav-auto">🤖 Auto-analyser</button>
+        </div>
+    </nav>
+
+    <!-- CONTENU PRINCIPAL -->
+    <main class="fiche-container">
+        <!-- EN-TÊTE AUTO-DÉTECTABLE -->
+        <header class="fiche-header">
+            <div class="breadcrumb">
+                <span class="pays-tag" data-pays="[PAYS]">[PAYS]</span>
+                <span class="date-tag" data-date="[DATE]">[DATE_AFFICHEE]</span>
+                <span class="categorie-tag" data-categorie="[CATEGORIE]">[CATEGORIE]</span>
+            </div>
+            <h1 class="fiche-titre">[TITRE_EVENEMENT]</h1>
+            <p class="fiche-resume">[RESUME_UNE_PHRASE]</p>
+            
+            <!-- TAGS AUTO-DÉTECTABLES -->
+            <div class="tags-auto" style="display: none;">
+                <span class="tag-periode">[PERIODE]</span>
+                <span class="tag-theme">[THEME]</span>
+            </div>
+        </header>
+
+        <!-- CONTENU AUTO-ANALYSABLE -->
+        <article class="fiche-contenu">
+            <!-- CONTEXTE avec mots-clés géographiques -->
+            <section class="section contexte">
+                <h2>📍 Contexte historique</h2>
+                <p>[Mentionnez les pays, villes, régions concernés]</p>
+                <p>[Décrivez la situation politique, économique, sociale]</p>
+                
+                <!-- ENTITÉS NOMMÉES (pour auto-détection) -->
+                <div class="entites-cachees" style="display: none;">
+                    <span class="entite-lieu">[VILLES, REGIONS]</span>
+                    <span class="entite-date">[DATES_IMPORTANTES]</span>
+                    <span class="entite-concept">[CONCEPTS_CLES]</span>
+                </div>
+            </section>
+
+            <!-- DÉROULEMENT avec chronologie détaillée -->
+            <section class="section deroulement">
+                <h2>⚡ Déroulement des événements</h2>
+                <div class="timeline-mini">
+                    <div class="timeline-item" data-date="[DATE1]">
+                        <div class="timeline-date">[DATE1]</div>
+                        <div class="timeline-desc">[DESCRIPTION1]</div>
+                    </div>
+                    <!-- Répéter pour chaque étape -->
+                </div>
+            </section>
+
+            <!-- PERSONNAGES CLÉS (auto-extractibles) -->
+            <section class="section personnages">
+                <h2>👤 Personnages clés</h2>
+                <div class="personnages-grid">
+                    <div class="personnage-card" data-personnage="[NOM1]">
+                        <h3>[NOM_COMPLET]</h3>
+                        <p class="role">[ROLE_FONCTION]</p>
+                        <p class="nationalite" style="display: none;">[NATIONALITE]</p>
+                        <p class="dates-vie" style="display: none;">[NAISSANCE-MORT]</p>
+                        <p>[DESCRIPTION_ROLE_EVENEMENT]</p>
+                    </div>
+                    <!-- Répéter pour chaque personnage -->
+                </div>
+            </section>
+
+            <!-- LIEUX (auto-détectables) -->
+            <section class="section lieux">
+                <h2>🗺️ Lieux importants</h2>
+                <div class="lieux-grid">
+                    <div class="lieu-card" data-lieu="[NOM_LIEU]">
+                        <h3>[NOM_LIEU]</h3>
+                        <p class="coordonnees" style="display: none;">[LAT, LNG]</p>
+                        <p class="pays-lieu" style="display: none;">[PAYS]</p>
+                        <p>[IMPORTANCE_DANS_EVENEMENT]</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CONSÉQUENCES avec impact géopolitique -->
+            <section class="section consequences">
+                <h2>🎯 Conséquences</h2>
+                <ul class="consequences-list">
+                    <li data-impact="immediat"><strong>À court terme :</strong> [CONSEQUENCES_IMMEDIATES]</li>
+                    <li data-impact="moyen-terme"><strong>À moyen terme :</strong> [IMPACT_REGIONAL]</li>
+                    <li data-impact="long-terme"><strong>À long terme :</strong> [IMPACT_HISTORIQUE]</li>
+                    <li data-impact="heritage"><strong>Héritage :</strong> [CE_QUI_RESTE_AUJOURD_HUI]</li>
+                </ul>
+                
+                <!-- PAYS IMPACTÉS (cachés pour auto-détection) -->
+                <div class="pays-impactes" style="display: none;">
+                    <span class="pays-impact">[PAYS1]</span>
+                    <span class="pays-impact">[PAYS2]</span>
+                </div>
+            </section>
+
+            <!-- ÉVÉNEMENTS LIÉS (auto-générés) -->
+            <section class="section evenements-lies" id="evenements-lies">
+                <h2>🔗 Événements liés</h2>
+                <div class="liens-auto">
+                    <!-- Sera rempli automatiquement par le système -->
+                    <p>Les liens seront générés automatiquement...</p>
+                </div>
+            </section>
+
+            <!-- MES NOTES PERSONNELLES -->
+            <section class="section mes-notes">
+                <h2>📝 Mes notes et réflexions</h2>
+                <div class="notes-content">
+                    <p><strong>Analyse personnelle :</strong> [VOS_REFLEXIONS]</p>
+                    <p><strong>Questions à creuser :</strong> [VOS_QUESTIONS]</p>
+                    <p><strong>Liens avec mes autres études :</strong> [CONNECTIONS]</p>
+                    
+                    <!-- MOTS-CLÉS CACHÉS POUR AUTO-LIAISON -->
+                    <div class="mots-cles-auto" style="display: none;">
+                        <span class="mot-cle">[THEME1]</span>
+                        <span class="mot-cle">[THEME2]</span>
+                        <span class="mot-cle">[CONCEPT_IMPORTANT]</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SOURCES -->
+            <section class="section sources">
+                <h2>📚 Sources et pour aller plus loin</h2>
+                <ul class="sources-list">
+                    <li><a href="#" target="_blank">[SOURCE_PRIMAIRE]</a></li>
+                    <li><a href="#" target="_blank">[LIVRE_REFERENCE]</a></li>
+                    <li><a href="#" target="_blank">[ARTICLE_ACADEMIQUE]</a></li>
+                </ul>
+            </section>
+        </article>
+
+        <!-- NAVIGATION ENTRE FICHES (auto-générée) -->
+        <nav class="fiche-navigation" id="navigation-auto">
+            <a href="#" class="nav-prev">← [PRECEDENT_AUTO]</a>
+            <a href="#" class="nav-next">[SUIVANT_AUTO] →</a>
+        </nav>
+    </main>
+
+    <!--
