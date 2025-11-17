@@ -317,28 +317,29 @@
         /* Frise chronologique horizontale */
         .timeline-horizontal {
             position: relative;
-            margin-top: 20px;
-            height: 80px;
-            border-top: 3px solid var(--couleur-accent);
+            margin-top: 16px;
+            margin-bottom: 16px;
+            height: 60px;
+            border-top: 2px solid var(--couleur-accent);
         }
         
+        /* Les points d'événements sur la frise */
         .timeline-point {
             position: absolute;
             top: -5px;
-            width: 12px;
-            height: 12px;
+            width: 10px;
+            height: 10px;
             background: var(--couleur-accent);
             border-radius: 50%;
             transform: translateX(-50%);
-            cursor: pointer;
         }
         
-        /* Repères d'années */
+        /* Les repères d'années sous la frise */
         .timeline-year {
             position: absolute;
-            top: 20px;
+            top: 12px;
+            font-size: 0.75rem;
             transform: translateX(-50%);
-            font-size: 0.8rem;
             opacity: 0.7;
             white-space: nowrap;
         }
@@ -1312,8 +1313,9 @@
             
                 let html = `
                     <h3>📜 Timeline - ${countryName}</h3>
-                    <div class="timeline-horizontal"><div class="timeline-track">
-                    </div></div>
+                    <div class="timeline-horizontal">
+                        <div class="timeline-track">
+            
                 `;
             
                 // 🔹 Ajouter les repères d’années tous les 10 ans
@@ -1354,7 +1356,9 @@
                     }
                 });
             
-                html += `</div>`;
+                html += `
+                        </div>`;
+                    </div>
             
                 timelineContent.innerHTML = html;
             }
