@@ -314,11 +314,62 @@
             transform: scale(1.1);
         }
 
+        /* Frise chronologique horizontale */
+        .timeline-horizontal {
+            position: relative;
+            margin-top: 20px;
+            height: 80px;
+            border-top: 3px solid var(--couleur-accent);
+        }
+        
+        .timeline-point {
+            position: absolute;
+            top: -5px;
+            width: 12px;
+            height: 12px;
+            background: var(--couleur-accent);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            cursor: pointer;
+        }
+        
+        /* Repères d'années */
+        .timeline-year {
+            position: absolute;
+            top: 20px;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
+        
+        /* Plage pour les événements sur plusieurs années */
+        .timeline-range {
+            position: absolute;
+            top: -3px;
+            height: 6px;
+            background: var(--couleur-accent);
+            border-radius: 3px;
+            opacity: 0.7;
+        }
+        
         /* Boutons de filtre d'affichage */
         .filter-buttons {
             display: grid;
             grid-template-columns: 1fr;
             gap: var(--espacement-sm);
+        }
+        
+        .timeline-horizontal {
+            overflow-x: auto;
+            white-space: nowrap;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-track {
+            position: relative;
+            height: 80px;
+            min-width: 1500px; /* zoom par défaut */
         }
 
         .btn-filter {
@@ -1245,29 +1296,66 @@
             showTimeline(countryName, events) {
                 const timelineContent = document.getElementById('timeline-content');
                 const timeline = document.getElementById('timeline');
-                
+            
                 timeline.classList.remove('collapsed');
                 document.getElementById('toggle-timeline').textContent = '▼';
-                
-                let html = `<h3 style="color: var(--couleur-accent); margin-bottom: 20px;">📜 Timeline - ${countryName}</h3>`;
-                
+            
                 if (events.length === 0) {
-                    html += `<p>Aucun événement trouvé pour ${countryName} avant ${this.selectedYear}.</p>`;
-                } else {
-                    const sortedEvents = events.sort((a, b) => new Date(b.date) - new Date(a.date));
-                    
-                    sortedEvents.forEach(event => {
-                        const categoryIcon = this.getCategoryIcon(event.categorie);
+                    timelineContent.innerHTML = `<p>Aucun événement trouvé pour ${countryName}.</p>`;
+                    return;
+                }
+            
+                // Déterminer les bornes de la timeline
+                const years = events.map(ev => parseInt(ev.date.split('-')[0]));
+                const minYear = Math.min(...years);
+                const maxYear = Math.max(...years);
+            
+                let html = `
+                    <h3>📜 Timeline - ${countryName}</h3>
+                    <div class="timeline-horizontal"><div class="timeline-track">
+                    </div></div>
+                `;
+            
+                // 🔹 Ajouter les repères d’années tous les 10 ans
+                for (let y = minYear; y <= maxYear; y += 10) {
+                    const pos = ((y - minYear) / (maxYear - minYear)) * 100;
+                    html += `
+                        <div class="timeline-year" style="left:${pos}%;">
+                            ${y}
+                        </div>
+                    `;
+                }
+            
+                // 🔹 Ajouter les événements : point ou plage
+                events.forEach(ev => {
+                    const start = parseInt(ev.date.split('-')[0]);
+            
+                    if (ev.date_fin) {
+                        // Événement sur plusieurs années (plage)
+                        const end = parseInt(ev.date_fin.split('-')[0]);
+                        const left = ((start - minYear) / (maxYear - minYear)) * 100;
+                        const width = ((end - start) / (maxYear - minYear)) * 100;
+            
                         html += `
-                            <div class="timeline-event">
-                                <div class="event-date">${categoryIcon} ${event.date}</div>
-                                <div class="event-title">${event.titre}</div>
-                                <div class="event-description">${event.description}</div>
+                            <div class="timeline-range"
+                                style="left:${left}%; width:${width}%"
+                                title="${ev.titre} (${ev.date} - ${ev.date_fin})">
                             </div>
                         `;
-                    });
-                }
-                
+                    } else {
+                        // Événement ponctuel
+                        const pos = ((start - minYear) / (maxYear - minYear)) * 100;
+                        html += `
+                            <div class="timeline-point"
+                                style="left:${pos}%"
+                                title="${ev.titre} (${ev.date})">
+                            </div>
+                        `;
+                    }
+                });
+            
+                html += `</div>`;
+            
                 timelineContent.innerHTML = html;
             }
             
