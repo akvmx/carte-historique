@@ -704,6 +704,103 @@
             background: var(--couleur-attention);
         }
 
+        /* ========================================
+   LISTE "TOUS LES ÉVÉNEMENTS" — STYLE PRO
+   ======================================== */
+
+    .events-list {
+        margin-top: var(--espacement-sm);
+        padding: var(--espacement-sm);
+        background: var(--couleur-fond);
+        border-radius: var(--arrondi-lg);
+        border: 1px solid var(--couleur-bordure);
+        box-shadow: var(--ombre-sm);
+        max-height: 350px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--espacement-md);
+    }
+
+    /* --------- ITEM --------- */
+
+    .event-item {
+        background: var(--couleur-panneau);
+        padding: var(--espacement-md);
+        border-radius: var(--arrondi-md);
+        border: 1px solid var(--couleur-bordure);
+        box-shadow: var(--ombre-xs);
+        cursor: pointer;
+        transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+        position: relative;
+    }
+
+    .event-item:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--ombre-lg);
+    }
+
+    /* --------- BARRE VERTICALE (effet timeline locale) --------- */
+
+    .event-item::before {
+        content: "";
+        position: absolute;
+        left: -10px;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: var(--couleur-accent);
+        border-radius: 4px;
+    }
+
+    /* --------- DATE --------- */
+
+    .event-date {
+        font-size: 0.82rem;
+        font-weight: 700;
+        color: var(--couleur-accent);
+        display: block;
+        margin-bottom: 4px;
+        opacity: 0.95;
+    }
+
+    /* --------- TITRE --------- */
+
+    .event-title {
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+        line-height: 1.3;
+    }
+
+    /* --------- BADGE PAYS --------- */
+
+    .event-country {
+        display: inline-block;
+        padding: 3px 8px;
+        font-size: 0.75rem;
+        border-radius: 12px;
+        background: rgba(0,0,0,0.07);
+        color: #333;
+        font-weight: 600;
+        opacity: 0.85;
+        margin-top: 4px;
+    }
+
+    body.theme-sombre .event-country {
+        background: rgba(255,255,255,0.08);
+        color: #ddd;
+    }
+
+    /* --------- PAS D'ÉVÉNEMENTS --------- */
+
+    .events-list .no-events {
+        font-size: 0.9rem;
+        opacity: 0.7;
+        text-align: center;
+        padding: var(--espacement-sm);
+    }
+
         /* Responsive */
         @media (max-width: 768px) {
             .sidebar {
@@ -807,22 +904,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
-                <!-- Section Obsidian -->
-                <section class="obsidian-section">
-                    <h3>Synchronisation Obsidian</h3>
-                    <div class="obsidian-status">
-                        <span>Dernière sync:</span>
-                        <span id="last-sync">Jamais</span>
-                    </div>
-                    <div class="obsidian-actions">
-                        <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
-                            🔄 Sync
-                        </button>
-                        <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
-                            👁️ Watch
-                        </button>
-                    </div>
-                </section>
+                
 
                 
 
@@ -879,8 +961,23 @@
                     <p class="no-events">Aucun événement.</p>
                 </div>
                 </section>
-            </div>
-        </aside>
+                
+                <!-- Section Obsidian -->
+                <section class="obsidian-section">
+                    <h3>Synchronisation Obsidian</h3>
+                    <div class="obsidian-status">
+                        <span>Dernière sync:</span>
+                        <span id="last-sync">Jamais</span>
+                    </div>
+                    <div class="obsidian-actions">
+                        <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
+                            🔄 Sync
+                        </button>
+                        <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
+                            👁️ Watch
+                        </button>
+                    </div>
+                </aside>
 
         <!-- Zone carte -->
         <section class="map-container">
