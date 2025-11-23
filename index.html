@@ -369,13 +369,40 @@
         
         .timeline-track {
             position: relative;
-            height: 80px;
-            min-width: 1500px; /* zoom par défaut */
+            height: 70px;
+            padding: 12px 0 10px 0;
+            overflow-x: auto;
+            overflow-y: visible;
+            border-bottom: 1px solid var(--couleur-bordure);
+            background: var(--couleur-panneau);
         }
-
+        
+        .timeline-track-inner {
+            position: relative;
+            height: 100%;
+        }
+        
+        .timeline-axis {
+            position: absolute;
+            top: 28px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--couleur-bordure);
+        }
+        
+        .timeline-year {
+            position: absolute;
+            top: 36px;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: var(--couleur-texte);
+            opacity: 0.6;
+        }
+        
         .timeline-dot {
             position: absolute;
-            top: 0;
+            top: 28px; /* sur la ligne */
             width: 12px;
             height: 12px;
             background: var(--couleur-accent);
@@ -383,19 +410,17 @@
             border: 2px solid white;
             transform: translate(-50%, -50%);
             cursor: pointer;
-            transition: transform 0.2s;
+            transition: transform 0.15s;
         }
         
-        /* Agrandissement au survol */
         .timeline-dot:hover {
             transform: translate(-50%, -50%) scale(1.5);
         }
         
-        /* Bulle de description */
         .timeline-tooltip {
             position: absolute;
-            bottom: 0; /* on part du bas de la zone */
-            transform: translate(-50%, -8px);
+            top: 0;
+            transform: translate(-50%, -100%);
             max-width: 260px;
             padding: 6px 10px;
             background: var(--couleur-panneau);
@@ -406,14 +431,13 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.15s;
-            z-index: 5;
+            z-index: 10;
         }
         
         .timeline-tooltip.visible {
             opacity: 1;
         }
 
-        
         .btn-filter {
             padding: var(--espacement-sm) var(--espacement-md);
             background: var(--couleur-fond);
@@ -929,8 +953,14 @@
             <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
                 ▼
             </button>
-        <div id="timeline-track"></div>
         </div>
+    
+        <!-- Frise horizontale -->
+        <div class="timeline-track" id="timeline-track">
+            <!-- rempli en JS -->
+        </div>
+    
+        <!-- Liste des événements -->
         <div class="timeline-content" id="timeline-content">
             <p>Cliquez sur un pays pour voir sa timeline...</p>
         </div>
@@ -1376,137 +1406,119 @@
                 const timelineContent = document.getElementById('timeline-content');
                 const timeline = document.getElementById('timeline');
             
+                if (!timelineContent || !timeline) return;
+            
                 timeline.classList.remove('collapsed');
                 document.getElementById('toggle-timeline').textContent = '▼';
             
-                if (events.length === 0) {
-                    this.drawTimeline(events);
-                    timelineContent.innerHTML = `<p>Aucun événement trouvé pour ${countryName}.</p>`;
-                    return;
-                }
-            
-                // Déterminer les bornes de la timeline
-                const years = events.map(ev => parseInt(ev.date.split('-')[0]));
-                const minYear = Math.min(...years);
-                const maxYear = Math.max(...years);
-            
                 let html = `
-                    <h3>📜 Timeline - ${countryName}</h3>
-                    <div class="timeline-horizontal">
-                        <div class="timeline-track">
-            
+                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
+                        📜 Timeline – ${countryName}
+                    </h3>
                 `;
             
-                // 🔹 Ajouter les repères d’années tous les 10 ans
-                for (let y = minYear; y <= maxYear; y += 10) {
-                    const pos = ((y - minYear) / (maxYear - minYear)) * 100;
-                    html += `
-                        <div class="timeline-year" style="left:${pos}%;">
-                            ${y}
-                        </div>
-                    `;
+                if (!events || events.length === 0) {
+                    html += `<p>Aucun événement trouvé pour ${countryName} avant ${this.selectedYear}.</p>`;
+                } else {
+                    const sortedEvents = [...events].sort(
+                        (a, b) => new Date(a.date) - new Date(b.date)
+                    );
+            
+                    sortedEvents.forEach(event => {
+                        const categoryIcon = this.getCategoryIcon(event.categorie);
+                        html += `
+                            <div class="timeline-event">
+                                <div class="event-date">${categoryIcon} ${event.date}</div>
+                                <div class="event-title">${event.titre}</div>
+                                <div class="event-description">${event.description}</div>
+                            </div>
+                        `;
+                    });
                 }
             
-                // 🔹 Ajouter les événements : point ou plage
-                events.forEach(ev => {
-                    const start = parseInt(ev.date.split('-')[0]);
-            
-                    if (ev.date_fin) {
-                        // Événement sur plusieurs années (plage)
-                        const end = parseInt(ev.date_fin.split('-')[0]);
-                        const left = ((start - minYear) / (maxYear - minYear)) * 100;
-                        const width = ((end - start) / (maxYear - minYear)) * 100;
-            
-                        html += `
-                            <div class="timeline-range"
-                                style="left:${left}%; width:${width}%"
-                                title="${ev.titre} (${ev.date} - ${ev.date_fin})">
-                            </div>
-                        `;
-                    } else {
-                        // Événement ponctuel
-                        const pos = ((start - minYear) / (maxYear - minYear)) * 100;
-                        html += `
-                            <div class="timeline-point"
-                                style="left:${pos}%"
-                                title="${ev.titre} (${ev.date})">
-                            </div>
-                        `;
-                    }
-                });
-            
-                html += `
-                        </div>
-                    </div>
-                `;
-                
                 timelineContent.innerHTML = html;
+            
+                // 💡 Dessiner la frise avec les points
+                this.drawTimeline(events);
             }
 
             drawTimeline(events) {
                 const track = document.getElementById("timeline-track");
                 if (!track) return;
             
-                // On vide la timeline
+                // On vide la frise
                 track.innerHTML = "";
             
                 if (!events || events.length === 0) return;
             
-                // Calcul de l'échelle
-                const years = events.map(ev => parseInt(ev.date.split('-')[0]));
+                // Récupérer les années
+                const years = events
+                    .map(ev => parseInt(ev.date.split("-")[0], 10))
+                    .filter(y => !isNaN(y));
+            
+                if (years.length === 0) return;
+            
+                // On aligne sur des siècles et on réduit à une échelle lisible
                 const minYear = Math.min(...years);
                 const maxYear = Math.max(...years);
             
-                // On élargit à un intervalle de 100 ans
-                const interval = 100;
-                const start = minYear - (minYear % interval);
-                const end = maxYear + (interval - (maxYear % interval));
+                const start = Math.floor(minYear / 100) * 100;
+                const end   = Math.ceil(maxYear / 100) * 100;
             
-                // Dessine les années
-                for (let y = start; y <= end; y++) {
-                    const yearMark = document.createElement("div");
-                    yearMark.className = "timeline-year";
-                    yearMark.textContent = y;
-                    yearMark.style.position = "relative";
-                    track.appendChild(yearMark);
+                const pxPerYear = 4; // 👉 100 ans = 400px de largeur
+                const totalWidth = (end - start) * pxPerYear;
+            
+                // Conteneur interne
+                const inner = document.createElement("div");
+                inner.className = "timeline-track-inner";
+                inner.style.width = totalWidth + "px";
+                track.appendChild(inner);
+            
+                // Axe
+                const axis = document.createElement("div");
+                axis.className = "timeline-axis";
+                axis.style.width = totalWidth + "px";
+                inner.appendChild(axis);
+            
+                // Repères d'années tous les 50 ans
+                for (let y = start; y <= end; y += 50) {
+                    const label = document.createElement("div");
+                    label.className = "timeline-year";
+                    label.textContent = y;
+                    const x = (y - start) * pxPerYear;
+                    label.style.left = x + "px";
+                    inner.appendChild(label);
                 }
             
-                // Ajout des points
+                // Tooltip unique
+                const tooltip = document.createElement("div");
+                tooltip.className = "timeline-tooltip";
+                inner.appendChild(tooltip);
+            
+                // Points d’événements
                 events.forEach(ev => {
-                    const year = parseInt(ev.date.split("-")[0]);
-                    const xRatio = (year - start) / (end - start);
-                    const xPos = xRatio * track.scrollWidth;
-                
+                    const year = parseInt(ev.date.split("-")[0], 10);
+                    if (isNaN(year)) return;
+            
+                    const xPos = (year - start) * pxPerYear;
+            
                     const dot = document.createElement("div");
                     dot.className = "timeline-dot";
                     dot.style.left = xPos + "px";
-                
-                    // On stocke la description dans un data-*
-                    dot.dataset.description = ev.description || ev.titre || ev.date;
-                
-                    // Tooltip custom
+            
+                    const description = ev.description || `${ev.date} — ${ev.titre}`;
+            
                     dot.addEventListener("mouseenter", () => {
-                        let tooltip = document.getElementById("timeline-tooltip");
-                        if (!tooltip) {
-                            tooltip = document.createElement("div");
-                            tooltip.id = "timeline-tooltip";
-                            tooltip.className = "timeline-tooltip";
-                            track.appendChild(tooltip);
-                        }
-                
-                        tooltip.textContent = dot.dataset.description;
-                        tooltip.style.left = dot.style.left;
+                        tooltip.textContent = description;
+                        tooltip.style.left = xPos + "px";
                         tooltip.classList.add("visible");
                     });
-                
+            
                     dot.addEventListener("mouseleave", () => {
-                        const tooltip = document.getElementById("timeline-tooltip");
-                        if (tooltip) {
-                            tooltip.classList.remove("visible");
-                        }
+                        tooltip.classList.remove("visible");
                     });
-                
-                    track.appendChild(dot);
+            
+                    inner.appendChild(dot);
                 });
             }
 
