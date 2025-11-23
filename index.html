@@ -369,8 +369,8 @@
         
         .timeline-track {
             position: relative;
-            height: 100px; /* 👉 plus haut */
-            padding: 16px 0 12px 0;
+            height: 150px;
+            padding: 20px 0 20px 0;
             overflow-x: auto;
             overflow-y: visible;
             border-bottom: 1px solid var(--couleur-bordure);
@@ -381,60 +381,105 @@
             position: relative;
             height: 100%;
         }
+
+        .timeline-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 var(--espacement-lg);
+        }
+
+        /* La frise prend toute la place disponible entre les flèches */
+        .timeline-nav .timeline-track {
+            flex: 1;
+        }
         
+        .timeline-arrow {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 1px solid var(--couleur-bordure);
+            background: var(--couleur-fond);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.15s;
+        }
+
+        .timeline-arrow:hover {
+            background: var(--couleur-accent);
+            color: white;
+            border-color: var(--couleur-accent);
+            transform: translateY(-1px);
+        }
+
         .timeline-axis {
             position: absolute;
-            top: 50px;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--couleur-bordure);
+            top: 50%;
+            transform: translateY(-50%);
+            height: 6px;                      /* ÉPAISSEUR DE LA FRISE */
+            background: linear-gradient(
+                90deg,
+                rgba(59,130,246,0.8),
+                rgba(96,165,250,0.8)
+            );
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.12);
         }
         
         .timeline-year {
             position: absolute;
-            top: 58px;
+            top: calc(50% + 18px);
             transform: translateX(-50%);
-            font-size: 0.95rem;   /* 👉 plus gros */
+            font-size: 0.95rem;
             font-weight: 600;
             color: var(--couleur-texte);
-            opacity: 0.85;
+            opacity: 0.8;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.7);
         }
         
         .timeline-dot {
             position: absolute;
-            top: 50px; /* sur la ligne */
-            width: 14px;
-            height: 14px;
-            background: var(--couleur-accent);
-            border-radius: 50%;
-            border: 2px solid white;
+            top: 50%;
             transform: translate(-50%, -50%);
+            width: 18px;  
+            height: 18px; 
+            background: white;
+            border: 4px solid var(--couleur-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(59,130,246,0.4);  /* halo bleu */
+            transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
-            transition: transform 0.15s;
         }
-        
+
         .timeline-dot:hover {
-            transform: translate(-50%, -50%) scale(1.6);
+            transform: translate(-50%, -50%) scale(1.45);
+            box-shadow: 0 0 14px rgba(59,130,246,0.6);
+        }
+
+        .timeline-dot.selected {
+            transform: translate(-50%, -50%) scale(1.8);
+            box-shadow: 0 0 18px rgba(59,130,246,0.9);
         }
         
         .timeline-tooltip {
             position: absolute;
-            top: 32px;
-            transform: translate(-50%, -100%);
-            max-width: 380px;      /* 👉 plus large */
-            padding: 8px 12px;      /* plus lisible */
-            background: var(--couleur-panneau);
+            top: 0;
+            transform: translate(-50%, -120%);
+            max-width: 380px;
+            padding: 10px 14px;
+            background: white;
             color: var(--couleur-texte);
-            border-radius: 8px;
-            box-shadow: var(--ombre-md);
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             font-size: 0.9rem;
-            line-height: 1.4;
-            white-space: normal;    /* le texte va à la ligne */
-            pointer-events: none;
+            font-weight: 500;
+            white-space: normal;
             opacity: 0;
             transition: opacity 0.15s;
-            z-index: 10;
+            z-index: 20;
         }
         
         .timeline-tooltip.visible {
@@ -594,7 +639,7 @@
         }
 
         .timeline-content {
-            flex: 1;
+            max-height: 180px;
             overflow-y: auto;
             padding: var(--espacement-md);
         }
@@ -726,102 +771,6 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
-        }
-
-        #timeline-track {
-            position: relative;
-            height: 60px;
-            white-space: nowrap;
-            overflow-x: auto;
-            border-bottom: 2px solid var(--couleur-bordure);
-            padding-bottom: 10px;
-        }
-        
-        .timeline-year {
-            display: inline-block;
-            width: 60px; /* Échelle : 1 unité = 1 an → tu réduis pour 100 ans */
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--couleur-texte);
-            opacity: 0.5;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            top: 0;
-            width: 12px;
-            height: 12px;
-            background: var(--couleur-accent);
-            border-radius: 50%;
-            border: 2px solid white;
-            transform: translate(-50%, -50%);
-            cursor: pointer;
-            transition: transform 0.2s;
-        }
-        
-        .timeline-dot:hover {
-            transform: translate(-50%, -50%) scale(1.4);
-        }
-
-        
-        /* Styles pour la liste des événements */
-        .events-list {
-            background: var(--couleur-fond);
-            border: 1px solid var(--couleur-bordure);
-            border-radius: var(--arrondi-lg);
-            padding: var(--espacement-md);
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .event-item {
-            padding: var(--espacement-sm);
-            margin-bottom: var(--espacement-sm);
-            background: var(--couleur-panneau);
-            border-radius: var(--arrondi-sm);
-            cursor: pointer;
-            transition: all var(--transition-rapide);
-            border-left: 3px solid var(--couleur-accent);
-        }
-
-        .event-item:hover {
-            background: var(--couleur-accent);
-            color: white;
-            transform: translateX(4px);
-        }
-
-        .event-item:last-child {
-            margin-bottom: 0;
-        }
-
-        .event-date {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--couleur-accent);
-            margin-bottom: 2px;
-        }
-
-        .event-item:hover .event-date {
-            color: white;
-        }
-
-        .event-title {
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 2px;
-        }
-
-        .event-country {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-
-        .no-events {
-            text-align: center;
-            color: var(--couleur-texte);
-            opacity: 0.6;
-            font-style: italic;
-            padding: var(--espacement-lg);
         }
     </style>
 </head>
@@ -963,10 +912,16 @@
             </button>
         </div>
     
-        <!-- Frise horizontale -->
-        <div class="timeline-track" id="timeline-track">
-            <!-- rempli en JS -->
-        </div>
+            <!-- Navigation + frise horizontale -->
+            <div class="timeline-nav">
+                <button class="timeline-arrow" id="timeline-prev" title="Événement précédent">◀</button>
+
+                <div class="timeline-track" id="timeline-track">
+                    <!-- rempli en JS -->
+                </div>
+
+                <button class="timeline-arrow" id="timeline-next" title="Événement suivant">▶</button>
+            </div>
     
         <!-- Liste des événements -->
         <div class="timeline-content" id="timeline-content">
@@ -991,7 +946,12 @@
                 this.isDarkTheme = localStorage.getItem('theme-sombre') === 'true';
                 this.isLoading = false;
                 this.watchMode = false;
-                
+                this.timelineScaleMode = "auto"; // "auto" ou "fixed"
+                this.timelineFixedPxPerYear = 4; // utilisé seulement si mode "fixed"
+                this.timelineDots = [];
+                this.selectedTimelineIndex = null;
+                this.currentTimelineEvents = [];
+
                 // Cache et données
                 this.cache = {
                     countries: [],
@@ -1137,6 +1097,20 @@
                     timeline.classList.toggle('collapsed');
                     button.textContent = timeline.classList.contains('collapsed') ? '▲' : '▼';
                 });
+
+                // Flèches de navigation dans la timeline
+                const prevBtn = document.getElementById('timeline-prev');
+                const nextBtn = document.getElementById('timeline-next');
+
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        this.moveTimeline(-1);
+                    });
+
+                    nextBtn.addEventListener('click', () => {
+                        this.moveTimeline(1);
+                    });
+                }
                 
                 // Export
                 document.getElementById('export-btn').addEventListener('click', () => {
@@ -1273,7 +1247,56 @@
                     }
                 });
             }
-            
+
+            updateStats() {
+                const nbPaysElement = document.getElementById('nb-pays');
+                const nbEvenementsElement = document.getElementById('nb-evenements');
+
+                if (!nbPaysElement || !nbEvenementsElement) return;
+
+                let countriesWithEvents = 0;
+                let totalEvents = 0;
+
+                // On part des pays déjà filtrés par continent
+                let filteredCountries = this.cache.countries;
+                if (this.selectedContinent !== "tous") {
+                    filteredCountries = this.cache.countries.filter(
+                        country => country.continent === this.selectedContinent
+                    );
+                }
+
+                filteredCountries.forEach(country => {
+                    // On regarde les événements correspondant à ce pays
+                    const eventsForCountry = this.cache.events.filter(ev => {
+                        if (ev.pays.toLowerCase() !== country.pays.toLowerCase()) {
+                            return false;
+                        }
+
+                        // Mode "Tous les événements" : on ne filtre pas par année
+                        if (this.eventDisplayMode === "all") {
+                            return true;
+                        }
+
+                        // Mode "Année courante" : uniquement les événements visibles pour l'année sélectionnée
+                        return this.isEventVisibleForYear(ev, this.selectedYear);
+                    });
+
+                    if (eventsForCountry.length > 0) {
+                        countriesWithEvents++;
+                        totalEvents += eventsForCountry.length;
+                    }
+                });
+
+                // Utiliser l'animation si la méthode existe
+                if (typeof this.animateNumber === 'function') {
+                    this.animateNumber(nbPaysElement, countriesWithEvents);
+                    this.animateNumber(nbEvenementsElement, totalEvents);
+                } else {
+                    nbPaysElement.textContent = countriesWithEvents;
+                    nbEvenementsElement.textContent = totalEvents;
+                }
+            }
+
             isEventVisibleForYear(event, year) {
                 const eventStartYear = parseInt(event.date.split('-')[0]);
 
@@ -1442,7 +1465,7 @@
                     const eventId = `timeline-event-${index}`;
             
                     html += `
-                        <div class="timeline-event" id="${eventId}">
+                        <div class="timeline-event" data-link="${event.lien}">
                             <div class="event-date">${categoryIcon} ${event.date}</div>
                             <div class="event-title">${event.titre}</div>
                             <div class="event-description">${event.description}</div>
@@ -1451,6 +1474,16 @@
                 });
             
                 timelineContent.innerHTML = html;
+
+                // Rendre chaque événement cliquable -> ouvre la fiche
+                document.querySelectorAll('.timeline-event').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const link = el.getAttribute('data-link');
+                        if (link) {
+                            window.open(link, '_blank');   // ouvre dans un nouvel onglet
+                        }
+                    });
+                });
             
                 // 💡 Dessiner la frise avec les points cliquables
                 this.drawTimeline(sortedEvents);
@@ -1459,36 +1492,58 @@
             drawTimeline(events) {
                 const track = document.getElementById("timeline-track");
                 if (!track) return;
-            
+
                 track.innerHTML = "";
                 if (!events || events.length === 0) return;
-            
+
                 const years = events
                     .map(ev => parseInt(ev.date.split("-")[0], 10))
                     .filter(y => !isNaN(y));
-            
+
                 if (years.length === 0) return;
-            
+
                 const minYear = Math.min(...years);
                 const maxYear = Math.max(...years);
-            
+
+                // On aligne sur des siècles
                 const start = Math.floor(minYear / 100) * 100;
                 const end   = Math.ceil(maxYear / 100) * 100;
-            
-                const pxPerYear = 4; // 100 ans = 400 px
-                const totalWidth = (end - start) * pxPerYear;
-            
+
+                // 🧠 MODE AUTO : pxPerYear dépend de la largeur disponible
+                let pxPerYear;
+                const visibleYears = end - start || 100;
+
+                if (this.timelineScaleMode === "auto") {
+                    const trackWidth = track.clientWidth || 800;
+                    // On veut que la période entière occupe ~1.5 fois la largeur de la zone
+                    const targetWidth = trackWidth * 1.5;
+
+                    pxPerYear = targetWidth / visibleYears;
+
+                    // On limite pour éviter des trucs ridicules
+                    const MIN = 2;   // pas trop compressé
+                    const MAX = 15;  // pas trop zoomé
+                    pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
+                } else {
+                    // Mode fixe au cas où tu veuilles revenir à un comportement constant
+                    pxPerYear = this.timelineFixedPxPerYear || 4;
+                }
+
+                const totalWidth = visibleYears * pxPerYear;
+
+                // Conteneur interne
                 const inner = document.createElement("div");
                 inner.className = "timeline-track-inner";
                 inner.style.width = totalWidth + "px";
                 track.appendChild(inner);
-            
+
+                // Axe
                 const axis = document.createElement("div");
                 axis.className = "timeline-axis";
                 axis.style.width = totalWidth + "px";
                 inner.appendChild(axis);
-            
-                // Repères tous les 50 ans
+
+                // Repères d'années tous les 50 ans
                 for (let y = start; y <= end; y += 50) {
                     const label = document.createElement("div");
                     label.className = "timeline-year";
@@ -1497,75 +1552,109 @@
                     label.style.left = x + "px";
                     inner.appendChild(label);
                 }
-            
+
                 // Tooltip unique
                 const tooltip = document.createElement("div");
                 tooltip.className = "timeline-tooltip";
                 inner.appendChild(tooltip);
-            
+
+                // Tableau de dots pour la navigation
+                const dots = [];
+
                 // Points d’événements
                 events.forEach((ev, index) => {
                     const year = parseInt(ev.date.split("-")[0], 10);
                     if (isNaN(year)) return;
-            
+
                     const xPos = (year - start) * pxPerYear;
                     const dot = document.createElement("div");
                     dot.className = "timeline-dot";
                     dot.style.left = xPos + "px";
-            
+
                     const description = ev.description || `${ev.date} — ${ev.titre}`;
-                    const targetId = `timeline-event-${index}`;
-            
-                    // Survol : agrandissement + tooltip lisible
+
+                    // Survol : tooltip lisible
                     dot.addEventListener("mouseenter", () => {
                         tooltip.textContent = description;
                         tooltip.style.left = xPos + "px";
                         tooltip.classList.add("visible");
                     });
-            
+
                     dot.addEventListener("mouseleave", () => {
                         tooltip.classList.remove("visible");
                     });
-            
-                    // Clic : scroll vers le bloc d'événement
+
+                    // Clic : sélection + centrage + scroll vers l'évènement
                     dot.addEventListener("click", () => {
-                        const target = document.getElementById(targetId);
-                        if (target) {
-                            target.scrollIntoView({ behavior: "smooth", block: "nearest" });
-                            target.classList.add("highlight");
-                            setTimeout(() => target.classList.remove("highlight"), 1500);
-                        }
+                        this.focusTimelineEvent(index);
                     });
-            
+
+                    dots.push(dot);
                     inner.appendChild(dot);
                 });
+
+                // Mémoriser les dots et les événements pour la navigation
+                this.timelineDots = dots;
+                this.currentTimelineEvents = events;
+                this.selectedTimelineIndex = null;
+
+                // Option : sélectionner automatiquement le premier évènement
+                if (dots.length > 0) {
+                    this.focusTimelineEvent(0);
+                }
             }
 
-            updateStats() {
-                const nbPaysElement = document.getElementById('nb-pays');
-                const nbEvenementsElement = document.getElementById('nb-evenements');
-                
-                let countriesWithEvents = 0;
-                let totalEvents = 0;
-                
-                let filteredCountries = this.cache.countries;
-                if (this.selectedContinent !== "tous") {
-                    filteredCountries = this.cache.countries.filter(
-                        country => country.continent === this.selectedContinent
-                    );
-                }
-                
-                filteredCountries.forEach(country => {
-                    const events = this.getEventsForCountry(country.pays);
-                    if (events.length > 0) {
-                        countriesWithEvents++;
-                        totalEvents += events.length;
-                    }
+            focusTimelineEvent(index) {
+                const track = document.getElementById('timeline-track');
+                if (!track || !this.timelineDots || this.timelineDots.length === 0) return;
+
+                if (index < 0 || index >= this.timelineDots.length) return;
+
+                // Mettre à jour l'index sélectionné
+                this.selectedTimelineIndex = index;
+
+                // Nettoyer la sélection précédente
+                this.timelineDots.forEach(dot => dot.classList.remove('selected'));
+
+                const dot = this.timelineDots[index];
+                if (!dot) return;
+
+                // Appliquer l'état sélectionné
+                dot.classList.add('selected');
+
+                // Centrer le point dans la frise
+                const trackWidth = track.clientWidth || 0;
+                const xPos = dot.offsetLeft;
+                const targetScrollLeft = xPos - trackWidth / 2;
+                track.scrollTo({
+                    left: Math.max(0, targetScrollLeft),
+                    behavior: 'smooth'
                 });
-                
-                nbPaysElement.textContent = countriesWithEvents;
-                nbEvenementsElement.textContent = totalEvents; 
+
+                // Faire défiler la liste vers l'évènement correspondant
+                const target = document.getElementById(`timeline-event-${index}`);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    target.classList.add('highlight');
+                    setTimeout(() => target.classList.remove('highlight'), 1500);
+                }
             }
+
+            moveTimeline(delta) {
+                if (!this.timelineDots || this.timelineDots.length === 0) return;
+
+                let index = (this.selectedTimelineIndex !== null)
+                    ? this.selectedTimelineIndex
+                    : 0;
+
+                index += delta;
+
+                // On bloque au début / à la fin
+                if (index < 0) index = 0;
+                if (index >= this.timelineDots.length) index = this.timelineDots.length - 1;
+
+                this.focusTimelineEvent(index);
+            }  
 
             updateEventsList() {
                 const eventsList = document.getElementById('events-list');

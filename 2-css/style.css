@@ -194,27 +194,6 @@ main {
 }
 
 /* ========================================
-   TIMELINE (en bas)
-   ======================================== */
-#timeline {
-    height: 200px;
-    background: var(--couleur-panneau);
-    border-top: 1px solid var(--couleur-bordure);
-    padding: var(--espacement-moyen);
-    overflow-y: auto;
-    transition: height 0.3s ease;
-}
-
-#timeline h2 {
-    margin-bottom: var(--espacement-moyen);
-    color: var(--couleur-accent);
-}
-
-#contenu-timeline {
-    line-height: 1.8;
-}
-
-/* ========================================
    RESPONSIVE (adaptation mobile)
    ======================================== */
 @media (max-width: 768px) {
