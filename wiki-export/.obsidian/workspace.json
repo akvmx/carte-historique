@@ -1,0 +1,195 @@
+{
+  "main": {
+    "id": "265e3e9d98ec64b4",
+    "type": "split",
+    "children": [
+      {
+        "id": "cfaf8d019806614a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "007d12afcd007e44",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "sultanat-mamluk.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "sultanat-mamluk"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "98e7ca612c5ecc4d",
+    "type": "split",
+    "children": [
+      {
+        "id": "d2c46570178accbe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "735602e3aa663323",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorateur de fichiers"
+            }
+          },
+          {
+            "id": "88ac1d265c678da3",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Rechercher"
+            }
+          },
+          {
+            "id": "56c83f720928fa85",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Signet"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "2df82bb32ffdf292",
+    "type": "split",
+    "children": [
+      {
+        "id": "ccab1e4afc5d93dd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "09650952d9372791",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "siège-antioche.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Rétrolien pour siège-antioche"
+            }
+          },
+          {
+            "id": "336203019f9eff0f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "déclin-ottoman.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Liens sortants de déclin-ottoman"
+            }
+          },
+          {
+            "id": "f2fc9aa4af40732f",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Mots-clés"
+            }
+          },
+          {
+            "id": "7a427d87a2f87a02",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "déclin-ottoman.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Plan de déclin-ottoman"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "switcher:Ouvrir le sélecteur rapide": false,
+      "graph:Ouvrir la vue graphique": false,
+      "canvas:Créer une nouvelle toile": false,
+      "daily-notes:Ouvrir la note quotidienne": false,
+      "templates:Insérer le modèle": false,
+      "command-palette:Ouvrir la palette de commandes": false,
+      "templater-obsidian:Templater": false
+    }
+  },
+  "active": "007d12afcd007e44",
+  "lastOpenFiles": [
+    "état-indépendant-du-congo.md",
+    "Sans titre.base",
+    "Sans titre 1.base",
+    "Sans titre 2.base",
+    "déclin-ottoman.md",
+    "guerres-congo.md",
+    "siège-antioche.md",
+    "origines-ottoman.md",
+    "sultanat-mamluk.md",
+    "turcs-seljukides-croisades.md",
+    "traité-presbourg.md",
+    "croisades-de-secours.md",
+    "campagne-espagne-napoléon.md",
+    "bataille-friedland.md",
+    "bataille-eylau.md",
+    "bataille-austerlitz.md",
+    "templates/evènement.md",
+    "Sans titre.md",
+    "templates"
+  ]
+}

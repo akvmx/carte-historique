@@ -466,17 +466,17 @@
         
         .timeline-tooltip {
             position: absolute;
-            top: 0;
-            transform: translate(-50%, -120%);
-            max-width: 380px;
-            padding: 10px 14px;
+            top: 50%;                          
+            transform: translate(-50%, -110%); 
+            max-width: 220px;
+            padding: 4px 8px;               
             background: white;
             color: var(--couleur-texte);
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            font-size: 0.9rem;
+            border-radius: 6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            font-size: 0.75rem;          
             font-weight: 500;
-            white-space: normal;
+            white-space: nowrap;              
             opacity: 0;
             transition: opacity 0.15s;
             z-index: 20;
@@ -809,9 +809,9 @@
             <div class="sidebar-content">
                 <!-- Section Obsidian -->
                 <section class="obsidian-section">
-                    <h3>🔮 Synchronisation Obsidian</h3>
+                    <h3>Synchronisation Obsidian</h3>
                     <div class="obsidian-status">
-                        <span>📊 Dernière sync:</span>
+                        <span>Dernière sync:</span>
                         <span id="last-sync">Jamais</span>
                     </div>
                     <div class="obsidian-actions">
@@ -821,6 +821,21 @@
                         <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
                             👁️ Watch
                         </button>
+                    </div>
+                </section>
+
+                
+
+                <!-- Continents -->
+                <section class="control-section">
+                    <h3>🌍 Continents</h3>
+                    <div class="continent-grid" role="group" aria-label="Filtres par continent">
+                        <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
+                        <button class="btn-continent" data-continent="europe">🌏 Europe</button>
+                        <button class="btn-continent" data-continent="asie">🌏 Asie</button>
+                        <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
+                        <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
+                        <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
                     </div>
                 </section>
 
@@ -848,19 +863,6 @@
                     </div>
                 </section>
 
-                <!-- Continents -->
-                <section class="control-section">
-                    <h3>🌍 Continents</h3>
-                    <div class="continent-grid" role="group" aria-label="Filtres par continent">
-                        <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
-                        <button class="btn-continent" data-continent="europe">🌏 Europe</button>
-                        <button class="btn-continent" data-continent="asie">🌏 Asie</button>
-                        <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
-                        <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
-                        <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
-                    </div>
-                </section>
-
                 <!-- Filtre d'affichage des événements -->
                 <section class="control-section">
                     <h3>🔍 Affichage</h3>
@@ -870,25 +872,11 @@
                     </div>
                 </section>
 
-                <!-- Statistiques -->
-                <section class="control-section">
-                    <h3>📊 Statistiques</h3>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-number" id="nb-pays">0</div>
-                            <div class="stat-label">Pays</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-number" id="nb-evenements">0</div>
-                            <div class="stat-label">Événements</div>
-                        </div>
-                    </div>
-                </section>
                 <!-- Liste des événements de l'année -->
                 <section class="control-section">
-                <h3>📅 Événements de l'année</h3>
+                <h3>📅 Tous les événements</h3>
                 <div class="events-list" id="events-list">
-                    <p class="no-events">Aucun événement pour cette année</p>
+                    <p class="no-events">Aucun événement.</p>
                 </div>
                 </section>
             </div>
@@ -1571,7 +1559,7 @@
                     dot.className = "timeline-dot";
                     dot.style.left = xPos + "px";
 
-                    const description = ev.description || `${ev.date} — ${ev.titre}`;
+                    const description = `${ev.date} — ${ev.titre}`;
 
                     // Survol : tooltip lisible
                     dot.addEventListener("mouseenter", () => {

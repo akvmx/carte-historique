@@ -16,6 +16,14 @@
     ]
   },
   {
+    "pays": "Espagne",
+    "continent": "europe",
+    "coordonnees": [
+      40.4168,
+      -3.7038
+    ]
+  },
+  {
     "pays": "France",
     "continent": "europe",
     "coordonnees": [
@@ -29,6 +37,14 @@
     "coordonnees": [
       37.0,
       15.0
+    ]
+  },
+  {
+    "pays": "République démocratique du Congo",
+    "continent": "afrique",
+    "coordonnees": [
+      -2.88,
+      23.656
     ]
   },
   {
@@ -48,19 +64,19 @@
     ]
   },
   {
+    "pays": "Slovaquie",
+    "continent": "europe",
+    "coordonnees": [
+      48.14685,
+      17.09731
+    ]
+  },
+  {
     "pays": "Empire Seljuk",
     "continent": "afrique",
     "coordonnees": [
       35.73834183660386,
       51.357234044865045
-    ]
-  },
-  {
-    "pays": "Etat indépendant du Congo",
-    "continent": "afrique",
-    "coordonnees": [
-      5.51,
-      13.03
     ]
   }
 ]

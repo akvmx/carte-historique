@@ -42,6 +42,20 @@
     "lien": "fiches/bataille-friedland.html"
   },
   {
+    "titre": "La campagne d'Espagne",
+    "date": "T808-05-02",
+    "date_fin": "1814-04-17",
+    "perpetuel": false,
+    "pays": "Espagne",
+    "coords": [
+      40.4168,
+      -3.7038
+    ],
+    "description": "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique.",
+    "categorie": "guerre",
+    "lien": "fiches/campagne-espagne-napoléon.html"
+  },
+  {
     "titre": "Croisades de secours",
     "date": "1100-01-01",
     "date_fin": null,
@@ -68,6 +82,20 @@
     "description": "pourquoi l'Empire ottoman a décliné",
     "categorie": "politique",
     "lien": "fiches/déclin-ottoman.html"
+  },
+  {
+    "titre": "Les guerres du Congo et l'imounité, de 1996 à 2019",
+    "date": "1996-10-01",
+    "date_fin": null,
+    "perpetuel": false,
+    "pays": "République démocratique du Congo",
+    "coords": [
+      -2.88,
+      23.656
+    ],
+    "description": "Cycle de guerres, massacres et prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale dénoncée par le docteur Denis Mukwege et de nombreux témoins.",
+    "categorie": "guerre",
+    "lien": "fiches/guerres-congo.html"
   },
   {
     "titre": "Les origines de l'Empire Ottoman",
@@ -112,6 +140,20 @@
     "lien": "fiches/sultanat-mamluk.html"
   },
   {
+    "titre": "La signature du traité de Presbourg par Napoléon et son impact",
+    "date": "1805-12-26",
+    "date_fin": "null",
+    "perpetuel": false,
+    "pays": "Slovaquie",
+    "coords": [
+      48.14685,
+      17.09731
+    ],
+    "description": "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse.",
+    "categorie": "politique",
+    "lien": "fiches/traité-presbourg.html"
+  },
+  {
     "titre": "Les Turcs seljukides dans le contexte des croisades",
     "date": "0990-01-01",
     "date_fin": "1081-01-01",
@@ -130,10 +172,10 @@
     "date": "1885-01-01",
     "date_fin": "1908-01-01",
     "perpetuel": false,
-    "pays": "Etat indépendant du Congo",
+    "pays": "République démocratique du Congo",
     "coords": [
-      5.51,
-      13.03
+      -2.88,
+      23.656
     ],
     "description": "les ravages de Léopold II au Congo",
     "categorie": "politique",
