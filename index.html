@@ -373,6 +373,47 @@
             min-width: 1500px; /* zoom par défaut */
         }
 
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--couleur-accent);
+            border-radius: 50%;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        /* Agrandissement au survol */
+        .timeline-dot:hover {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+        
+        /* Bulle de description */
+        .timeline-tooltip {
+            position: absolute;
+            bottom: 0; /* on part du bas de la zone */
+            transform: translate(-50%, -8px);
+            max-width: 260px;
+            padding: 6px 10px;
+            background: var(--couleur-panneau);
+            color: var(--couleur-texte);
+            border-radius: 8px;
+            box-shadow: var(--ombre-md);
+            font-size: 0.8rem;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.15s;
+            z-index: 5;
+        }
+        
+        .timeline-tooltip.visible {
+            opacity: 1;
+        }
+
+        
         .btn-filter {
             padding: var(--espacement-sm) var(--espacement-md);
             background: var(--couleur-fond);
@@ -655,6 +696,42 @@
             100% { transform: rotate(360deg); }
         }
 
+        #timeline-track {
+            position: relative;
+            height: 60px;
+            white-space: nowrap;
+            overflow-x: auto;
+            border-bottom: 2px solid var(--couleur-bordure);
+            padding-bottom: 10px;
+        }
+        
+        .timeline-year {
+            display: inline-block;
+            width: 60px; /* Échelle : 1 unité = 1 an → tu réduis pour 100 ans */
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--couleur-texte);
+            opacity: 0.5;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: var(--couleur-accent);
+            border-radius: 50%;
+            border: 2px solid white;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .timeline-dot:hover {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        
         /* Styles pour la liste des événements */
         .events-list {
             background: var(--couleur-fond);
@@ -852,6 +929,7 @@
             <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
                 ▼
             </button>
+        <div id="timeline-track"></div>
         </div>
         <div class="timeline-content" id="timeline-content">
             <p>Cliquez sur un pays pour voir sa timeline...</p>
@@ -1302,6 +1380,7 @@
                 document.getElementById('toggle-timeline').textContent = '▼';
             
                 if (events.length === 0) {
+                    this.drawTimeline(events);
                     timelineContent.innerHTML = `<p>Aucun événement trouvé pour ${countryName}.</p>`;
                     return;
                 }
@@ -1363,7 +1442,74 @@
                 
                 timelineContent.innerHTML = html;
             }
+
+            drawTimeline(events) {
+                const track = document.getElementById("timeline-track");
+                if (!track) return;
             
+                // On vide la timeline
+                track.innerHTML = "";
+            
+                if (!events || events.length === 0) return;
+            
+                // Calcul de l'échelle
+                const years = events.map(ev => parseInt(ev.date.split('-')[0]));
+                const minYear = Math.min(...years);
+                const maxYear = Math.max(...years);
+            
+                // On élargit à un intervalle de 100 ans
+                const interval = 100;
+                const start = minYear - (minYear % interval);
+                const end = maxYear + (interval - (maxYear % interval));
+            
+                // Dessine les années
+                for (let y = start; y <= end; y++) {
+                    const yearMark = document.createElement("div");
+                    yearMark.className = "timeline-year";
+                    yearMark.textContent = y;
+                    yearMark.style.position = "relative";
+                    track.appendChild(yearMark);
+                }
+            
+                // Ajout des points
+                events.forEach(ev => {
+                    const year = parseInt(ev.date.split("-")[0]);
+                    const xRatio = (year - start) / (end - start);
+                    const xPos = xRatio * track.scrollWidth;
+                
+                    const dot = document.createElement("div");
+                    dot.className = "timeline-dot";
+                    dot.style.left = xPos + "px";
+                
+                    // On stocke la description dans un data-*
+                    dot.dataset.description = ev.description || ev.titre || ev.date;
+                
+                    // Tooltip custom
+                    dot.addEventListener("mouseenter", () => {
+                        let tooltip = document.getElementById("timeline-tooltip");
+                        if (!tooltip) {
+                            tooltip = document.createElement("div");
+                            tooltip.id = "timeline-tooltip";
+                            tooltip.className = "timeline-tooltip";
+                            track.appendChild(tooltip);
+                        }
+                
+                        tooltip.textContent = dot.dataset.description;
+                        tooltip.style.left = dot.style.left;
+                        tooltip.classList.add("visible");
+                    });
+                
+                    dot.addEventListener("mouseleave", () => {
+                        const tooltip = document.getElementById("timeline-tooltip");
+                        if (tooltip) {
+                            tooltip.classList.remove("visible");
+                        }
+                    });
+                
+                    track.appendChild(dot);
+                });
+            }
+
             updateStats() {
                 const nbPaysElement = document.getElementById('nb-pays');
                 const nbEvenementsElement = document.getElementById('nb-evenements');
