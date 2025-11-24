@@ -13,11 +13,11 @@
         :root {
             --couleur-fond: #ffffff;
             --couleur-texte: #2d3748;
-            --couleur-accent: #3b82f6;
-            --couleur-accent-hover: #2563eb;
+            --couleur-accent: #FFC5D3;
+            --couleur-accent-hover: #FFC5D3;
             --couleur-bordure: #e2e8f0;
             --couleur-panneau: #f8fafc;
-            --couleur-succes: #10b981;
+            --couleur-succes: #e0edc6;
             --couleur-attention: #f59e0b;
             --couleur-erreur: #ef4444;
             
@@ -705,103 +705,236 @@
         }
 
         /* ========================================
-   LISTE "TOUS LES ÉVÉNEMENTS" — STYLE PRO
-   ======================================== */
+        LISTE "TOUS LES ÉVÉNEMENTS" — STYLE PRO
+        ======================================== */
 
-    .events-list {
-        margin-top: var(--espacement-sm);
-        padding: var(--espacement-sm);
-        background: var(--couleur-fond);
-        border-radius: var(--arrondi-lg);
-        border: 1px solid var(--couleur-bordure);
-        box-shadow: var(--ombre-sm);
-        max-height: 350px;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-        gap: var(--espacement-md);
-    }
+            .events-list {
+                margin-top: var(--espacement-sm);
+                padding: var(--espacement-sm);
+                background: var(--couleur-fond);
+                border-radius: var(--arrondi-lg);
+                border: 1px solid var(--couleur-bordure);
+                box-shadow: var(--ombre-sm);
+                max-height: 350px;
+                overflow-y: auto;
+                display: flex;
+                flex-direction: column;
+                gap: var(--espacement-md);
+            }
 
-    /* --------- ITEM --------- */
+            /* --------- ITEM --------- */
 
-    .event-item {
-        background: var(--couleur-panneau);
-        padding: var(--espacement-md);
-        border-radius: var(--arrondi-md);
-        border: 1px solid var(--couleur-bordure);
-        box-shadow: var(--ombre-xs);
-        cursor: pointer;
-        transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-        position: relative;
-    }
+            .event-item {
+                background: var(--couleur-panneau);
+                padding: var(--espacement-md);
+                border-radius: var(--arrondi-md);
+                border: 1px solid var(--couleur-bordure);
+                box-shadow: var(--ombre-xs);
+                cursor: pointer;
+                transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+                position: relative;
+            }
 
-    .event-item:hover {
-        transform: translateY(-3px);
-        box-shadow: var(--ombre-lg);
-    }
+            .event-item:hover {
+                transform: translateY(-3px);
+                box-shadow: var(--ombre-lg);
+            }
 
-    /* --------- BARRE VERTICALE (effet timeline locale) --------- */
+            /* --------- BARRE VERTICALE (effet timeline locale) --------- */
 
-    .event-item::before {
-        content: "";
-        position: absolute;
-        left: -10px;
-        top: 0;
-        bottom: 0;
-        width: 3px;
-        background: var(--couleur-accent);
-        border-radius: 4px;
-    }
+            .event-item::before {
+                content: "";
+                position: absolute;
+                left: -10px;
+                top: 0;
+                bottom: 0;
+                width: 3px;
+                background: var(--couleur-accent);
+                border-radius: 4px;
+            }
 
-    /* --------- DATE --------- */
+            /* --------- DATE --------- */
 
-    .event-date {
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: var(--couleur-accent);
-        display: block;
-        margin-bottom: 4px;
-        opacity: 0.95;
-    }
+            .event-date {
+                font-size: 0.82rem;
+                font-weight: 700;
+                color: var(--couleur-accent);
+                display: block;
+                margin-bottom: 4px;
+                opacity: 0.95;
+            }
 
-    /* --------- TITRE --------- */
+            /* --------- TITRE --------- */
 
-    .event-title {
-        font-size: 0.95rem;
-        font-weight: 600;
-        margin-bottom: 6px;
-        line-height: 1.3;
-    }
+            .event-title {
+                font-size: 0.95rem;
+                font-weight: 600;
+                margin-bottom: 6px;
+                line-height: 1.3;
+            }
 
-    /* --------- BADGE PAYS --------- */
+            /* --------- BADGE PAYS --------- */
 
-    .event-country {
-        display: inline-block;
-        padding: 3px 8px;
-        font-size: 0.75rem;
-        border-radius: 12px;
-        background: rgba(0,0,0,0.07);
-        color: #333;
-        font-weight: 600;
-        opacity: 0.85;
-        margin-top: 4px;
-    }
+            .event-country {
+                display: inline-block;
+                padding: 3px 8px;
+                font-size: 0.75rem;
+                border-radius: 12px;
+                background: rgba(0,0,0,0.07);
+                color: #333;
+                font-weight: 600;
+                opacity: 0.85;
+                margin-top: 4px;
+            }
 
-    body.theme-sombre .event-country {
-        background: rgba(255,255,255,0.08);
-        color: #ddd;
-    }
+            body.theme-sombre .event-country {
+                background: rgba(255,255,255,0.08);
+                color: #ddd;
+            }
 
-    /* --------- PAS D'ÉVÉNEMENTS --------- */
+            /* --------- PAS D'ÉVÉNEMENTS --------- */
 
-    .events-list .no-events {
-        font-size: 0.9rem;
-        opacity: 0.7;
-        text-align: center;
-        padding: var(--espacement-sm);
-    }
-
+            .events-list .no-events {
+                font-size: 0.9rem;
+                opacity: 0.7;
+                text-align: center;
+                padding: var(--espacement-sm);
+            }
+            
         /* Responsive */
+        /* ========================================
+            TIMELINE COMPARAISON DE PAYS
+            ======================================== */
+
+            .timeline-compare-wrapper {
+                display: flex;
+                gap: var(--espacement-lg);
+                padding: var(--espacement-md) 0;
+            }
+
+            .timeline-compare-track-container {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                gap: var(--espacement-sm);
+            }
+
+            .timeline-compare-track-label {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: var(--couleur-texte);
+                opacity: 0.9;
+            }
+
+            .timeline-compare-track {
+                position: relative;
+                height: 120px;
+                overflow-x: auto;
+                overflow-y: visible;
+                border-bottom: 1px solid var(--couleur-bordure);
+                background: var(--couleur-panneau);
+                border-radius: var(--arrondi-md);
+            }
+
+            /* Conteneur interne qui s'étire en largeur selon la période */
+            .timeline-compare-track-inner {
+                position: relative;
+                height: 100%;
+            }
+
+            /* Axe horizontal de la frise */
+            .timeline-compare-axis {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                height: 4px;
+                background: linear-gradient(
+                    90deg,
+                    rgba(255, 197, 211, 0.9),
+                    rgba(255, 156, 179, 0.9)
+                );
+                border-radius: 999px;
+                box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+            }
+
+            /* Repères d'années */
+            .timeline-compare-year {
+                position: absolute;
+                top: calc(50% + 18px);
+                transform: translateX(-50%);
+                font-size: 0.7rem;
+                font-weight: 500;
+                opacity: 0.75;
+            }
+
+            /* Points d'événements : base */
+            .timeline-compare-dot {
+                position: absolute;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 16px;
+                height: 16px;
+                background: var(--couleur-fond);
+                border-radius: 50%;
+                cursor: pointer;
+                transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+            }
+
+            /* Pays A : rose pastel */
+            .timeline-compare-dot-A {
+                border: 4px solid #FFC5D3;              /* rose pastel */
+                box-shadow: 0 0 10px rgba(255, 197, 211, 0.6);
+            }
+
+            /* Pays B : bleu pastel */
+            .timeline-compare-dot-B {
+                border: 4px solid #C3E9FF;              /* bleu pastel */
+                box-shadow: 0 0 10px rgba(195, 233, 255, 0.6);
+            }
+
+            .timeline-compare-dot:hover {
+                transform: translate(-50%, -50%) scale(1.3);
+            }
+
+            /* Sélection commune */
+            .timeline-compare-dot.selected {
+                transform: translate(-50%, -50%) scale(1.6);
+                box-shadow: 0 0 16px rgba(0,0,0,0.25);
+            }
+
+            /* Grille pour les cartes d'événements A / B */
+            .timeline-compare-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: var(--espacement-md);
+                margin-top: var(--espacement-md);
+            }
+
+            .timeline-compare-column h4 {
+                margin-bottom: var(--espacement-sm);
+                font-size: 0.95rem;
+                color: var(--couleur-accent);
+            }
+
+            /* Highlight des cartes liées à la sélection */
+            .compare-event.highlight-compare {
+                outline: 2px solid var(--couleur-accent);
+                box-shadow: var(--ombre-md);
+                background: rgba(255, 197, 211, 0.1);
+            }
+
+            /* Mobile : les colonnes passent l'une sous l'autre */
+            @media (max-width: 768px) {
+                .timeline-compare-wrapper {
+                    flex-direction: column;
+                }
+                
+                .timeline-compare-grid {
+                    grid-template-columns: 1fr;
+                }
+            }
+
+        
         @media (max-width: 768px) {
             .sidebar {
                 position: absolute;
@@ -962,6 +1095,34 @@
                 </div>
                 </section>
                 
+                <!-- Comparaison de pays -->
+                <section class="control-section" id="compare-section">
+                    <h3>🇨🇳🇫🇷 Comparer deux pays</h3>
+                    
+                    <div class="compare-fields">
+                        <label for="compare-country-a">Pays A</label>
+                        <select id="compare-country-a">
+                            <option value="">Sélectionner un pays…</option>
+                            <!-- options remplies en JS -->
+                        </select>
+
+                        <label for="compare-country-b">Pays B</label>
+                        <select id="compare-country-b">
+                            <option value="">Sélectionner un pays…</option>
+                            <!-- options remplies en JS -->
+                        </select>
+
+                        <div class="compare-buttons">
+                            <button class="btn btn-secondary" id="compare-btn" type="button">
+                                🔍 Comparer
+                            </button>
+                            <button class="btn btn-secondary" id="compare-reset-btn" type="button">
+                                ✖ Réinitialiser
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
                 <!-- Section Obsidian -->
                 <section class="obsidian-section">
                     <h3>Synchronisation Obsidian</h3>
@@ -991,12 +1152,29 @@
     <!-- Timeline -->
     <footer class="timeline" id="timeline">
         <div class="timeline-header">
-            <h2>📜 Timeline</h2>
-            <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
-                ▼
-            </button>
+            <div class="timeline-header-left">
+                <h2>📜 Timeline</h2>
+            </div>
+
+            <div class="timeline-header-right">
+                <!-- Onglets de mode -->
+                <div class="timeline-tabs" id="timeline-tabs">
+                    <button class="btn btn-secondary timeline-tab active" data-mode="country">
+                        🗺️ Timeline du pays
+                    </button>
+                    <button class="btn btn-secondary timeline-tab" data-mode="world">
+                        🌍 Timeline mondiale
+                    </button>
+                </div>
+
+                <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
+                    ▼
+                </button>
+            </div>
         </div>
-    
+
+        <!-- TIMELINE PAYS (ton bloc existant, juste enveloppé) -->
+        <div class="timeline-country" id="timeline-country">
             <!-- Navigation + frise horizontale -->
             <div class="timeline-nav">
                 <button class="timeline-arrow" id="timeline-prev" title="Événement précédent">◀</button>
@@ -1007,10 +1185,28 @@
 
                 <button class="timeline-arrow" id="timeline-next" title="Événement suivant">▶</button>
             </div>
-    
-        <!-- Liste des événements -->
-        <div class="timeline-content" id="timeline-content">
-            <p>Cliquez sur un pays pour voir sa timeline...</p>
+
+            <!-- Liste des événements du pays -->
+            <div class="timeline-content" id="timeline-content">
+                <p>Cliquez sur un pays pour voir sa timeline...</p>
+            </div>
+        </div>
+
+        <!-- TIMELINE MONDIALE (nouveau bloc, caché au début) -->
+        <div class="timeline-global" id="timeline-global" style="display: none;">
+            <div class="timeline-nav">
+                <button class="timeline-arrow" id="timeline-global-prev" title="Événement précédent (monde)">◀</button>
+
+                <div class="timeline-track" id="timeline-global-track">
+                    <!-- sera rempli en JS avec tous les événements -->
+                </div>
+
+                <button class="timeline-arrow" id="timeline-global-next" title="Événement suivant (monde)">▶</button>
+            </div>
+
+            <div class="timeline-content" id="timeline-global-content">
+                <p>Chronologie mondiale de tous les événements...</p>
+            </div>
         </div>
     </footer>
 
@@ -1036,6 +1232,18 @@
                 this.timelineDots = [];
                 this.selectedTimelineIndex = null;
                 this.currentTimelineEvents = [];
+                this.compareMode = false;
+                this.countryA = null;
+                this.countryB = null;
+                this.compareEventsA = [];
+                this.compareEventsB = [];
+                this.compareDotsA = [];
+                this.compareDotsB = [];
+                this.selectedComparisonSide = null;
+                this.selectedComparisonIndex = null;
+                this.timelineGlobalDots = [];
+                this.currentGlobalTimelineEvents = [];
+                this.selectedGlobalTimelineIndex = null;
 
                 // Cache et données
                 this.cache = {
@@ -1109,7 +1317,7 @@
                         this.updateDisplay();
                     });
                 });
-                
+
                 // Slider année avec champ de saisie synchronisé
                 const yearSlider = document.getElementById('slider-annee');
                 const yearInput = document.getElementById('input-annee');
@@ -1171,6 +1379,69 @@
                     });
                 });
                 
+                //  SELECTEURS DE COMPARAISON
+                const selectA = document.getElementById("compare-country-a");
+                const selectB = document.getElementById("compare-country-b");
+
+                // Fonction pour remplir les listes déroulantes de pays
+                const fillCountrySelects = () => {
+                    // vider au cas où
+                    selectA.innerHTML = '<option value="">Sélectionner un pays…</option>';
+                    selectB.innerHTML = '<option value="">Sélectionner un pays…</option>';
+
+                    this.cache.countries.forEach(country => {
+                        const optA = document.createElement("option");
+                        const optB = document.createElement("option");
+
+                        optA.value = country.pays;
+                        optB.value = country.pays;
+
+                        optA.textContent = country.pays;
+                        optB.textContent = country.pays;
+
+                        selectA.appendChild(optA);
+                        selectB.appendChild(optB);
+                    });
+                };
+
+                //      BOUTONS DE COMPARAISON
+                document.getElementById("compare-btn").addEventListener("click", () => {
+                    const countryA = selectA.value;
+                    const countryB = selectB.value;
+
+                    if (!countryA || !countryB || countryA === countryB) {
+                        this.showNotification("Sélectionnez deux pays différents.", "warning");
+                        return;
+                    }
+
+                    // On stocke les choix
+                    this.compareMode = true;
+                    this.countryA = countryA;
+                    this.countryB = countryB;
+
+                    this.showNotification(`Comparaison activée : ${countryA} vs ${countryB}`, "success");
+
+                    // Lancer l'affichage comparatif (on fera la fonction après)
+                    this.startComparison(countryA, countryB);
+                });
+
+                document.getElementById("compare-reset-btn").addEventListener("click", () => {
+                    this.compareMode = false;
+                    this.countryA = null;
+                    this.countryB = null;
+
+                    selectA.value = "";
+                    selectB.value = "";
+
+                    this.showNotification("Mode comparaison désactivé.", "info");
+
+                    // On remet l'affichage normal
+                    this.endComparison();
+                });
+
+                // Remplir les selects lorsque les données sont chargées
+                setTimeout(fillCountrySelects, 500); // petit délai pour laisser loadData finir
+
                 // Toggle sidebar et timeline
                 document.getElementById('toggle-sidebar').addEventListener('click', () => {
                     document.getElementById('sidebar').classList.toggle('collapsed');
@@ -1182,6 +1453,33 @@
                     timeline.classList.toggle('collapsed');
                     button.textContent = timeline.classList.contains('collapsed') ? '▲' : '▼';
                 });
+
+                // Onglets timeline (pays / monde)
+                const timelineTabs = document.querySelectorAll('.timeline-tab');
+                const timelineCountry = document.getElementById('timeline-country');
+                const timelineGlobal = document.getElementById('timeline-global');
+
+                timelineTabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        timelineTabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        const mode = tab.dataset.mode;
+
+                        if (mode === 'country') {
+                            // Afficher la timeline pays
+                            if (timelineCountry) timelineCountry.style.display = 'block';
+                            if (timelineGlobal) timelineGlobal.style.display = 'none';
+                        } else if (mode === 'world') {
+                            // Afficher la timeline mondiale
+                            if (timelineCountry) timelineCountry.style.display = 'none';
+                            if (timelineGlobal) timelineGlobal.style.display = 'block';
+                            // (Re)construire la timeline mondiale avec les filtres actuels
+                            this.showGlobalTimeline();
+                        }
+                    });
+                });
+
 
                 // Flèches de navigation dans la timeline
                 const prevBtn = document.getElementById('timeline-prev');
@@ -1311,6 +1609,12 @@
                     this.updateStats();
                     this.updateEventsList();
                 });
+
+                // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
+                const worldTab = document.querySelector('.timeline-tab[data-mode="world"]');
+                if (worldTab && worldTab.classList.contains('active')) {
+                    this.showGlobalTimeline();
+                }
             }
             
             updateMarkers() {
@@ -1689,6 +1993,233 @@
                 }
             }
 
+            showGlobalTimeline() {
+                const track = document.getElementById('timeline-global-track');
+                const content = document.getElementById('timeline-global-content');
+                if (!track || !content) return;
+
+                // 1) Sélection des événements selon les filtres
+                let events = [];
+
+                if (this.eventDisplayMode === "all") {
+                    // Tous les événements (mode global)
+                    events = [...this.cache.events];
+                } else {
+                    // Seulement ceux visibles pour l'année sélectionnée
+                    events = this.cache.events.filter(ev =>
+                        this.isEventVisibleForYear(ev, this.selectedYear)
+                    );
+                }
+
+                // Filtre par continent si besoin
+                if (this.selectedContinent !== "tous") {
+                    const countriesInContinent = this.cache.countries
+                        .filter(country => country.continent === this.selectedContinent)
+                        .map(country => country.pays.toLowerCase());
+
+                    events = events.filter(ev =>
+                        countriesInContinent.includes(ev.pays.toLowerCase())
+                    );
+                }
+
+                if (events.length === 0) {
+                    track.innerHTML = "";
+                    content.innerHTML = `<p>Aucun événement à afficher en chronologie mondiale.</p>`;
+                    return;
+                }
+
+                // Trier par date
+                events.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                // 2) Dessiner la frise
+                this.drawGlobalTimeline(events);
+
+                // 3) Liste textuelle en dessous (simple)
+                let html = `
+                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
+                        🌍 Chronologie mondiale (${events.length} événement(s))
+                    </h3>
+                `;
+
+                events.forEach((ev, index) => {
+                    const icon = this.getCategoryIcon(ev.categorie);
+                    html += `
+                        <div class="timeline-event" data-global-index="${index}">
+                            <div class="event-date">${icon} ${ev.date} – ${ev.pays}</div>
+                            <div class="event-title">${ev.titre}</div>
+                            <div class="event-description">${ev.description || ""}</div>
+                        </div>
+                    `;
+                });
+
+                content.innerHTML = html;
+
+                // Cliquer sur une carte = focus sur le point dans la frise
+                content.querySelectorAll(".timeline-event").forEach(card => {
+                    card.addEventListener("click", () => {
+                        const idx = parseInt(card.getAttribute("data-global-index"), 10);
+                        this.focusGlobalTimelineEvent(idx);
+                    });
+                });
+            }
+
+            drawGlobalTimeline(events) {
+                const track = document.getElementById("timeline-global-track");
+                if (!track) return;
+
+                track.innerHTML = "";
+                if (!events || events.length === 0) return;
+
+                const years = events
+                    .map(ev => parseInt(ev.date.split("-")[0], 10))
+                    .filter(y => !isNaN(y));
+
+                if (years.length === 0) return;
+
+                const minYear = Math.min(...years);
+                const maxYear = Math.max(...years);
+
+                const start = Math.floor(minYear / 100) * 100;
+                const end   = Math.ceil(maxYear / 100) * 100;
+                const visibleYears = end - start || 100;
+
+                // Même logique que drawTimeline, mais indépendante
+                const trackWidth = track.clientWidth || 800;
+                const targetWidth = trackWidth * 1.5;
+                let pxPerYear = targetWidth / visibleYears;
+
+                const MIN = 2;
+                const MAX = 15;
+                pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
+
+                const totalWidth = visibleYears * pxPerYear;
+
+                const inner = document.createElement("div");
+                inner.className = "timeline-track-inner";
+                inner.style.width = totalWidth + "px";
+                track.appendChild(inner);
+
+                // Axe
+                const axis = document.createElement("div");
+                axis.className = "timeline-axis";
+                axis.style.width = totalWidth + "px";
+                inner.appendChild(axis);
+
+                // Repères tous les 50 ans
+                for (let y = start; y <= end; y += 50) {
+                    const label = document.createElement("div");
+                    label.className = "timeline-year";
+                    label.textContent = y;
+                    const x = (y - start) * pxPerYear;
+                    label.style.left = x + "px";
+                    inner.appendChild(label);
+                }
+
+                // Tooltip unique
+                const tooltip = document.createElement("div");
+                tooltip.className = "timeline-tooltip";
+                inner.appendChild(tooltip);
+
+                const dots = [];
+
+                events.forEach((ev, index) => {
+                    const year = parseInt(ev.date.split("-")[0], 10);
+                    if (isNaN(year)) return;
+
+                    const xPos = (year - start) * pxPerYear;
+                    const dot = document.createElement("div");
+                    dot.className = "timeline-dot"; // tu peux mettre une classe spéciale si tu veux
+                    dot.style.left = xPos + "px";
+
+                    const description = `${ev.date} – ${ev.pays} – ${ev.titre}`;
+
+                    dot.addEventListener("mouseenter", () => {
+                        tooltip.textContent = description;
+                        tooltip.style.left = xPos + "px";
+                        tooltip.classList.add("visible");
+                    });
+
+                    dot.addEventListener("mouseleave", () => {
+                        tooltip.classList.remove("visible");
+                    });
+
+                    dot.addEventListener("click", () => {
+                        this.focusGlobalTimelineEvent(index);
+                    });
+
+                    dots.push(dot);
+                    inner.appendChild(dot);
+                });
+
+                this.timelineGlobalDots = dots;
+                this.currentGlobalTimelineEvents = events;
+                this.selectedGlobalTimelineIndex = null;
+
+                if (dots.length > 0) {
+                    this.focusGlobalTimelineEvent(0);
+                }
+
+                // Brancher les flèches ◀ ▶ dédiées à la timeline mondiale
+                const prev = document.getElementById("timeline-global-prev");
+                const next = document.getElementById("timeline-global-next");
+                if (prev && next) {
+                    prev.onclick = () => this.moveGlobalTimeline(-1);
+                    next.onclick = () => this.moveGlobalTimeline(1);
+                }
+            }
+
+            focusGlobalTimelineEvent(index) {
+                const track = document.getElementById('timeline-global-track');
+                if (!track || !this.timelineGlobalDots || this.timelineGlobalDots.length === 0) return;
+
+                if (index < 0 || index >= this.timelineGlobalDots.length) return;
+
+                this.selectedGlobalTimelineIndex = index;
+
+                this.timelineGlobalDots.forEach(dot => dot.classList.remove('selected'));
+
+                const dot = this.timelineGlobalDots[index];
+                if (!dot) return;
+
+                dot.classList.add('selected');
+
+                const trackWidth = track.clientWidth || 0;
+                const xPos = dot.offsetLeft;
+                const targetScrollLeft = xPos - trackWidth / 2;
+                track.scrollTo({
+                    left: Math.max(0, targetScrollLeft),
+                    behavior: 'smooth'
+                });
+
+                // Faire défiler la liste texte correspondante
+                const content = document.getElementById('timeline-global-content');
+                if (content) {
+                    const card = content.querySelector(`.timeline-event[data-global-index="${index}"]`);
+                    if (card) {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        card.classList.add('highlight');
+                        setTimeout(() => card.classList.remove('highlight'), 1500);
+                    }
+                }
+            }
+
+            moveGlobalTimeline(delta) {
+                if (!this.timelineGlobalDots || this.timelineGlobalDots.length === 0) return;
+
+                let index = (this.selectedGlobalTimelineIndex !== null)
+                    ? this.selectedGlobalTimelineIndex
+                    : 0;
+
+                index += delta;
+
+                if (index < 0) index = 0;
+                if (index >= this.timelineGlobalDots.length) {
+                    index = this.timelineGlobalDots.length - 1;
+                }
+
+                this.focusGlobalTimelineEvent(index);
+            }
+
             focusTimelineEvent(index) {
                 const track = document.getElementById('timeline-track');
                 if (!track || !this.timelineDots || this.timelineDots.length === 0) return;
@@ -1980,6 +2511,385 @@
                 URL.revokeObjectURL(url);
                 this.showNotification('📁 Données exportées', 'success');
             }
+
+                    // ========================================
+                    //      MODE COMPARAISON DE PAYS
+                    // ========================================
+
+                    // Lancer la comparaison depuis les selects
+                    startComparison(countryA, countryB) {
+                        this.compareMode = true;
+                        this.countryA = countryA;
+                        this.countryB = countryB;
+
+                        // Récupérer les événements pour chaque pays (sans filtre d'année)
+                        const eventsA = this.cache.events.filter(ev =>
+                            ev.pays.toLowerCase() === countryA.toLowerCase()
+                        ).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                        const eventsB = this.cache.events.filter(ev =>
+                            ev.pays.toLowerCase() === countryB.toLowerCase()
+                        ).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                        if (eventsA.length === 0 && eventsB.length === 0) {
+                            this.showNotification("Aucun événement pour ces pays.", "warning");
+                            return;
+                        }
+
+                        this.showDualTimeline(countryA, eventsA, countryB, eventsB);
+                        this.highlightComparisonCountries(countryA, countryB);
+                    }
+
+                    // Sortir du mode comparaison
+                    endComparison() {
+                        this.compareMode = false;
+                        this.countryA = null;
+                        this.countryB = null;
+                        this.compareEventsA = [];
+                        this.compareEventsB = [];
+                        this.compareDotsA = [];
+                        this.compareDotsB = [];
+                        this.selectedComparisonSide = null;
+                        this.selectedComparisonIndex = null;
+
+                        // On réinitialise la timeline pour qu'elle puisse resservir en mode normal
+                        const track = document.getElementById("timeline-track");
+                        const content = document.getElementById("timeline-content");
+
+                        if (track) track.innerHTML = "";
+                        if (content) {
+                            content.innerHTML = `<p>Cliquez sur un pays pour voir sa timeline...</p>`;
+                        }
+
+                        this.resetMapHighlights();
+                    }
+
+                    // Met en place la double frise + les colonnes d'événements
+                    showDualTimeline(countryA, eventsA, countryB, eventsB) {
+                        const timeline = document.getElementById('timeline');
+                        const timelineTrack = document.getElementById('timeline-track');
+                        const timelineContent = document.getElementById('timeline-content');
+
+                        if (!timeline || !timelineTrack || !timelineContent) return;
+
+                        // S'assurer que la timeline est ouverte
+                        timeline.classList.remove('collapsed');
+                        const toggleBtn = document.getElementById('toggle-timeline');
+                        if (toggleBtn) toggleBtn.textContent = '▼';
+
+                        // ========= 1) CONFIGURATION DES DEUX FRISES =============
+
+                        timelineTrack.innerHTML = `
+                            <div class="timeline-compare-wrapper">
+                                <div class="timeline-compare-track-container">
+                                    <div class="timeline-compare-track-label">🇦 ${countryA}</div>
+                                    <div class="timeline-compare-track" id="timeline-track-A"></div>
+                                </div>
+                                <div class="timeline-compare-track-container">
+                                    <div class="timeline-compare-track-label">🇧 ${countryB}</div>
+                                    <div class="timeline-compare-track" id="timeline-track-B"></div>
+                                </div>
+                            </div>
+                        `;
+
+                        this.drawComparisonTimelines(eventsA, eventsB);
+
+                        // ========= 2) CARTES D'ÉVÉNEMENTS A / B CÔTE À CÔTE =========
+
+                        let html = `
+                            <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
+                                🔍 Comparaison – ${countryA} vs ${countryB}
+                            </h3>
+                            <div class="timeline-compare-grid">
+                                <div class="timeline-compare-column">
+                                    <h4>🇦 ${countryA}</h4>
+                        `;
+
+                        if (eventsA.length === 0) {
+                            html += `<p class="no-events">Aucun événement pour ${countryA}.</p>`;
+                        } else {
+                            eventsA.forEach((ev, index) => {
+                                const icon = this.getCategoryIcon(ev.categorie);
+                                html += `
+                                    <div class="timeline-event compare-event" 
+                                        data-side="A" 
+                                        data-index="${index}">
+                                        <div class="event-date">${icon} ${ev.date}</div>
+                                        <div class="event-title">${ev.titre}</div>
+                                        <div class="event-description">${ev.description || ""}</div>
+                                    </div>
+                                `;
+                            });
+                        }
+
+                        html += `
+                                </div>
+                                <div class="timeline-compare-column">
+                                    <h4>🇧 ${countryB}</h4>
+                        `;
+
+                        if (eventsB.length === 0) {
+                            html += `<p class="no-events">Aucun événement pour ${countryB}.</p>`;
+                        } else {
+                            eventsB.forEach((ev, index) => {
+                                const icon = this.getCategoryIcon(ev.categorie);
+                                html += `
+                                    <div class="timeline-event compare-event" 
+                                        data-side="B" 
+                                        data-index="${index}">
+                                        <div class="event-date">${icon} ${ev.date}</div>
+                                        <div class="event-title">${ev.titre}</div>
+                                        <div class="event-description">${ev.description || ""}</div>
+                                    </div>
+                                `;
+                            });
+                        }
+
+                        html += `
+                                </div>
+                            </div>
+                        `;
+
+                        timelineContent.innerHTML = html;
+
+                        // Cliquer sur une carte = sélectionner aussi les dots correspondants
+                        document.querySelectorAll(".compare-event").forEach(card => {
+                            card.addEventListener("click", () => {
+                                const side = card.getAttribute("data-side");
+                                const index = parseInt(card.getAttribute("data-index"), 10);
+                                this.syncComparisonSelection(side, index);
+                            });
+                        });
+                    }
+
+                    // Dessine les deux frises (A et B) avec scroll synchronisé
+                    drawComparisonTimelines(eventsA, eventsB) {
+                        const trackA = document.getElementById("timeline-track-A");
+                        const trackB = document.getElementById("timeline-track-B");
+                        if (!trackA || !trackB) return;
+
+                        // Mémoriser les données
+                        this.compareEventsA = eventsA;
+                        this.compareEventsB = eventsB;
+                        this.compareDotsA = [];
+                        this.compareDotsB = [];
+                        this.selectedComparisonSide = "A";
+                        this.selectedComparisonIndex = 0;
+
+                        // Calculer les bornes globales (A + B)
+                        const allYears = [
+                            ...eventsA.map(ev => parseInt(ev.date.split("-")[0], 10)),
+                            ...eventsB.map(ev => parseInt(ev.date.split("-")[0], 10))
+                        ].filter(y => !isNaN(y));
+
+                        if (allYears.length === 0) return;
+
+                        const minYear = Math.min(...allYears);
+                        const maxYear = Math.max(...allYears);
+
+                        const start = Math.floor(minYear / 100) * 100;
+                        const end   = Math.ceil(maxYear / 100) * 100;
+                        const visibleYears = end - start || 100;
+
+                        const baseWidth = trackA.clientWidth || trackB.clientWidth || 800;
+                        const targetWidth = baseWidth * 1.5;
+                        let pxPerYear = targetWidth / visibleYears;
+
+                        const MIN = 2;
+                        const MAX = 15;
+                        pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
+
+                        const totalWidth = visibleYears * pxPerYear;
+
+                        // Helper interne pour construire une frise
+                        const buildTrack = (trackElement, events, side) => {
+                            trackElement.innerHTML = "";
+                            const inner = document.createElement("div");
+                            inner.className = "timeline-compare-track-inner";
+                            inner.style.width = totalWidth + "px";
+                            trackElement.appendChild(inner);
+
+                            // Axe
+                            const axis = document.createElement("div");
+                            axis.className = "timeline-compare-axis";
+                            axis.style.width = totalWidth + "px";
+                            inner.appendChild(axis);
+
+                            // Repères d'années (seulement sur la frise du haut pour alléger)
+                            if (side === "A") {
+                                for (let y = start; y <= end; y += 50) {
+                                    const label = document.createElement("div");
+                                    label.className = "timeline-compare-year";
+                                    label.textContent = y;
+                                    const x = (y - start) * pxPerYear;
+                                    label.style.left = x + "px";
+                                    inner.appendChild(label);
+                                }
+                            }
+
+                            const dotsArray = (side === "A") ? this.compareDotsA : this.compareDotsB;
+
+                            events.forEach((ev, index) => {
+                                const year = parseInt(ev.date.split("-")[0], 10);
+                                if (isNaN(year)) return;
+
+                                const xPos = (year - start) * pxPerYear;
+                                const dot = document.createElement("div");
+                                dot.className = `timeline-compare-dot timeline-compare-dot-${side}`;
+                                dot.style.left = xPos + "px";
+
+                                const description = `${ev.date} — ${ev.titre}`;
+
+                                dot.title = description;
+
+                                dot.addEventListener("click", () => {
+                                    this.syncComparisonSelection(side, index);
+                                });
+
+                                dotsArray.push(dot);
+                                inner.appendChild(dot);
+                            });
+                        };
+
+                        buildTrack(trackA, eventsA, "A");
+                        buildTrack(trackB, eventsB, "B");
+
+                        // Scroll synchronisé
+                        let isSyncing = false;
+
+                        const syncScroll = (source, target) => {
+                            if (isSyncing) return;
+                            isSyncing = true;
+                            target.scrollLeft = source.scrollLeft;
+                            isSyncing = false;
+                        };
+
+                        trackA.addEventListener("scroll", () => syncScroll(trackA, trackB));
+                        trackB.addEventListener("scroll", () => syncScroll(trackB, trackA));
+
+                        // Sélection par défaut : premier événement du pays A (ou B si A vide)
+                        if (eventsA.length > 0) {
+                            this.syncComparisonSelection("A", 0);
+                        } else if (eventsB.length > 0) {
+                            this.syncComparisonSelection("B", 0);
+                        }
+                    }
+
+                    // Trouve l'index dans eventsOther le plus proche en année
+                    findNearestIndexByYear(eventsOther, targetYear) {
+                        if (!eventsOther || eventsOther.length === 0) return null;
+
+                        let bestIndex = 0;
+                        let bestDiff = Infinity;
+
+                        eventsOther.forEach((ev, idx) => {
+                            const year = parseInt(ev.date.split("-")[0], 10);
+                            if (isNaN(year)) return;
+                            const diff = Math.abs(year - targetYear);
+                            if (diff < bestDiff) {
+                                bestDiff = diff;
+                                bestIndex = idx;
+                            }
+                        });
+
+                        return bestIndex;
+                    }
+
+                    // Sélection synchronisée : dots + cartes
+                    syncComparisonSelection(side, index) {
+                        this.selectedComparisonSide = side;
+                        this.selectedComparisonIndex = index;
+
+                        const eventsA = this.compareEventsA || [];
+                        const eventsB = this.compareEventsB || [];
+                        const dotsA = this.compareDotsA || [];
+                        const dotsB = this.compareDotsB || [];
+
+                        if (side === "A" && (!eventsA[index])) return;
+                        if (side === "B" && (!eventsB[index])) return;
+
+                        const primaryEvents = (side === "A") ? eventsA : eventsB;
+                        const otherEvents   = (side === "A") ? eventsB : eventsA;
+                        const primaryDots   = (side === "A") ? dotsA : dotsB;
+                        const otherDots     = (side === "A") ? dotsB : dotsA;
+
+                        const primaryTrack  = document.getElementById(side === "A" ? "timeline-track-A" : "timeline-track-B");
+                        const otherTrack    = document.getElementById(side === "A" ? "timeline-track-B" : "timeline-track-A");
+
+                        const ev = primaryEvents[index];
+                        if (!ev) return;
+
+                        const targetYear = parseInt(ev.date.split("-")[0], 10);
+
+                        const otherIndex = this.findNearestIndexByYear(otherEvents, targetYear);
+
+                        // Nettoyer les sélections précédentes
+                        [...dotsA, ...dotsB].forEach(dot => dot.classList.remove("selected"));
+                        document.querySelectorAll(".compare-event").forEach(card => {
+                            card.classList.remove("highlight-compare");
+                        });
+
+                        // Sélection côté principal
+                        const primaryDot = primaryDots[index];
+                        if (primaryDot) {
+                            primaryDot.classList.add("selected");
+                            this.centerDotInTrack(primaryTrack, primaryDot);
+                        }
+
+                        // Sélection côté opposé
+                        if (otherIndex !== null && otherDots[otherIndex]) {
+                            const otherDot = otherDots[otherIndex];
+                            otherDot.classList.add("selected");
+                            this.centerDotInTrack(otherTrack, otherDot);
+                        }
+
+                        // Highlight des cartes
+                        const selectorPrimary = `.compare-event[data-side="${side}"][data-index="${index}"]`;
+                        const selectorOther   = `.compare-event[data-side="${side === "A" ? "B" : "A"}"][data-index="${otherIndex}"]`;
+
+                        const cardPrimary = document.querySelector(selectorPrimary);
+                        const cardOther   = document.querySelector(selectorOther);
+
+                        if (cardPrimary) cardPrimary.classList.add("highlight-compare");
+                        if (cardOther)   cardOther.classList.add("highlight-compare");
+                    }
+
+                    // Centre un dot dans son track
+                    centerDotInTrack(track, dot) {
+                        if (!track || !dot) return;
+                        const x = dot.offsetLeft;
+                        const targetScroll = Math.max(0, x - track.clientWidth / 2);
+                        track.scrollTo({
+                            left: targetScroll,
+                            behavior: "smooth"
+                        });
+                    }
+
+                    // Ajuster la vue de la carte pour voir les deux pays
+                    highlightComparisonCountries(countryA, countryB) {
+                        const countryObjA = this.cache.countries.find(
+                            c => c.pays.toLowerCase() === countryA.toLowerCase()
+                        );
+                        const countryObjB = this.cache.countries.find(
+                            c => c.pays.toLowerCase() === countryB.toLowerCase()
+                        );
+
+                        if (countryObjA && countryObjB) {
+                            try {
+                                this.map.fitBounds([
+                                    countryObjA.coordonnees,
+                                    countryObjB.coordonnees
+                                ]);
+                            } catch (e) {
+                                console.warn("Impossible d'ajuster la vue pour la comparaison:", e);
+                            }
+                        }
+                    }
+
+                    // Plus tard tu pourras changer les icônes / opacité. Pour l'instant on ne fait que laisser la carte telle quelle.
+                    resetMapHighlights() {
+                        // Placeholder si tu veux plus tard réinitialiser des styles spéciaux de comparaison
+                    }
         }
         
         // ========================================

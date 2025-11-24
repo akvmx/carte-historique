@@ -56,6 +56,20 @@
     "lien": "fiches/campagne-espagne-napoléon.html"
   },
   {
+    "titre": "La campagne d'Allemagne par Napoléon",
+    "date": "1813-01-01",
+    "date_fin": "1814-01-01",
+    "perpetuel": false,
+    "pays": "Allemagne",
+    "coords": [
+      51.18446,
+      14.42367
+    ],
+    "description": "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.",
+    "categorie": "guerre",
+    "lien": "fiches/campagne-napoléon-allemagne.html"
+  },
+  {
     "titre": "Croisades de secours",
     "date": "1100-01-01",
     "date_fin": null,
@@ -124,20 +138,6 @@
     "description": "Description courte en une phrase",
     "categorie": "politique",
     "lien": "fiches/siège-antioche.html"
-  },
-  {
-    "titre": "Montée au pouvoir du Sultanat Mamluk",
-    "date": "1250-01-01",
-    "date_fin": "1580-01-01",
-    "perpetuel": false,
-    "pays": "Sultanat mamluk d'Egypte",
-    "coords": [
-      30.02399,
-      31.25946
-    ],
-    "description": "comment les Mamluks ont dead ça",
-    "categorie": "politique",
-    "lien": "fiches/sultanat-mamluk.html"
   },
   {
     "titre": "La signature du traité de Presbourg par Napoléon et son impact",

@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "sultanat-mamluk.md",
+                "file": "campagne-napoléon-allemagne.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "sultanat-mamluk"
+              "title": "campagne-napoléon-allemagne"
             }
           }
         ]
@@ -172,6 +172,9 @@
   },
   "active": "007d12afcd007e44",
   "lastOpenFiles": [
+    "croisades-de-secours.md",
+    "campagne-napoléon-allemagne.md",
+    "sultanat-mamluk.md",
     "état-indépendant-du-congo.md",
     "Sans titre.base",
     "Sans titre 1.base",
@@ -180,10 +183,8 @@
     "guerres-congo.md",
     "siège-antioche.md",
     "origines-ottoman.md",
-    "sultanat-mamluk.md",
     "turcs-seljukides-croisades.md",
     "traité-presbourg.md",
-    "croisades-de-secours.md",
     "campagne-espagne-napoléon.md",
     "bataille-friedland.md",
     "bataille-eylau.md",

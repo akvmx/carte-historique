@@ -24,6 +24,14 @@
     ]
   },
   {
+    "pays": "Allemagne",
+    "continent": "europe",
+    "coordonnees": [
+      51.18446,
+      14.42367
+    ]
+  },
+  {
     "pays": "France",
     "continent": "europe",
     "coordonnees": [
@@ -53,14 +61,6 @@
     "coordonnees": [
       34.96176,
       38.20598
-    ]
-  },
-  {
-    "pays": "Sultanat mamluk d'Egypte",
-    "continent": "afrique",
-    "coordonnees": [
-      30.02399,
-      31.25946
     ]
   },
   {

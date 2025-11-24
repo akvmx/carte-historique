@@ -1,4 +1,4 @@
----
+ ---
 type: évènement
 titre: "Montée au pouvoir du Sultanat Mamluk"
 date: "1250-01-01"
