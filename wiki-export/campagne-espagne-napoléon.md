@@ -1,7 +1,7 @@
 ---
 type: évènement
 titre: "La campagne d'Espagne"
-date: "T808-05-02"
+date: "1808-05-02"
 date_fin: "1814-04-17"  # ← Optionnel : pour événements avec durée
 perpetuel: false  # ← Optionnel : true pour événements perpétuels
 pays: "Espagne"

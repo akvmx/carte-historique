@@ -42,8 +42,8 @@
         body.theme-sombre {
             --couleur-fond: #1a202c;
             --couleur-texte: #e2e8f0;
-            --couleur-accent: #60a5fa;
-            --couleur-accent-hover: #3b82f6;
+            --couleur-accent: #FFC5D3;
+            --couleur-accent-hover: #cf9fab;
             --couleur-bordure: #4a5568;
             --couleur-panneau: #2d3748;
         }
@@ -168,21 +168,35 @@
             flex: 1;
             overflow: hidden;
             position: relative;
+            min-height: 0;   /* évite que la carte "pousse" en dehors du viewport */
+        }
+
+        .timeline {
+            flex-shrink: 0;   /* la timeline garde sa hauteur, la carte s'adapte */
         }
 
         /* Sidebar avec section Obsidian */
         .sidebar {
-            width: 320px;
+            flex: 0 0 320px;              /* largeur de base dans le flex */
+            max-width: 320px;
             background: var(--couleur-panneau);
             border-right: 1px solid var(--couleur-bordure);
             overflow-y: auto;
-            transition: transform var(--transition-normale);
+            transition: transform var(--transition-normale), 
+                        flex-basis var(--transition-normale), 
+                        max-width var(--transition-normale), 
+                        padding var(--transition-normale), 
+                        border var(--transition-normale);
             position: relative;
             z-index: 100;
         }
 
         .sidebar.collapsed {
             transform: translateX(-100%);
+            flex-basis: 0;       /* ne prend plus de place dans le flex */
+            max-width: 0;
+            padding: 0;
+            border-right: none;
         }
 
         .sidebar-content {
@@ -205,7 +219,7 @@
 
         /* Section spéciale Obsidian */
         .obsidian-section {
-            background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+            background: linear-gradient(135deg, #FFC5D3, #cf92a1);
             color: white;
             padding: var(--espacement-lg);
             border-radius: var(--arrondi-lg);
@@ -422,8 +436,8 @@
             height: 6px;                      /* ÉPAISSEUR DE LA FRISE */
             background: linear-gradient(
                 90deg,
-                rgba(59,130,246,0.8),
-                rgba(96,165,250,0.8)
+                rgba(233, 164, 218, 0.8),
+                rgba(196, 107, 181, 0.8)
             );
             border-radius: 4px;
             box-shadow: 0 2px 6px rgba(0,0,0,0.12);
@@ -587,6 +601,8 @@
             flex: 1;
             position: relative;
             background: var(--couleur-bordure);
+            min-width: 0;  /* important en flex pour éviter les débordements */
+            min-height: 0;
         }
 
         #carte {
@@ -612,6 +628,18 @@
         .toggle-sidebar:hover {
             background: var(--couleur-accent);
             color: white;
+        }
+
+        .timeline-header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* espace entre les onglets et le bouton ▼ */
+        }
+
+        .timeline-tabs {
+            display: flex;
+            gap: 8px;
+            align-items: center;
         }
 
         /* Timeline */
@@ -1013,7 +1041,7 @@
     <!-- Header avec indicateur de sync -->
     <header>
         <div class="logo">
-            <h1>🗺️ Carte Historique</h1>
+            <h1>carte.</h1>
             <div class="sync-indicator" id="sync-indicator">
                 <div class="sync-dot"></div>
                 <span>Synchronisé</span>
@@ -1021,13 +1049,13 @@
         </div>
         <div class="header-controls">
             <button id="refresh-btn" class="btn btn-secondary" title="Actualiser les données">
-                🔄 Actualiser
+                🔄
             </button>
             <button id="export-btn" class="btn btn-secondary" title="Exporter les données">
-                📁 Exporter
+                📁
             </button>
             <button id="theme-btn" class="btn" title="Changer le thème">
-                🌓 Thème
+                🌓
             </button>
         </div>
     </header>
@@ -1043,7 +1071,7 @@
 
                 <!-- Continents -->
                 <section class="control-section">
-                    <h3>🌍 Continents</h3>
+                    <h3>continents.</h3>
                     <div class="continent-grid" role="group" aria-label="Filtres par continent">
                         <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
                         <button class="btn-continent" data-continent="europe">🌏 Europe</button>
@@ -1056,14 +1084,13 @@
 
                 <!-- Filtre année -->
                 <section class="control-section">
-                    <h3>📅 Période</h3>
+                    <h3>période.</h3>
                     <div class="range-control">
                         <div class="range-label">
-                            <span>Année</span>
                             <input type="number" 
                                 id="input-annee" 
                                 class="year-input"
-                                min="-2000" 
+                                min="-500" 
                                 max="2024" 
                                 value="2024"
                                 placeholder="Tapez une année">
@@ -1080,16 +1107,16 @@
 
                 <!-- Filtre d'affichage des événements -->
                 <section class="control-section">
-                    <h3>🔍 Affichage</h3>
+                    <h3>affichage.</h3>
                     <div class="filter-buttons">
-                        <button class="btn-filter active" data-filter="year">📅 Année courante</button>
-                        <button class="btn-filter" data-filter="all">📜 Tous les événements</button>
+                        <button class="btn-filter active" data-filter="year">année courante.</button>
+                        <button class="btn-filter" data-filter="all">tout.</button>
                     </div>
                 </section>
 
                 <!-- Liste des événements de l'année -->
                 <section class="control-section">
-                <h3>📅 Tous les événements</h3>
+                <h3>tous les événements.</h3>
                 <div class="events-list" id="events-list">
                     <p class="no-events">Aucun événement.</p>
                 </div>
@@ -1097,27 +1124,27 @@
                 
                 <!-- Comparaison de pays -->
                 <section class="control-section" id="compare-section">
-                    <h3>🇨🇳🇫🇷 Comparer deux pays</h3>
+                    <h3>comparer deux pays !</h3>
                     
                     <div class="compare-fields">
-                        <label for="compare-country-a">Pays A</label>
+                        <label for="compare-country-a">1er pays</label>
                         <select id="compare-country-a">
-                            <option value="">Sélectionner un pays…</option>
+                            <option value="">sélectionner un pays…</option>
                             <!-- options remplies en JS -->
                         </select>
 
-                        <label for="compare-country-b">Pays B</label>
+                        <label for="compare-country-b">2e pays</label>
                         <select id="compare-country-b">
-                            <option value="">Sélectionner un pays…</option>
+                            <option value="">sélectionner un pays…</option>
                             <!-- options remplies en JS -->
                         </select>
 
                         <div class="compare-buttons">
                             <button class="btn btn-secondary" id="compare-btn" type="button">
-                                🔍 Comparer
+                                comparer.
                             </button>
                             <button class="btn btn-secondary" id="compare-reset-btn" type="button">
-                                ✖ Réinitialiser
+                                ✖ réinitialiser.
                             </button>
                         </div>
                     </div>
@@ -1125,20 +1152,22 @@
 
                 <!-- Section Obsidian -->
                 <section class="obsidian-section">
-                    <h3>Synchronisation Obsidian</h3>
+                    <h3>obsidian</h3>
                     <div class="obsidian-status">
                         <span>Dernière sync:</span>
                         <span id="last-sync">Jamais</span>
                     </div>
                     <div class="obsidian-actions">
                         <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
-                            🔄 Sync
+                            🔄
                         </button>
                         <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
-                            👁️ Watch
+                            👁️
                         </button>
                     </div>
-                </aside>
+                </section>
+            </div>
+        </aside>
 
         <!-- Zone carte -->
         <section class="map-container">
@@ -1153,17 +1182,17 @@
     <footer class="timeline" id="timeline">
         <div class="timeline-header">
             <div class="timeline-header-left">
-                <h2>📜 Timeline</h2>
+                <h2>timeline.</h2>
             </div>
 
             <div class="timeline-header-right">
                 <!-- Onglets de mode -->
                 <div class="timeline-tabs" id="timeline-tabs">
                     <button class="btn btn-secondary timeline-tab active" data-mode="country">
-                        🗺️ Timeline du pays
+                        timeline du pays
                     </button>
                     <button class="btn btn-secondary timeline-tab" data-mode="world">
-                        🌍 Timeline mondiale
+                        timeline mondiale
                     </button>
                 </div>
 
@@ -1195,13 +1224,13 @@
         <!-- TIMELINE MONDIALE (nouveau bloc, caché au début) -->
         <div class="timeline-global" id="timeline-global" style="display: none;">
             <div class="timeline-nav">
-                <button class="timeline-arrow" id="timeline-global-prev" title="Événement précédent (monde)">◀</button>
+                <button class="timeline-arrow" id="timeline-global-prev" title="Événement précédent">◀</button>
 
                 <div class="timeline-track" id="timeline-global-track">
                     <!-- sera rempli en JS avec tous les événements -->
                 </div>
 
-                <button class="timeline-arrow" id="timeline-global-next" title="Événement suivant (monde)">▶</button>
+                <button class="timeline-arrow" id="timeline-global-next" title="Événement suivant">▶</button>
             </div>
 
             <div class="timeline-content" id="timeline-global-content">
@@ -1259,6 +1288,16 @@
                 };
                 
                 this.init();
+
+                // Zoom de la timeline par pays
+                this.timelineZoom = 1;        // 1 = 1000 ans visibles par défaut
+                this.timelineMinZoom = 0.5;   // dé-zoom max (2000 ans visibles)
+                this.timelineMaxZoom = 5;     // zoom max (200 ans visibles)
+
+                // Zoom de la timeline mondiale
+                this.timelineGlobalZoom = 1;        // 1 = ~1000 ans visibles
+                this.timelineGlobalMinZoom = 0.5;   // dé-zoom max (plus d'années)
+                this.timelineGlobalMaxZoom = 5;     // zoom max (moins d'années)
             }
             
             async init() {
@@ -1298,6 +1337,10 @@
                 }).addTo(this.map);
                 
                 this.markers = L.layerGroup().addTo(this.map);
+
+                setTimeout(() => {
+                    if (this.map) this.map.invalidateSize();
+                }, 0);
             }
             
             initControls() {
@@ -1443,15 +1486,48 @@
                 setTimeout(fillCountrySelects, 500); // petit délai pour laisser loadData finir
 
                 // Toggle sidebar et timeline
-                document.getElementById('toggle-sidebar').addEventListener('click', () => {
-                    document.getElementById('sidebar').classList.toggle('collapsed');
-                });
-                
-                document.getElementById('toggle-timeline').addEventListener('click', () => {
-                    const timeline = document.getElementById('timeline');
-                    const button = document.getElementById('toggle-timeline');
-                    timeline.classList.toggle('collapsed');
-                    button.textContent = timeline.classList.contains('collapsed') ? '▲' : '▼';
+                const sidebarEl = document.getElementById('sidebar');
+                const timelineEl = document.getElementById('timeline');
+                const toggleSidebarBtn = document.getElementById('toggle-sidebar');
+                const toggleTimelineBtn = document.getElementById('toggle-timeline');
+
+                // Masquer / afficher la sidebar
+                if (toggleSidebarBtn && sidebarEl) {
+                    toggleSidebarBtn.addEventListener('click', () => {
+                        sidebarEl.classList.toggle('collapsed');
+                    });
+
+                    // Quand la transition de la sidebar est terminée -> recalcul carte
+                    sidebarEl.addEventListener('transitionend', (e) => {
+                        if (!this.map) return;
+                        // On ne réagit qu'aux changements de largeur / transform
+                        if (e.propertyName === 'flex-basis' || e.propertyName === 'max-width' || e.propertyName === 'transform') {
+                            this.map.invalidateSize();
+                        }
+                    });
+                }
+
+                // Abaisser / remonter la timeline
+                if (toggleTimelineBtn && timelineEl) {
+                    toggleTimelineBtn.addEventListener('click', () => {
+                        timelineEl.classList.toggle('collapsed');
+                        toggleTimelineBtn.textContent = timelineEl.classList.contains('collapsed') ? '▲' : '▼';
+                    });
+
+                    // Quand la hauteur de la timeline a fini de changer -> recalcul carte
+                    timelineEl.addEventListener('transitionend', (e) => {
+                        if (!this.map) return;
+                        if (e.propertyName === 'height') {
+                            this.map.invalidateSize();
+                        }
+                    });
+                }
+
+                // Sécurité : si la fenêtre change de taille → recalculer aussi
+                window.addEventListener('resize', () => {
+                    if (this.map) {
+                        this.map.invalidateSize();
+                    }
                 });
 
                 // Onglets timeline (pays / monde)
@@ -1477,9 +1553,12 @@
                             // (Re)construire la timeline mondiale avec les filtres actuels
                             this.showGlobalTimeline();
                         }
+
+                        
                     });
                 });
-
+                
+                
 
                 // Flèches de navigation dans la timeline
                 const prevBtn = document.getElementById('timeline-prev');
@@ -1822,60 +1901,61 @@
                 return icons[category] || icons.default;
             }
             
-            showTimeline(countryName, events) {
+            showTimeline(countryName, eventsIgnorés) {
                 const timelineContent = document.getElementById('timeline-content');
                 const timeline = document.getElementById('timeline');
-            
+
                 if (!timelineContent || !timeline) return;
-            
+
                 timeline.classList.remove('collapsed');
                 document.getElementById('toggle-timeline').textContent = '▼';
-            
+
+                // ⚠️ On ignore complètement le paramètre "events"
+                // et on récupère TOUS les événements de ce pays, toutes années confondues.
+                const allEventsForCountry = this.cache.events
+                    .filter(ev => ev.pays.toLowerCase() === countryName.toLowerCase())
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
                 let html = `
                     <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
                         📜 Timeline – ${countryName}
                     </h3>
                 `;
-            
-                if (!events || events.length === 0) {
-                    html += `<p>Aucun événement trouvé pour ${countryName} avant ${this.selectedYear}.</p>`;
+
+                if (!allEventsForCountry || allEventsForCountry.length === 0) {
+                    html += `<p>Aucun événement trouvé pour ${countryName}.</p>`;
                     timelineContent.innerHTML = html;
                     this.drawTimeline([]); // vide la frise
                     return;
                 }
-            
-                // On TRIE une fois et on réutilise le même ordre partout
-                const sortedEvents = [...events].sort(
-                    (a, b) => new Date(a.date) - new Date(b.date)
-                );
-            
-                sortedEvents.forEach((event, index) => {
+
+                allEventsForCountry.forEach((event, index) => {
                     const categoryIcon = this.getCategoryIcon(event.categorie);
                     const eventId = `timeline-event-${index}`;
-            
+
                     html += `
-                        <div class="timeline-event" data-link="${event.lien}">
+                        <div class="timeline-event" id="${eventId}" data-link="${event.lien}">
                             <div class="event-date">${categoryIcon} ${event.date}</div>
                             <div class="event-title">${event.titre}</div>
-                            <div class="event-description">${event.description}</div>
+                            <div class="event-description">${event.description || ""}</div>
                         </div>
                     `;
                 });
-            
+
                 timelineContent.innerHTML = html;
 
-                // Rendre chaque événement cliquable -> ouvre la fiche
+                // Clic sur une carte : ouvre la fiche
                 document.querySelectorAll('.timeline-event').forEach(el => {
                     el.addEventListener('click', () => {
                         const link = el.getAttribute('data-link');
-                        if (link) {
-                            window.open(link, '_blank');   // ouvre dans un nouvel onglet
+                        if (link && link !== '#') {
+                            window.open(link, '_blank');
                         }
                     });
                 });
-            
-                // 💡 Dessiner la frise avec les points cliquables
-                this.drawTimeline(sortedEvents);
+
+                // Dessiner la frise sur TOUS les évènements du pays
+                this.drawTimeline(allEventsForCountry);
             }
 
             drawTimeline(events) {
@@ -1883,6 +1963,10 @@
                 if (!track) return;
 
                 track.innerHTML = "";
+                this.timelineDots = [];
+                this.currentTimelineEvents = events || [];
+                this.selectedTimelineIndex = null;
+
                 if (!events || events.length === 0) return;
 
                 const years = events
@@ -1891,32 +1975,27 @@
 
                 if (years.length === 0) return;
 
-                const minYear = Math.min(...years);
-                const maxYear = Math.max(...years);
+                const maxYearEvents = Math.max(...years);
 
-                // On aligne sur des siècles
-                const start = Math.floor(minYear / 100) * 100;
-                const end   = Math.ceil(maxYear / 100) * 100;
+                // 🕒 Année "aujourd'hui"
+                const currentYear = 2024;
 
-                // 🧠 MODE AUTO : pxPerYear dépend de la largeur disponible
-                let pxPerYear;
+                // On veut que l'axe aille au moins jusqu'à aujourd'hui
+                const finalMaxYear = Math.max(maxYearEvents, currentYear);
+
+                // 🧭 Début de la timeline TOUJOURS à -500
+                const start = -500;
+                const end   = Math.ceil(finalMaxYear / 100) * 100;
                 const visibleYears = end - start || 100;
 
-                if (this.timelineScaleMode === "auto") {
-                    const trackWidth = track.clientWidth || 800;
-                    // On veut que la période entière occupe ~1.5 fois la largeur de la zone
-                    const targetWidth = trackWidth * 1.5;
+                // 🎯 Objectif : ~1000 ans visibles à l'écran pour zoom = 1
+                const trackWidth = track.clientWidth || 800;
+                const yearsPerScreen = 1000;
+                let pxPerYear = (trackWidth / (yearsPerScreen * this.timelineZoom));
 
-                    pxPerYear = targetWidth / visibleYears;
-
-                    // On limite pour éviter des trucs ridicules
-                    const MIN = 2;   // pas trop compressé
-                    const MAX = 15;  // pas trop zoomé
-                    pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
-                } else {
-                    // Mode fixe au cas où tu veuilles revenir à un comportement constant
-                    pxPerYear = this.timelineFixedPxPerYear || 4;
-                }
+                const MIN = 0.5;
+                const MAX = 30;
+                pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
 
                 const totalWidth = visibleYears * pxPerYear;
 
@@ -1947,14 +2026,13 @@
                 tooltip.className = "timeline-tooltip";
                 inner.appendChild(tooltip);
 
-                // Tableau de dots pour la navigation
                 const dots = [];
 
-                // Points d’événements
                 events.forEach((ev, index) => {
                     const year = parseInt(ev.date.split("-")[0], 10);
                     if (isNaN(year)) return;
 
+                    // position horizontale basée sur start = -500
                     const xPos = (year - start) * pxPerYear;
                     const dot = document.createElement("div");
                     dot.className = "timeline-dot";
@@ -1962,7 +2040,6 @@
 
                     const description = `${ev.date} — ${ev.titre}`;
 
-                    // Survol : tooltip lisible
                     dot.addEventListener("mouseenter", () => {
                         tooltip.textContent = description;
                         tooltip.style.left = xPos + "px";
@@ -1973,7 +2050,6 @@
                         tooltip.classList.remove("visible");
                     });
 
-                    // Clic : sélection + centrage + scroll vers l'évènement
                     dot.addEventListener("click", () => {
                         this.focusTimelineEvent(index);
                     });
@@ -1982,15 +2058,33 @@
                     inner.appendChild(dot);
                 });
 
-                // Mémoriser les dots et les événements pour la navigation
                 this.timelineDots = dots;
-                this.currentTimelineEvents = events;
-                this.selectedTimelineIndex = null;
 
-                // Option : sélectionner automatiquement le premier évènement
+                // ✅ sélectionner automatiquement le premier événement
                 if (dots.length > 0) {
                     this.focusTimelineEvent(0);
                 }
+
+                // 🎚️ Zoom / dézoom à la molette
+                track.onwheel = (e) => {
+                    e.preventDefault();
+
+                    if (e.deltaY > 0) {
+                        // dézoomer (voir plus d'années)
+                        this.timelineZoom = Math.max(this.timelineMinZoom, this.timelineZoom / 1.6);
+                    } else {
+                        // zoomer (voir moins d'années)
+                        this.timelineZoom = Math.min(this.timelineMaxZoom, this.timelineZoom * 1.6);
+                    }
+
+                    // on redessine la timeline avec le nouveau zoom
+                    this.drawTimeline(this.currentTimelineEvents);
+
+                    // on recentre sur l'évènement sélectionné si possible
+                    if (this.selectedTimelineIndex !== null) {
+                        this.focusTimelineEvent(this.selectedTimelineIndex);
+                    }
+                };
             }
 
             showGlobalTimeline() {
@@ -2068,6 +2162,10 @@
                 if (!track) return;
 
                 track.innerHTML = "";
+                this.timelineGlobalDots = [];
+                this.currentGlobalTimelineEvents = events || [];
+                this.selectedGlobalTimelineIndex = null;
+
                 if (!events || events.length === 0) return;
 
                 const years = events
@@ -2076,20 +2174,26 @@
 
                 if (years.length === 0) return;
 
-                const minYear = Math.min(...years);
-                const maxYear = Math.max(...years);
+                const maxYearEvents = Math.max(...years);
 
-                const start = Math.floor(minYear / 100) * 100;
-                const end   = Math.ceil(maxYear / 100) * 100;
+                // 🕒 année "aujourd'hui"
+                const currentYear = 2024;
+
+                // l’axe doit au moins aller jusqu’à aujourd’hui
+                const finalMaxYear = Math.max(maxYearEvents, currentYear);
+
+                // 🧭 début toujours à -500 pour la timeline mondiale
+                const start = -500;
+                const end   = Math.ceil(finalMaxYear / 100) * 100;
                 const visibleYears = end - start || 100;
 
-                // Même logique que drawTimeline, mais indépendante
+                // 🎯 ~1000 ans visibles à l’écran pour zoom = 1
                 const trackWidth = track.clientWidth || 800;
-                const targetWidth = trackWidth * 1.5;
-                let pxPerYear = targetWidth / visibleYears;
+                const yearsPerScreen = 1000;
+                let pxPerYear = trackWidth / (yearsPerScreen * this.timelineGlobalZoom);
 
-                const MIN = 2;
-                const MAX = 15;
+                const MIN = 0.5;
+                const MAX = 30;
                 pxPerYear = Math.max(MIN, Math.min(MAX, pxPerYear));
 
                 const totalWidth = visibleYears * pxPerYear;
@@ -2128,7 +2232,7 @@
 
                     const xPos = (year - start) * pxPerYear;
                     const dot = document.createElement("div");
-                    dot.className = "timeline-dot"; // tu peux mettre une classe spéciale si tu veux
+                    dot.className = "timeline-dot"; // tu peux changer la classe si tu veux un look spécial
                     dot.style.left = xPos + "px";
 
                     const description = `${ev.date} – ${ev.pays} – ${ev.titre}`;
@@ -2153,19 +2257,45 @@
 
                 this.timelineGlobalDots = dots;
                 this.currentGlobalTimelineEvents = events;
-                this.selectedGlobalTimelineIndex = null;
 
                 if (dots.length > 0) {
                     this.focusGlobalTimelineEvent(0);
                 }
 
-                // Brancher les flèches ◀ ▶ dédiées à la timeline mondiale
+                // Brancher les flèches ◀ ▶ pour la timeline mondiale
                 const prev = document.getElementById("timeline-global-prev");
                 const next = document.getElementById("timeline-global-next");
                 if (prev && next) {
                     prev.onclick = () => this.moveGlobalTimeline(-1);
                     next.onclick = () => this.moveGlobalTimeline(1);
                 }
+
+                // 🎚️ Zoom / dézoom à la molette
+                track.onwheel = (e) => {
+                    e.preventDefault();
+
+                    if (e.deltaY > 0) {
+                        // dézoomer (voir plus d’années)
+                        this.timelineGlobalZoom = Math.max(
+                            this.timelineGlobalMinZoom,
+                            this.timelineGlobalZoom / 1.2
+                        );
+                    } else {
+                        // zoomer (voir moins d’années)
+                        this.timelineGlobalZoom = Math.min(
+                            this.timelineGlobalMaxZoom,
+                            this.timelineGlobalZoom * 1.2
+                        );
+                    }
+
+                    // on redessine la timeline globale avec le nouveau zoom
+                    this.drawGlobalTimeline(this.currentGlobalTimelineEvents);
+
+                    // on recentre sur l’évènement sélectionné si possible
+                    if (this.selectedGlobalTimelineIndex !== null) {
+                        this.focusGlobalTimelineEvent(this.selectedGlobalTimelineIndex);
+                    }
+                };
             }
 
             focusGlobalTimelineEvent(index) {
@@ -2346,7 +2476,9 @@
                     this.map.setView(country.coordonnees, 6);
                     
                     // Montrer les événements du pays dans la timeline
-                    const events = this.getEventsForCountry(country.pays);
+                    const events = this.cache.events
+                        .filter(ev => ev.pays.toLowerCase() === country.pays.toLowerCase())
+                        .sort((a, b) => new Date(a.date) - new Date(b.date));
                     this.showTimeline(country.pays, events);
                     
                     // Fermer la sidebar sur mobile
