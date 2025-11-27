@@ -13,15 +13,30 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "campagne-espagne-napoléon.md",
+                "file": "docu-sucre.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "campagne-espagne-napoléon"
+              "title": "docu-sucre"
+            }
+          },
+          {
+            "id": "4eb3d06865edbc2f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "nouvelle-amsterdam-débuts.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "nouvelle-amsterdam-débuts"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -170,22 +185,27 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "007d12afcd007e44",
+  "active": "4eb3d06865edbc2f",
   "lastOpenFiles": [
-    "état-indépendant-du-congo.md",
+    "campagne-espagne-napoléon.md",
     "campagne-napoléon-allemagne.md",
     "croisades-de-secours.md",
+    "docu-sucre.md",
+    "déclin-ottoman.md",
+    "guerre-hollande-france.md",
+    "nouvelle-amsterdam-débuts.md",
+    "Untitled.md",
+    "Untitled",
+    "état-indépendant-du-congo.md",
     "sultanat-mamluk.md",
     "Sans titre.base",
     "Sans titre 1.base",
     "Sans titre 2.base",
-    "déclin-ottoman.md",
     "guerres-congo.md",
     "siège-antioche.md",
     "origines-ottoman.md",
     "turcs-seljukides-croisades.md",
     "traité-presbourg.md",
-    "campagne-espagne-napoléon.md",
     "bataille-friedland.md",
     "bataille-eylau.md",
     "bataille-austerlitz.md",

@@ -1,12 +1,14 @@
 ---
 type: évènement
-titre: "Le déclin de l'Empire ottoman"
-date: "1900"
-perpetuel: true  # ← Optionnel : true pour événements perpétuels
-pays: "Empire ottoman"
-coords: [37, 15]  # ← Trouvez sur Google Maps
-description: "pourquoi l'Empire ottoman a décliné"
-categorie: "politique"  # ← politique, guerre, science, culture, economie, social
+titre: Le déclin de l'Empire ottoman
+date: 1900-01-01
+perpetuel: true
+pays: Empire ottoman
+coords:
+  - 37
+  - 15
+description: pourquoi l'Empire ottoman a décliné
+categorie: politique
 lien: fiches/déclin-ottoman.html
 ---
 
