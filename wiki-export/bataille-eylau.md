@@ -11,7 +11,7 @@ categorie: "politique"  # ← politique, guerre, science, culture, economie, soc
 lien: fiches/bataille-eylau.html
 ---
 
-# Paris–Berlin–Eylau (octobre 1806 – février 1807) : de la victoire opérative à la guerre idéologique
+# La bataille d'Eylau (octobre 1806 – février 1807)
 
 ## I. Paris acclame, l’Europe s’endurcit : après Iéna-Auerstaedt, une victoire encore inachevée
 
@@ -33,15 +33,9 @@ L’entrée à Berlin ouvre un second front, non militaire mais systémique. Par
 
 Repoussée vers l’est, la campagne bascule en Pologne. La Grande Armée y trouve une logistique de circonstance : routes déblayées par les communautés locales, ponts réparés, vivres fournis par la noblesse et le clergé, accueil triomphal à Varsovie. L’espoir d’un relèvement polonais, relayé par la figure de Maria Walewska, cherche à créer un lien personnel avec l’Empereur. Loin d’une promesse formelle de restauration, Napoléon manœuvre : il encourage les élites, capte leur concours, et garde la décision pour après la défaite russe. La campagne d’hiver en sera le test.
 
-## VI. Vers Eylau : une bataille de contrainte plus que de choix
-
 La grande poursuite bute sur les éléments. Pluie et boue puis neige laminent la mobilité française ; Bennigsen (commandement russe) gagne du temps, se replie, puis se retourne. Napoléon cherche la décision malgré des effectifs inégaux, en s’appuyant sur la cohésion des corps (Soult au centre-gauche, Davout à droite, Ney attendu sur la gauche). Le 7 février 1807, engagements meurtriers dans Eylau ; au matin du 8, l’armée russe, supérieure en nombre et en artillerie, prend l’initiative.
 
-## VII. Eylau (8 février 1807) : l’épreuve du feu, l’épreuve des nerfs
-
 La bataille se déroule dans un blizzard qui dissout les plans. L’infanterie russe enfonce par moments les lignes françaises ; Augereau, dévoyé par la tempête de neige, avance à l’aveugle et se fait hacher par les batteries adverses ; le centre français vacille, une brèche s’ouvre entre Davout (à droite) et Soult (à gauche). La réponse est une décision d’urgence : Murat lance la cavalerie de masse. La charge, parmi les plus vastes du cycle révolutionnaire-impérial, traverse le feu, bouscule les lignes, rétablit l’équilibre au centre et sauve la position, pendant que Davout, manœuvrant à droite, grignote le flanc russe. À la tombée du jour, Ney arrive enfin ; des renforts prussiens contrebalancent cet apport. La nuit fige un champ de bataille d’apocalypse : nul vainqueur indiscutable, des pertes gigantesques et disputées par les historiens, mais en tout état de cause l’une des journées les plus meurtrières de l’Empire. Militairement, l’armée française tient le terrain ; politiquement, l’illusion d’invincibilité s’ébrèche.
-
-## VIII. Portée et limites : une victoire stratégique différée
 
 Eylau n’est ni une défaite, ni l’Austerlitz du Nord. C’est une bataille de contrainte, payée au prix fort, qui empêche la jonction russo-prussienne et maintient l’initiative française, mais qui dévoile les limites de la guerre d’hiver, de la logistique continentale et de la sur-extension. Elle confirme la transformation du conflit : l’issue ne dépend plus seulement d’une manœuvre opérative brillante, mais de la capacité à faire consentir peuples et élites à un ordre nouveau. Or la brutalité d’Eylau nourrit la propagande adverse et le désir de revanche, quand la poursuite de la modernisation napoléonienne continue de rallier des soutiens locaux. La décision reviendra à une nouvelle campagne, sur un terrain mieux choisi et par une manœuvre plus nette.
 

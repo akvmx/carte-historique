@@ -13,7 +13,6 @@ categorie: politique
 lien: fiches/docu-sucre.html
 ---
 
-# Titre principal de votre article
+# Les ravages du sucre.
 
-## Déroulement des événements
-
+## 

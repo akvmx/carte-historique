@@ -13,7 +13,7 @@ lien: fiches/campagne-napoléon-allemagne.html
 
 # La campagne d'Allemagne
 
-**1. De Vilnius à l’effondrement stratégique : la catastrophe russe et ses conséquences immédiates**
+## I. De Vilnius à l’effondrement stratégique
 
 En décembre 1812, à Vilnius, dans l’actuelle Lituanie, la Grande Armée n’est plus qu’une ombre. Sous une température avoisinant les –40 °C, dans un vent glacial, les survivants de la campagne de Russie tentent simplement de rester en vie et de fuir. Les hommes manquent de tout, surtout de nourriture et de vêtements chauds, au point de mourir littéralement gelés les uns après les autres. La retraite, commencée comme un repli militaire, se transforme en hécatombe.
 
@@ -25,7 +25,7 @@ Pour Napoléon, l’impact est double. Sur le plan intérieur, il vient d’éch
 
 Dans ce contexte, Napoléon lui-même reconnaît son erreur. Face à la politique de « terre brûlée » adoptée par les Russes – qui incendient leurs villes, leurs villages, leurs campagnes plutôt que de se rendre –, il aurait cette formule : « Ce sont des Scythes », comparant les Russes à cet ancien peuple barbare qui défendait son territoire en détruisant tout ce qui pouvait servir à l’ennemi. Il ajoute qu’il a commis une grande faute, mais affirme encore qu’il aura les moyens de la réparer. C’est toute l’ambiguïté du moment : l’empereur comprend la gravité de la situation, mais continue de croire qu’un redressement militaire est possible, à condition d’agir vite et fort.
 
-**2. Recomposition des alliances européennes : Autriche, Prusse et Angleterre face à un empire fragilisé**
+## II. La recomposition des alliances européennes
 
 À la fin de 1812 et au début de 1813, le tsar cherche des soutiens en Europe pour transformer sa victoire défensive en offensive générale contre Napoléon. Le système continental, qui tenait tant bien que mal, apparaît soudain comme une construction vulnérable. Officiellement, une bonne partie du continent est intégrée à l’ordre napoléonien ; officieusement, beaucoup d’États n’attendent qu’une occasion pour se défaire du joug français.
 
@@ -45,7 +45,7 @@ Parallèlement, l’Angleterre, déjà en guerre permanente contre la France, se
 
 Ainsi, au tournant de 1813, trois dynamiques se mettent en place simultanément : la Russie se pose en protectrice des chrétiens et en bras armé de la « volonté divine » contre la Révolution ; la Prusse aspire à se présenter comme le bouclier des peuples allemands ; l’Autriche prépare en coulisse sa revanche ; l’Angleterre vise à devenir le champion incontesté du commerce mondial. Toutes convergent vers un objectif unique : non pas simplement vaincre Napoléon, mais le détruire et mettre fin à l’ordre qu’il a imposé à l’Europe.
 
-**3. La campagne d’Allemagne du printemps 1813 : victoires tactiques, impasse stratégique**
+## III. La campagne d’Allemagne du printemps 1813
 
 Lorsque Napoléon revient à la tête de l’armée, le 26 avril 1813, l’urgence est totale. La coalition a déjà progressé profondément en Allemagne. Les Russes et les Prussiens alignent environ soixante-dix mille fantassins, des milliers de cavaliers et près de 550 canons, avec la perspective de renforts autrichiens et suédois qui pourraient porter leurs effectifs à plusieurs centaines de milliers d’hommes. Pour l’instant, l’Autriche affiche une « neutralité armée » et la Suède n’a pas encore formalisé son entrée en guerre. Mais l’ombre de ces renforts pèse sur les calculs napoléoniens.
 
@@ -61,7 +61,7 @@ Mais le terrain s’y oppose. Une colline sépare l’Empereur des mouvements de
 
 La bataille de Bautzen est, comme Lützen, une victoire française : les coalisés reculent, mais ne sont pas détruits. Les pertes françaises restent très élevées, avec environ vingt mille hommes hors de combat sur quatre-vingt mille engagés. Surtout, ces succès tactiques ne débouchent sur aucun basculement stratégique. La Prusse et la Russie reculent, mais continuent à attirer à elles de nouveaux alliés. En Espagne, les Anglais remportent en juin une victoire importante à Vitoria. Au nord, la Suède de Bernadotte négocie son entrée en guerre. Dans les villes allemandes, les révoltes se multiplient. En quelques mois, Napoléon a prouvé qu’il pouvait encore battre ses adversaires sur le terrain ; mais chaque bataille gagnée, coûteuse en hommes qu’il ne peut plus aisément remplacer, ne fait que repousser une issue qui lui devient peu à peu défavorable.
 
-**4. L’Autriche en arbitre, le piège diplomatique de Prague et la bataille de Dresde : un chef-d’œuvre tactique dans une guerre compromise**
+## IV. L’Autriche en arbitre, le piège diplomatique de Prague et la bataille de Dresde : un chef-d’œuvre tactique dans une guerre compromise
 
 Au milieu de l’année 1813, le rapport de forces n’est pas encore désespéré pour Napoléon, à condition que l’Autriche reste en dehors du conflit. Tant que Vienne ne prend pas parti, la coalition russo-prussienne et les contingents anglais et suédois restent puissants, mais pas irrésistibles. Metternich le sait parfaitement, et c’est autour de cette position charnière que se joue le basculement.
 

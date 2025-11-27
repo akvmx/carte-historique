@@ -19,7 +19,6 @@ La bataille d’Eylau (7–8 février 1807) est un tournant psychologique plus e
 
 Pour la première fois depuis 1796, la victoire napoléonienne ne se confond plus avec une démonstration de génie. Au sein de la Grande Armée, la question qui surgit n’est plus « comment avons-nous vaincu ? », mais « pourquoi meurt-on ici ? » La guerre, jusqu’alors vécue par beaucoup comme un espace de promotion sociale, de gloire et d’aventure, se révèle brutalement comme une machine sacrificielle lointaine, en Prusse et en Pologne, loin du territoire national. Eylau fissure le mythe d’invincibilité et ébranle le ressort moral sur lequel repose l’Empire.
 
-
 ## II. Un Empire militairement victorieux mais politiquement fragile
 
 Si Napoléon a besoin d’une bataille décisive, ce n’est pas seulement pour abattre la Russie, mais pour stabiliser son propre régime. L’Empire n’est pas un bloc monolithique : il est le produit d’un compromis instable entre des forces qui restent antagonistes.
@@ -30,7 +29,6 @@ La constitution impériale offre, en apparence, une architecture conforme à l�
 
 Ainsi, la légitimité impériale est doublement conditionnée : vers l’intérieur, par la promesse d’ordre, de réforme et de prospérité ; vers l’extérieur, par la capacité à imposer un ordre continental durable. Après Eylau, l’Empire est contesté sur les deux fronts : l’usure institutionnelle rencontre la fatigue de guerre.
 
-
 ## III. La crise économique et sociale : un arrière-plan silencieux de la campagne de 1807
 
 L’exemple de Nantes, ancien premier port de l’Atlantique français, illustre la profondeur de la crise. La Révolution, les guerres maritimes, la rupture des circuits coloniaux et la guerre civile ont dévasté le tissu économique local : mortalité élevée, ruine du commerce, déclin de la marine marchande. L’Empire apporte bien des éléments de stabilisation – préfets, lycées, cours de justice, encadrement administratif – mais il ne peut reconstituer d’un coup les flux transatlantiques.
@@ -39,13 +37,11 @@ Le blocus britannique, la guerre incessante, et bientôt le blocus continental, 
 
 D’où la formule implicite qui guide l’Empereur en 1807 : une bataille décisive serait la condition même de la paix, et donc de la pérennité de la dynastie.
 
-
 ## IV. L’hiver 1807 : entre Eylau et Friedland, un repositionnement stratégique
 
 Après Eylau, Napoléon recule vers le sud pour hiverner, fixe son quartier à Osterode et réorganise ses forces. Sur le papier, la supériorité numérique française est nette : environ 150 000 à 200 000 hommes contre un peu plus de 100 000 russes et 20 000 prussiens. Mais cette supériorité est théorique : une partie considérable de la Grande Armée est immobilisée pour garder les villes nouvellement conquises, tenir Berlin, assurer la sécurité de Varsovie, protéger les lignes de communication et réquisitionner vivres et fourrages. En termes de troupes réellement disponibles pour une bataille décisive, Napoléon ne dispose que d’un peu plus de 100 000 hommes.
 
 Côté russe, la stratégie hésite entre la prudence et la recherche du prestige. Bennigsen, commandant en chef, a d’abord misé sur la retraite : user les Français, les attirer dans les profondeurs, laisser l’hiver et les distances faire leur œuvre. Le tsar, soucieux d’honneur et de rang dans le concert monarchique, refuse un retrait systématique. Il exige au minimum une grande bataille où la Russie prouverait qu’elle peut « tenir tête » à l’Empereur. C’est cette tension entre logique militaire et exigence symbolique qui conduit à la reprise de l’offensive au printemps.
-
 
 ## V. Guttstadt–Heilsberg : l’offensive manquée de Bennigsen
 
@@ -54,7 +50,6 @@ Au début de juin 1807, Bennigsen prend l’initiative. Il tente une manœuvre e
 Mais la mécanique russe se dérègle. Ney, surpris, parvient pourtant à éviter l’encerclement grâce à la qualité tactique de ses officiers et à la discipline de ses troupes. La tentative de Kesselschlacht (bataille d’encerclement) échoue ; le dispositif russe se trouve désormais exposé. Surtout, en attaquant, Bennigsen donne à Napoléon ce dont il avait besoin : la certitude du point où se concentre l’ennemi. La Grande Armée, jusque-là sur la défensive stratégique, peut basculer vers la contre-offensive, en cherchant à envelopper à son tour l’armée russe en retraite.
 
 La pression française, alimentée par la cavalerie de Murat et les mouvements de Soult et Lannes, contraint Bennigsen à un repli précipité en direction de Friedland, au nord-est, dans l’espoir de se couvrir par la présence prussienne autour de Königsberg.
-
 
 ## VI. Friedland (14 juin 1807) : l’ultime pari de Napoléon
 
@@ -67,7 +62,6 @@ Lorsque l’Empereur rejoint le champ de bataille, la configuration est idéale 
 Napoléon conçoit alors une manœuvre en tenaille : fixation centrale et feu d’artillerie sur le pont pour transformer la rivière en piège, attaque principale confiée à Ney sur le flanc gauche russe, soutenue par les corps voisins. Le but n’est pas seulement de repousser l’ennemi, mais de le coincer entre les Français et la rivière, pour obtenir non plus une victoire, mais une destruction.
 
 La bataille se déroule selon ce schéma : Ney surgit des bois, enfonce le flanc russe ; Soult et Lannes resserrent la pression ; l’artillerie impériale martèle les points de passage. La topographie joue contre les Russes : limitée en profondeur, leur ligne se brise et se désagrège. Sur environ 80 000 hommes engagés côté russe, près de la moitié est hors de combat (tués, blessés, capturés). La Grande Armée, partie en sous-nombre localement, termine la journée avec des pertes certes lourdes, mais relativement modestes au regard de l’ampleur du succès.
-
 
 ## VII. Friedland comme prétendue clôture des guerres de la Révolution
 

@@ -9,7 +9,7 @@
       49.1281,
       16.9118
     ],
-    "description": "L’affrontement qui s’annonce n’est pas seulement militaire : il est avant tout idéologique. D’un côté, la France napoléonienne porte les valeurs révolutionnaires — souveraineté nationale, égalité civile, modernisation administrative. De l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien. Depuis 1793, la peur de la contagion révolutionnaire a justifié la constitution successive de coalitions hostiles à Paris.",
+    "description": "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien.",
     "categorie": "guerre",
     "personnages": null,
     "lien": "fiches/bataille-austerlitz.html"
@@ -84,10 +84,25 @@
       46.2276,
       2.2137
     ],
-    "description": "la lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem.",
+    "description": "La lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/croisades-de-secours.html"
+  },
+  {
+    "titre": "Le déclin de l'Empire ottoman",
+    "date": "1900-01-01",
+    "date_fin": false,
+    "perpetuel": true,
+    "pays": "Empire ottoman",
+    "coords": [
+      39.41626,
+      35.379558
+    ],
+    "description": "pourquoi l'Empire ottoman a décliné",
+    "categorie": "politique",
+    "personnages": null,
+    "lien": "fiches/déclin-ottoman.html"
   },
   {
     "titre": "Les guerres du Congo et l'imounité, de 1996 à 2019",
@@ -109,10 +124,10 @@
     "date": "1299-01-01",
     "date_fin": "1453-01-01",
     "perpetuel": false,
-    "pays": "Empire Ottoman",
+    "pays": "Empire ottoman",
     "coords": [
-      37.0,
-      15.0
+      39.41626,
+      35.379558
     ],
     "description": "les origines de l'Empire Ottoman",
     "categorie": "politique",

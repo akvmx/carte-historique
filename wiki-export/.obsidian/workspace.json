@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "guerres-congo.md",
+                "file": "siège-antioche.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "guerres-congo"
+              "title": "siège-antioche"
             }
           }
         ],
@@ -187,28 +187,28 @@
   },
   "active": "4eb3d06865edbc2f",
   "lastOpenFiles": [
-    "guerre-hollande-france.md",
+    "sultanat-mamluk.md",
+    "siège-antioche.md",
     "origines-ottoman.md",
-    "état-indépendant-du-congo.md",
-    "guerres-congo.md",
-    "docu-sucre.md",
+    "turcs-seljukides-croisades.md",
+    "traité-presbourg.md",
     "nouvelle-amsterdam-débuts.md",
-    "campagne-espagne-napoléon.md",
-    "campagne-napoléon-allemagne.md",
-    "croisades-de-secours.md",
+    "guerres-congo.md",
+    "guerre-hollande-france.md",
+    "état-indépendant-du-congo.md",
+    "docu-sucre.md",
     "déclin-ottoman.md",
+    "campagne-espagne-napoléon.md",
+    "bataille-friedland.md",
+    "croisades-de-secours.md",
+    "campagne-napoléon-allemagne.md",
+    "bataille-austerlitz.md",
+    "bataille-eylau.md",
     "Untitled.md",
     "Untitled",
-    "sultanat-mamluk.md",
     "Sans titre.base",
     "Sans titre 1.base",
     "Sans titre 2.base",
-    "siège-antioche.md",
-    "turcs-seljukides-croisades.md",
-    "traité-presbourg.md",
-    "bataille-friedland.md",
-    "bataille-eylau.md",
-    "bataille-austerlitz.md",
     "templates/evènement.md",
     "Sans titre.md",
     "templates"
