@@ -7,6 +7,7 @@ pays: "République démocratique du Congo"
 coords: [-2.8800, 23.6560]  # ← Trouvez sur Google Maps
 description: "Cycle de guerres, massacres et prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale dénoncée par le docteur Denis Mukwege et de nombreux témoins."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
+personnages: "Léopold II"
 lien: fiches/guerres-congo.html
 ---
 

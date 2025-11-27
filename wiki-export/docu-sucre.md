@@ -4,7 +4,7 @@ titre: La guerre du sucre
 date: YYYY-MM-DD
 date_fin: YYYY-MM-DD
 perpetuel: false
-pays: Nom du pays
+pays: Brésil
 coords:
   - latitude
   - longitude

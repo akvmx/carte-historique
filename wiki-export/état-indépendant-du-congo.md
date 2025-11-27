@@ -7,6 +7,7 @@ pays: "République démocratique du Congo"
 coords: [-2.8800, 23.6560]
 description: "les ravages de Léopold II au Congo"
 categorie: "politique"
+personnages: "Léopold II"
 lien: "fiches/état-indépendant-du-Congo.html"
 ---
 

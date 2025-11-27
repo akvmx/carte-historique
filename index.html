@@ -978,10 +978,26 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
-            
+
+            /* Timeline moins haute en mode normal, et VRAIMENT petite en mode abaissée */
             .timeline {
-                height: 200px;
+                height: 180px;          /* timeline développée */
             }
+
+            .timeline.collapsed {
+                height: 60px;           /* barre fine quand abaissée */
+            }
+
+            /* S'assurer que la carte a toujours une taille décente sur mobile */
+            .map-container {
+                min-height: 200px;
+            }
+
+            /* Optionnel : si tu veux autoriser un peu de scroll plutôt que tout caser dans 100vh
+            body {
+                overflow: auto;
+            }
+            */
         }
 
         /* Popup personnalisée pour Leaflet */
@@ -1030,6 +1046,221 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+                /* ============ Sidebar plus légère ============ */
+
+        .sidebar {
+            flex: 0 0 280px;
+            max-width: 280px;
+            background: linear-gradient(
+                180deg,
+                var(--couleur-panneau) 0%,
+                var(--couleur-fond) 40%
+            );
+        }
+
+        .sidebar-content {
+            padding: 20px 18px 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Titres de section : plus petits, plus discrets */
+        .control-section h3 {
+            margin: 0 0 6px 0;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--couleur-texte);
+            opacity: 0.7;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Chaque section = simple séparation, pas de gros blocs forts */
+        .control-section {
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+        }
+
+        .control-section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* ============ Filtres continents ============ */
+
+        .continent-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .btn-continent {
+            flex: 1 1 calc(50% - 8px);
+            padding: 6px 10px;
+            background: transparent;
+            border-radius: 9999px;
+            border: 1px solid var(--couleur-bordure);
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease,
+                        transform 0.1s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-continent:hover {
+            border-color: var(--couleur-accent);
+            box-shadow: var(--ombre-sm);
+            transform: translateY(-1px);
+        }
+
+        .btn-continent.active {
+            background: var(--couleur-accent);
+            color: #ffffff;
+            border-color: var(--couleur-accent);
+            box-shadow: var(--ombre-md);
+        }
+
+        /* ============ Période + affichage ============ */
+        .range-control {
+            background: transparent;
+            border-radius: 12px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 12px 10px;
+            box-shadow: none;
+        }
+
+        .range-label {
+            margin-bottom: 10px;
+        }
+
+        .year-input {
+            font-size: 0.85rem;
+            min-width: 72px;
+            padding: 4px 8px;
+        }
+
+        .range-slider {
+            height: 4px;
+            border-radius: 999px;
+        }
+
+        /* boutons "année courante / tout" -> look de petits onglets */
+        .filter-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-filter {
+            flex: 1;
+            padding: 6px 10px;
+            font-size: 0.8rem;
+            border-radius: 9999px;
+            border-width: 1px;
+            border-style: solid;
+            border-color: var(--couleur-bordure);
+            background: transparent;
+            box-shadow: none;
+        }
+
+        .btn-filter.active {
+            background: var(--couleur-accent);
+            color: #fff;
+            border-color: var(--couleur-accent);
+        }
+
+        /* ============ Liste d'événements plus minimaliste ============ */
+        .events-list {
+            padding: 4px 0;
+            background: transparent;
+            border-radius: 0;
+            border: none;
+            box-shadow: none;
+            max-height: 260px;
+            gap: 4px;
+        }
+
+        .event-item {
+            position: relative;
+            background: transparent;
+            border-radius: 8px;
+            border: none;
+            padding: 6px 4px;
+            box-shadow: none;
+            cursor: pointer;
+            transition: background-color 0.12s ease, transform 0.08s ease;
+        }
+
+        .event-item::before {
+            display: none;
+        }
+
+        .event-item:hover {
+            background: rgba(148, 163, 184, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .event-date {
+            font-size: 0.75rem;
+            opacity: 0.8;
+        }
+
+        .event-title {
+            font-size: 0.85rem;
+            font-weight: 550;
+            margin-bottom: 2px;
+        }
+
+        .event-country {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            padding: 0;
+            background: transparent;
+        }
+
+        /* ============ Widget Obsidian simplifié ============ */
+
+        .obsidian-section {
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            padding: 10px 12px;
+            border-radius: 12px;
+            border: 1px solid var(--couleur-bordure);
+            margin-bottom: 0;
+            box-shadow: none;
+        }
+
+        .obsidian-section h3 {
+            color: inherit;
+            margin-bottom: 6px;
+        }
+
+        .obsidian-status {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        .obsidian-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-obsidian {
+            background: transparent;
+            border-radius: 9999px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 4px 8px;
+            font-size: 0.8rem;
+        }
+
+        .btn-obsidian:hover {
+            background: var(--couleur-panneau);
+        }
     </style>
 </head>
 <body>
@@ -1065,9 +1296,6 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
-                
-
-                
 
                 <!-- Continents -->
                 <section class="control-section">
@@ -1120,6 +1348,14 @@
                 <div class="events-list" id="events-list">
                     <p class="no-events">Aucun événement.</p>
                 </div>
+                </section>
+
+                <!-- Personnages historiques -->
+                <section class="control-section">
+                    <h3>personnages.</h3>
+                    <div class="events-list" id="persons-list">
+                        <p class="no-events">Aucun personnage référencé.</p>
+                    </div>
                 </section>
                 
                 <!-- Comparaison de pays -->
@@ -1179,7 +1415,7 @@
     </main>
 
     <!-- Timeline -->
-    <footer class="timeline" id="timeline">
+    <footer class="timeline collapsed" id="timeline">
         <div class="timeline-header">
             <div class="timeline-header-left">
                 <h2>timeline.</h2>
@@ -1197,7 +1433,7 @@
                 </div>
 
                 <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
-                    ▼
+                    ▲
                 </button>
             </div>
         </div>
@@ -1273,6 +1509,7 @@
                 this.timelineGlobalDots = [];
                 this.currentGlobalTimelineEvents = [];
                 this.selectedGlobalTimelineIndex = null;
+                this.personIndex = {}; // { "Napoléon Ier": { nom, events: [...] } }
 
                 // Cache et données
                 this.cache = {
@@ -1558,8 +1795,6 @@
                     });
                 });
                 
-                
-
                 // Flèches de navigation dans la timeline
                 const prevBtn = document.getElementById('timeline-prev');
                 const nextBtn = document.getElementById('timeline-next');
@@ -1623,7 +1858,8 @@
                         this.cache.events = await eventsResponse.json();
                         this.cache.countries = await countriesResponse.json();
                         this.cache.lastSync = new Date();
-                        
+                        this.buildPersonsIndex();
+
                         console.log(`✅ ${this.cache.events.length} événements et ${this.cache.countries.length} pays chargés`);
                         this.setSyncStatus('success', 'Synchronisé');
                         this.showNotification('📦 Données mises à jour', 'success');
@@ -1680,6 +1916,29 @@
                 this.showNotification('⚠️ Données de test chargées', 'warning');
             }
             
+            buildPersonsIndex() {
+                this.personIndex = {};
+
+                this.cache.events.forEach(ev => {
+                    if (!ev.personnages) return;
+
+                    const noms = Array.isArray(ev.personnages) ? ev.personnages : [ev.personnages];
+
+                    noms.forEach(nomBrut => {
+                        const nom = (nomBrut || "").trim();
+                        if (!nom) return;
+
+                        if (!this.personIndex[nom]) {
+                            this.personIndex[nom] = {
+                                nom,
+                                events: []
+                            };
+                        }
+                        this.personIndex[nom].events.push(ev);
+                    });
+                });
+            }
+
             updateDisplay() {
                 if (this.isLoading) return;
                 
@@ -1687,6 +1946,7 @@
                     this.updateMarkers();
                     this.updateStats();
                     this.updateEventsList();
+                    this.updatePersonsList();
                 });
 
                 // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
@@ -1715,6 +1975,123 @@
                     }
                 });
             }
+            
+            updatePersonsList() {
+                const container = document.getElementById('persons-list');
+                if (!container) return;
+
+                const entries = Object.values(this.personIndex);
+
+                if (entries.length === 0) {
+                    container.innerHTML = '<p class="no-events">Aucun personnage référencé.</p>';
+                    return;
+                }
+
+                // tri simple : par nombre d'événements puis par nom
+                entries.sort((a, b) => {
+                    if (b.events.length !== a.events.length) {
+                        return b.events.length - a.events.length;
+                    }
+                    return a.nom.localeCompare(b.nom, 'fr');
+                });
+
+                let html = '';
+                entries.forEach(person => {
+                    // Pays principaux (on récupère tous les pays associés aux événements)
+                    const paysSet = new Set();
+                    person.events.forEach(ev => {
+                        this.eventCountries(ev).forEach(p => paysSet.add(p));
+                    });
+                    const paysList = Array.from(paysSet).join(', ');
+
+                    html += `
+                        <div class="event-item person-item" data-person="${person.nom}">
+                            <div class="event-title">${person.nom}</div>
+                            <div class="event-date">
+                                ${person.events.length} événement(s)
+                                ${paysList ? ` – ${paysList}` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+
+                // Gestion du clic : ouvrir la "page" du personnage
+                container.querySelectorAll('.person-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const name = el.getAttribute('data-person');
+                        this.showPersonPage(name);
+                    });
+                });
+            }
+
+            showPersonPage(name) {
+                const data = this.personIndex[name];
+                if (!data) return;
+
+                const timeline = document.getElementById('timeline');
+                const toggleTimelineBtn = document.getElementById('toggle-timeline');
+                const timelineContent = document.getElementById('timeline-content');
+
+                if (!timeline || !timelineContent) return;
+
+                // s'assurer que la timeline est ouverte
+                timeline.classList.remove('collapsed');
+                if (toggleTimelineBtn) {
+                    toggleTimelineBtn.textContent = '▼';
+                }
+
+                // on force l’onglet "timeline du pays" à être visible
+                const timelineCountry = document.getElementById('timeline-country');
+                const timelineGlobal = document.getElementById('timeline-global');
+                const tabs = document.querySelectorAll('.timeline-tab');
+
+                tabs.forEach(t => t.classList.remove('active'));
+                const countryTab = document.querySelector('.timeline-tab[data-mode="country"]');
+                if (countryTab) countryTab.classList.add('active');
+
+                if (timelineCountry) timelineCountry.style.display = 'block';
+                if (timelineGlobal) timelineGlobal.style.display = 'none';
+
+                // événements triés
+                const events = [...data.events].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                let html = `
+                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
+                        👤 ${name} – ${events.length} événement(s)
+                    </h3>
+                `;
+
+                events.forEach((ev, index) => {
+                    const icon = this.getCategoryIcon(ev.categorie);
+                    const paysList = this.eventCountries(ev).join(', ');
+                    const eventId = `timeline-event-person-${index}`;
+
+                    html += `
+                        <div class="timeline-event" id="${eventId}" data-link="${ev.lien || '#'}">
+                            <div class="event-date">${icon} ${ev.date} – ${paysList}</div>
+                            <div class="event-title">${ev.titre}</div>
+                            <div class="event-description">${ev.description || ""}</div>
+                        </div>
+                    `;
+                });
+
+                timelineContent.innerHTML = html;
+
+                // clic = ouvrir la fiche événement si un lien existe
+                document.querySelectorAll('.timeline-event').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const link = el.getAttribute('data-link');
+                        if (link && link !== '#') {
+                            window.open(link, '_blank');
+                        }
+                    });
+                });
+
+                // on trace la frise à partir de tous les événements du personnage
+                this.drawTimeline(events);
+            }
 
             updateStats() {
                 const nbPaysElement = document.getElementById('nb-pays');
@@ -1736,16 +2113,14 @@
                 filteredCountries.forEach(country => {
                     // On regarde les événements correspondant à ce pays
                     const eventsForCountry = this.cache.events.filter(ev => {
-                        if (ev.pays.toLowerCase() !== country.pays.toLowerCase()) {
+                        if (!this.eventBelongsToCountry(ev, country.pays)) {
                             return false;
                         }
 
-                        // Mode "Tous les événements" : on ne filtre pas par année
                         if (this.eventDisplayMode === "all") {
                             return true;
                         }
 
-                        // Mode "Année courante" : uniquement les événements visibles pour l'année sélectionnée
                         return this.isEventVisibleForYear(ev, this.selectedYear);
                     });
 
@@ -1783,21 +2158,28 @@
                 return eventStartYear === year;
             }
 
+            eventCountries(event) {
+                if (!event || !event.pays) return [];
+                return Array.isArray(event.pays) ? event.pays : [event.pays];
+            }
+
+            eventBelongsToCountry(event, countryName) {
+                const target = countryName.toLowerCase();
+                return this.eventCountries(event).some(
+                    p => (p || "").toLowerCase() === target
+                );
+            }
+
             getEventsForCountry(countryName) {
                 return this.cache.events.filter(event => {
-                    // 1) On vérifie d'abord le pays
-                    if (event.pays.toLowerCase() !== countryName.toLowerCase()) {
+                    if (!this.eventBelongsToCountry(event, countryName)) {
                         return false;
                     }
 
-                    // 2) Mode "Tous les événements" :
-                    //    on ignore complètement l'année sélectionnée.
                     if (this.eventDisplayMode === "all") {
                         return true;
                     }
 
-                    // 3) Mode "Année courante" :
-                    //    on utilise la logique commune de visibilité.
                     return this.isEventVisibleForYear(event, this.selectedYear);
                 });
             }
@@ -1913,7 +2295,7 @@
                 // ⚠️ On ignore complètement le paramètre "events"
                 // et on récupère TOUS les événements de ce pays, toutes années confondues.
                 const allEventsForCountry = this.cache.events
-                    .filter(ev => ev.pays.toLowerCase() === countryName.toLowerCase())
+                    .filter(ev => this.eventBelongsToCountry(ev, countryName))
                     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
                 let html = `
@@ -2416,9 +2798,10 @@
                             .filter(country => country.continent === this.selectedContinent)
                             .map(country => country.pays.toLowerCase());
                         
-                        currentYearEvents = currentYearEvents.filter(event => 
-                            countriesInContinent.includes(event.pays.toLowerCase())
-                        );
+                        currentYearEvents = currentYearEvents.filter(event => {
+                            const eventCountries = this.eventCountries(event).map(p => p.toLowerCase());
+                            return eventCountries.some(p => countriesInContinent.includes(p));
+                        });
                     }
                 } else {
                     // Mode "Année courante" : filtrer les événements pour l'année sélectionnée
@@ -2432,9 +2815,10 @@
                             .filter(country => country.continent === this.selectedContinent)
                             .map(country => country.pays.toLowerCase());
                         
-                        currentYearEvents = currentYearEvents.filter(event => 
-                            countriesInContinent.includes(event.pays.toLowerCase())
-                        );
+                        currentYearEvents = currentYearEvents.filter(event => {
+                            const eventCountries = this.eventCountries(event).map(p => p.toLowerCase());
+                            return eventCountries.some(p => countriesInContinent.includes(p));
+                        });
                     }
                 }
                 
@@ -2477,8 +2861,8 @@
                     
                     // Montrer les événements du pays dans la timeline
                     const events = this.cache.events
-                        .filter(ev => ev.pays.toLowerCase() === country.pays.toLowerCase())
-                        .sort((a, b) => new Date(a.date) - new Date(b.date));
+                    .filter(ev => this.eventBelongsToCountry(ev, country.pays))
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
                     this.showTimeline(country.pays, events);
                     
                     // Fermer la sidebar sur mobile
@@ -2656,11 +3040,11 @@
 
                         // Récupérer les événements pour chaque pays (sans filtre d'année)
                         const eventsA = this.cache.events.filter(ev =>
-                            ev.pays.toLowerCase() === countryA.toLowerCase()
+                            this.eventBelongsToCountry(ev, countryA)
                         ).sort((a, b) => new Date(a.date) - new Date(b.date));
 
                         const eventsB = this.cache.events.filter(ev =>
-                            ev.pays.toLowerCase() === countryB.toLowerCase()
+                            this.eventBelongsToCountry(ev, countryB)
                         ).sort((a, b) => new Date(a.date) - new Date(b.date));
 
                         if (eventsA.length === 0 && eventsB.length === 0) {

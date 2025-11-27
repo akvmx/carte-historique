@@ -40,19 +40,19 @@
     ]
   },
   {
-    "pays": "Empire ottoman",
-    "continent": "afrique",
-    "coordonnees": [
-      37.0,
-      15.0
-    ]
-  },
-  {
     "pays": "République démocratique du Congo",
     "continent": "afrique",
     "coordonnees": [
       -2.88,
       23.656
+    ]
+  },
+  {
+    "pays": "Empire Ottoman",
+    "continent": "afrique",
+    "coordonnees": [
+      37.0,
+      15.0
     ]
   },
   {

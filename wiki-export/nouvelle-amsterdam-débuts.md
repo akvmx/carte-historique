@@ -5,7 +5,7 @@ date: YYYY-MM-DD
 date_fin:
   - "null"
 perpetuel: true
-pays: Nom du pays
+pays: Etats-Unis
 coords:
   - "40.7056297"
   - "-74.0080942"

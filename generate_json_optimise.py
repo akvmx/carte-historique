@@ -98,7 +98,7 @@ def parse_frontmatter(content):
                             print(f"⚠️ Coordonnées invalides: {value} - Erreur: {e}")
                     else:
                         print(f"⚠️ Format coordonnées invalide: {value}")
-                    
+
                 # Parser les booléens
                 elif key == 'perpetuel':
                     metadata[key] = value.lower() in ('true', 'yes', '1')
@@ -111,15 +111,24 @@ def parse_frontmatter(content):
                     normalized = normalize_date(value)
                     if normalized:
                         metadata[key] = normalized
+
+                # Champs pouvant contenir plusieurs valeurs sur une ligne (séparées par des virgules)
+                elif key in ('pays', 'personnages'):
+                    if '#' in value:
+                        value = value.split('#')[0].strip()
+                    # ex : "France, Russie, Pologne"
+                    if ',' in value:
+                        items = [v.strip() for v in value.split(',') if v.strip()]
+                        metadata[key] = items
+                    else:
+                        metadata[key] = value
                 
                 else:
                     # Retirer les commentaires pour les autres champs aussi
                     if '#' in value:
                         value = value.split('#')[0].strip()
                     metadata[key] = value
-
-                
-        
+                    
         return metadata, markdown_content
         
     except Exception as e:
@@ -168,6 +177,11 @@ def generate_html(metadata, content, filename):
     coords_str = str(coords[0]) + ", " + str(coords[1]) if coords else "Non spécifiées"
     
     # Template HTML simplifié sans f-strings problématiques
+    pays_meta = metadata.get('pays', 'Pays inconnu')
+    if isinstance(pays_meta, list):
+        pays_str = ", ".join(pays_meta)
+    else:
+        pays_str = pays_meta
     html = """<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -211,7 +225,7 @@ def generate_html(metadata, content, filename):
         
         <div class="meta">
             <p><strong>📅 Date :</strong> """ + metadata.get('date', 'Date inconnue') + """</p>
-            <p><strong>🌍 Pays :</strong> """ + metadata.get('pays', 'Pays inconnu') + """</p>
+            <p><strong>🌍 Pays :</strong> """ + pays_str + """</p>
             <p><strong>📍 Coordonnées :</strong> """ + coords_str + """</p>
             <p><strong>🏷️ Catégorie :</strong> """ + metadata.get('categorie', 'General').title() + """</p>
         </div>
@@ -327,28 +341,38 @@ def main():
             evenement = {
                 "titre": metadata['titre'],
                 "date": metadata['date'],
-                "date_fin": metadata.get('date_fin'),      # ← Optionnel
+                "date_fin": metadata.get('date_fin', False),      # ← Optionnel
                 "perpetuel": metadata.get('perpetuel', False),  # ← Optionnel
                 "pays": metadata['pays'],
                 "coords": metadata['coords'],
                 "description": metadata.get('description', ''),
                 "categorie": categorie,
+                "personnages": metadata.get('personnages'),
                 "lien": f"fiches/{html_filename}"
             }
             evenements.append(evenement)
             stats['events'] += 1
             
-            # Gérer les pays
-            pays_key = metadata['pays'].lower().strip()
+            # Gérer les pays (un événement peut concerner plusieurs pays)
+            pays_field = metadata['pays']  # str ou liste
             continent = determine_continent(metadata['coords'])
             
-            if pays_key not in pays_dict:
-                pays_dict[pays_key] = {
-                    "pays": metadata['pays'],
-                    "continent": continent,
-                    "coordonnees": metadata['coords']
-                }
-                stats['countries'] += 1
+            if isinstance(pays_field, list):
+                pays_list = pays_field
+            else:
+                pays_list = [pays_field]
+
+            for pays_name in pays_list:
+                if not pays_name:
+                    continue
+                pays_key = pays_name.lower().strip()
+                if pays_key not in pays_dict:
+                    pays_dict[pays_key] = {
+                        "pays": pays_name,
+                        "continent": continent,
+                        "coordonnees": metadata['coords']
+                    }
+                    stats['countries'] += 1
             
             # Générer HTML
             if generate_html(metadata, markdown_content, filename):
