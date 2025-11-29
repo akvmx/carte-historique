@@ -5,53 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La campagne d'Allemagne par Napoléon</title>
     <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8fafc;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        .page {
+            width: 100%;
+            max-width: 960px;
         }
-        .btn-retour {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3b82f6;
-            color: white;
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #3b82f6; }
-        h2, h3 { color: #1e40af; margin-top: 2rem; }
-        .meta { background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="btn-retour">← Retour à la carte</a>
-        
-        <h1>La campagne d'Allemagne par Napoléon</h1>
-        
-        <div class="meta">
-            <p><strong>📅 Date :</strong> 1813-01-01</p>
-            <p><strong>🌍 Pays :</strong> Allemagne</p>
-            <p><strong>📍 Coordonnées :</strong> 51.18446, 14.42367</p>
-            <p><strong>🏷️ Catégorie :</strong> "Guerre"</p>
-        </div>
-        
-        <div class="content">
-            <p><h1>La campagne d'Allemagne</h1></p><p><h2>I. De Vilnius à l’effondrement stratégique</h2></p><p>En décembre 1812, à Vilnius, dans l’actuelle Lituanie, la Grande Armée n’est plus qu’une ombre. Sous une température avoisinant les –40 °C, dans un vent glacial, les survivants de la campagne de Russie tentent simplement de rester en vie et de fuir. Les hommes manquent de tout, surtout de nourriture et de vêtements chauds, au point de mourir littéralement gelés les uns après les autres. La retraite, commencée comme un repli militaire, se transforme en hécatombe.</p><p>Le bilan humain est effroyable. Côté français, environ 200 000 morts et autant de prisonniers ; côté russe, entre 200 000 et 300 000 morts. Mais le chiffre, déjà terrible, n’est pas le plus grave pour Napoléon : le désastre ne brise pas la volonté du tsar. Malgré les pertes, Alexandre Ier décide de poursuivre la guerre et de se poser en libérateur de l’Europe, en appelant à une « guerre de libération » non seulement contre l’empereur, présenté comme l’Antéchrist, mais aussi contre la France et l’héritage révolutionnaire.</p><p>Pour Napoléon, l’impact est double. Sur le plan intérieur, il vient d’échapper à une tentative de coup d’État : la fragilisation militaire se traduit immédiatement en fragilisation politique. Sur le plan extérieur, sa position stratégique se disloque. La Prusse et l’Autriche sont officiellement ses alliées, mais gardent un profond désir de revanche. À l’est, l’effondrement de la Grande Armée donne à Berlin et à Vienne une marge de manœuvre dont elles ne disposaient plus depuis longtemps. Au nord, la situation est tout aussi inquiétante : son ancien maréchal, Jean-Baptiste Bernadotte, devenu prince héritier puis roi de Suède, se détourne de la France. Au lieu de soutenir son ancien chef, il négocie avec l’Angleterre et la Russie, offrant son concours à la coalition qui se dessine.</p><p>À l’autre bout du continent, la péninsule Ibérique reste un bourbier. Incapables d’écraser définitivement les armées britanniques, espagnoles et portugaises, les Français s’enlisent dans une guérilla sans répit. Avec la menace d’une pression russe à l’est, rien ne garantit que Paris ait encore les moyens matériels et humains de supporter durablement une guerre sur deux fronts.</p><p>Dans ce contexte, Napoléon lui-même reconnaît son erreur. Face à la politique de « terre brûlée » adoptée par les Russes – qui incendient leurs villes, leurs villages, leurs campagnes plutôt que de se rendre –, il aurait cette formule : « Ce sont des Scythes », comparant les Russes à cet ancien peuple barbare qui défendait son territoire en détruisant tout ce qui pouvait servir à l’ennemi. Il ajoute qu’il a commis une grande faute, mais affirme encore qu’il aura les moyens de la réparer. C’est toute l’ambiguïté du moment : l’empereur comprend la gravité de la situation, mais continue de croire qu’un redressement militaire est possible, à condition d’agir vite et fort.</p><p><h2>II. La recomposition des alliances européennes</h2></p><p>À la fin de 1812 et au début de 1813, le tsar cherche des soutiens en Europe pour transformer sa victoire défensive en offensive générale contre Napoléon. Le système continental, qui tenait tant bien que mal, apparaît soudain comme une construction vulnérable. Officiellement, une bonne partie du continent est intégrée à l’ordre napoléonien ; officieusement, beaucoup d’États n’attendent qu’une occasion pour se défaire du joug français.</p><p>L’Autriche représente une cible prioritaire. Vieille ennemie de la France révolutionnaire, battue à plusieurs reprises par Napoléon depuis quinze ans, elle n’a évité la destruction qu’en acceptant une alliance dynastique : en 1809–1810, le mariage de Napoléon avec Marie-Louise d’Autriche, fille de l’empereur François, scelle une union politique, et la naissance d’un héritier – le futur « Napoléon II » – est censée stabiliser le régime et le système continental. Mais, dans l’esprit du chancelier Metternich, ce mariage est surtout un moyen de gagner du temps. Il s’agit de flatter Napoléon en lui donnant ce qu’il désire le plus – un fils légitime – tout en préparant, en sous-main, la revanche autrichienne. L’objectif est clair : laver les humiliations passées et retrouver un rang de grande puissance.</p><p>Le désastre de Russie offre à Metternich une occasion inespérée. Dès lors, il pratique un double jeu. Officiellement lié à Paris, il donne des ordres de repli aux troupes autrichiennes envoyées sur le front, sous des prétextes tactiques, ce qui revient à limiter leur engagement réel contre les Russes et à montrer au tsar que l’Autriche n’est pas totalement hostile à Moscou. Le tsar, cependant, attend davantage : une entrée franche en guerre à ses côtés. Or Vienne n’est pas prête à brûler si vite ses derniers ponts.</p><p>La Prusse, quant à elle, est dans une situation plus précaire encore. Écrasée par Napoléon, amputée, occupée, elle reste officiellement alliée à la France, mais le ressentiment est immense. Le roi Frédéric-Guillaume fait preuve d’une grande prudence : affronter trop tôt la France, c’est risquer un désastre définitif. Pour se risquer à rompre avec l’empereur, Berlin exige des garanties solides et des soutiens. C’est là que l’opinion publique allemande et le jeu des idées entrent en scène.</p><p>Avant 1812, de nombreux intellectuels allemands – Hegel, Goethe et d’autres – voient encore en Napoléon une figure quasi héroïque : un fondateur, un porteur de la modernité, un homme qui diffuse, malgré sa brutalité, certaines conquêtes de la Révolution. L’espace germanique est ainsi partagé entre francophiles admirateurs de l’empereur et germanistes hostiles, partisans de l’indépendance prussienne et ennemis de la domination française.</p><p>La campagne de Russie vient bouleverser cet équilibre. De nombreuses familles allemandes ont envoyé leurs fils au sein des contingents levés pour la Grande Armée. On leur promettait une guerre courte, quelques mois de campagne, une victoire facile, un retour rapide. Or ces fils ne reviennent pas. Là où l’on avait fourni deux, trois, voire quatre garçons, parfois un seul survit. Dans ces conditions, il devient impossible de continuer à présenter le projet napoléonien comme un bien commun européen. La colère gronde dans les villes, les campagnes, et la propagande prussienne trouve un terrain fertile pour attiser l’hostilité à la France.</p><p>Le 30 décembre 1812, un événement symbolique cristallise ce changement : trente mille Prussiens intégrés à la Grande Armée font défection sans même en recevoir l’ordre. C’est un signal politique autant que militaire : plus Napoléon recule, plus ses « alliés » se dérobent. Le tsar peut désormais prétendre à un rôle de libérateur du monde germanique, pendant que la Prusse se pose en protectrice de « tous les Allemands ».</p><p>Parallèlement, l’Angleterre, déjà en guerre permanente contre la France, se réjouit du désastre russe. À Londres, la chute éventuelle de Napoléon est perçue comme la condition pour assurer la domination maritime et commerciale britannique. En Espagne, le général Wellington apprend la destruction de la Grande Armée au moment où son propre corps expéditionnaire est affaibli par la maladie et le manque de vivres ; cette nouvelle lui offre un formidable levier psychologique pour relancer l’offensive. Désormais, la perspective n’est plus de simple victoire locale, mais de destruction de l’ennemi principal.</p><p>Ainsi, au tournant de 1813, trois dynamiques se mettent en place simultanément : la Russie se pose en protectrice des chrétiens et en bras armé de la « volonté divine » contre la Révolution ; la Prusse aspire à se présenter comme le bouclier des peuples allemands ; l’Autriche prépare en coulisse sa revanche ; l’Angleterre vise à devenir le champion incontesté du commerce mondial. Toutes convergent vers un objectif unique : non pas simplement vaincre Napoléon, mais le détruire et mettre fin à l’ordre qu’il a imposé à l’Europe.</p><p><h2>III. La campagne d’Allemagne du printemps 1813</h2></p><p>Lorsque Napoléon revient à la tête de l’armée, le 26 avril 1813, l’urgence est totale. La coalition a déjà progressé profondément en Allemagne. Les Russes et les Prussiens alignent environ soixante-dix mille fantassins, des milliers de cavaliers et près de 550 canons, avec la perspective de renforts autrichiens et suédois qui pourraient porter leurs effectifs à plusieurs centaines de milliers d’hommes. Pour l’instant, l’Autriche affiche une « neutralité armée » et la Suède n’a pas encore formalisé son entrée en guerre. Mais l’ombre de ces renforts pèse sur les calculs napoléoniens.</p><p>Malgré le désastre russe, Napoléon parvient à rassembler 248 000 fantassins. Mais il ne dispose que de 8 000 cavaliers et de 350 canons environ. La cavalerie, décimée dans les plaines de Russie, manque cruellement : sans elle, les reconnaissances sont quasi impossibles et les poursuites après la victoire difficilement exécutables. L’Empereur ne peut pourtant pas se permettre d’attendre : il lui faut prouver, par une grande victoire, qu’il reste le maître du champ de bataille.</p><p>La première rencontre a lieu près de Lützen. Le 3ᵉ corps français tombe presque par surprise sur une armée prusso-russe, faute de renseignements fiables. Le maréchal tient bon, les renforts arrivent, et la bataille tourne finalement à l’avantage des Français. Mais ce succès est coûteux et révélateur. Les pertes sont très lourdes de part et d’autre : sur quatre-vingt mille hommes engagés côté français, on compte déjà plusieurs milliers de morts et plus de dix-sept mille blessés. Surtout, le manque de cavalerie empêche toute poursuite efficace. L’ennemi se replie en bon ordre, sauve l’essentiel de ses forces et conserve intactes ses capacités de manœuvre.</p><p>Napoléon en tire une leçon : l’ennemi a appris de ses méthodes, et l’usure de ses propres troupes, notamment la disparition d’une grande partie de son encadrement expérimenté, rend les combats encore plus meurtriers. Néanmoins, l’Empereur poursuit son plan : il marche vers Dresde, capitale du royaume de Saxe, dont le roi, après avoir un temps abandonné la France, se rallie à nouveau en voyant l’armée impériale arriver. Viennent ensuite les préparatifs pour l’affrontement suivant, près de Bautzen.</p><p>Là, les Russes et les Prussiens s’installent sur un plateau renforcé par des ouvrages de campagne, des redoutes, des barrières naturelles. La position, bien choisie, leur permet de jouer la défensive. Napoléon prévoit une combinaison classique : un choc frontal massif tandis que le maréchal Ney, avec un corps distinct, doit déborder la gauche ennemie, tomber sur ses arrières et couper sa retraite. Sur le papier, l’opération pourrait anéantir l’armée coalisée.</p><p>Mais le terrain s’y oppose. Une colline sépare l’Empereur des mouvements de Ney, empêchant toute vision d’ensemble et toute coordination fine. Par prudence, le maréchal ralentit et se montre hésitant : arrivé en avance sur l’horaire prévu, il n’exploite pas jusqu’au bout l’effet de surprise. Plus grave encore, il se trompe d’axe et attaque à droite au lieu de frapper la gauche ennemie comme convenu. Il débouche, par erreur, sur des positions françaises, provoquant confusion et retard, ce qui permet aux forces prusso-russes de se replier sans être encerclées.</p><p>La bataille de Bautzen est, comme Lützen, une victoire française : les coalisés reculent, mais ne sont pas détruits. Les pertes françaises restent très élevées, avec environ vingt mille hommes hors de combat sur quatre-vingt mille engagés. Surtout, ces succès tactiques ne débouchent sur aucun basculement stratégique. La Prusse et la Russie reculent, mais continuent à attirer à elles de nouveaux alliés. En Espagne, les Anglais remportent en juin une victoire importante à Vitoria. Au nord, la Suède de Bernadotte négocie son entrée en guerre. Dans les villes allemandes, les révoltes se multiplient. En quelques mois, Napoléon a prouvé qu’il pouvait encore battre ses adversaires sur le terrain ; mais chaque bataille gagnée, coûteuse en hommes qu’il ne peut plus aisément remplacer, ne fait que repousser une issue qui lui devient peu à peu défavorable.</p><p><h2>IV. L’Autriche en arbitre, le piège diplomatique de Prague et la bataille de Dresde : un chef-d’œuvre tactique dans une guerre compromise</h2></p><p>Au milieu de l’année 1813, le rapport de forces n’est pas encore désespéré pour Napoléon, à condition que l’Autriche reste en dehors du conflit. Tant que Vienne ne prend pas parti, la coalition russo-prussienne et les contingents anglais et suédois restent puissants, mais pas irrésistibles. Metternich le sait parfaitement, et c’est autour de cette position charnière que se joue le basculement.</p><p>Dans un premier temps, le chancelier autrichien affiche une « neutralité armée » : cent cinquante mille hommes sont massés à la frontière, prêts à intervenir, mais officiellement non engagés. Parallèlement, il propose un armistice, destiné, en apparence, à ouvrir la voie à la paix. L’Autriche se pose ainsi en médiatrice, gardienne de l’équilibre européen. En réalité, Metternich cherche à piéger Napoléon.</p><p>Le 26 juin 1813, les deux hommes se rencontrent près de Dresde. L’entretien tourne rapidement à la confrontation. Napoléon fulmine contre une Autriche qui, selon lui, lui doit tout : ne l’a-t-il pas plusieurs fois battue, puis sauvée de l’anéantissement en évitant de la démanteler ? Ne s’est-il pas allié par mariage à la maison d’Autriche ? Comment, dans ces conditions, Vienne peut-elle désormais le trahir et profiter de ses revers ? Metternich, lui, avance le langage de la paix : il affirme qu’il est encore possible de mettre fin à la guerre, mais seulement si la France accepte de réduire sa domination. Concrètement, il demande que Paris renonce à une partie de ses conquêtes, rende à l’Autriche et à la Prusse leur puissance antérieure, abandonne la Pologne et plusieurs territoires annexés.</p><p>Pour Napoléon, ces exigences sont exorbitantes. Rendre l’Italie, l’Allemagne, les provinces illyriennes, ce serait, à ses yeux, ouvrir la porte à un encerclement direct de la France. Il rappelle aussi que la Grande Armée vient de remporter des victoires à Lützen et Bautzen, et que ses adversaires ne doivent leur survie qu’à des replis in extremis. Il refuse donc de céder, donnant à Metternich ce que le chancelier attendait : la preuve, aux yeux de l’opinion et des autres cours, que l’Empereur est l’obstacle à la paix.</p><p>La manœuvre se poursuit à Prague, où la coalition se réunit à partir du 10 juillet. Officiellement, il s’agit de négocier. Officieusement, tout est déjà joué. Les puissances dressent un projet de paix si dur qu’elles sont convaincues que Napoléon le rejettera : la France devra abandonner l’Allemagne, restituer la Pologne, céder les provinces illyriennes, restaurer pleinement l’Autriche et la Prusse. L’idée est simple : provoquer un refus net, afin de justifier aux yeux du monde l’entrée en guerre de Vienne et la formation d’une coalition générale.</p><p>C’est ici que le scénario déraille un instant. Contre toute attente, Napoléon accepte ces conditions. Il se déclare prêt à enterrer la hache de guerre, à renoncer à une partie de ses conquêtes, pour préserver l’essentiel. Metternich, pris de court, ne peut plus utiliser son argumentaire prévu – la paix refusée par l’Empereur – pour justifier la rupture. Il s’invente alors un prétexte : la réponse serait arrivée trop tard, les délais auraient expiré. En réalité, l’Autriche a déjà fait le choix de la guerre. Elle rompt les négociations, rejoint officiellement la coalition, et ajoute à l’édifice anti-napoléonien ses cent cinquante mille soldats.</p><p>À partir de là, la coalition peut aligner environ 550 000 hommes : cent trente mille au nord, cent dix mille en Silésie, deux cent trente mille en Bohême, sans compter près de quatre-vingt mille, encore en formation, en Pologne. Napoléon, lui, ne peut plus compter que sur environ 350 000 hommes. La supériorité numérique des coalisés est désormais écrasante. Pour compenser, ces derniers adoptent, lors de la conférence de Trachenberg, une stratégie nouvelle : ne jamais affronter Napoléon lui-même en bataille rangée. Chaque fois que l’Empereur apparaît sur un front, on se retire ; on ne combat que ses maréchaux, réputés moins talentueux.</p><p>De son côté, Napoléon tente de s’adapter. Il répartit ses forces en trois grands ensembles, se réserve une importante réserve centrale, pour pouvoir soutenir tour à tour chaque front. Il envisage d’abord d’attaquer vers l’est, mais les Prussiens l’anticipent, profitent de la fin de l’armistice pour attaquer deux jours plus tôt, et infligent une lourde défaite à un de ses corps d’armée. Dans le même temps, au sud, une masse alliée se met en mouvement vers Dresde, menaçant de couper les communications françaises avec la France.</p><p>L’Empereur doit faire volte-face. Face à une armée coalisée gigantesque qui marche sur Dresde, il ne dispose sur place que de trois corps pour défendre la ville. Il décide alors une manœuvre audacieuse : faire parcourir à la Garde impériale, au 1ᵉʳ corps de cavalerie et au 6ᵉ corps environ cent cinquante kilomètres en moins de trois jours, afin de tomber brusquement sur les arrières ennemis. Le plan initial prévoit de rassembler d’abord les forces disponibles sur la rive de l’Elbe, puis de traverser le fleuve pour frapper les coalisés alors qu’ils sont engagés devant Dresde. Mais ce plan repose sur une hypothèse très risquée : laisser le maréchal Saint-Cyr défendre la ville seul, à un contre cinq. L’Empereur hésite, consulte ses maréchaux ; Saint-Cyr répond qu’il « fera de son mieux » sans rien garantir. Finalement, Napoléon modifie son projet : seul un corps traversera l’Elbe, tandis que le gros de ses forces se portera directement sur Dresde pour renforcer la garnison.</p><p>À ce moment, l’état-major coalisé, commandé notamment par Schwarzenberg, ignore tout de ces mouvements. Fort de sa supériorité numérique écrasante, il avance prudemment et fixe le signal de l’attaque : une canonnade générale à quinze heures, ni avant ni après. Mais le 26 août au matin, un événement imprévu bouleverse les plans : Napoléon est aperçu à Dresde dès dix heures, accompagné déjà d’une partie de ses renforts, tandis que le gros de la Garde et des corps d’armée converge vers la ville. Selon la logique de Trachenberg, les coalisés devraient se retirer. Mais lorsque l’horloge sonne quinze heures, l’artillerie, fidèle aux ordres donnés le matin, ouvre le feu. La bataille commence sans qu’aucune décision politique n’ait été prise pour changer la stratégie.</p><p>Les premières heures voient les Français sur la défensive. Saint-Cyr a organisé quatre points d’appui autour de la ville, dont le grand parc – le Große Garten – qui constitue un point faible difficile à tenir. Le combat se concentre dans ce parc, transformé en champ de bataille, où arbres, serres, ravins, bâtiments sont utilisés comme autant de positions de fortune. Au centre, les fortifications improvisées tiennent bon. Sur la gauche, l’avancée russe se heurte à une artillerie française habilement placée sur l’autre rive de l’Elbe, qui prend l’ennemi en enfilade et lui inflige des pertes sévères. Sur la droite, les Autrichiens ne sont pas encore tous en ligne, ce qui permet à Murat de les repousser.</p><p>À dix-sept heures, l’arrivée de la Garde impériale, emmenée par Ney, stabilise définitivement le front français. La journée se termine sur un quasi match nul, mais les coalisés ont échoué à prendre la ville malgré leur supériorité numérique. La nuit suivante change tout. Des pluies diluviennes s’abattent sur le champ de bataille : orages, vent, chute brutale de température. Le terrain est bouleversé, les chemins deviennent bourbiers, les ruisseaux gonflent, et surtout, la poudre se mouille. Le lendemain matin, la situation est profondément différente : la droite autrichienne a été ralentie, coupée de ses renforts, et un simple cours d’eau, transformé par la crue, isole désormais une partie importante des troupes de Schwarzenberg du reste de l’armée.</p><p>Napoléon saisit immédiatement l’occasion. Il remarque que cette aile ennemie est isolée, mal reliée au centre, empêchée de recevoir un soutien rapide, et, surtout, que l’état de la poudre rend difficile l’emploi des armes à feu. Il ordonne à Murat de charger sans délai, avec la cavalerie, cette fraction des forces coalisées. Les Autrichiens surpris, pataugeant dans la boue, incapables de tirer efficacement, sont écrasés sous l’impact. En quelques heures, la coalition perd environ vingt pour cent de ses effectifs de départ, entre morts, blessés et prisonniers, alors que les pertes françaises restent limitées à une dizaine de milliers d’hommes.</p><p>La victoire de Dresde est éclatante sur le plan tactique. Elle confirme que, même contre des forces supérieures en nombre, Napoléon conserve un sens exceptionnel de l’exploitation du terrain, du temps et de la manœuvre. Mais elle ne suffit pas à renverser le cours de la guerre. La coalition, forte de sa masse et de la stratégie de Trachenberg, peut encaisser une défaite et continuer à harceler les maréchaux français. L’Autriche, qui vient à peine de trahir l’alliance française, commence sa participation à la nouvelle guerre par une déroute, ce qui suscite en interne des doutes et réveille le souvenir des grandes défaites antérieures – Rivoli, Marengo, Austerlitz. Pourtant, le camp coalisé sait que l’essentiel n’est pas là : ce qui compte, ce ne sont pas quelques batailles, mais l’usure d’un empire qui, malgré son génie militaire, n’a plus les réserves humaines, financières et politiques pour soutenir indéfiniment une guerre contre l’Europe entière.</p><p>La bataille de Dresde apparaît ainsi comme un sommet tactique au cœur d’une dynamique stratégique défavorable : un moment où Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.</p>
-        </div>
-        
-        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
-        </footer>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La campagne d'Allemagne par Napoléon</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1813-01-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Allemagne</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1813-01-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La campagne d'Allemagne</strong></h1></p><p><h2>I. De Vilnius à l’effondrement stratégique</h2></p><p>En décembre 1812, à Vilnius, dans l’actuelle Lituanie, la Grande Armée n’est plus qu’une ombre. Sous une température avoisinant les –40 °C, dans un vent glacial, les survivants de la campagne de Russie tentent simplement de rester en vie et de fuir. Les hommes manquent de tout, surtout de nourriture et de vêtements chauds, au point de mourir littéralement gelés les uns après les autres. La retraite, commencée comme un repli militaire, se transforme en hécatombe.</p><p>Le bilan humain est effroyable. Côté français, environ 200 000 morts et autant de prisonniers ; côté russe, entre 200 000 et 300 000 morts. Mais le chiffre, déjà terrible, n’est pas le plus grave pour Napoléon : le désastre ne brise pas la volonté du tsar. Malgré les pertes, Alexandre Ier décide de poursuivre la guerre et de se poser en libérateur de l’Europe, en appelant à une « guerre de libération » non seulement contre l’empereur, présenté comme l’Antéchrist, mais aussi contre la France et l’héritage révolutionnaire.</p><p>Pour Napoléon, l’impact est double. Sur le plan intérieur, il vient d’échapper à une tentative de coup d’État : la fragilisation militaire se traduit immédiatement en fragilisation politique. Sur le plan extérieur, sa position stratégique se disloque. La Prusse et l’Autriche sont officiellement ses alliées, mais gardent un profond désir de revanche. À l’est, l’effondrement de la Grande Armée donne à Berlin et à Vienne une marge de manœuvre dont elles ne disposaient plus depuis longtemps. Au nord, la situation est tout aussi inquiétante : son ancien maréchal, Jean-Baptiste Bernadotte, devenu prince héritier puis roi de Suède, se détourne de la France. Au lieu de soutenir son ancien chef, il négocie avec l’Angleterre et la Russie, offrant son concours à la coalition qui se dessine.</p><p>À l’autre bout du continent, la péninsule Ibérique reste un bourbier. Incapables d’écraser définitivement les armées britanniques, espagnoles et portugaises, les Français s’enlisent dans une guérilla sans répit. Avec la menace d’une pression russe à l’est, rien ne garantit que Paris ait encore les moyens matériels et humains de supporter durablement une guerre sur deux fronts.</p><p>Dans ce contexte, Napoléon lui-même reconnaît son erreur. Face à la politique de « terre brûlée » adoptée par les Russes – qui incendient leurs villes, leurs villages, leurs campagnes plutôt que de se rendre –, il aurait cette formule : « Ce sont des Scythes », comparant les Russes à cet ancien peuple barbare qui défendait son territoire en détruisant tout ce qui pouvait servir à l’ennemi. Il ajoute qu’il a commis une grande faute, mais affirme encore qu’il aura les moyens de la réparer. C’est toute l’ambiguïté du moment : l’empereur comprend la gravité de la situation, mais continue de croire qu’un redressement militaire est possible, à condition d’agir vite et fort.</p><p><h2>II. La recomposition des alliances européennes</h2></p><p>À la fin de 1812 et au début de 1813, le tsar cherche des soutiens en Europe pour transformer sa victoire défensive en offensive générale contre Napoléon. Le système continental, qui tenait tant bien que mal, apparaît soudain comme une construction vulnérable. Officiellement, une bonne partie du continent est intégrée à l’ordre napoléonien ; officieusement, beaucoup d’États n’attendent qu’une occasion pour se défaire du joug français.</p><p>L’Autriche représente une cible prioritaire. Vieille ennemie de la France révolutionnaire, battue à plusieurs reprises par Napoléon depuis quinze ans, elle n’a évité la destruction qu’en acceptant une alliance dynastique : en 1809–1810, le mariage de Napoléon avec Marie-Louise d’Autriche, fille de l’empereur François, scelle une union politique, et la naissance d’un héritier – le futur « Napoléon II » – est censée stabiliser le régime et le système continental. Mais, dans l’esprit du chancelier Metternich, ce mariage est surtout un moyen de gagner du temps. Il s’agit de flatter Napoléon en lui donnant ce qu’il désire le plus – un fils légitime – tout en préparant, en sous-main, la revanche autrichienne. L’objectif est clair : laver les humiliations passées et retrouver un rang de grande puissance.</p><p>Le désastre de Russie offre à Metternich une occasion inespérée. Dès lors, il pratique un double jeu. Officiellement lié à Paris, il donne des ordres de repli aux troupes autrichiennes envoyées sur le front, sous des prétextes tactiques, ce qui revient à limiter leur engagement réel contre les Russes et à montrer au tsar que l’Autriche n’est pas totalement hostile à Moscou. Le tsar, cependant, attend davantage : une entrée franche en guerre à ses côtés. Or Vienne n’est pas prête à brûler si vite ses derniers ponts.</p><p>La Prusse, quant à elle, est dans une situation plus précaire encore. Écrasée par Napoléon, amputée, occupée, elle reste officiellement alliée à la France, mais le ressentiment est immense. Le roi Frédéric-Guillaume fait preuve d’une grande prudence : affronter trop tôt la France, c’est risquer un désastre définitif. Pour se risquer à rompre avec l’empereur, Berlin exige des garanties solides et des soutiens. C’est là que l’opinion publique allemande et le jeu des idées entrent en scène.</p><p>Avant 1812, de nombreux intellectuels allemands – Hegel, Goethe et d’autres – voient encore en Napoléon une figure quasi héroïque : un fondateur, un porteur de la modernité, un homme qui diffuse, malgré sa brutalité, certaines conquêtes de la Révolution. L’espace germanique est ainsi partagé entre francophiles admirateurs de l’empereur et germanistes hostiles, partisans de l’indépendance prussienne et ennemis de la domination française.</p><p>La campagne de Russie vient bouleverser cet équilibre. De nombreuses familles allemandes ont envoyé leurs fils au sein des contingents levés pour la Grande Armée. On leur promettait une guerre courte, quelques mois de campagne, une victoire facile, un retour rapide. Or ces fils ne reviennent pas. Là où l’on avait fourni deux, trois, voire quatre garçons, parfois un seul survit. Dans ces conditions, il devient impossible de continuer à présenter le projet napoléonien comme un bien commun européen. La colère gronde dans les villes, les campagnes, et la propagande prussienne trouve un terrain fertile pour attiser l’hostilité à la France.</p><p>Le 30 décembre 1812, un événement symbolique cristallise ce changement : trente mille Prussiens intégrés à la Grande Armée font défection sans même en recevoir l’ordre. C’est un signal politique autant que militaire : plus Napoléon recule, plus ses « alliés » se dérobent. Le tsar peut désormais prétendre à un rôle de libérateur du monde germanique, pendant que la Prusse se pose en protectrice de « tous les Allemands ».</p><p>Parallèlement, l’Angleterre, déjà en guerre permanente contre la France, se réjouit du désastre russe. À Londres, la chute éventuelle de Napoléon est perçue comme la condition pour assurer la domination maritime et commerciale britannique. En Espagne, le général Wellington apprend la destruction de la Grande Armée au moment où son propre corps expéditionnaire est affaibli par la maladie et le manque de vivres ; cette nouvelle lui offre un formidable levier psychologique pour relancer l’offensive. Désormais, la perspective n’est plus de simple victoire locale, mais de destruction de l’ennemi principal.</p><p>Ainsi, au tournant de 1813, trois dynamiques se mettent en place simultanément : la Russie se pose en protectrice des chrétiens et en bras armé de la « volonté divine » contre la Révolution ; la Prusse aspire à se présenter comme le bouclier des peuples allemands ; l’Autriche prépare en coulisse sa revanche ; l’Angleterre vise à devenir le champion incontesté du commerce mondial. Toutes convergent vers un objectif unique : non pas simplement vaincre Napoléon, mais le détruire et mettre fin à l’ordre qu’il a imposé à l’Europe.</p><p><h2>III. La campagne d’Allemagne du printemps 1813</h2></p><p>Lorsque Napoléon revient à la tête de l’armée, le 26 avril 1813, l’urgence est totale. La coalition a déjà progressé profondément en Allemagne. Les Russes et les Prussiens alignent environ soixante-dix mille fantassins, des milliers de cavaliers et près de 550 canons, avec la perspective de renforts autrichiens et suédois qui pourraient porter leurs effectifs à plusieurs centaines de milliers d’hommes. Pour l’instant, l’Autriche affiche une « neutralité armée » et la Suède n’a pas encore formalisé son entrée en guerre. Mais l’ombre de ces renforts pèse sur les calculs napoléoniens.</p><p>Malgré le désastre russe, Napoléon parvient à rassembler 248 000 fantassins. Mais il ne dispose que de 8 000 cavaliers et de 350 canons environ. La cavalerie, décimée dans les plaines de Russie, manque cruellement : sans elle, les reconnaissances sont quasi impossibles et les poursuites après la victoire difficilement exécutables. L’Empereur ne peut pourtant pas se permettre d’attendre : il lui faut prouver, par une grande victoire, qu’il reste le maître du champ de bataille.</p><p>La première rencontre a lieu près de Lützen. Le 3ᵉ corps français tombe presque par surprise sur une armée prusso-russe, faute de renseignements fiables. Le maréchal tient bon, les renforts arrivent, et la bataille tourne finalement à l’avantage des Français. Mais ce succès est coûteux et révélateur. Les pertes sont très lourdes de part et d’autre : sur quatre-vingt mille hommes engagés côté français, on compte déjà plusieurs milliers de morts et plus de dix-sept mille blessés. Surtout, le manque de cavalerie empêche toute poursuite efficace. L’ennemi se replie en bon ordre, sauve l’essentiel de ses forces et conserve intactes ses capacités de manœuvre.</p><p>Napoléon en tire une leçon : l’ennemi a appris de ses méthodes, et l’usure de ses propres troupes, notamment la disparition d’une grande partie de son encadrement expérimenté, rend les combats encore plus meurtriers. Néanmoins, l’Empereur poursuit son plan : il marche vers Dresde, capitale du royaume de Saxe, dont le roi, après avoir un temps abandonné la France, se rallie à nouveau en voyant l’armée impériale arriver. Viennent ensuite les préparatifs pour l’affrontement suivant, près de Bautzen.</p><p>Là, les Russes et les Prussiens s’installent sur un plateau renforcé par des ouvrages de campagne, des redoutes, des barrières naturelles. La position, bien choisie, leur permet de jouer la défensive. Napoléon prévoit une combinaison classique : un choc frontal massif tandis que le maréchal Ney, avec un corps distinct, doit déborder la gauche ennemie, tomber sur ses arrières et couper sa retraite. Sur le papier, l’opération pourrait anéantir l’armée coalisée.</p><p>Mais le terrain s’y oppose. Une colline sépare l’Empereur des mouvements de Ney, empêchant toute vision d’ensemble et toute coordination fine. Par prudence, le maréchal ralentit et se montre hésitant : arrivé en avance sur l’horaire prévu, il n’exploite pas jusqu’au bout l’effet de surprise. Plus grave encore, il se trompe d’axe et attaque à droite au lieu de frapper la gauche ennemie comme convenu. Il débouche, par erreur, sur des positions françaises, provoquant confusion et retard, ce qui permet aux forces prusso-russes de se replier sans être encerclées.</p><p>La bataille de Bautzen est, comme Lützen, une victoire française : les coalisés reculent, mais ne sont pas détruits. Les pertes françaises restent très élevées, avec environ vingt mille hommes hors de combat sur quatre-vingt mille engagés. Surtout, ces succès tactiques ne débouchent sur aucun basculement stratégique. La Prusse et la Russie reculent, mais continuent à attirer à elles de nouveaux alliés. En Espagne, les Anglais remportent en juin une victoire importante à Vitoria. Au nord, la Suède de Bernadotte négocie son entrée en guerre. Dans les villes allemandes, les révoltes se multiplient. En quelques mois, Napoléon a prouvé qu’il pouvait encore battre ses adversaires sur le terrain ; mais chaque bataille gagnée, coûteuse en hommes qu’il ne peut plus aisément remplacer, ne fait que repousser une issue qui lui devient peu à peu défavorable.</p><p><h2>IV. L’Autriche en arbitre, le piège diplomatique de Prague et la bataille de Dresde : un chef-d’œuvre tactique dans une guerre compromise</h2></p><p>Au milieu de l’année 1813, le rapport de forces n’est pas encore désespéré pour Napoléon, à condition que l’Autriche reste en dehors du conflit. Tant que Vienne ne prend pas parti, la coalition russo-prussienne et les contingents anglais et suédois restent puissants, mais pas irrésistibles. Metternich le sait parfaitement, et c’est autour de cette position charnière que se joue le basculement.</p><p>Dans un premier temps, le chancelier autrichien affiche une « neutralité armée » : cent cinquante mille hommes sont massés à la frontière, prêts à intervenir, mais officiellement non engagés. Parallèlement, il propose un armistice, destiné, en apparence, à ouvrir la voie à la paix. L’Autriche se pose ainsi en médiatrice, gardienne de l’équilibre européen. En réalité, Metternich cherche à piéger Napoléon.</p><p>Le 26 juin 1813, les deux hommes se rencontrent près de Dresde. L’entretien tourne rapidement à la confrontation. Napoléon fulmine contre une Autriche qui, selon lui, lui doit tout : ne l’a-t-il pas plusieurs fois battue, puis sauvée de l’anéantissement en évitant de la démanteler ? Ne s’est-il pas allié par mariage à la maison d’Autriche ? Comment, dans ces conditions, Vienne peut-elle désormais le trahir et profiter de ses revers ? Metternich, lui, avance le langage de la paix : il affirme qu’il est encore possible de mettre fin à la guerre, mais seulement si la France accepte de réduire sa domination. Concrètement, il demande que Paris renonce à une partie de ses conquêtes, rende à l’Autriche et à la Prusse leur puissance antérieure, abandonne la Pologne et plusieurs territoires annexés.</p><p>Pour Napoléon, ces exigences sont exorbitantes. Rendre l’Italie, l’Allemagne, les provinces illyriennes, ce serait, à ses yeux, ouvrir la porte à un encerclement direct de la France. Il rappelle aussi que la Grande Armée vient de remporter des victoires à Lützen et Bautzen, et que ses adversaires ne doivent leur survie qu’à des replis in extremis. Il refuse donc de céder, donnant à Metternich ce que le chancelier attendait : la preuve, aux yeux de l’opinion et des autres cours, que l’Empereur est l’obstacle à la paix.</p><p>La manœuvre se poursuit à Prague, où la coalition se réunit à partir du 10 juillet. Officiellement, il s’agit de négocier. Officieusement, tout est déjà joué. Les puissances dressent un projet de paix si dur qu’elles sont convaincues que Napoléon le rejettera : la France devra abandonner l’Allemagne, restituer la Pologne, céder les provinces illyriennes, restaurer pleinement l’Autriche et la Prusse. L’idée est simple : provoquer un refus net, afin de justifier aux yeux du monde l’entrée en guerre de Vienne et la formation d’une coalition générale.</p><p>C’est ici que le scénario déraille un instant. Contre toute attente, Napoléon accepte ces conditions. Il se déclare prêt à enterrer la hache de guerre, à renoncer à une partie de ses conquêtes, pour préserver l’essentiel. Metternich, pris de court, ne peut plus utiliser son argumentaire prévu – la paix refusée par l’Empereur – pour justifier la rupture. Il s’invente alors un prétexte : la réponse serait arrivée trop tard, les délais auraient expiré. En réalité, l’Autriche a déjà fait le choix de la guerre. Elle rompt les négociations, rejoint officiellement la coalition, et ajoute à l’édifice anti-napoléonien ses cent cinquante mille soldats.</p><p>À partir de là, la coalition peut aligner environ 550 000 hommes : cent trente mille au nord, cent dix mille en Silésie, deux cent trente mille en Bohême, sans compter près de quatre-vingt mille, encore en formation, en Pologne. Napoléon, lui, ne peut plus compter que sur environ 350 000 hommes. La supériorité numérique des coalisés est désormais écrasante. Pour compenser, ces derniers adoptent, lors de la conférence de Trachenberg, une stratégie nouvelle : ne jamais affronter Napoléon lui-même en bataille rangée. Chaque fois que l’Empereur apparaît sur un front, on se retire ; on ne combat que ses maréchaux, réputés moins talentueux.</p><p>De son côté, Napoléon tente de s’adapter. Il répartit ses forces en trois grands ensembles, se réserve une importante réserve centrale, pour pouvoir soutenir tour à tour chaque front. Il envisage d’abord d’attaquer vers l’est, mais les Prussiens l’anticipent, profitent de la fin de l’armistice pour attaquer deux jours plus tôt, et infligent une lourde défaite à un de ses corps d’armée. Dans le même temps, au sud, une masse alliée se met en mouvement vers Dresde, menaçant de couper les communications françaises avec la France.</p><p>L’Empereur doit faire volte-face. Face à une armée coalisée gigantesque qui marche sur Dresde, il ne dispose sur place que de trois corps pour défendre la ville. Il décide alors une manœuvre audacieuse : faire parcourir à la Garde impériale, au 1ᵉʳ corps de cavalerie et au 6ᵉ corps environ cent cinquante kilomètres en moins de trois jours, afin de tomber brusquement sur les arrières ennemis. Le plan initial prévoit de rassembler d’abord les forces disponibles sur la rive de l’Elbe, puis de traverser le fleuve pour frapper les coalisés alors qu’ils sont engagés devant Dresde. Mais ce plan repose sur une hypothèse très risquée : laisser le maréchal Saint-Cyr défendre la ville seul, à un contre cinq. L’Empereur hésite, consulte ses maréchaux ; Saint-Cyr répond qu’il « fera de son mieux » sans rien garantir. Finalement, Napoléon modifie son projet : seul un corps traversera l’Elbe, tandis que le gros de ses forces se portera directement sur Dresde pour renforcer la garnison.</p><p>À ce moment, l’état-major coalisé, commandé notamment par Schwarzenberg, ignore tout de ces mouvements. Fort de sa supériorité numérique écrasante, il avance prudemment et fixe le signal de l’attaque : une canonnade générale à quinze heures, ni avant ni après. Mais le 26 août au matin, un événement imprévu bouleverse les plans : Napoléon est aperçu à Dresde dès dix heures, accompagné déjà d’une partie de ses renforts, tandis que le gros de la Garde et des corps d’armée converge vers la ville. Selon la logique de Trachenberg, les coalisés devraient se retirer. Mais lorsque l’horloge sonne quinze heures, l’artillerie, fidèle aux ordres donnés le matin, ouvre le feu. La bataille commence sans qu’aucune décision politique n’ait été prise pour changer la stratégie.</p><p>Les premières heures voient les Français sur la défensive. Saint-Cyr a organisé quatre points d’appui autour de la ville, dont le grand parc – le Große Garten – qui constitue un point faible difficile à tenir. Le combat se concentre dans ce parc, transformé en champ de bataille, où arbres, serres, ravins, bâtiments sont utilisés comme autant de positions de fortune. Au centre, les fortifications improvisées tiennent bon. Sur la gauche, l’avancée russe se heurte à une artillerie française habilement placée sur l’autre rive de l’Elbe, qui prend l’ennemi en enfilade et lui inflige des pertes sévères. Sur la droite, les Autrichiens ne sont pas encore tous en ligne, ce qui permet à Murat de les repousser.</p><p>À dix-sept heures, l’arrivée de la Garde impériale, emmenée par Ney, stabilise définitivement le front français. La journée se termine sur un quasi match nul, mais les coalisés ont échoué à prendre la ville malgré leur supériorité numérique. La nuit suivante change tout. Des pluies diluviennes s’abattent sur le champ de bataille : orages, vent, chute brutale de température. Le terrain est bouleversé, les chemins deviennent bourbiers, les ruisseaux gonflent, et surtout, la poudre se mouille. Le lendemain matin, la situation est profondément différente : la droite autrichienne a été ralentie, coupée de ses renforts, et un simple cours d’eau, transformé par la crue, isole désormais une partie importante des troupes de Schwarzenberg du reste de l’armée.</p><p>Napoléon saisit immédiatement l’occasion. Il remarque que cette aile ennemie est isolée, mal reliée au centre, empêchée de recevoir un soutien rapide, et, surtout, que l’état de la poudre rend difficile l’emploi des armes à feu. Il ordonne à Murat de charger sans délai, avec la cavalerie, cette fraction des forces coalisées. Les Autrichiens surpris, pataugeant dans la boue, incapables de tirer efficacement, sont écrasés sous l’impact. En quelques heures, la coalition perd environ vingt pour cent de ses effectifs de départ, entre morts, blessés et prisonniers, alors que les pertes françaises restent limitées à une dizaine de milliers d’hommes.</p><p>La victoire de Dresde est éclatante sur le plan tactique. Elle confirme que, même contre des forces supérieures en nombre, Napoléon conserve un sens exceptionnel de l’exploitation du terrain, du temps et de la manœuvre. Mais elle ne suffit pas à renverser le cours de la guerre. La coalition, forte de sa masse et de la stratégie de Trachenberg, peut encaisser une défaite et continuer à harceler les maréchaux français. L’Autriche, qui vient à peine de trahir l’alliance française, commence sa participation à la nouvelle guerre par une déroute, ce qui suscite en interne des doutes et réveille le souvenir des grandes défaites antérieures – Rivoli, Marengo, Austerlitz. Pourtant, le camp coalisé sait que l’essentiel n’est pas là : ce qui compte, ce ne sont pas quelques batailles, mais l’usure d’un empire qui, malgré son génie militaire, n’a plus les réserves humaines, financières et politiques pour soutenir indéfiniment une guerre contre l’Europe entière.</p><p>La bataille de Dresde apparaît ainsi comme un sommet tactique au cœur d’une dynamique stratégique défavorable : un moment où Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.</p>
+            </section>
+        </article>
     </div>
 </body>
 </html>

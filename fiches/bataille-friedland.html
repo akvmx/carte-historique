@@ -5,53 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'après Eylau</title>
     <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8fafc;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        .page {
+            width: 100%;
+            max-width: 960px;
         }
-        .btn-retour {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3b82f6;
-            color: white;
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #3b82f6; }
-        h2, h3 { color: #1e40af; margin-top: 2rem; }
-        .meta { background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="btn-retour">← Retour à la carte</a>
-        
-        <h1>L'après Eylau</h1>
-        
-        <div class="meta">
-            <p><strong>📅 Date :</strong> 1807-02-01</p>
-            <p><strong>🌍 Pays :</strong> Russie</p>
-            <p><strong>📍 Coordonnées :</strong> 54.44668, 21.01586</p>
-            <p><strong>🏷️ Catégorie :</strong> "Guerre"</p>
-        </div>
-        
-        <div class="content">
-            <p><h1>La bataille de Friedland </h1></p><p><h2>I. Eylau (février 1807) : une victoire inutile ou le doute au cœur de la Grande Armée</h2></p><p>La bataille d’Eylau (7–8 février 1807) est un tournant psychologique plus encore que stratégique. Sur un champ balayé par la neige, Victor Hugo évoquera plus tard un paysage d’apocalypse : église éventrée, faubourgs incendiés, roulement continu de l’artillerie, vacarme assimilé à un écroulement du monde. Du point de vue militaire, Napoléon a tenu le terrain, empêché la jonction russo-prussienne et maintenu l’initiative, mais au prix d’un carnage sans précédent : environ un tiers des effectifs engagés hors de combat.</p><p>Pour la première fois depuis 1796, la victoire napoléonienne ne se confond plus avec une démonstration de génie. Au sein de la Grande Armée, la question qui surgit n’est plus « comment avons-nous vaincu ? », mais « pourquoi meurt-on ici ? » La guerre, jusqu’alors vécue par beaucoup comme un espace de promotion sociale, de gloire et d’aventure, se révèle brutalement comme une machine sacrificielle lointaine, en Prusse et en Pologne, loin du territoire national. Eylau fissure le mythe d’invincibilité et ébranle le ressort moral sur lequel repose l’Empire.</p><p><h2>II. Un Empire militairement victorieux mais politiquement fragile</h2></p><p>Si Napoléon a besoin d’une bataille décisive, ce n’est pas seulement pour abattre la Russie, mais pour stabiliser son propre régime. L’Empire n’est pas un bloc monolithique : il est le produit d’un compromis instable entre des forces qui restent antagonistes.</p><p>Le paysage politique français reste structuré par la fracture ouverte en 1789 : d’un côté, des royalistes qui rêvent d’une restauration plus ou moins épurée ; de l’autre, des républicains qui soupçonnent Napoléon d’avoir trahi l’idéal de 1792–1793. Le consulat puis l’Empire ont été justifiés par la nécessité : conjurer l’invasion, contenir l’insurrection royaliste, prévenir une rechute jacobine. Mais en 1807, après Austerlitz et Iéna, l’argument de l’« urgence nationale » s’érode.</p><p>La constitution impériale offre, en apparence, une architecture conforme à l’horizon de 1789 : séparation fonctionnelle entre Sénat (qui forme et interprète les lois), Tribunat (qui les discute) et Corps législatif (qui les adopte), le tout coiffé par le suffrage universel masculin pour légitimer l’Empereur par plébiscite. Pour une Germaine de Staël, cependant, il s’agit d’une façade : la nomination des sénateurs par Napoléon, et le rôle déterminant de ces mêmes sénateurs dans la désignation des députés, vident le suffrage de sa substance. Le peuple ratifie plus qu’il ne choisit.</p><p>Ainsi, la légitimité impériale est doublement conditionnée : vers l’intérieur, par la promesse d’ordre, de réforme et de prospérité ; vers l’extérieur, par la capacité à imposer un ordre continental durable. Après Eylau, l’Empire est contesté sur les deux fronts : l’usure institutionnelle rencontre la fatigue de guerre.</p><p><h2>III. La crise économique et sociale : un arrière-plan silencieux de la campagne de 1807</h2></p><p>L’exemple de Nantes, ancien premier port de l’Atlantique français, illustre la profondeur de la crise. La Révolution, les guerres maritimes, la rupture des circuits coloniaux et la guerre civile ont dévasté le tissu économique local : mortalité élevée, ruine du commerce, déclin de la marine marchande. L’Empire apporte bien des éléments de stabilisation – préfets, lycées, cours de justice, encadrement administratif – mais il ne peut reconstituer d’un coup les flux transatlantiques.</p><p>Le blocus britannique, la guerre incessante, et bientôt le blocus continental, enferment l’économie française dans un espace contraint. Pour les cités portuaires et les petits commerçants, les promesses de modernisation se heurtent à l’absence de débouchés. La légitimité de Napoléon ne peut donc être fondée sur la seule rhétorique du « retour à l’ordre » : il lui faut une paix qui rouvre les marchés, stabilise les finances et réoriente vers l’intérieur l’énergie d’une société épuisée.</p><p>D’où la formule implicite qui guide l’Empereur en 1807 : une bataille décisive serait la condition même de la paix, et donc de la pérennité de la dynastie.</p><p><h2>IV. L’hiver 1807 : entre Eylau et Friedland, un repositionnement stratégique</h2></p><p>Après Eylau, Napoléon recule vers le sud pour hiverner, fixe son quartier à Osterode et réorganise ses forces. Sur le papier, la supériorité numérique française est nette : environ 150 000 à 200 000 hommes contre un peu plus de 100 000 russes et 20 000 prussiens. Mais cette supériorité est théorique : une partie considérable de la Grande Armée est immobilisée pour garder les villes nouvellement conquises, tenir Berlin, assurer la sécurité de Varsovie, protéger les lignes de communication et réquisitionner vivres et fourrages. En termes de troupes réellement disponibles pour une bataille décisive, Napoléon ne dispose que d’un peu plus de 100 000 hommes.</p><p>Côté russe, la stratégie hésite entre la prudence et la recherche du prestige. Bennigsen, commandant en chef, a d’abord misé sur la retraite : user les Français, les attirer dans les profondeurs, laisser l’hiver et les distances faire leur œuvre. Le tsar, soucieux d’honneur et de rang dans le concert monarchique, refuse un retrait systématique. Il exige au minimum une grande bataille où la Russie prouverait qu’elle peut « tenir tête » à l’Empereur. C’est cette tension entre logique militaire et exigence symbolique qui conduit à la reprise de l’offensive au printemps.</p><p><h2>V. Guttstadt–Heilsberg : l’offensive manquée de Bennigsen</h2></p><p>Au début de juin 1807, Bennigsen prend l’initiative. Il tente une manœuvre en trois temps : démonstrations au nord et au sud pour fixer les Français, effort principal au centre contre le maréchal Ney, isolé avec environ 20 000 hommes à Guttstadt. L’idée est de profiter de la dispersion française pour écraser un corps d’armée et rompre l’emprise de Napoléon sur la Vistule.</p><p>Mais la mécanique russe se dérègle. Ney, surpris, parvient pourtant à éviter l’encerclement grâce à la qualité tactique de ses officiers et à la discipline de ses troupes. La tentative de Kesselschlacht (bataille d’encerclement) échoue ; le dispositif russe se trouve désormais exposé. Surtout, en attaquant, Bennigsen donne à Napoléon ce dont il avait besoin : la certitude du point où se concentre l’ennemi. La Grande Armée, jusque-là sur la défensive stratégique, peut basculer vers la contre-offensive, en cherchant à envelopper à son tour l’armée russe en retraite.</p><p>La pression française, alimentée par la cavalerie de Murat et les mouvements de Soult et Lannes, contraint Bennigsen à un repli précipité en direction de Friedland, au nord-est, dans l’espoir de se couvrir par la présence prussienne autour de Königsberg.</p><p><h2>VI. Friedland (14 juin 1807) : l’ultime pari de Napoléon</h2></p><p>La situation à Friedland résulte d’une double erreur d’appréciation du commandement russe. Bennigsen suppose d’abord que Napoléon est encore à plus d’une journée de marche et qu’il ne fait face qu’à un corps isolé (celui de Lannes). Il décide alors de repasser la rivière Alle au niveau de Friedland, en maintenant sur la rive gauche l’essentiel de ses forces pour écraser Lannes avant l’arrivée des renforts. Une partie de son artillerie lourde et de ses réserves reste sur la rive droite, protégée par le pont, dans l’idée d’une éventuelle retraite.</p><p>En réalité, la Grande Armée converge. Lannes, en nette infériorité numérique, applique une tactique de retardement : occupation méthodique du village de Posthenen, utilisation maximale des haies, canaux, champs de blé et bois pour casser l’élan russe, défense des maisons et des rues comme autant de mini-forteresses. L’objectif n’est pas de vaincre, mais de gagner le temps nécessaire à l’arrivée de Napoléon et des autres maréchaux.</p><p>Lorsque l’Empereur rejoint le champ de bataille, la configuration est idéale pour lui et catastrophique pour Bennigsen : environ 60 000 Russes sont massés sur une rive basse, avec une seule ligne de retraite – le pont de Friedland – et un fleuve dans le dos. L’artillerie principale est mal positionnée, l’espace de manœuvre réduit, et, surtout, les troupes russes sont démoralisées par des mois de marches, de retraites et par le souvenir d’Eylau. Des témoins russes, comme la cavalière Nadejda Durova, évoquent une armée blême, physiquement courageuse mais psychologiquement en retrait devant l’agressivité française.</p><p>Napoléon conçoit alors une manœuvre en tenaille : fixation centrale et feu d’artillerie sur le pont pour transformer la rivière en piège, attaque principale confiée à Ney sur le flanc gauche russe, soutenue par les corps voisins. Le but n’est pas seulement de repousser l’ennemi, mais de le coincer entre les Français et la rivière, pour obtenir non plus une victoire, mais une destruction.</p><p>La bataille se déroule selon ce schéma : Ney surgit des bois, enfonce le flanc russe ; Soult et Lannes resserrent la pression ; l’artillerie impériale martèle les points de passage. La topographie joue contre les Russes : limitée en profondeur, leur ligne se brise et se désagrège. Sur environ 80 000 hommes engagés côté russe, près de la moitié est hors de combat (tués, blessés, capturés). La Grande Armée, partie en sous-nombre localement, termine la journée avec des pertes certes lourdes, mais relativement modestes au regard de l’ampleur du succès.</p><p><h2>VII. Friedland comme prétendue clôture des guerres de la Révolution</h2></p><p>Friedland réalise enfin ce que Napoléon n’avait pas obtenu à Eylau : une victoire nette, lisible, politiquement exploitable. Elle ruine la capacité de la Russie à continuer seule la guerre sur le théâtre prussien, place la Prusse au bord de l’effondrement total et offre à l’Empereur une position de force inédite pour négocier. Aux yeux de Napoléon, la séquence Austerlitz – Iéna – Friedland forme une trilogie : trois coups portés successivement aux trois grandes puissances continentales (Autriche, Prusse, Russie), susceptibles de fonder un nouvel équilibre européen.</p><p>Dans la représentation que l’Empereur se fait de l’histoire, Friedland doit clore le cycle ouvert en 1792 : quinze années de guerres révolutionnaires seraient, en quelque sorte, soldées par un « ordre napoléonien » plus libéral dans sa forme (codes, égalité civile, rationalisation administrative), mais impérial dans son principe. La paix qu’il espère arracher n’est pas une simple interruption des hostilités ; c’est une refondation : substitution des États féodaux par des États réformés, alignés sur le modèle français et intégrés dans un système d’alliances et de clientèles.</p><p>Reste à savoir si cette paix est acceptable pour les autres puissances, et, plus encore, si les sociétés européennes, déjà travaillées par les résistances nationales, consentiront durablement à cette modernité imposée par les armes. Friedland est bien une décision militaire majeure ; elle n’est pas encore la garantie que l’idée napoléonienne de paix – cette paix impériale et révolutionnaire à la fois – pourra s’inscrire dans la durée.</p>
-        </div>
-        
-        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
-        </footer>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">L'après Eylau</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1807-02-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Russie</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1807-02-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La bataille de Friedland</strong> </h1></p><p><h2>I. Eylau (février 1807) : une victoire inutile ou le doute au cœur de la Grande Armée</h2></p><p>La bataille d’Eylau (7–8 février 1807) est un tournant psychologique plus encore que stratégique. Sur un champ balayé par la neige, Victor Hugo évoquera plus tard un paysage d’apocalypse : église éventrée, faubourgs incendiés, roulement continu de l’artillerie, vacarme assimilé à un écroulement du monde. Du point de vue militaire, Napoléon a tenu le terrain, empêché la jonction russo-prussienne et maintenu l’initiative, mais au prix d’un carnage sans précédent : environ un tiers des effectifs engagés hors de combat.</p><p>Pour la première fois depuis 1796, la victoire napoléonienne ne se confond plus avec une démonstration de génie. Au sein de la Grande Armée, la question qui surgit n’est plus « comment avons-nous vaincu ? », mais « pourquoi meurt-on ici ? » La guerre, jusqu’alors vécue par beaucoup comme un espace de promotion sociale, de gloire et d’aventure, se révèle brutalement comme une machine sacrificielle lointaine, en Prusse et en Pologne, loin du territoire national. Eylau fissure le mythe d’invincibilité et ébranle le ressort moral sur lequel repose l’Empire.</p><p><h2>II. Un Empire militairement victorieux mais politiquement fragile</h2></p><p>Si Napoléon a besoin d’une bataille décisive, ce n’est pas seulement pour abattre la Russie, mais pour stabiliser son propre régime. L’Empire n’est pas un bloc monolithique : il est le produit d’un compromis instable entre des forces qui restent antagonistes.</p><p>Le paysage politique français reste structuré par la fracture ouverte en 1789 : d’un côté, des royalistes qui rêvent d’une restauration plus ou moins épurée ; de l’autre, des républicains qui soupçonnent Napoléon d’avoir trahi l’idéal de 1792–1793. Le consulat puis l’Empire ont été justifiés par la nécessité : conjurer l’invasion, contenir l’insurrection royaliste, prévenir une rechute jacobine. Mais en 1807, après Austerlitz et Iéna, l’argument de l’« urgence nationale » s’érode.</p><p>La constitution impériale offre, en apparence, une architecture conforme à l’horizon de 1789 : séparation fonctionnelle entre Sénat (qui forme et interprète les lois), Tribunat (qui les discute) et Corps législatif (qui les adopte), le tout coiffé par le suffrage universel masculin pour légitimer l’Empereur par plébiscite. Pour une Germaine de Staël, cependant, il s’agit d’une façade : la nomination des sénateurs par Napoléon, et le rôle déterminant de ces mêmes sénateurs dans la désignation des députés, vident le suffrage de sa substance. Le peuple ratifie plus qu’il ne choisit.</p><p>Ainsi, la légitimité impériale est doublement conditionnée : vers l’intérieur, par la promesse d’ordre, de réforme et de prospérité ; vers l’extérieur, par la capacité à imposer un ordre continental durable. Après Eylau, l’Empire est contesté sur les deux fronts : l’usure institutionnelle rencontre la fatigue de guerre.</p><p><h2>III. La crise économique et sociale : un arrière-plan silencieux de la campagne de 1807</h2></p><p>L’exemple de Nantes, ancien premier port de l’Atlantique français, illustre la profondeur de la crise. La Révolution, les guerres maritimes, la rupture des circuits coloniaux et la guerre civile ont dévasté le tissu économique local : mortalité élevée, ruine du commerce, déclin de la marine marchande. L’Empire apporte bien des éléments de stabilisation – préfets, lycées, cours de justice, encadrement administratif – mais il ne peut reconstituer d’un coup les flux transatlantiques.</p><p>Le blocus britannique, la guerre incessante, et bientôt le blocus continental, enferment l’économie française dans un espace contraint. Pour les cités portuaires et les petits commerçants, les promesses de modernisation se heurtent à l’absence de débouchés. La légitimité de Napoléon ne peut donc être fondée sur la seule rhétorique du « retour à l’ordre » : il lui faut une paix qui rouvre les marchés, stabilise les finances et réoriente vers l’intérieur l’énergie d’une société épuisée.</p><p>D’où la formule implicite qui guide l’Empereur en 1807 : une bataille décisive serait la condition même de la paix, et donc de la pérennité de la dynastie.</p><p><h2>IV. L’hiver 1807 : entre Eylau et Friedland, un repositionnement stratégique</h2></p><p>Après Eylau, Napoléon recule vers le sud pour hiverner, fixe son quartier à Osterode et réorganise ses forces. Sur le papier, la supériorité numérique française est nette : environ 150 000 à 200 000 hommes contre un peu plus de 100 000 russes et 20 000 prussiens. Mais cette supériorité est théorique : une partie considérable de la Grande Armée est immobilisée pour garder les villes nouvellement conquises, tenir Berlin, assurer la sécurité de Varsovie, protéger les lignes de communication et réquisitionner vivres et fourrages. En termes de troupes réellement disponibles pour une bataille décisive, Napoléon ne dispose que d’un peu plus de 100 000 hommes.</p><p>Côté russe, la stratégie hésite entre la prudence et la recherche du prestige. Bennigsen, commandant en chef, a d’abord misé sur la retraite : user les Français, les attirer dans les profondeurs, laisser l’hiver et les distances faire leur œuvre. Le tsar, soucieux d’honneur et de rang dans le concert monarchique, refuse un retrait systématique. Il exige au minimum une grande bataille où la Russie prouverait qu’elle peut « tenir tête » à l’Empereur. C’est cette tension entre logique militaire et exigence symbolique qui conduit à la reprise de l’offensive au printemps.</p><p><h2>V. Guttstadt–Heilsberg : l’offensive manquée de Bennigsen</h2></p><p>Au début de juin 1807, Bennigsen prend l’initiative. Il tente une manœuvre en trois temps : démonstrations au nord et au sud pour fixer les Français, effort principal au centre contre le maréchal Ney, isolé avec environ 20 000 hommes à Guttstadt. L’idée est de profiter de la dispersion française pour écraser un corps d’armée et rompre l’emprise de Napoléon sur la Vistule.</p><p>Mais la mécanique russe se dérègle. Ney, surpris, parvient pourtant à éviter l’encerclement grâce à la qualité tactique de ses officiers et à la discipline de ses troupes. La tentative de Kesselschlacht (bataille d’encerclement) échoue ; le dispositif russe se trouve désormais exposé. Surtout, en attaquant, Bennigsen donne à Napoléon ce dont il avait besoin : la certitude du point où se concentre l’ennemi. La Grande Armée, jusque-là sur la défensive stratégique, peut basculer vers la contre-offensive, en cherchant à envelopper à son tour l’armée russe en retraite.</p><p>La pression française, alimentée par la cavalerie de Murat et les mouvements de Soult et Lannes, contraint Bennigsen à un repli précipité en direction de Friedland, au nord-est, dans l’espoir de se couvrir par la présence prussienne autour de Königsberg.</p><p><h2>VI. Friedland (14 juin 1807) : l’ultime pari de Napoléon</h2></p><p>La situation à Friedland résulte d’une double erreur d’appréciation du commandement russe. Bennigsen suppose d’abord que Napoléon est encore à plus d’une journée de marche et qu’il ne fait face qu’à un corps isolé (celui de Lannes). Il décide alors de repasser la rivière Alle au niveau de Friedland, en maintenant sur la rive gauche l’essentiel de ses forces pour écraser Lannes avant l’arrivée des renforts. Une partie de son artillerie lourde et de ses réserves reste sur la rive droite, protégée par le pont, dans l’idée d’une éventuelle retraite.</p><p>En réalité, la Grande Armée converge. Lannes, en nette infériorité numérique, applique une tactique de retardement : occupation méthodique du village de Posthenen, utilisation maximale des haies, canaux, champs de blé et bois pour casser l’élan russe, défense des maisons et des rues comme autant de mini-forteresses. L’objectif n’est pas de vaincre, mais de gagner le temps nécessaire à l’arrivée de Napoléon et des autres maréchaux.</p><p>Lorsque l’Empereur rejoint le champ de bataille, la configuration est idéale pour lui et catastrophique pour Bennigsen : environ 60 000 Russes sont massés sur une rive basse, avec une seule ligne de retraite – le pont de Friedland – et un fleuve dans le dos. L’artillerie principale est mal positionnée, l’espace de manœuvre réduit, et, surtout, les troupes russes sont démoralisées par des mois de marches, de retraites et par le souvenir d’Eylau. Des témoins russes, comme la cavalière Nadejda Durova, évoquent une armée blême, physiquement courageuse mais psychologiquement en retrait devant l’agressivité française.</p><p>Napoléon conçoit alors une manœuvre en tenaille : fixation centrale et feu d’artillerie sur le pont pour transformer la rivière en piège, attaque principale confiée à Ney sur le flanc gauche russe, soutenue par les corps voisins. Le but n’est pas seulement de repousser l’ennemi, mais de le coincer entre les Français et la rivière, pour obtenir non plus une victoire, mais une destruction.</p><p>La bataille se déroule selon ce schéma : Ney surgit des bois, enfonce le flanc russe ; Soult et Lannes resserrent la pression ; l’artillerie impériale martèle les points de passage. La topographie joue contre les Russes : limitée en profondeur, leur ligne se brise et se désagrège. Sur environ 80 000 hommes engagés côté russe, près de la moitié est hors de combat (tués, blessés, capturés). La Grande Armée, partie en sous-nombre localement, termine la journée avec des pertes certes lourdes, mais relativement modestes au regard de l’ampleur du succès.</p><p><h2>VII. Friedland comme prétendue clôture des guerres de la Révolution</h2></p><p>Friedland réalise enfin ce que Napoléon n’avait pas obtenu à Eylau : une victoire nette, lisible, politiquement exploitable. Elle ruine la capacité de la Russie à continuer seule la guerre sur le théâtre prussien, place la Prusse au bord de l’effondrement total et offre à l’Empereur une position de force inédite pour négocier. Aux yeux de Napoléon, la séquence Austerlitz – Iéna – Friedland forme une trilogie : trois coups portés successivement aux trois grandes puissances continentales (Autriche, Prusse, Russie), susceptibles de fonder un nouvel équilibre européen.</p><p>Dans la représentation que l’Empereur se fait de l’histoire, Friedland doit clore le cycle ouvert en 1792 : quinze années de guerres révolutionnaires seraient, en quelque sorte, soldées par un « ordre napoléonien » plus libéral dans sa forme (codes, égalité civile, rationalisation administrative), mais impérial dans son principe. La paix qu’il espère arracher n’est pas une simple interruption des hostilités ; c’est une refondation : substitution des États féodaux par des États réformés, alignés sur le modèle français et intégrés dans un système d’alliances et de clientèles.</p><p>Reste à savoir si cette paix est acceptable pour les autres puissances, et, plus encore, si les sociétés européennes, déjà travaillées par les résistances nationales, consentiront durablement à cette modernité imposée par les armes. Friedland est bien une décision militaire majeure ; elle n’est pas encore la garantie que l’idée napoléonienne de paix – cette paix impériale et révolutionnaire à la fois – pourra s’inscrire dans la durée.</p>
+            </section>
+        </article>
     </div>
 </body>
 </html>

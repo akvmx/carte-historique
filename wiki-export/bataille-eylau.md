@@ -8,10 +8,11 @@ pays: "Russie"
 coords: [54.71467, 20.43912]  # ← Trouvez sur Google Maps
 description: "Description courte en une phrase"
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/bataille-eylau.html
 ---
 
-# La bataille d'Eylau (octobre 1806 – février 1807)
+# **La bataille d'Eylau (octobre 1806 – février 1807)**
 
 ## I. Paris acclame, l’Europe s’endurcit : après Iéna-Auerstaedt, une victoire encore inachevée
 

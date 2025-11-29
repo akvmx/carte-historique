@@ -2,16 +2,16 @@
 type: évènement
 titre: "La signature du traité de Presbourg par Napoléon et son impact"
 date: "1805-12-26"
-date_fin: "null"  # ← Optionnel : pour événements avec durée
 perpetuel: false  # ← Optionnel : true pour événements perpétuels
 pays: "Slovaquie"
 coords: [48.14685, 17.09731]  # ← Trouvez sur Google Maps
 description: "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse."
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/traité-presbourg.html
 ---
 
-# Le traité de Presbourg (26 décembre 1805) : paix imposée, ordre continental refondu, guerre différée
+# **Le traité de Presbourg (26 décembre 1805) : paix imposée, ordre continental refondu, guerre différée**
 
 ## ## I. L’après-Austerlitz à Presbourg : une paix sous contrainte réciproque
 

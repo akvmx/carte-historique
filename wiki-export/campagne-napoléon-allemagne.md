@@ -8,10 +8,11 @@ pays: "Allemagne"
 coords: [51.18446, 14.42367]  # ← Trouvez sur Google Maps
 description: "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/campagne-napoléon-allemagne.html
 ---
 
-# La campagne d'Allemagne
+# **La campagne d'Allemagne**
 
 ## I. De Vilnius à l’effondrement stratégique
 

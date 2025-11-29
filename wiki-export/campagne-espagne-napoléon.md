@@ -8,10 +8,11 @@ pays: "Espagne"
 coords: [40.4168, -3.7038]  # ← Trouvez sur Google Maps
 description: "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/campagne-espagne-napoléon.html
 ---
 
-# L'après Friedland et la campagne de l'Espagne  
+# **L'après Friedland et la campagne de l'Espagne**  
 
 La bataille de Friedland, le 14 juin 1807, clôt militairement la grande séquence austro-prussienne ouverte en 1805. Après Ulm, Austerlitz, Iéna-Auerstaedt et la campagne de Pologne, Napoléon brise cette fois-ci l’armée russe de Bennigsen dans une bataille nettement décisive, à la différence du carnage indécis d’Eylau. Les Russes, acculés contre la rivière Alle, subissent des pertes telles que le tsar Alexandre Ier est contraint d’accepter des pourparlers.
 

@@ -1,15 +1,17 @@
 ---
 type: évènement
 titre: "Croisades de secours"
-date: "1100"
+date: "1100-01-01"
+date_fin: "1101-01-01"
 pays: "France"
 coords: [46.2276,2.2137]
 description: "La lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem."
 categorie: "politique"
+personnages: Raymond de Saint-Gilles, Tancrède de Hauteville, Baudoin de Boulogne
 lien: "fiches/croisades de secours.html"
 ---
 
-# Les croisades de secours
+# **Les croisades de secours**
 
 ## I. La nécessité des renforts
 

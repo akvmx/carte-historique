@@ -8,6 +8,7 @@ pays: "Nom du pays"
 coords: [latitude, longitude]  # ← Trouvez sur Google Maps
 description: "Description courte en une phrase"
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
+personnages: 
 lien: fiches/aaa.html
 ---
 

@@ -7,10 +7,11 @@ pays: "République tchèque"
 coords: [49.1281, 16.9118]  # ← Trouvez sur Google Maps
 description: "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/bataille-austerlitz.html
 ---
 
-# La bataille d'Austerlitz 
+# **La bataille d'Austerlitz** 
 
 ## I. Le contexte politique et idéologique du début de l’Empire
 

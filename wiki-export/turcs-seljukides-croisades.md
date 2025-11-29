@@ -1,18 +1,16 @@
 ---
 type: évènement
 titre: "Les Turcs seljukides dans le contexte des croisades"
-date: "990"
-date_fin: "1081"  # ← Optionnel : pour événements avec durée
+date: "990-01-01"
+date_fin: "1081-01-01"  # ← Optionnel : pour événements avec durée
 pays: "Empire Seljuk"
 coords: [35.73834183660386, 51.357234044865045]  # ← Trouvez sur Google Maps
-description: "L'expansion de l'Empire seljuk"
+description: "L'expansion de l'Empire seljuk au Xème siècle."
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
 lien: fiches/turcs-seljukides-croisades.html
 ---
 
-# Titre principal de votre article
-
-## Déroulement des événements
+# **Les Turcs seljukides dans le contexte des croisades**
 
 ## L'ascension des Turcs en Asie centrale (990)
 

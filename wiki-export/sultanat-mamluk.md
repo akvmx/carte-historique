@@ -1,35 +1,29 @@
- ---
+---
 type: évènement
 titre: "Montée au pouvoir du Sultanat Mamluk"
 date: "1250-01-01"
 date_fin: "1580-01-01"
 pays: "Sultanat mamluk d'Egypte"
 coords: [30.02399, 31.25946]
-description: "comment les Mamluks ont dead ça"
+description: "Comment les Mamluks ont dead ça."
 categorie: "politique"
+personnages: Nur ad-Din, Shirkuh, Salah ad-Din
 lien: "fiches/sultanat-mamluk.html"
-
 ---
 
-# L'Empire des Mamelouks : Esclaves devenus maîtres de l'Égypte et de la Syrie (1250-1517)
+# **L'Empire des Mamelouks (1250-1517)**
 
-## Introduction
+Ces esclaves affranchis devenus maîtres de l'Égypte et de la Syrie étaient des cavaliers d'élite qui ont réussi l'exploit de renverser les derniers Ayyoubides, chasser les derniers croisés et repousser les Mongols. Leur prestige fut immense, construit à la pointe du sabre et symbolisé par les magnifiques mosquées et palais qu'ils édifièrent dans des villes légendaires comme Alep, Damas, Alexandrie et leur splendide capitale, Le Caire.
 
-Cette vidéo fait le lien entre les croisades et la période ottomane en explorant l'histoire d'un autre grand empire musulman qui a duré 267 ans : celui des Mamelouks. Ces esclaves affranchis devenus maîtres de l'Égypte et de la Syrie étaient des cavaliers d'élite qui ont réussi l'exploit de renverser les derniers Ayyoubides, chasser les derniers croisés et repousser les Mongols. Leur prestige fut immense, construit à la pointe du sabre et symbolisé par les magnifiques mosquées et palais qu'ils édifièrent dans des villes légendaires comme Alep, Damas, Alexandrie et leur splendide capitale, Le Caire.
+## I. L'origine et la signification du terme "*Mamelouk*"
 
-## Origine et signification du terme "Mamelouk"
+"*Mamluk*" (مملوك) signifie "*chose possédée*", donc "*esclave*", et plus spécifiquement "*esclave militaire*". Dans l'islam médiéval existait une importante tradition d'éléments turcs dans les armées, ces guerriers formant souvent la colonne vertébrale des forces militaires car comptés parmi les meilleurs combattants de l'époque. On retrouve ainsi des Turcs dans les armées abbassides dès le IXe siècle, et progressivement, certains de ces peuples turcs prennent la tête d'empires musulmans : les Toulounides en Égypte au Xe siècle, les Seldjoukides dominant le monde musulman, puis les Ottomans prenant progressivement le contrôle depuis l'Anatolie. Les Mamelouks, d'abord turcs puis tcherkesses (circassiens), ont dominé l'Égypte et la Syrie bien avant les Ottomans, mais ni comme colons ni comme envahisseurs - leur statut était unique.
 
-"Mamelouk" signifie "chose possédée", donc "esclave", et plus spécifiquement "esclave militaire". Dans l'islam médiéval existait une importante tradition d'éléments turcs dans les armées, ces guerriers formant souvent la colonne vertébrale des forces militaires car comptés parmi les meilleurs combattants de l'époque. On retrouve ainsi des Turcs dans les armées abbassides dès le IXe siècle, et progressivement, certains de ces peuples turcs prennent la tête d'empires musulmans : les Toulounides en Égypte au Xe siècle, les Seldjoukides dominant le monde musulman, puis les Ottomans prenant progressivement le contrôle depuis l'Anatolie. Les Mamelouks, d'abord turcs puis tcherkesses (circassiens), ont dominé l'Égypte et la Syrie bien avant les Ottomans, mais ni comme colons ni comme envahisseurs - leur statut était unique.
-
-## L'ascension au pouvoir : la fin des Ayyoubides
-
-À la fin du XIIe siècle, le califat fatimide d'Égypte, de confession chiite, est affaibli. Le grand vizir Shawar doit faire face aux ambitions d'Amaury Ier, roi de Jérusalem, qui impose un tribut à l'Égypte et convoite ce territoire. Shawar fait donc appel à Nur ad-Din, sultan sunnite de Damas et d'Alep, fils de Zengi qui avait repris Édesse en 1144 et grand prédicateur du jihad contre les croisés.
-
-Nur ad-Din envoie dès 1164 son plus fidèle lieutenant, Shirkuh, pour rétablir l'ordre en Égypte. Shirkuh est accompagné de son neveu, peu désireux de cette aventure : Saladin. Par un concours de circonstances extraordinaires, Shirkuh meurt, l'entourage du calife considère le jeune Saladin comme manipulable et le fait grand vizir à seulement 31 ans. Ensuite, Nur ad-Din ordonne à Saladin de faire prononcer la khutba (prière du vendredi) dans les mosquées égyptiennes au nom du calife abbasside sunnite, et non plus au nom du calife fatimide chiite. Saladin finit par le faire, et peu après meurt le dernier calife fatimide, marquant la fin du califat fatimide chiite d'Égypte et le début de la puissance de Saladin.
+À la fin du XIIe siècle, le califat fatimide d'Égypte, de confession chiite, est affaibli. Le grand vizir Shawar doit faire face aux ambitions d'Amaury Ier, roi de Jérusalem, qui impose un tribut à l'Égypte et convoite ce territoire. Shawar fait donc appel à Nur ad-Din, sultan sunnite de Damas et d'Alep, fils de Zengi qui avait repris Édesse en 1144 et grand prédicateur du jihad contre les croisés. Nur ad-Din envoie dès 1164 son plus fidèle lieutenant, Shirkuh, pour rétablir l'ordre en Égypte. Shirkuh est accompagné de son neveu, peu désireux de cette aventure : Saladin. Par un concours de circonstances extraordinaires, Shirkuh meurt, l'entourage du calife considère le jeune Saladin comme manipulable et le fait grand vizir à seulement 31 ans. Ensuite, Nur ad-Din ordonne à Saladin de faire prononcer la khutba (prière du vendredi) dans les mosquées égyptiennes au nom du calife abbasside sunnite, et non plus au nom du calife fatimide chiite. Saladin finit par le faire, et peu après meurt le dernier calife fatimide, marquant la fin du califat fatimide chiite d'Égypte et le début de la puissance de Saladin.
 
 Nur ad-Din prend rapidement ombrage de ce jeune subordonné devenu maître de l'un des pays les plus riches du monde musulman et projette de descendre en Égypte, mais il meurt en 1174 avant d'avoir pu le faire. La même année, Amaury Ier de Jérusalem meurt également. Après avoir maté quelques résistances, notamment chez les zengides (la famille de Nur ad-Din), Saladin devient sultan d'Égypte puis de Syrie, créant ainsi le sultanat ayyoubide. Il possède déjà quelques mamelouks, qui lui sauveront la vie à la bataille de Montgisard face aux Francs.
 
-## Les Mamelouks sous les Ayyoubides
+## II. Les Mamelouks sous les Ayyoubides
 
 Après Saladin, ses successeurs ne seront pas à la hauteur, mais bénéficieront de son prestige. Parmi leurs généraux et vizirs, on commence à compter des mamelouks. Ceux-ci viennent alors majoritairement (jusqu'en 1382 environ) des tribus turques qiptchak du sud de la Russie, que les Mongols ont vaincues et repoussées lors de leur conquête, notamment après leur victoire à la rivière Kalka en 1223.
 
@@ -37,7 +31,7 @@ Les Mongols, surtout ceux de la Horde d'Or, réduisent régulièrement en esclav
 
 Dans l'Égypte ayyoubide, ces qualités militaires et équestres attirent l'attention du sultan al-Malik al-Salih. Après avoir vu, lors de fréquentes querelles fratricides courantes chez les Ayyoubides, son armée et ses proches lui tourner le dos à l'exception de ses fidèles mamelouks, il ne s'en remet plus qu'à eux, portant leur nombre jusqu'à un millier. Il leur fait construire au Caire une caserne sur le Nil, la "Bahr al-Nil", qui leur donne leur nom : les mamelouks Bahri, ainsi que celui de leur régiment, la Bahriyya.
 
-## La prise du pouvoir : de gardes du corps à sultans
+## III. La prise du pouvoir : de gardes du corps à sultans
 
 En 1244, un jeune mamelouk, Baybars, inflige pour son sultan al-Salih une défaite écrasante aux Francs près de La Forbie en Palestine, massacrant au passage un bon nombre de Templiers, d'Hospitaliers et même quelques chevaliers teutoniques. Cette bataille a un grand retentissement à l'époque et motive l'appel à la croisade. C'est Louis IX, roi de France, qui répond présent et s'embarque en 1248 pour l'Égypte, où il s'empare de Damiette le 5 juin 1249.
 
@@ -45,11 +39,7 @@ Le 23 novembre 1249, alors que Louis IX se dirige vers Le Caire, al-Malik al-Sal
 
 Turanshah arrive, devient sultan, mais commet l'erreur de vouloir remplacer les mamelouks qui viennent de sauver son trône par ses propres hommes, et de leur retirer leurs iqta' (terres dont ils tirent leurs revenus). Baybars et ses hommes le font assassiner le 2 mai 1250, et placent sur le trône Shajar al-Durr, qui a fait preuve d'une grande habileté politique pendant la crise.
 
-Une femme sultan fait jaser, notamment le calife de Bagdad. Elle ne reste donc sultane unique que pendant deux mois avant d'épouser en juillet 1250 un émir mamelouk, Aybak, qui devient sultan tout en lui laissant le pouvoir effectif. Le sultanat mamelouk est né.
-
-## Structure et fonctionnement du sultanat mamelouk
-
-Le principe de succession est simple : le sultan régnant meurt (parfois assassiné, parfois déposé) et désigne son fils, généralement très jeune, comme successeur, dans une optique dynastique. Ce système ne fonctionne vraiment qu'une seule fois dans l'histoire du sultanat avec les Qalaounides qui règnent de façon discontinue de 1279 à 1382. Le jeune sultan est entouré de grands émirs comme tuteurs ; l'un d'entre eux s'impose, vainc les autres, renverse le jeune sultan et prend le pouvoir, avant d'être lui-même renversé par un autre émir ambitieux.
+Une femme sultan fait jaser, notamment le calife de Bagdad. Elle ne reste donc sultane unique que pendant deux mois avant d'épouser en juillet 1250 un émir mamelouk, Aybak, qui devient sultan tout en lui laissant le pouvoir effectif. Le sultanat mamelouk est né. Le principe de succession est simple : le sultan régnant meurt (parfois assassiné, parfois déposé) et désigne son fils, généralement très jeune, comme successeur, dans une optique dynastique. Ce système ne fonctionne vraiment qu'une seule fois dans l'histoire du sultanat avec les Qalaounides qui règnent de façon discontinue de 1279 à 1382. Le jeune sultan est entouré de grands émirs comme tuteurs ; l'un d'entre eux s'impose, vainc les autres, renverse le jeune sultan et prend le pouvoir, avant d'être lui-même renversé par un autre émir ambitieux.
 
 L'un des sultans les plus marquants fut Baybars. Après avoir aidé son rival Qutuz à monter sur le trône, il va encore une fois sauver l'Égypte, cette fois-ci de la menace mongole. En 1258, le monde musulman subit un choc majeur : Bagdad, siège du califat abbasside, est mise à sac par les Mongols, et le calife est tué. Le conquérant mongol Hülegü, frère de Kubilai et de Möngke, se dirige ensuite vers la Syrie, où il ravage Alep et Damas, avant de menacer l'Égypte, accompagné par ses alliés arméniens et francs.
 
@@ -57,21 +47,17 @@ Le 3 septembre 1260, à Ayn Jalut en Palestine, près de Naplouse, la cavalerie 
 
 Baybars devient le premier grand sultan mamelouk le 22 octobre 1260, après avoir tué Qutuz. Sous son règne et celui de ses proches successeurs, le sultanat prend une forme qu'il gardera quasi intacte jusqu'à la fin. Son premier objectif est de rallier la Syrie et la Palestine, comme du temps de Saladin. Il commence par mater les émirs locaux rivaux, les rejetons ayyoubides tenant encore quelques principautés, ou même les Assassins qu'il va soumettre entre 1271 et 1273.
 
-## L'expulsion des croisés
-
 Pour faire encore mieux que les Ayyoubides et éclipser leur prestige, l'idéal serait de chasser définitivement les Francs de leur bande côtière, qu'au bout d'un temps les Ayyoubides n'ont plus contestée. De plus, les croisés représentent une menace non négligeable, que ce soit par leur potentielle alliance avec les Mongols ou au vu des nombreuses croisades pouvant surgir à tout moment.
 
 Pendant trente ans, après un travail méticuleux initié par Baybars, sultan après sultan, forteresse après forteresse rasée, siège après siège, port détruit après port détruit (pour éviter de laisser un point de débarquement potentiel aux Francs et pallier au cruel manque de navires mamelouks), les derniers Francs sont chassés de Terre sainte par le fils de Qalawun avec la prise d'Acre en 1291 et l'évacuation de quelques autres ports chrétiens qui s'ensuit, comme Beyrouth et Tyr.
 
-## Prestige et légitimité
+## IV. Le prestige et la légitimité
 
 Les Mamelouks ont accompli des exploits considérables : ils ont écrasé la dernière croisade, repoussé les Mongols (parfois jusqu'à l'Euphrate en 1277), chassé les derniers Francs de Terre sainte et réuni la Syrie et l'Égypte. Mais ce n'est pas tout.
 
 En 1261, Baybars reçoit au Caire l'oncle en exil du dernier calife abbasside. Il devient calife lui-même (quoique sans pouvoir) et en échange d'une armée avec laquelle il va tenter sans succès de reprendre Bagdad, il confère à Baybars le titre de "sultan universel", dominant ainsi toutes les autres principautés musulmanes. Lorsque ce calife meurt pendant la tentative de reconquête, un autre héritier du califat se présente au Caire, est placé dans un palais doré, et lui et ses successeurs légitimeront le pouvoir des sultans jusqu'à la chute du sultanat, sans jamais en avoir eux-mêmes une parcelle.
 
 De plus, les Mamelouks ont mis la main sur le Hedjaz et ses lieux saints, La Mecque et Médine, pour mieux en assurer la protection. Ils parrainent le mahmal, un palanquin accompagnant la caravane des pèlerins vers La Mecque, et se posent ainsi encore plus en patrons incontestés du monde musulman. Au XVe siècle, sous le règne du sultan Barsbay, ils envoient même une garnison au Hedjaz, non seulement pour mieux administrer la région, mais aussi pour mettre la main sur les considérables revenus du commerce sur la mer Rouge.
-
-## La caste militaire des Mamelouks
 
 Toute la structure étatique repose sur cette caste militaire que sont les Mamelouks, accompagnée comme dans tout bon État musulman par la caste des oulémas et des cadis (les hommes de savoir et de loi). Cette caste militaire est très élitiste et méritocratique : c'est une aristocratie d'une seule génération, le fils de mamelouk n'étant ni mamelouk ni héritier du titre de son père. Les hautes fonctions de l'administration et de l'armée dépendent uniquement des compétences de chacun et du favoritisme du sultan.
 
@@ -85,23 +71,19 @@ Il existe deux catégories de mamelouks : d'un côté les mamelouks des émirs, 
 
 La formation des jeunes mamelouks a lieu au Caire, jamais en province, soit dans leurs casernes sur le Nil, soit dans la citadelle. Elle commence par une conversion rigoureuse qui fait de ces jeunes païens des steppes des musulmans pieux et dévoués connaissant le Coran par cœur, même s'ils ne le parlent pas puisqu'ils parlent uniquement le turc, même du temps des tcherkesses. À partir de 15 ans, par l'entraînement et par la discipline, par l'apprentissage du tir à l'arc, du maniement de la lance, du sabre, de la masse, du polo, des échecs, des arts équestres, ils apprennent la futuwwa, l'équivalent oriental de la chevalerie. Ils deviennent ainsi cette cavalerie d'élite n'ayant rien à envier à la chevalerie européenne, utilisant même des rangs (sortes de blasons) avec toute une logique héraldique, cas unique dans l'histoire musulmane.
 
-## Politique et gouvernance
-
 Quand un Baybars prend le pouvoir, il s'entoure de ses propres hommes, qui resteront au pouvoir tant que lui-même y sera, et inversement. Mais dans le même temps, il est entouré de "Baybars en puissance" venant d'autres clans, qu'il doit mater, cajoler, réprimer, voire supprimer.
 
 Baybars parvient à trouver un certain équilibre dans la construction de son appareil étatique. Par exemple, les anciens grands émirs royaux, souvent candidats frustrés au trône et donc très dangereux, se voient confier de hauts postes comme le gouvernorat de Damas ou d'Alep, loin au nord en Syrie, tout en étant rigoureusement surveillés. Il leur est interdit de partir avec leurs mamelouks, car une armée privée loin en Syrie n'est jamais bon signe. Les plus dangereux sont priés de rester à portée du sultan dans sa citadelle.
 
 Baybars pousse sa paranoïa jusqu'à un stade cliniquement grave mais très efficace : pour toujours tout savoir, il entretient un énorme réseau d'espions, fait réparer toutes les routes du sultanat afin d'être informé le plus rapidement possible grâce à un système de relais de poste, ne s'entoure que d'une poignée très réduite de mamelouks très fidèles (les "khassaki") qu'il charge des messages les plus confidentiels, ne communique jamais à l'avance sa destination, et entretient un réseau de pigeons voyageurs. Il a même prévu un système de signalisation via des feux de broussailles au cas où il y aurait un problème avec les relais de poste.
 
-## Économie et commerce
+## V. Économie et commerce
 
 Les Mamelouks, peu conquérants, cherchent avant tout à consolider leur empire, à en protéger les marches (comme la Cilicie au nord), mais surtout à en protéger et à en développer le fructueux commerce. L'Égypte est économiquement très prospère, véritable grenier à blé depuis l'Antiquité, et son commerce est plus florissant que jamais.
 
 Il y a d'abord le commerce des esclaves (venant des steppes qiptchak ou des montagnes tcherkesses pour les mamelouks, ou d'Afrique noire, d'Inde et des Balkans pour les eunuques et autre main-d'œuvre), auquel les chrétiens participent activement. À cela s'ajoutent le commerce de l'or du Soudan, les habituelles débouchés des routes de la soie en Syrie, le commerce anatolien, mais aussi le commerce d'Asie du Sud passant par la mer Rouge, avec notamment la précieuse porcelaine, et surtout les épices extrêmement recherchées en Europe. Les marchands chrétiens obtiennent des concessions dans les grands ports du sultanat comme Alexandrie, et en profitent pour vendre au sultanat des produits dont il a besoin pour son développement mais qui sont absents de son territoire, comme le bois ou les métaux, malgré les interdits pontificaux.
 
 La rémunération des mamelouks se fait à travers le système de l'iqta', des revenus en monnaie ou en nature générés par des terres et des villages attribués à tel ou tel émir en fonction de son rang et du nombre de mamelouks qu'il doit entretenir. Contrairement à un fief ou à un timar ottoman, l'émir collecte juste les revenus, il n'administre rien sur place et n'y met jamais les pieds. Pour éviter que les émirs ne s'approprient des terres, on a tendance à leur attribuer des iqta' très éloignés les uns des autres, et surtout, ils sont attribués à la fonction et non à la personne.
-
-## Crises et défis
 
 Si le sultanat est prospère à ses débuts, sa démographie grimpant jusqu'à quatre millions d'habitants et Le Caire atteignant 200 000 habitants (quand Paris n'en compte que 80 000), il connaît plusieurs crises majeures. En 1348, après avoir vaincu les Francs et les Mongols, c'est la peste noire : non seulement un tiers de la population y passe sur le coup, mais la peste va revenir régulièrement tous les 2-3 ans, accompagnée de famines. Le sultanat ne retrouvera jamais sa prospérité passée.
 
@@ -113,21 +95,17 @@ Une autre grande menace fut Tamerlan (Timur Lenk), qui, au tournant des XIVe-XVe
 
 La dévastation de la Syrie, associée à la peste, aux mauvaises récoltes, aux guerres des émirs, à la famine et aux mauvais sultans, plonge le sultanat dans une grave crise. La guerre civile dure jusqu'en 1412, date à laquelle Faraj est assassiné. S'ensuit une cinquantaine d'années relativement calmes et prospères, avec notamment quatre règnes assez longs pendant lesquels le but fut essentiellement de reconstruire le sultanat, de le consolider et de favoriser son commerce.
 
-## Tentatives d'expansion maritime
-
 Sous le règne du sultan Barsbay (homonyme verlan de "Baybars"), sont entreprises deux des seules grosses expéditions extraterritoriales mameloukes. La première est l'occupation du Hedjaz et des lieux saints, qui permet à Barsbay d'administrer directement la région, d'en prendre les revenus et de mieux contrôler la mer Rouge. La seconde est l'occupation de Chypre en 1425-1426, véritable nid à problèmes chrétiens qui intercepte les navires mamelouks et pratique régulièrement la piraterie sur le delta du Nil. Cette opération est aussi une vengeance pour le pillage d'Alexandrie lors d'une croisade en 1365.
 
 Ces succès maritimes sont d'autant plus remarquables que les Mamelouks, en bons cavaliers et en bons musulmans, détestent la mer et les marins, au point que "homme de mer" est une insulte chez eux. De plus, l'Égypte a toujours cruellement manqué de bois, rendant difficile la construction d'une flotte. Chypre restera tributaire du sultanat jusqu'en 1489, date à laquelle sa dernière reine vendra l'île aux Vénitiens.
 
 En 1498, Vasco de Gama passe le cap de Bonne-Espérance, débarque à Calicut sur la côte occidentale indienne, achète de la marchandise et la revend beaucoup plus cher au Portugal. Dès lors, les Portugais sont bien décidés à ruiner le commerce des Arabes et de Venise qui passe par la mer Rouge et l'Égypte. Une guerre maritime éclate à partir de 1506 sous le règne de Qansuh al-Ghuri, qui fait construire une flotte et s'allie à la flotte du Gujarat en Inde, aux Ottomans, et surtout à Venise. Manquant de canons mais pas de vaillance, les Mamelouks remportent quelques victoires avant de subir une défaite définitive en 1509. Les Portugais ne réussiront cependant jamais à créer un véritable blocus complet ni à imposer un monopole total.
 
-## L'arriération militaire et la chute face aux Ottomans
+## VI. L'arriération militaire et la chute face aux Ottomans
 
 Les Mamelouks de la fin ne sont pas exactement ceux des débuts. Alors que du temps de Baybars ils utilisaient sans scrupule des armes de siège modernes et perfectionnées, et qu'ils utilisent de la poudre dans le cadre des sièges depuis 1360, ils ne construisent des fonderies et n'incorporent à leur armée des armes à feu qu'à partir de 1490, alors que cela fait déjà un siècle que tout le monde s'y est mis. Pire encore, ils ne les utilisent que très peu, très mal, et ne les confient qu'à des esclaves noirs, tout en bas de l'échelle sociale, qu'ils méprisent tellement qu'ils appellent leur régiment "la fausse armée".
 
 Ce rejet s'explique par plusieurs raisons. D'abord, jusqu'aux années 1480-1490, ils n'ont jamais ou presque affronté d'ennemis utilisant des armes à feu. Ensuite, selon eux, ces armes sont incompatibles avec la futuwwa, qui prône le cavalier, sa lance, son arc et son sabre. De plus, manipuler un mousquet à cheval est très difficile. Enfin, réformer l'armée pour mettre en avant des régiments modernes de fantassins dans une société où le cheval est le privilège exclusif du mamelouk, où le cavalier est tout en haut de l'échelle sociale et incarne à lui seul le régime en place, était socialement et politiquement inacceptable. Plutôt que d'évoluer, ils se sont obstinés dans un "baroud d'honneur" qui force le respect.
-
-## Les Ottomans et la fin du sultanat mamelouk
 
 La montée en puissance des Ottomans en Anatolie n'inquiète d'abord pas les Mamelouks, séparés qu'ils sont par une ribambelle de petits beyliks anatoliens indépendants. Mais quand les Ottomans commencent à annexer ces beyliks, notamment celui de Karaman, la situation devient préoccupante, surtout autour de la principauté tampon des Dhul-Qadr ou celle des Ramazanoğlu, toutes deux en Cilicie, une région que les Ottomans comme les Mamelouks considèrent comme leur chasse gardée.
 

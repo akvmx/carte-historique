@@ -8,10 +8,11 @@ pays: "Russie"
 coords: [54.44668, 21.01586]  # ← Trouvez sur Google Maps
 description: "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de « clore » les guerres de la Révolution."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
+personnages: "Napoléon Bonaparte"
 lien: fiches/bataille-friedland.html
 ---
 
-# La bataille de Friedland 
+# **La bataille de Friedland** 
 
 ## I. Eylau (février 1807) : une victoire inutile ou le doute au cœur de la Grande Armée
 

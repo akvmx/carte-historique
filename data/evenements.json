@@ -11,7 +11,7 @@
     ],
     "description": "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien.",
     "categorie": "guerre",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-austerlitz.html"
   },
   {
@@ -26,7 +26,7 @@
     ],
     "description": "Description courte en une phrase",
     "categorie": "politique",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-eylau.html"
   },
   {
@@ -41,7 +41,7 @@
     ],
     "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de « clore » les guerres de la Révolution.",
     "categorie": "guerre",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-friedland.html"
   },
   {
@@ -56,7 +56,7 @@
     ],
     "description": "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique.",
     "categorie": "guerre",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/campagne-espagne-napoléon.html"
   },
   {
@@ -71,13 +71,13 @@
     ],
     "description": "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.",
     "categorie": "guerre",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/campagne-napoléon-allemagne.html"
   },
   {
     "titre": "Croisades de secours",
     "date": "1100-01-01",
-    "date_fin": false,
+    "date_fin": "1101-01-01",
     "perpetuel": false,
     "pays": "France",
     "coords": [
@@ -86,26 +86,45 @@
     ],
     "description": "La lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem.",
     "categorie": "politique",
-    "personnages": null,
+    "personnages": [
+      "Raymond de Saint-Gilles",
+      "Tancrède de Hauteville",
+      "Baudoin de Boulogne"
+    ],
     "lien": "fiches/croisades-de-secours.html"
+  },
+  {
+    "titre": "La guerre du sucre",
+    "date": "1419-014-01",
+    "date_fin": false,
+    "perpetuel": true,
+    "pays": "Portugal",
+    "coords": [
+      32.73772323339855,
+      -17.00895629428063
+    ],
+    "description": "Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...",
+    "categorie": "politique",
+    "personnages": null,
+    "lien": "fiches/docu-sucre.html"
   },
   {
     "titre": "Le déclin de l'Empire ottoman",
     "date": "1900-01-01",
-    "date_fin": false,
+    "date_fin": "1901-01-à1",
     "perpetuel": true,
     "pays": "Empire ottoman",
     "coords": [
       39.41626,
       35.379558
     ],
-    "description": "pourquoi l'Empire ottoman a décliné",
+    "description": "Pourquoi l'Empire ottoman a décliné.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/déclin-ottoman.html"
   },
   {
-    "titre": "Les guerres du Congo et l'imounité, de 1996 à 2019",
+    "titre": "Les guerres du Congo et l'immunité européenne, de 1996 à 2019",
     "date": "1996-10-01",
     "date_fin": false,
     "perpetuel": false,
@@ -114,10 +133,25 @@
       -2.88,
       23.656
     ],
-    "description": "Cycle de guerres, massacres et prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale dénoncée par le docteur Denis Mukwege et de nombreux témoins.",
+    "description": "Le cycle de guerres causé par la prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale.",
     "categorie": "guerre",
     "personnages": "Léopold II",
     "lien": "fiches/guerres-congo.html"
+  },
+  {
+    "titre": "Le développement de New York",
+    "date": "1664-01-01",
+    "date_fin": false,
+    "perpetuel": true,
+    "pays": "Etats-Unis",
+    "coords": [
+      40.7056297,
+      -74.0080942
+    ],
+    "description": "Le développement de New York à l'époque de la Nouvelle Amsterdam.",
+    "categorie": "politique",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/nouvelle-amsterdam-débuts.html"
   },
   {
     "titre": "Les origines de l'Empire Ottoman",
@@ -129,7 +163,7 @@
       39.41626,
       35.379558
     ],
-    "description": "les origines de l'Empire Ottoman",
+    "description": "Les origines de l'Empire Ottoman.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/origines-ottoman.html"
@@ -144,15 +178,34 @@
       34.96176,
       38.20598
     ],
-    "description": "Description courte en une phrase",
+    "description": "À l’automne 1097, après la traversée éprouvante de l’Anatolie, l’essentiel des forces croisées se dirige vers Antioche, ancienne capitale byzantine de la région et verrou stratégique indispensable à toute progression vers la Palestine ou à tout projet de domination durable de la Syrie.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/siège-antioche.html"
   },
   {
+    "titre": "Montée au pouvoir du Sultanat Mamluk",
+    "date": "1250-01-01",
+    "date_fin": "1580-01-01",
+    "perpetuel": false,
+    "pays": "Sultanat mamluk d'Egypte",
+    "coords": [
+      30.02399,
+      31.25946
+    ],
+    "description": "Comment les Mamluks ont dead ça.",
+    "categorie": "politique",
+    "personnages": [
+      "Nur ad-Din",
+      "Shirkuh",
+      "Salah ad-Din"
+    ],
+    "lien": "fiches/sultanat-mamluk.html"
+  },
+  {
     "titre": "La signature du traité de Presbourg par Napoléon et son impact",
     "date": "1805-12-26",
-    "date_fin": "null",
+    "date_fin": false,
     "perpetuel": false,
     "pays": "Slovaquie",
     "coords": [
@@ -161,12 +214,12 @@
     ],
     "description": "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse.",
     "categorie": "politique",
-    "personnages": null,
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/traité-presbourg.html"
   },
   {
     "titre": "Les Turcs seljukides dans le contexte des croisades",
-    "date": "0990-01-01",
+    "date": "990-01-01",
     "date_fin": "1081-01-01",
     "perpetuel": false,
     "pays": "Empire Seljuk",
@@ -174,7 +227,7 @@
       35.73834183660386,
       51.357234044865045
     ],
-    "description": "L'expansion de l'Empire seljuk",
+    "description": "L'expansion de l'Empire seljuk au Xème siècle.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/turcs-seljukides-croisades.html"

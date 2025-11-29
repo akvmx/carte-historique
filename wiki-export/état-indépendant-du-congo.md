@@ -1,8 +1,8 @@
 ---
 type: évènement
 titre: "Léopold II dans l'Etat indépendant du Congo"
-date: "1885"
-date_fin: "1908"
+date: "1885-01-01"
+date_fin: "1908-01-01"
 pays: "République démocratique du Congo"
 coords: [-2.8800, 23.6560]
 description: "les ravages de Léopold II au Congo"
@@ -11,7 +11,7 @@ personnages: "Léopold II"
 lien: "fiches/état-indépendant-du-Congo.html"
 ---
 
-# L'indépendance da la République démocratique du Congo 
+# **L'indépendance da la République démocratique du Congo** 
 
 ## I. Le portrait de Léopold II
 

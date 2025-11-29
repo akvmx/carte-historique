@@ -5,53 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>La bataille d'Eylau</title>
     <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8fafc;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        .page {
+            width: 100%;
+            max-width: 960px;
         }
-        .btn-retour {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3b82f6;
-            color: white;
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #3b82f6; }
-        h2, h3 { color: #1e40af; margin-top: 2rem; }
-        .meta { background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="btn-retour">← Retour à la carte</a>
-        
-        <h1>La bataille d'Eylau</h1>
-        
-        <div class="meta">
-            <p><strong>📅 Date :</strong> 1809-10-01</p>
-            <p><strong>🌍 Pays :</strong> Russie</p>
-            <p><strong>📍 Coordonnées :</strong> 54.71467, 20.43912</p>
-            <p><strong>🏷️ Catégorie :</strong> "Politique"</p>
-        </div>
-        
-        <div class="content">
-            <p><h1>La bataille d'Eylau (octobre 1806 – février 1807)</h1></p><p><h2>I. Paris acclame, l’Europe s’endurcit : après Iéna-Auerstaedt, une victoire encore inachevée</h2></p><p>À l’automne 1806, la propagande impériale transforme l’écrasement prussien de Iéna et d’Auerstaedt en un triomphe fondateur. La capitale fête une « paix prochaine » ; pourtant, sur le continent, rien n’est réglé. La Prusse, saignée, ne capitule pas en bloc ; la Russie s’avance pour la relever ; la Suède et la Grande-Bretagne épaulent la coalition. L’Angleterre contrôle les mers, finance les alliances et aspire à étouffer l’économie française ; la Russie revendique le rôle de libératrice des monarchies continentales. La guerre se déplace aussitôt du champ tactique vers l’affrontement de modèles politiques.</p><p><h2>II. Exporter 1789 : la modernité impériale comme enjeu et comme risque</h2></p><p>Depuis 1805, l’Empire diffuse un programme de modernisation : codification civile, égalité civile, réforme des administrations, rationalisation fiscale, abolition d’anciennes servitudes. À Munich, Milan, Amsterdam, Genève ou Naples, la « greffe française » substitue la loi écrite aux privilèges. Des élites intellectuelles y voient l’irruption d’un ordre nouveau : en Allemagne, la réception est ambivalente, mêlant fascination pour l’État de droit et rejet d’une tutelle étrangère. Cette projection normative convertit la guerre en croisade idéologique. Aux yeux des cours, l’Empire sape la monarchie de droit divin ; dans la rhétorique de Londres et de Saint-Pétersbourg, la lutte contre Napoléon devient la défense d’un ordre chrétien et dynastique. L’idéologie durcit la coalition autant qu’elle soude, derrière l’Empereur, les partisans de la Révolution régénérée.</p><p><h2>III. Après Iéna-Auerstaedt : poursuite, démoralisation prussienne et effondrement logistique</h2></p><p>La manœuvre opérative française, déjà victorieuse, se mue en chasse stratégique. L’objectif n’est pas de tenir un champ de bataille, mais d’empêcher la reconstitution prussienne et la jonction avec les Russes. Les avant-gardes (Murat, Bernadotte, Soult, Ney) enlèvent successivement places et colonnes en retraite ; la psychologie des troupes fait la différence. Face à des unités prussiennes désorganisées, la Grande Armée capitalise sur la vitesse des corps d’armée, la maîtrise des ponts, l’artillerie mobile, mais aussi sur l’audace : redditions arrachées par le bluff, garnisons paniquées par l’annonce de la prise de Berlin, effondrement d’une chaîne de commandement déjà décapitée. En quelques semaines, le potentiel prussien s’évapore : un cinquième de l’armée disparaît en un jour, puis la débandade logistique transforme la retraite en déroute.</p><p><h2>IV. Berlin et le décret : la guerre économique comme prolongement du combat</h2></p><p>L’entrée à Berlin ouvre un second front, non militaire mais systémique. Par le décret dit « de Berlin » (novembre 1806), Napoléon proclame le blocus continental : interdiction d’importer des marchandises britanniques dans l’espace sous influence impériale, saisie des biens anglais, fermeture des ports. L’objectif est double : asphyxier l’économie insulaire et reconstruire un marché protégé apte à absorber les productions françaises et alliées. Cette stratégie suppose une obéissance européenne que seul un dispositif politico-militaire peut imposer ; elle braque les neutres, incite à la fraude, et aiguillonne la détermination britannique. Elle accentue surtout la coloration idéologique de la guerre : l’Europe doit choisir entre la mer anglaise et la loi continentale.</p><p><h2>V. La Pologne comme théâtre et comme enjeu politique</h2></p><p>Repoussée vers l’est, la campagne bascule en Pologne. La Grande Armée y trouve une logistique de circonstance : routes déblayées par les communautés locales, ponts réparés, vivres fournis par la noblesse et le clergé, accueil triomphal à Varsovie. L’espoir d’un relèvement polonais, relayé par la figure de Maria Walewska, cherche à créer un lien personnel avec l’Empereur. Loin d’une promesse formelle de restauration, Napoléon manœuvre : il encourage les élites, capte leur concours, et garde la décision pour après la défaite russe. La campagne d’hiver en sera le test.</p><p>La grande poursuite bute sur les éléments. Pluie et boue puis neige laminent la mobilité française ; Bennigsen (commandement russe) gagne du temps, se replie, puis se retourne. Napoléon cherche la décision malgré des effectifs inégaux, en s’appuyant sur la cohésion des corps (Soult au centre-gauche, Davout à droite, Ney attendu sur la gauche). Le 7 février 1807, engagements meurtriers dans Eylau ; au matin du 8, l’armée russe, supérieure en nombre et en artillerie, prend l’initiative.</p><p>La bataille se déroule dans un blizzard qui dissout les plans. L’infanterie russe enfonce par moments les lignes françaises ; Augereau, dévoyé par la tempête de neige, avance à l’aveugle et se fait hacher par les batteries adverses ; le centre français vacille, une brèche s’ouvre entre Davout (à droite) et Soult (à gauche). La réponse est une décision d’urgence : Murat lance la cavalerie de masse. La charge, parmi les plus vastes du cycle révolutionnaire-impérial, traverse le feu, bouscule les lignes, rétablit l’équilibre au centre et sauve la position, pendant que Davout, manœuvrant à droite, grignote le flanc russe. À la tombée du jour, Ney arrive enfin ; des renforts prussiens contrebalancent cet apport. La nuit fige un champ de bataille d’apocalypse : nul vainqueur indiscutable, des pertes gigantesques et disputées par les historiens, mais en tout état de cause l’une des journées les plus meurtrières de l’Empire. Militairement, l’armée française tient le terrain ; politiquement, l’illusion d’invincibilité s’ébrèche.</p><p>Eylau n’est ni une défaite, ni l’Austerlitz du Nord. C’est une bataille de contrainte, payée au prix fort, qui empêche la jonction russo-prussienne et maintient l’initiative française, mais qui dévoile les limites de la guerre d’hiver, de la logistique continentale et de la sur-extension. Elle confirme la transformation du conflit : l’issue ne dépend plus seulement d’une manœuvre opérative brillante, mais de la capacité à faire consentir peuples et élites à un ordre nouveau. Or la brutalité d’Eylau nourrit la propagande adverse et le désir de revanche, quand la poursuite de la modernisation napoléonienne continue de rallier des soutiens locaux. La décision reviendra à une nouvelle campagne, sur un terrain mieux choisi et par une manœuvre plus nette.</p><p><h2>Conclusion</h2></p><p>De Paris à Eylau, l’Empire passe de la victoire opérative fulgurante à la guerre d’usure idéologique. La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis. La campagne n’est pas close ; la décision, différée, exigera une victoire nette susceptible de reconvertir le capital symbolique entamé. C’est le sens de la séquence qui mènera, quelques mois plus tard, à la rupture véritable de l’équilibre oriental.</p>
-        </div>
-        
-        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
-        </footer>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La bataille d'Eylau</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Politique"</span>
+                    <span class="badge badge-ghost">📅 1809-10-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Russie</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1809-10-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Politique"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La bataille d'Eylau (octobre 1806 – février 1807)</strong></h1></p><p><h2>I. Paris acclame, l’Europe s’endurcit : après Iéna-Auerstaedt, une victoire encore inachevée</h2></p><p>À l’automne 1806, la propagande impériale transforme l’écrasement prussien de Iéna et d’Auerstaedt en un triomphe fondateur. La capitale fête une « paix prochaine » ; pourtant, sur le continent, rien n’est réglé. La Prusse, saignée, ne capitule pas en bloc ; la Russie s’avance pour la relever ; la Suède et la Grande-Bretagne épaulent la coalition. L’Angleterre contrôle les mers, finance les alliances et aspire à étouffer l’économie française ; la Russie revendique le rôle de libératrice des monarchies continentales. La guerre se déplace aussitôt du champ tactique vers l’affrontement de modèles politiques.</p><p><h2>II. Exporter 1789 : la modernité impériale comme enjeu et comme risque</h2></p><p>Depuis 1805, l’Empire diffuse un programme de modernisation : codification civile, égalité civile, réforme des administrations, rationalisation fiscale, abolition d’anciennes servitudes. À Munich, Milan, Amsterdam, Genève ou Naples, la « greffe française » substitue la loi écrite aux privilèges. Des élites intellectuelles y voient l’irruption d’un ordre nouveau : en Allemagne, la réception est ambivalente, mêlant fascination pour l’État de droit et rejet d’une tutelle étrangère. Cette projection normative convertit la guerre en croisade idéologique. Aux yeux des cours, l’Empire sape la monarchie de droit divin ; dans la rhétorique de Londres et de Saint-Pétersbourg, la lutte contre Napoléon devient la défense d’un ordre chrétien et dynastique. L’idéologie durcit la coalition autant qu’elle soude, derrière l’Empereur, les partisans de la Révolution régénérée.</p><p><h2>III. Après Iéna-Auerstaedt : poursuite, démoralisation prussienne et effondrement logistique</h2></p><p>La manœuvre opérative française, déjà victorieuse, se mue en chasse stratégique. L’objectif n’est pas de tenir un champ de bataille, mais d’empêcher la reconstitution prussienne et la jonction avec les Russes. Les avant-gardes (Murat, Bernadotte, Soult, Ney) enlèvent successivement places et colonnes en retraite ; la psychologie des troupes fait la différence. Face à des unités prussiennes désorganisées, la Grande Armée capitalise sur la vitesse des corps d’armée, la maîtrise des ponts, l’artillerie mobile, mais aussi sur l’audace : redditions arrachées par le bluff, garnisons paniquées par l’annonce de la prise de Berlin, effondrement d’une chaîne de commandement déjà décapitée. En quelques semaines, le potentiel prussien s’évapore : un cinquième de l’armée disparaît en un jour, puis la débandade logistique transforme la retraite en déroute.</p><p><h2>IV. Berlin et le décret : la guerre économique comme prolongement du combat</h2></p><p>L’entrée à Berlin ouvre un second front, non militaire mais systémique. Par le décret dit « de Berlin » (novembre 1806), Napoléon proclame le blocus continental : interdiction d’importer des marchandises britanniques dans l’espace sous influence impériale, saisie des biens anglais, fermeture des ports. L’objectif est double : asphyxier l’économie insulaire et reconstruire un marché protégé apte à absorber les productions françaises et alliées. Cette stratégie suppose une obéissance européenne que seul un dispositif politico-militaire peut imposer ; elle braque les neutres, incite à la fraude, et aiguillonne la détermination britannique. Elle accentue surtout la coloration idéologique de la guerre : l’Europe doit choisir entre la mer anglaise et la loi continentale.</p><p><h2>V. La Pologne comme théâtre et comme enjeu politique</h2></p><p>Repoussée vers l’est, la campagne bascule en Pologne. La Grande Armée y trouve une logistique de circonstance : routes déblayées par les communautés locales, ponts réparés, vivres fournis par la noblesse et le clergé, accueil triomphal à Varsovie. L’espoir d’un relèvement polonais, relayé par la figure de Maria Walewska, cherche à créer un lien personnel avec l’Empereur. Loin d’une promesse formelle de restauration, Napoléon manœuvre : il encourage les élites, capte leur concours, et garde la décision pour après la défaite russe. La campagne d’hiver en sera le test.</p><p>La grande poursuite bute sur les éléments. Pluie et boue puis neige laminent la mobilité française ; Bennigsen (commandement russe) gagne du temps, se replie, puis se retourne. Napoléon cherche la décision malgré des effectifs inégaux, en s’appuyant sur la cohésion des corps (Soult au centre-gauche, Davout à droite, Ney attendu sur la gauche). Le 7 février 1807, engagements meurtriers dans Eylau ; au matin du 8, l’armée russe, supérieure en nombre et en artillerie, prend l’initiative.</p><p>La bataille se déroule dans un blizzard qui dissout les plans. L’infanterie russe enfonce par moments les lignes françaises ; Augereau, dévoyé par la tempête de neige, avance à l’aveugle et se fait hacher par les batteries adverses ; le centre français vacille, une brèche s’ouvre entre Davout (à droite) et Soult (à gauche). La réponse est une décision d’urgence : Murat lance la cavalerie de masse. La charge, parmi les plus vastes du cycle révolutionnaire-impérial, traverse le feu, bouscule les lignes, rétablit l’équilibre au centre et sauve la position, pendant que Davout, manœuvrant à droite, grignote le flanc russe. À la tombée du jour, Ney arrive enfin ; des renforts prussiens contrebalancent cet apport. La nuit fige un champ de bataille d’apocalypse : nul vainqueur indiscutable, des pertes gigantesques et disputées par les historiens, mais en tout état de cause l’une des journées les plus meurtrières de l’Empire. Militairement, l’armée française tient le terrain ; politiquement, l’illusion d’invincibilité s’ébrèche.</p><p>Eylau n’est ni une défaite, ni l’Austerlitz du Nord. C’est une bataille de contrainte, payée au prix fort, qui empêche la jonction russo-prussienne et maintient l’initiative française, mais qui dévoile les limites de la guerre d’hiver, de la logistique continentale et de la sur-extension. Elle confirme la transformation du conflit : l’issue ne dépend plus seulement d’une manœuvre opérative brillante, mais de la capacité à faire consentir peuples et élites à un ordre nouveau. Or la brutalité d’Eylau nourrit la propagande adverse et le désir de revanche, quand la poursuite de la modernisation napoléonienne continue de rallier des soutiens locaux. La décision reviendra à une nouvelle campagne, sur un terrain mieux choisi et par une manœuvre plus nette.</p><p><h2>Conclusion</h2></p><p>De Paris à Eylau, l’Empire passe de la victoire opérative fulgurante à la guerre d’usure idéologique. La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis. La campagne n’est pas close ; la décision, différée, exigera une victoire nette susceptible de reconvertir le capital symbolique entamé. C’est le sens de la séquence qui mènera, quelques mois plus tard, à la rupture véritable de l’équilibre oriental.</p>
+            </section>
+        </article>
     </div>
 </body>
 </html>

@@ -3,51 +3,245 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Les guerres du Congo et l'imounité, de 1996 à 2019</title>
+    <title>Les guerres du Congo et l'immunité européenne, de 1996 à 2019</title>
     <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8fafc;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        .page {
+            width: 100%;
+            max-width: 960px;
         }
-        .btn-retour {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3b82f6;
-            color: white;
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #3b82f6; }
-        h2, h3 { color: #1e40af; margin-top: 2rem; }
-        .meta { background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="btn-retour">← Retour à la carte</a>
-        
-        <h1>Les guerres du Congo et l'imounité, de 1996 à 2019</h1>
-        
-        <div class="meta">
-            <p><strong>📅 Date :</strong> 1996-10-01</p>
-            <p><strong>🌍 Pays :</strong> République démocratique du Congo</p>
-            <p><strong>📍 Coordonnées :</strong> -2.88, 23.656</p>
-            <p><strong>🏷️ Catégorie :</strong> "Guerre"</p>
-        </div>
-        
-        <div class="content">
-            <p><h1>Les guerres du Congo et l’impunité (1996–2019)</h1></p><p><h2>I. Un pays filmé dans la durée : violence, silence et figure du témoin</h2></p><p>Le récit s’ouvre sur la parole d’un cinéaste qui affirme filmer le Congo depuis trente ans, « pays aussi vaste que l’Europe » où le fleuve Congo est décrit comme le cœur de l’Afrique. Il dit avoir partagé « toutes les saisons » du pays : les espoirs, les révoltes, les violences et les injustices.</p><p>Parmi les figures rencontrées, une se détache : le docteur Denis Mukwege, gynécologue congolais qui se présente comme originaire d’« un pays le plus riche de la planète » en ressources naturelles (or, coltan, cobalt, autres minerais stratégiques), mais dont le peuple figure parmi « les plus pauvres du monde ». Mukwege établit d’emblée un lien direct entre cette abondance de ressources, la guerre, la violence extrême et la pauvreté structurelle. Il rappelle que le peuple congolais est « massacré depuis plus de deux décennies » sous les yeux de la communauté internationale. Le motif central est posé : la quête de paix, face à un cycle de violence et à une impunité qu’il dénonce sans relâche.</p><p>Le cinéaste explique avoir été témoin sur le terrain, dans les villes, les villages et les forêts, de visages, de cris et de demandes de justice. C’est ce matériau accumulé qui fonde le projet du film, conçu pour rompre « la loi du silence ».</p><p>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Les guerres du Congo et l'immunité européenne, de 1996 à 2019</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1996-10-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">République démocratique du Congo</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1996-10-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>Les guerres du Congo et l’impunité (1996–2019)</strong></h1></p><p><h2>I. Un pays filmé dans la durée : violence, silence et figure du témoin</h2></p><p>Le récit s’ouvre sur la parole d’un cinéaste qui affirme filmer le Congo depuis trente ans, « pays aussi vaste que l’Europe » où le fleuve Congo est décrit comme le cœur de l’Afrique. Il dit avoir partagé « toutes les saisons » du pays : les espoirs, les révoltes, les violences et les injustices.</p><p>Parmi les figures rencontrées, une se détache : le docteur Denis Mukwege, gynécologue congolais qui se présente comme originaire d’« un pays le plus riche de la planète » en ressources naturelles (or, coltan, cobalt, autres minerais stratégiques), mais dont le peuple figure parmi « les plus pauvres du monde ». Mukwege établit d’emblée un lien direct entre cette abondance de ressources, la guerre, la violence extrême et la pauvreté structurelle. Il rappelle que le peuple congolais est « massacré depuis plus de deux décennies » sous les yeux de la communauté internationale. Le motif central est posé : la quête de paix, face à un cycle de violence et à une impunité qu’il dénonce sans relâche.</p><p>Le cinéaste explique avoir été témoin sur le terrain, dans les villes, les villages et les forêts, de visages, de cris et de demandes de justice. C’est ce matériau accumulé qui fonde le projet du film, conçu pour rompre « la loi du silence ».</p><p>
 <h3>II. Origines régionales : du génocide rwandais à la déstabilisation du Zaïre</h3></p><p>Pour « comprendre la tragédie congolaise », le récit remonte aux années 1990, à l’époque où le Congo s’appelle encore Zaïre et où Mobutu Sese Seko dirige le pays depuis près de trente ans. Son régime autoritaire, affaibli par la maladie, touche à sa fin.</p><p>La bascule s’opère à partir du Rwanda voisin : en 1994, environ 800 000 Rwandais de l’ethnie tutsie sont massacrés en moins de trois mois lors d’un génocide perpétré par l’armée et les milices extrémistes hutu. Une armée tutsie, organisée en exil, met fin au génocide et prend le pouvoir à Kigali. La peur change alors de camp : environ un million et demi de Hutu franchissent la frontière et se réfugient à l’est du Zaïre.</p><p>Ces camps de réfugiés, installés près de la frontière, accueillent à la fois des civils et des milliers de criminels génocidaires armés (militaires et miliciens hutu). Les camps deviennent des espaces de contrôle par les milices génocidaires, qui utilisent les réfugiés comme boucliers humains et entendent poursuivre la lutte pour reprendre le pouvoir au Rwanda. Ces camps constituent, pour les nouvelles autorités rwandaises et leur allié ougandais, une menace directe.</p><p>Les dirigeants rwandais et ougandais interpellent la communauté internationale et Mobutu : il faudrait déplacer les camps vers l’intérieur du Congo et désarmer les éléments armés, conformément aux règles internationales, pour éviter une reprise du génocide. Mobutu refuse de déplacer les camps ; la communauté internationale, malgré les avertissements, demeure largement inerte.</p><p>Face à cette inertie, les présidents rwandais et ougandais « passent à l’exécution » : en octobre 1996, une coalition composée de militaires tutsis rwandais, d’éléments de l’armée ougandaise et de rebelles zaïrois franchit la frontière. Cette coalition est baptisée Alliance des forces démocratiques pour la libération du Congo (AFDL).</p><p>
 <h3>III. L’AFDL, la première guerre du Congo et les massacres de réfugiés</h3></p><p>#### 1. Objectifs déclarés et choix de Kabila</p><p>Les objectifs de cette intervention sont multiples :</p><p>- contraindre les réfugiés à revenir au Rwanda en dispersant les camps ;
     
@@ -68,10 +262,8 @@
 2. Voir toute la vérité dite sur les crimes de guerre, les crimes contre l’humanité et les crimes éventuellement qualifiables de génocide commis dans son pays, des crimes qui devraient « choquer la conscience de l’humanité ».
     
 3. Enfin, voir le peuple de la région des Grands Lacs pardonner, se réconcilier, et faire germer un « arbre de la paix au cœur de l’Afrique ».</p>
-        </div>
-        
-        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
-        </footer>
+            </section>
+        </article>
     </div>
 </body>
 </html>

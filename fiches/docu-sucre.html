@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La guerre du sucre</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La guerre du sucre</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Politique</span>
+                    <span class="badge badge-ghost">📅 1419-014-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Portugal</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1419-014-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Politique</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>Les ravages du sucre.</strong></h1></p><p><h2>I. L'Europe et ses colonies</h2></p><p>L’histoire du sucre est d’abord celle d’une emprise progressive et massive sur les corps, les terres et les sociétés, au point de constituer l’un des moteurs centraux de la mondialisation moderne et du capitalisme atlantique. Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle en Chine, en Inde et en Égypte, puis introduit en Europe où il demeure longtemps un produit de luxe réservé aux élites. Il sert à la fois de friandise ostentatoire, d’épice rare et d’ingrédient médicinal, ornant les tables aristocratiques et contribuant à marquer la distinction sociale. Pourtant, la fascination pour le goût sucré et la possibilité d’une énergie rapide et bon marché vont faire exploser la demande. La consommation par habitant en Europe passe d’environ quelques dizaines de grammes par an vers 1600 à plusieurs kilos au début du XIXᵉ siècle, pour atteindre aujourd’hui plusieurs dizaines de kilos par personne et par an. Parallèlement, la production connaît une croissance exponentielle : elle s’envole au XVIIᵉ siècle, quadruple au XVIIIᵉ, est multipliée par douze au XIXᵉ puis encore par plusieurs dizaines au XXᵉ siècle. Le paradoxe est que cette expansion porte sur une denrée sans nécessité vitale, dont le corps humain peut parfaitement se passer, mais qui devient l’un des symboles du « superflu indispensable » des sociétés industrielles.</p><p>Pour satisfaire cette demande croissante, l’Europe met en place, à partir du XVᵉ siècle, un dispositif colonial d’une violence inédite. Les Portugais jouent un rôle pionnier. Dès 1419, l’île de Madère est conquise et entièrement dédiée à la culture de la canne à sucre. Bientôt, elle fournit en sucre une grande partie de l’Europe. En 1474, le Portugal étend ce modèle aux petites îles de São Tomé et Príncipe, au large du Gabon. C’est là que s’opère une rupture décisive : l’articulation systématique d’une économie sucrière avec la déportation et la mise en esclavage, à longue distance, d’une main-d’œuvre africaine. Le modèle de plantation est alors forgé : défrichement massif, monoculture intensive de canne, moulin, chaudières, fours, quartiers d’esclaves, maison du maître dominant l’ensemble. Il repose sur une économie extractiviste visant à extraire du sol une culture d’exportation et d’arracher des êtres humains à l’Afrique pour les transformer en force de travail corvéable, le tout pour produire un bien de consommation de luxe destiné aux marchés européens. Ce modèle, expérimenté à São Tomé, est transposé dans le « Nouveau Monde » à la fin du XVᵉ siècle. Christophe Colomb emporte des plants de canne lors de son second voyage en 1493 et les introduit sur l’île d’Hispaniola. Très vite, un complexe de plantations se met en place dans les Caraïbes, puis au Brésil à partir du début du XVIᵉ siècle. Partout, la progression de la canne s’accompagne de la destruction des milieux naturels, de la mise en esclavage des populations indigènes puis, celles-ci ayant été décimées, de leur remplacement par des Africains déportés.</p><p>L’économie sucrière devient ainsi l’un des principaux moteurs de la traite atlantique. Sur les 12,5 millions d’Africains réduits en esclavage et déportés vers les Amériques, plus de la moitié le sont pour travailler directement ou indirectement pour le sucre. Le Brésil reçoit à lui seul près de quatre millions d’Africains, soit environ la moitié de l’ensemble des captifs destinés au continent américain. Le travail dans les plantations et surtout dans les moulins et les chaudières y est extrêmement dangereux : l’accident, la mutilation et la mort y sont omniprésents. Le témoignage d’anciens esclaves souligne à quel point la discipline est organisée par la violence extrême : main coupée en cas d’accident à la meule, jambe tranchée en cas de tentative de fuite. La formule célèbre selon laquelle « c’est à ce prix que l’on mange du sucre en Europe » résume cette logique d’échange inégal entre l’extrême souffrance des uns et la douceur gustative des autres. À partir du XVIᵉ siècle, un système triangulaire s’organise entre l’Afrique (où l’on capture et vend la main-d’œuvre), les Amériques (où l’on cultive, broie et raffine la canne) et l’Europe (où l’on consomme le sucre et où se concentrent les profits). La circulation des hommes, du sucre et de l’argent inaugure une forme de mondialisation dont le sucre est l’un des principaux vecteurs.</p><p>Cette économie ne se confond pas avec les seuls empires ibériques. Les financiers italiens, les marchands et entreprises des Provinces-Unies, puis les négociants français et britanniques s’y insèrent activement. Vers 1610, Amsterdam devient le principal centre européen de raffinage et de commerce du sucre, contrôlant environ la moitié des flux raffinés. La ville incarne à la fois le cœur du capitalisme européen et celui du commerce du sucre, illustrant le lien intime entre expansion sucrière et montée en puissance du capitalisme marchand, puis industriel. Les rivalités entre puissances européennes pour le contrôle des « îles à sucre » des Caraïbes donnent lieu à de nombreux conflits au XVIIᵉ et au XVIIIᵉ siècle, tant le sucre est devenu un enjeu de puissance. Les Français s’implantent à leur tour dans les Antilles à partir des années 1620–1630, puis prennent pied à Saint-Domingue à la fin du XVIIᵉ siècle. La partie occidentale d’Hispaniola devient, au XVIIIᵉ siècle, la « perle des Antilles », premier producteur mondial de sucre et colonie la plus riche de l’empire français, au prix de l’exploitation de quelque 450 000 esclaves africains. Le modèle de la plantation, importé du Brésil, y est poussé à son degré le plus abouti, combinant monoculture, contrôle social total, optimisation de la rentabilité du travail forcé et hiérarchies raciales rigides.</p><p>L’histoire du sucre est indissociable de la construction des catégories raciales modernes. Le système esclavagiste atlantique repose sur une hiérarchisation des corps et des couleurs de peau qui justifie l’asservissement des Africains et de leurs descendants. Dans les récits des missionnaires ou des colons, les Noirs sont décrits comme fainéants, malodorants, naturellement faits pour les travaux les plus durs. La prétendue paresse des esclaves sert de prétexte pour intensifier leur exploitation, accroître les cadences et légitimer la violence disciplinaire. Dans les colonies sucrières, se construit une équivalence entre blanchité, liberté, pouvoir et humanité pleine, d’une part, et noirceur, servitude, infériorité présumée, d’autre part. Ces représentations s’intériorisent durablement, y compris au sein des sociétés coloniales elles-mêmes, où la peau claire est valorisée comme un signe de « bonne sortie » sociale. Le racisme devient un outil central de légitimation de la domination, présenté comme naturel et nécessaire au bon fonctionnement de l’économie de plantation. Il continue de structurer les sociétés atlantiques bien après l’abolition formelle de l’esclavage.</p><p>Sur le plan économique, le sucre ne se contente pas d’enrichir les planteurs coloniaux et les négociants des ports atlantiques. Au XVIIIᵉ siècle, une grande partie des familles françaises est liée, directement ou indirectement, au commerce colonial : grandes dynasties marchandes, armateurs, assureurs maritimes, banquiers. Les îles à sucre sont décrites comme faisant « tourner l’univers », ou du moins l’économie européenne. Les profits de la traite et du commerce sucrier alimentent une proto-industrialisation, financent des raffineries, des banques coloniales, et contribuent à amasser les capitaux nécessaires à la révolution industrielle. L’Angleterre, en particulier, bénéficie de cette manne. Le sucre devient d’abord un moteur financier de l’industrialisation, en permettant d’investir dans les usines et les infrastructures, puis se transforme en moteur énergétique pour la classe ouvrière. Au fur et à mesure que la production augmente et que les coûts baissent, le sucre cesse d’être réservé aux élites et entre massivement dans le régime des classes populaires : thé sucré en Grande-Bretagne, confiseries, biscuits, puis, plus tard, boissons et produits transformés. Il fournit des calories rapides et bon marché à un prolétariat soumis à des cadences harassantes et à des salaires misérables. Nourrir les pauvres d’Europe avec du sucre produit par des esclaves d’Afrique, voilà l’un des mécanismes centraux de ce transfert d’énergie à l’échelle atlantique : des villages africains qui fournissent la main-d’œuvre déportée vers les plantations pour produire le sucre, lui-même intégré dans le régime des ouvriers européens.</p><p>L’apogée de ce système au XVIIIᵉ siècle coïncide avec l’émergence de contestations radicales. La Révolution haïtienne, déclenchée en 1791 à Saint-Domingue, transforme la colonie sucrière la plus riche du monde en théâtre d’une insurrection d’esclaves généralisée. Inspirés, entre autres, par le langage de liberté et d’égalité issu de la Révolution française, les insurgés revendiquent l’abolition de l’esclavage et une pleine humanité politique. La République française proclame l’abolition de l’esclavage en 1794, sous la pression de cette révolution. Cet épisode aurait pu constituer un tournant décisif dans l’histoire mondiale, en articulant droits de l’homme, fin de l’esclavage et remise en cause de l’économie sucrière. Mais le tournant est en grande partie refermé par le rétablissement de l’ordre colonial. Napoléon Bonaparte, soucieux de restaurer les profits du sucre, tente de réimposer l’esclavage à Saint-Domingue au début des années 1800. Il échoue militairement et l’île proclame son indépendance en 1804, donnant naissance au premier État noir libre et décolonisé, Haïti, où l’esclavage est définitivement proscrit. Toutefois, l’économie sucrière ne disparaît pas : elle se déplace. Des planteurs français se replient vers Cuba ou la Louisiane, emportant avec eux leurs esclaves et leur savoir-faire, relançant ailleurs la dynamique de plantation. L’échec de la reconquête de Saint-Domingue conduit Napoléon à renoncer à son empire américain et à vendre la Louisiane aux États-Unis en 1803, ce qui permet à ces derniers d’étendre considérablement leur territoire, mais aussi l’institution de l’esclavage, nourrie par de nouvelles plantations de cannes.</p><p>Au XIXᵉ siècle, la crise morale et politique de l’esclavage entraîne une séquence d’abolitions étalées sur près d’un siècle : abolition de la traite britannique en 1807, puis de l’esclavage dans les colonies britanniques en 1833, abolitions graduelles dans les empires français, américain, espagnol et portugais, jusqu’aux abolitions tardives de Cuba (1886) et du Brésil (1888). Cependant, ces ruptures juridiques s’accompagnent rarement d’une rupture économique. Les pouvoirs esclavagistes réclament et obtiennent des compensations financières massives pour la « perte » de leurs esclaves considérés comme des biens. La jeune République d’Haïti, en 1825, se voit imposer par la France une indemnité exorbitante en échange de la reconnaissance de son indépendance, contractée auprès de banques françaises et grevant durablement son développement. En 1849, la France indemnise également ses anciens propriétaires d’esclaves à hauteur de centaines de millions de francs-or, absorbant une part considérable des dépenses publiques. L’évaluation de ces indemnités repose sur une logique marchande dans laquelle un être humain mis en esclavage est estimé à une valeur monétaire fixe, prolongeant la logique de marchandisation des personnes au-delà même de l’esclavage légal. Ces fonds sont ensuite réinvestis dans l’économie métropolitaine et coloniale, modernisant plantations et sucreries et facilitant une reconversion sans remise en cause du pouvoir des planteurs.</p><p>L’abolition pose un problème aux producteurs : comment organiser la main-d’œuvre sans recourir à la propriété directe d’êtres humains ? Les anciens esclaves, désormais libres, entendent négocier leurs conditions de travail, leur salaire et leur dignité, ce que les planteurs acceptent mal. Ceux-ci se tournent alors vers un nouveau dispositif, l’engagisme, élaboré dès les années 1820 par l’Empire britannique. Il consiste à recruter, par contrat, des travailleurs « libres » mais extrêmement vulnérables (Indiens, Chinois, Africains, Vietnamiens, Malgaches, etc.) pour des périodes de plusieurs années, avec salaire minimal, logement et nourriture pris en charge, mais souvent compensés par des mécanismes d’endettement qui les attachent durablement à la plantation. Les « coolies » indiens et chinois, acheminés vers l’île Maurice, les Caraïbes, l’océan Indien ou le Pacifique, vivent dans des conditions qui, hormis le statut juridique, reproduisent largement celles de l’esclavage : mêmes habitations, mêmes rythmes de travail, même vocabulaire de la domination (maître et engagé). Cette main-d’œuvre engagée sauve l’économie du sucre en lui fournissant un réservoir exploitable à coût relativement bas, sans remettre en cause la structure d’ensemble de la plantation. Des centaines de milliers de travailleurs indiens et chinois, rejoints par d’autres groupes engagés, constituent ainsi l’avant-garde d’une diaspora contraint, approfondissant le caractère global de la « planète sucre ».</p><p>La rivalité entre canne et betterave constitue un autre élément clé de cette histoire. À la fin du XVIIIᵉ siècle, des procédés industriels permettent d’extraire du sucre de la betterave, culture adaptée aux climats tempérés européens. Napoléon, confronté au blocus continental britannique et à la difficulté d’importer le sucre colonial, encourage massivement la production sucrière de betterave. Au cours du XIXᵉ siècle, celle-ci en vient à représenter environ la moitié de la production mondiale de sucre. Les planteurs de canne des colonies se trouvent pris entre la concurrence de la betterave et la transformation des régimes du travail. Beaucoup choisissent de moderniser leurs installations, de s’endetter, de se tourner vers l’engagisme et d’obtenir des compensations d’État pour amortir les chocs. L’économie du sucre montre ainsi une capacité remarquable à s’adapter : déplacement géographique des centres de production (du Brésil à Saint-Domingue, puis à Cuba, à la Louisiane, etc.), mutation des régimes de travail (esclavage, puis engagisme, puis travail migrant sans droits), diversification des sources végétales (canne et betterave), tout en conservant ses traits fondamentaux d’extractivisme, de concentration foncière et de hiérarchies raciales et sociales.</p><p>Cette histoire de longue durée éclaire la persistance, jusqu’à nos jours, de formes de travail qui prolongent la logique de la plantation. Dans la République dominicaine contemporaine, les grandes compagnies sucrières contrôlent des parts considérables du territoire, comme la centrale Romana dans la région d’El Seibo, où environ 70 % des terres sont dédiées à la canne. La main-d’œuvre la plus pénible – la coupe manuelle de la canne – est assurée quasi exclusivement par des migrants haïtiens, souvent sans papiers, vivant dans des campements précaires, payés à la tâche, privés des droits sociaux les plus élémentaires et facilement expulsables. Descendants d’esclaves africains des anciennes plantations de Saint-Domingue, ils connaissent une forme d’« engagisme contemporain » qui ne dit pas son nom. De nombreux travailleurs âgés, après des décennies de coupe, se retrouvent sans retraite ni indemnité. Le parallèle avec les esclaves d’hier et les engagés d’autrefois s’impose à eux-mêmes, qui parlent de retour à l’esclavage, au moins sur le plan matériel. La filière sucrière contemporaine s’appuie également sur d’autres formes de précarité dans de nombreuses régions du monde, prolongeant la logique d’un sucre bon marché pour certains, financé par la vie brisée d’autres.</p><p>Ainsi, sur cinq siècles, le sucre apparaît comme un « péché mortel » au sens historique : un produit superflu qui a pourtant joué un rôle essentiel dans le développement des empires européens, dans la constitution du capitalisme moderne, dans l’organisation des inégalités raciales et dans la configuration des régimes alimentaires populaires. Il a structuré des transferts massifs d’énergie humaine de l’Afrique vers les Amériques et l’Europe, façonné des sociétés coloniales et postcoloniales profondément inégalitaires, et contribué à la naissance d’un monde globalisé dont les effets se font encore sentir dans les corps, les paysages et les hiérarchies sociales d’aujourd’hui.</p><p><h2>II. L’économie-monde du sucre au XXᵉ siècle : impérialisme américain, industrialisation alimentaire et continuité des rapports d’exploitation</h2></p><p>L’entrée dans le XXᵉ siècle marque une nouvelle phase d’expansion pour l’économie du sucre, caractérisée par l’intégration structurelle de ce produit dans le système agro-industriel nord-américain et par la recomposition de la géographie sucrière autour des intérêts impériaux des États-Unis. Alors qu’en Europe la consommation avait déjà explosé au XIXᵉ siècle, la dynamique du XXᵉ siècle trouve aux États-Unis son moteur principal : urbanisation rapide, transformation industrielle des modes alimentaires, émergence de la grande distribution et développement d’un capitalisme nutritionnel fondé sur le sucre comme additif omniprésent. Ce basculement s’accompagne d’une consolidation des structures de domination héritées de l’économie de plantation et d’une extension des logiques coloniales, désormais articulées à l’impérialisme américain.</p><p>À partir de la fin du XIXᵉ siècle, l’urbanisation croissante des États-Unis modifie profondément les logiques d’approvisionnement et les pratiques alimentaires. La population urbaine, coupée de la production agricole directe, ouvre un espace inédit aux industries de transformation. La conservation des aliments par le sucre, leur conditionnement et leur distribution à grande échelle deviennent les ressorts d’un marché en expansion permanente. Dans ce contexte, le sucre cesse d’être un produit ponctuel pour devenir une composante structurelle de l’alimentation industrielle : sodas dès le début des années 1900, glaces, chocolats produits en masse, fast-foods, sucreries intégrées dans des routines quotidiennes. L’industrialisation du goût s’appuie sur un usage systématique du sucre, devenu bon marché et techniquement indispensable à la conservation et à la standardisation des produits transformés. La consommation moyenne explose : si un Européen consommait 9 kg de sucre en 1800, un Américain en consomme déjà 30 kg en 1900, dans un contexte démographique multiplié par douze. Ainsi, le XXᵉ siècle voit s’installer un paradigme alimentaire dominé par le sucre, régi par les impératifs énergétiques de la main-d’œuvre industrielle et par la logique capitaliste de production de masse, entraînant une dépendance sociale, économique et sanitaire durable.</p><p>L’abolition de l’esclavage en 1865 ne met pas fin au système économique et social structuré autour de la canne à sucre. En Louisiane, comme dans l’ensemble des espaces de plantation, les anciennes structures se reconstituent immédiatement sous d’autres formes. Les terres restent concentrées entre les mains des anciens planteurs et aucune redistribution n’a lieu malgré les promesses évoquées de « 40 acres et une mule ». Les anciens esclaves, dépourvus d’alternatives économiques, retournent travailler dans les plantations dans un système de travail salarié contraint, fortement dépendant, dont les conditions matérielles demeurent proches de celles de l’esclavage. Cette continuité est renforcée par la violence organisée : milices privées, répression des grèves, comme en 1887 lors du massacre de Thibodaux où environ 60 ouvriers agricoles noirs sont tués par des groupes associés aux planteurs. La ségrégation instaurée dès 1896 légitime juridiquement ces rapports de domination. Le système de plantation demeure ainsi un espace de contrôle total, combinant dépendance économique et violence racialisée, au service d’une économie sucrière toujours profitable.</p><p>Le tournant des XIXᵉ-XXᵉ siècles voit l’essor d’un capitalisme sucrier concentré autour de grands conglomérats, dont le plus puissant est The American Sugar Refining Company, dirigé par Henry Osborne Havemeyer. Par une politique agressive de rachats, ce trust contrôle jusqu’à 98 % du raffinage du sucre américain au début du XXᵉ siècle, fixant les prix du sucre brut et du sucre raffiné, encadrant ainsi la totalité de la filière. Ce monopole exerce une influence considérable sur les politiques publiques américaines, la réglementation antitrust ne parvenant pas à entraver durablement sa puissance. L’expansion du trust en dehors du territoire continental américain s’inscrit dans une stratégie impériale, étroitement liée à la politique extérieure des États-Unis. L’annexion de Hawaii en 1898 en fournit l’exemple le plus clair : après des décennies de domination économique, la prise du pouvoir politique répond à la nécessité de sanctuariser la production de canne et de garantir l’approvisionnement direct des industries américaines. La même année, la guerre hispano-américaine consacre l’intégration de Cuba dans la sphère d’influence américaine : l’île, premier producteur mondial de sucre, devient un fournisseur privilégié de sucre brut, tandis que les investissements américains — dont ceux de Havemeyer — contrôlent une grande partie des raffineries et des centrales sucrières. L’impérialisme sucrier américain se construit donc sur l’articulation entre puissance militaire, contrôle économique et dépendance commerciale des territoires sucriers.</p><p>Dans la première moitié du XXᵉ siècle, Cuba illustre l’extrême polarisation sociale générée par l’économie du sucre. L’île fonctionne sur un modèle dual : d’un côté, un prolétariat agricole composé d’anciens esclaves, de travailleurs engagés venus d’Asie, d’Haïti ou de Jamaïque, soumis à une mobilité et à une rémunération faibles ; de l’autre, une élite créole et espagnole — la « sacarocratie » — alliée aux intérêts américains. Cette configuration crée des tensions croissantes, notamment dans la région orientale, où les terres confisquées alimentent des mouvements de guérilla dès les années 1920. La révolution cubaine de 1959 inscrit directement son discours politique dans la dénonciation de cette structure socio-économique. La nationalisation des usines et la collectivisation des plantations visent à rompre avec la dépendance aux États-Unis. Pourtant, l’économie socialiste demeure prisonnière du modèle sucrier : les quotas soviétiques prolongent la monoculture, et les objectifs productivistes conduisent à l’épuisement des sols et à l’effondrement du secteur après 1991. Le paradoxe est complet : territoire façonné par le sucre, Cuba finit par devoir en importer au XXIᵉ siècle.</p><p>L’indépendance progressive des colonies britanniques et la départementalisation française des Antilles ne modifient pas fondamentalement les structures foncières héritées. Les terres les plus fertiles demeurent entre les mains des descendants des planteurs — les « Békés » — tandis que les populations noires, descendantes des esclaves, se retrouvent confinées dans des positions économiques marginalisées. L’absence d’indemnisation des anciens esclaves, contrairement aux réparations accordées aux planteurs, renforce la transmission intergénérationnelle des désavantages. La monoculture sucrière ayant épuisé les sols et échoué à résister à la concurrence de la betterave européenne — fortement subventionnée par la Politique agricole commune — les économies caribéennes se tournent vers la banane ou le tourisme, secteurs moins rentables et marqués par la précarité, l’instabilité et l’émigration massive. La jeunesse quitte les îles, alimentant des flux migratoires vers l’Europe (Bumidom) ou vers les États-Unis (travailleurs saisonniers jamaïcains).</p><p>Aux États-Unis comme en République dominicaine, les industries sucrières recourent largement à une main-d’œuvre migrante, souvent haïtienne ou jamaïcaine, recrutée dans le cadre de programmes temporaires (H-2). Les conditions de vie et de travail — rémunération à la tâche, absence de droits, logements insalubres — reproduisent les mécanismes de dépendance du système d’engagisme du XIXᵉ siècle. Les tentatives de recours judiciaires, comme l’action collective menée en 1989 par des avocats américains au nom de 20 000 travailleurs jamaïcains, échouent face à la puissance économique et politique des entreprises sucrières. Parallèlement, les frères Fanjul, à la tête de Florida Crystals et d’American Sugar Refining, incarnent la concentration contemporaine de la filière : intégration verticale, influence politique bipartisane, subventions massives et stratégies de délocalisation en République dominicaine, où les travailleurs haïtiens composent une main-d’œuvre à très bas coût.</p><p>Depuis le XVIᵉ siècle, le Brésil demeure un acteur central du marché sucrier mondial. À partir de 1975, le plan Proálcool inscrit la filière dans un nouveau paradigme énergétique : l’éthanol de canne est présenté comme une alternative au pétrole et un moteur de croissance « verte ». Cette orientation entraîne une intensification de la monoculture, la mécanisation des récoltes et une extension massive des surfaces cultivées — plus de 6 millions d’hectares dans l’État de São Paulo. Si la combustion de l’éthanol réduit la pollution automobile, le coût environnemental global est lourd : déforestation, appauvrissement des sols, baisse de la biodiversité, sécheresses aggravées, pollution des eaux. Les conditions de travail dans les plantations mécanisées demeurent difficiles, marquées par une forte pression productiviste et par des carrières raccourcies du fait de l’usure physique. Ainsi, le sucre se présente simultanément comme un produit énergétique d’avenir et comme un facteur majeur de dégradation écologique.</p><p>Dans plusieurs régions du monde, les pratiques des grandes entreprises sucrières génèrent des conflits sociaux aigus. En Floride, les brûlis destinés à faciliter la récolte provoquent chaque année des pollutions atmosphériques chroniques touchant majoritairement des communautés noires et pauvres — révélant une forme de racisme environnemental institutionnalisé, renforcé par des réglementations différenciées selon la direction du vent.En République dominicaine, la Centrale Romana — également liée aux Fanjul — est accusée d’expulsions illégales, de destruction de logements et d’accaparement de terres communautaires, dans un contexte d’impunité locale et de dépendance politique. Si les États-Unis ont temporairement suspendu l’importation de son sucre en 2022 après une enquête officielle, la décision est rapidement annulée en 2025, illustrant une fois de plus la puissance d’influence de ces conglomérats.</p><p>Du XVIᵉ au XXIᵉ siècle, l’économie du sucre s’est distinguée par sa capacité à se déplacer, à muter et à intégrer de nouvelles technologies tout en conservant ses logiques fondamentales : extraction, concentration foncière, contrôle du travail, rentabilité maximale. À l’époque des plantations esclavagistes succèdent l’engagisme, puis les migrations contractuelles, puis la mécanisation ; mais les asymétries sociales, raciales et territoriales demeurent au cœur du système. Aujourd’hui encore, quelques conglomérats — en Europe, aux États-Unis, au Brésil — structurent un marché mondialisé où le sucre continue d’alimenter des économies, de susciter des conflits, d’épuiser des terres et de modeler les systèmes alimentaires. Le prix de cette économie, hier comme aujourd’hui, se mesure en exploitation humaine, en inégalités raciales persistantes et en dommages environnementaux massifs. Le sucre demeure ainsi une matrice historique d’inégalités structurelles, un héritage lourd qui continue de façonner les sociétés du bassin atlantique et au-delà.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

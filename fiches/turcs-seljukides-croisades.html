@@ -5,53 +5,245 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Les Turcs seljukides dans le contexte des croisades</title>
     <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            font-family: system-ui, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            background: #f8fafc;
-            line-height: 1.6;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
         }
-        .container {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+
+        .page {
+            width: 100%;
+            max-width: 960px;
         }
-        .btn-retour {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: #3b82f6;
-            color: white;
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
             text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 2rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
         }
-        h1 { color: #3b82f6; }
-        h2, h3 { color: #1e40af; margin-top: 2rem; }
-        .meta { background: #f8fafc; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" class="btn-retour">← Retour à la carte</a>
-        
-        <h1>Les Turcs seljukides dans le contexte des croisades</h1>
-        
-        <div class="meta">
-            <p><strong>📅 Date :</strong> 0990-01-01</p>
-            <p><strong>🌍 Pays :</strong> Empire Seljuk</p>
-            <p><strong>📍 Coordonnées :</strong> 35.73834183660386, 51.357234044865045</p>
-            <p><strong>🏷️ Catégorie :</strong> "Politique"</p>
-        </div>
-        
-        <div class="content">
-            <p><h1>Titre principal de votre article</h1></p><p><h2>Déroulement des événements</h2></p><p><h2>L'ascension des Turcs en Asie centrale (990)</h2></p><p>Après les conquêtes arabes en Transoxiane, dans l'actuel Ouzbékistan et Afghanistan, la dynastie iranienne locale des Samanides a pris le contrôle de la région au IXe siècle. Agissant officiellement pour le compte du calife de Bagdad, ils exerçaient dans les faits un pouvoir quasi indépendant. Leur territoire s'étendait également sur le Khorasan, englobant une grande partie de l'Afghanistan, de l'Ouzbékistan, du Tadjikistan, du Turkménistan et de l'Iran oriental.</p><p>Ces Samanides menaient de rudes combats à leurs frontières contre les invasions venues des steppes et, pour sacraliser leur lutte, entreprirent de convertir ces peuples à l'islam. Certains chefs barbares acceptèrent cette conversion, devenant mercenaires au service des Samanides et comprenant rapidement le potentiel politique considérable que leur offrait cette nouvelle religion.</p><p>Dans les années 990, alors que la dynastie samanide déclinait, elle engagea des mercenaires turcs convertis, les Ghaznévides, pour faire face à l'invasion d'autres Turcs convertis, les Karakhanides. La situation se détériora rapidement : en 999, les Karakhanides occupèrent la Transoxiane tandis que les Ghaznévides s'emparèrent de l'intégralité du Khorasan, condamnant les Samanides à disparaître.</p><p><h2>L'émergence de l'Empire seldjoukide (1040)</h2></p><p>Parallèlement à ces événements, d'autres Turcs convertis, les Seldjoukides, tirant leur nom de leur premier chef quasi mythologique Seljuk, avaient combattu pour les Samanides avant de nomadiser en Transoxiane. Leur destin bascula lorsque leur chef Toghrul Beg, futur fondateur de l'Empire, vainquit les Ghaznévides à Merv en 1040, s'emparant ainsi de l'intégralité du Khorasan.</p><p>L'intelligence politique de Toghrul Beg se révéla déterminante : il comprit rapidement l'intérêt de se "civiliser" en adoptant la culture et l'administration arabo-persane, transformant ainsi son statut de chef de bande en véritable chef d'État. Sa stratégie s'avéra fructueuse lorsque le calife abbasside de Bagdad, chef religieux sunnite, l'appela à son secours pour se libérer de la tutelle des émirs iraniens Bouyides, de confession chiite.</p><p>Toghrul Beg saisit cette opportunité, écrasa ses adversaires ainsi que quelques révoltes parmi ses opposants et cousins, et accéda au prestigieux titre de "Sultan, roi de l'Orient et de l'Occident", devenant ainsi le champion officiel du sunnisme. Cette consécration lui permit de légitimer ses futures conquêtes par la notion de guerre sainte musulmane, transformant un chef nomade qui "élevait trois moutons dans le désert" en souverain d'un empire immense.</p><p><h2>La consolidation et l'expansion</h2></p><p>L'Empire seldjoukide se substitua progressivement à l'ancien empire arabe, combinant conquêtes militaires et administration efficace. Les sultans, bien meilleurs guerriers qu'administrateurs, confièrent la gestion de l'empire à des hommes compétents comme Nizam al-Mulk, pendant qu'ils poursuivaient leurs campagnes militaires pour étendre ou consolider leur pouvoir.</p><p>Alp Arslan, le "lion héroïque", neveu et successeur de Toghrul Beg, illustra parfaitement cette dynamique. Accusé par certains d'être "un poil efféminé", il répondit en menant de vigoureuses campagnes contre ses cousins et ses oncles, contre la dynastie Mirdaside d'Alep, et en Transoxiane où il finit par périr.</p><p><h2>La bataille décisive de Manzikert (1071)</h2></p><p>Des bandes turques menaient depuis longtemps des incursions en Anatolie, harcelant l'Empire byzantin qui, pour se protéger, avait annexé les royaumes arméniens d'extrême Anatolie, provoquant le mécontentement de ces derniers. La situation de Byzance s'était considérablement détériorée depuis le début du XIe siècle : l'Empire était grignoté de toutes parts par des aventuriers turcs en Anatolie, des Normands en Italie du Sud, et d'autres groupes dans les Balkans. Les relations religieuses entre Rome et Constantinople avaient atteint leur point le plus bas, tandis que des factions internes se disputaient le pouvoir.</p><p>La puissance excessive de l'armée et le trésor vide poussèrent l'empereur Constantin X Doukas à réduire les effectifs militaires malgré les problèmes aux frontières, offrant aux Turcs une occasion inespérée d'intensifier leurs raids. Romain IV Diogène, ancien général devenu empereur, tenta de redresser la situation en réunissant une armée composée principalement de mercenaires étrangers, turcs et normands, pour consolider l'Arménie et punir les raids turcs.</p><p>Le 19 août 1071, à Manzikert, il affronta les troupes d'Alp Arslan venues spécialement pour l'occasion. Abandonné par ses généraux et mercenaires, il combattit seul avec héroïsme, mais fut défait et capturé. Renvoyé à Constantinople, il fut déposé, aveuglé et mourut de ses blessures, illustrant la cruauté des luttes de pouvoir byzantines.</p><p><h2>Les conséquences géopolitiques</h2></p><p>L'historien Emmanuel Sivan suggère qu'Alp Arslan ne visait pas nécessairement la conquête de l'Anatolie, mais plutôt la destruction du califat fatimide d'Égypte, puissance chiite par excellence. Cette théorie s'appuie sur le fait qu'Alp Arslan n'exploita jamais pleinement sa victoire à Manzikert, et que ni lui ni son fils Malik Shah n'entreprirent personnellement la conquête systématique de l'Anatolie, préférant confier cette tâche à des cadets de famille turbulents.</p><p>Après la mort d'Alp Arslan, assassiné un an seulement après Manzikert, son fils Malik Shah confia la conquête de l'Anatolie à son parent Suleiman ibn Qutulmish et à d'autres généraux, créant ainsi un nouveau sultanat vassal de l'Empire seldjoukide. Cependant, chacun de ces généraux chercha rapidement à établir son propre émirat, engendrant un chaos politique qui entrava les communications entre les places byzantines restantes.</p><p>La situation byzantine n'était guère meilleure : le traitement infligé à Romain IV Diogène avait choqué, et l'incompétence du nouvel empereur Michel VII Doukas provoqua de multiples révoltes. De nombreux généraux se proclamèrent empereurs et s'emparèrent successivement de plusieurs villes, mais faute d'armée byzantine, ils durent recourir à des mercenaires turcs, facilitant involontairement les conquêtes turques. Ainsi, Suleiman ibn Qutulmish reçut Nicée des mains des mercenaires turcs du général Botaniatès et en fit la capitale de son nouveau sultanat de Roum (sultanat des "Romains").</p><p><h2>La fragmentation du Moyen-Orient</h2></p><p>En Syrie-Palestine, où la situation était relativement stable entre les Arabes locaux, les Byzantins et les Fatimides, tout bascula en 1078 lorsque l'aventurier turc Atsiz s'empara de Jérusalem et de Damas au détriment des Fatimides. Malik Shah envoya alors son frère Tutush, qui s'empara avec son lieutenant Ortok de Jérusalem, Damas et Alep.</p><p>Au nord, Suleiman ibn Qutulmish prit Antioche aux Arméniens en 1085, cherchant à agrandir son sultanat de Roum. Le conflit entre Suleiman et Tutush s'acheva par la mort du premier, déstabilisant le sultanat de Roum, tandis que Tutush récupérait Antioche et toute la Syrie.</p><p>La mort de Malik Shah en 1092 plongea l'Empire dans dix ans de guerres fratricides entre ses fils. Tutush mourut à son tour en 1095, provoquant un nouveau morcellement de la Syrie-Palestine : ses fils Ridwan et Duqaq régnèrent respectivement à Alep et à Damas, pendant que des émirs arabes et des seigneurs turcs créaient leurs propres principautés indépendantes, et que les Fatimides reconquéraient la Palestine.</p><p><h2>Les prémices des croisades</h2></p><p>Ce chaos politique au Moyen-Orient n'échappa pas à l'Occident, particulièrement aux papes Grégoire VII et Urbain II qui, en pleine réforme grégorienne, y virent matière à réflexion. Lorsque l'empereur byzantin Alexis Ier Comnène, au pouvoir depuis 1081, leur demanda, comme cela s'était déjà produit par le passé, de lui procurer des mercenaires, ils trouvèrent là un prétexte supplémentaire pour intervenir. Cette conjonction de facteurs allait bientôt conduire au lancement des croisades, transformant profondément les relations entre Orient et Occident pour les siècles à venir.</p>
-        </div>
-        
-        <footer style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem;">
-        </footer>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Les Turcs seljukides dans le contexte des croisades</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Politique"</span>
+                    <span class="badge badge-ghost">📅 990-01-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Empire Seljuk</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">990-01-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Politique"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>Les Turcs seljukides dans le contexte des croisades</strong></h1></p><p><h2>L'ascension des Turcs en Asie centrale (990)</h2></p><p>Après les conquêtes arabes en Transoxiane, dans l'actuel Ouzbékistan et Afghanistan, la dynastie iranienne locale des Samanides a pris le contrôle de la région au IXe siècle. Agissant officiellement pour le compte du calife de Bagdad, ils exerçaient dans les faits un pouvoir quasi indépendant. Leur territoire s'étendait également sur le Khorasan, englobant une grande partie de l'Afghanistan, de l'Ouzbékistan, du Tadjikistan, du Turkménistan et de l'Iran oriental.</p><p>Ces Samanides menaient de rudes combats à leurs frontières contre les invasions venues des steppes et, pour sacraliser leur lutte, entreprirent de convertir ces peuples à l'islam. Certains chefs barbares acceptèrent cette conversion, devenant mercenaires au service des Samanides et comprenant rapidement le potentiel politique considérable que leur offrait cette nouvelle religion.</p><p>Dans les années 990, alors que la dynastie samanide déclinait, elle engagea des mercenaires turcs convertis, les Ghaznévides, pour faire face à l'invasion d'autres Turcs convertis, les Karakhanides. La situation se détériora rapidement : en 999, les Karakhanides occupèrent la Transoxiane tandis que les Ghaznévides s'emparèrent de l'intégralité du Khorasan, condamnant les Samanides à disparaître.</p><p><h2>L'émergence de l'Empire seldjoukide (1040)</h2></p><p>Parallèlement à ces événements, d'autres Turcs convertis, les Seldjoukides, tirant leur nom de leur premier chef quasi mythologique Seljuk, avaient combattu pour les Samanides avant de nomadiser en Transoxiane. Leur destin bascula lorsque leur chef Toghrul Beg, futur fondateur de l'Empire, vainquit les Ghaznévides à Merv en 1040, s'emparant ainsi de l'intégralité du Khorasan.</p><p>L'intelligence politique de Toghrul Beg se révéla déterminante : il comprit rapidement l'intérêt de se "civiliser" en adoptant la culture et l'administration arabo-persane, transformant ainsi son statut de chef de bande en véritable chef d'État. Sa stratégie s'avéra fructueuse lorsque le calife abbasside de Bagdad, chef religieux sunnite, l'appela à son secours pour se libérer de la tutelle des émirs iraniens Bouyides, de confession chiite.</p><p>Toghrul Beg saisit cette opportunité, écrasa ses adversaires ainsi que quelques révoltes parmi ses opposants et cousins, et accéda au prestigieux titre de "Sultan, roi de l'Orient et de l'Occident", devenant ainsi le champion officiel du sunnisme. Cette consécration lui permit de légitimer ses futures conquêtes par la notion de guerre sainte musulmane, transformant un chef nomade qui "élevait trois moutons dans le désert" en souverain d'un empire immense.</p><p><h2>La consolidation et l'expansion</h2></p><p>L'Empire seldjoukide se substitua progressivement à l'ancien empire arabe, combinant conquêtes militaires et administration efficace. Les sultans, bien meilleurs guerriers qu'administrateurs, confièrent la gestion de l'empire à des hommes compétents comme Nizam al-Mulk, pendant qu'ils poursuivaient leurs campagnes militaires pour étendre ou consolider leur pouvoir.</p><p>Alp Arslan, le "lion héroïque", neveu et successeur de Toghrul Beg, illustra parfaitement cette dynamique. Accusé par certains d'être "un poil efféminé", il répondit en menant de vigoureuses campagnes contre ses cousins et ses oncles, contre la dynastie Mirdaside d'Alep, et en Transoxiane où il finit par périr.</p><p><h2>La bataille décisive de Manzikert (1071)</h2></p><p>Des bandes turques menaient depuis longtemps des incursions en Anatolie, harcelant l'Empire byzantin qui, pour se protéger, avait annexé les royaumes arméniens d'extrême Anatolie, provoquant le mécontentement de ces derniers. La situation de Byzance s'était considérablement détériorée depuis le début du XIe siècle : l'Empire était grignoté de toutes parts par des aventuriers turcs en Anatolie, des Normands en Italie du Sud, et d'autres groupes dans les Balkans. Les relations religieuses entre Rome et Constantinople avaient atteint leur point le plus bas, tandis que des factions internes se disputaient le pouvoir.</p><p>La puissance excessive de l'armée et le trésor vide poussèrent l'empereur Constantin X Doukas à réduire les effectifs militaires malgré les problèmes aux frontières, offrant aux Turcs une occasion inespérée d'intensifier leurs raids. Romain IV Diogène, ancien général devenu empereur, tenta de redresser la situation en réunissant une armée composée principalement de mercenaires étrangers, turcs et normands, pour consolider l'Arménie et punir les raids turcs.</p><p>Le 19 août 1071, à Manzikert, il affronta les troupes d'Alp Arslan venues spécialement pour l'occasion. Abandonné par ses généraux et mercenaires, il combattit seul avec héroïsme, mais fut défait et capturé. Renvoyé à Constantinople, il fut déposé, aveuglé et mourut de ses blessures, illustrant la cruauté des luttes de pouvoir byzantines.</p><p><h2>Les conséquences géopolitiques</h2></p><p>L'historien Emmanuel Sivan suggère qu'Alp Arslan ne visait pas nécessairement la conquête de l'Anatolie, mais plutôt la destruction du califat fatimide d'Égypte, puissance chiite par excellence. Cette théorie s'appuie sur le fait qu'Alp Arslan n'exploita jamais pleinement sa victoire à Manzikert, et que ni lui ni son fils Malik Shah n'entreprirent personnellement la conquête systématique de l'Anatolie, préférant confier cette tâche à des cadets de famille turbulents.</p><p>Après la mort d'Alp Arslan, assassiné un an seulement après Manzikert, son fils Malik Shah confia la conquête de l'Anatolie à son parent Suleiman ibn Qutulmish et à d'autres généraux, créant ainsi un nouveau sultanat vassal de l'Empire seldjoukide. Cependant, chacun de ces généraux chercha rapidement à établir son propre émirat, engendrant un chaos politique qui entrava les communications entre les places byzantines restantes.</p><p>La situation byzantine n'était guère meilleure : le traitement infligé à Romain IV Diogène avait choqué, et l'incompétence du nouvel empereur Michel VII Doukas provoqua de multiples révoltes. De nombreux généraux se proclamèrent empereurs et s'emparèrent successivement de plusieurs villes, mais faute d'armée byzantine, ils durent recourir à des mercenaires turcs, facilitant involontairement les conquêtes turques. Ainsi, Suleiman ibn Qutulmish reçut Nicée des mains des mercenaires turcs du général Botaniatès et en fit la capitale de son nouveau sultanat de Roum (sultanat des "Romains").</p><p><h2>La fragmentation du Moyen-Orient</h2></p><p>En Syrie-Palestine, où la situation était relativement stable entre les Arabes locaux, les Byzantins et les Fatimides, tout bascula en 1078 lorsque l'aventurier turc Atsiz s'empara de Jérusalem et de Damas au détriment des Fatimides. Malik Shah envoya alors son frère Tutush, qui s'empara avec son lieutenant Ortok de Jérusalem, Damas et Alep.</p><p>Au nord, Suleiman ibn Qutulmish prit Antioche aux Arméniens en 1085, cherchant à agrandir son sultanat de Roum. Le conflit entre Suleiman et Tutush s'acheva par la mort du premier, déstabilisant le sultanat de Roum, tandis que Tutush récupérait Antioche et toute la Syrie.</p><p>La mort de Malik Shah en 1092 plongea l'Empire dans dix ans de guerres fratricides entre ses fils. Tutush mourut à son tour en 1095, provoquant un nouveau morcellement de la Syrie-Palestine : ses fils Ridwan et Duqaq régnèrent respectivement à Alep et à Damas, pendant que des émirs arabes et des seigneurs turcs créaient leurs propres principautés indépendantes, et que les Fatimides reconquéraient la Palestine.</p><p><h2>Les prémices des croisades</h2></p><p>Ce chaos politique au Moyen-Orient n'échappa pas à l'Occident, particulièrement aux papes Grégoire VII et Urbain II qui, en pleine réforme grégorienne, y virent matière à réflexion. Lorsque l'empereur byzantin Alexis Ier Comnène, au pouvoir depuis 1081, leur demanda, comme cela s'était déjà produit par le passé, de lui procurer des mercenaires, ils trouvèrent là un prétexte supplémentaire pour intervenir. Cette conjonction de facteurs allait bientôt conduire au lancement des croisades, transformant profondément les relations entre Orient et Occident pour les siècles à venir.</p>
+            </section>
+        </article>
     </div>
 </body>
 </html>

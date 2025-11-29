@@ -672,64 +672,172 @@
             padding: var(--espacement-md);
         }
 
-        .timeline-event {
-            margin-bottom: var(--espacement-md);
-            padding: var(--espacement-md);
+        /* ====== STUDIO CHRONOLOGIE – VERSION ÉPURÉE ====== */
+
+        /* En vue "chronologie.", la timeline devient une page à part entière */
+        body.view-timeline .timeline {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            height: calc(100vh - 64px); /* à ajuster si ton header est plus haut/bas */
+            max-height: calc(100vh - 64px);
             background: var(--couleur-fond);
-            border-left: 4px solid var(--couleur-accent);
-            border-radius: var(--arrondi-md);
-            transition: all var(--transition-rapide);
+            border-top: none;
+            box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+            border-radius: 18px 18px 0 0;
+            margin: 8px 12px 0;
+            overflow: hidden;
         }
 
-        .timeline-event:hover {
-            transform: translateX(4px);
-            box-shadow: var(--ombre-md);
+        /* Header de la timeline : plus compact, plus "app" */
+        body.view-timeline .timeline-header {
+            padding: 10px 18px;
+            border-bottom: 1px solid var(--couleur-bordure);
+            background: radial-gradient(circle at top left,
+                rgba(255, 197, 211, 0.20),
+                transparent 60%
+            );
         }
 
-        .event-date {
-            font-weight: 600;
-            color: var(--couleur-accent);
+        body.view-timeline .timeline-header-left h2 {
+            font-size: 1rem;
+            text-transform: lowercase;
+            margin-bottom: 2px;
+        }
+
+        body.view-timeline .timeline-header-left .detail-subtitle {
+            font-size: 0.78rem;
+        }
+
+        /* Tabs + filtres : alignés sur une ligne, type "toolbar" */
+        body.view-timeline .timeline-header-right {
+            gap: 10px;
+        }
+
+        body.view-timeline .timeline-tabs .btn {
+            font-size: 0.78rem;
+            padding: 4px 10px;
+            border-radius: 999px;
+        }
+
+        /* Les petits champs de filtre période */
+        body.view-timeline .timeline-header-controls {
+            gap: 6px;
+            font-size: 0.75rem;
+        }
+
+        body.view-timeline .timeline-header-controls select,
+        body.view-timeline .timeline-header-controls input {
+            padding: 3px 8px;
+        }
+
+        /* Le bouton ▼ de collapse n’a pas de sens dans ce mode => on le masque */
+        body.view-timeline #toggle-timeline {
+            display: none;
+        }
+
+        /* Layout principal : frise + liste */
+        body.view-timeline .timeline-country,
+        body.view-timeline .timeline-global {
+            flex: 1;
+            display: grid;
+            grid-template-columns: minmax(260px, 1.1fr) minmax(0, 2.2fr);
+            gap: 18px;
+            padding: 14px 18px 16px;
+            overflow: hidden;
+        }
+
+        /* Colonne gauche : nav + grande frise */
+        body.view-timeline .timeline-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        body.view-timeline .timeline-track {
+            flex: 1;
+            border-radius: 14px;
+            background: var(--couleur-panneau);
+            border: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-sm);
+            padding: 6px 0;
+        }
+
+        /* Flèches ◀ ▶ plus discrètes */
+        body.view-timeline .timeline-arrow {
+            align-self: flex-end;
+            width: 30px;
+            height: 30px;
             font-size: 0.9rem;
         }
 
-        .event-title {
-            font-weight: 600;
-            margin: var(--espacement-xs) 0;
+        /* Frise : ligne simple, respirante */
+        body.view-timeline .timeline-axis {
+            height: 4px;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 197, 211, 0.9),
+                rgba(209, 213, 219, 0.9)
+            );
+            border-radius: 999px;
         }
 
-        .event-description {
-            font-size: 0.9rem;
-            color: var(--couleur-texte);
-            opacity: 0.8;
+        body.view-timeline .timeline-year {
+            font-size: 0.7rem;
+            opacity: 0.65;
         }
 
-        /* Notifications */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--couleur-succes);
-            color: white;
-            padding: var(--espacement-md) var(--espacement-lg);
-            border-radius: var(--arrondi-md);
-            box-shadow: var(--ombre-lg);
-            z-index: 10000;
-            font-weight: 500;
-            transform: translateX(100%);
-            transition: transform var(--transition-normale);
-            max-width: 300px;
+        /* Points d’événements : plus petits, moins “flashy” */
+        body.view-timeline .timeline-dot {
+            width: 14px;
+            height: 14px;
+            border-width: 3px;
+            box-shadow: 0 0 6px rgba(15, 23, 42, 0.20);
         }
 
-        .notification.show {
-            transform: translateX(0);
+        body.view-timeline .timeline-dot.selected {
+            transform: translate(-50%, -50%) scale(1.5);
+            box-shadow: 0 0 12px rgba(15, 23, 42, 0.35);
         }
 
-        .notification.error {
-            background: var(--couleur-erreur);
+        /* Tooltip sobre */
+        body.view-timeline .timeline-tooltip {
+            font-size: 0.75rem;
+            padding: 4px 6px;
         }
 
-        .notification.warning {
-            background: var(--couleur-attention);
+        /* Colonne droite : liste d’événements */
+        body.view-timeline .timeline-content,
+        body.view-timeline #timeline-global-content {
+            max-height: none;
+            background: var(--couleur-panneau);
+            border-radius: 14px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 10px 10px 12px;
+            overflow-y: auto;
+        }
+
+        /* Cartes d’événements dans la vue chronologie */
+        body.view-timeline .timeline-event {
+            margin-bottom: 8px;
+            padding: 8px 8px;
+            border-radius: 10px;
+            border-left-width: 3px;
+            box-shadow: none;
+        }
+
+        body.view-timeline .timeline-event:hover {
+            transform: translateX(2px);
+            box-shadow: var(--ombre-sm);
+        }
+
+        /* Vue "carte" : on garde une timeline compacte en bas (déjà gérée) */
+        body.view-map .timeline {
+            height: 260px;
+        }
+
+        body.view-map .timeline.collapsed {
+            height: 50px;
         }
 
         /* ========================================
@@ -942,6 +1050,11 @@
                 margin-bottom: var(--espacement-sm);
                 font-size: 0.95rem;
                 color: var(--couleur-accent);
+
+            .timeline-track.dragging {
+                cursor: grabbing;
+                cursor: -webkit-grabbing;
+            }
             }
 
             /* Highlight des cartes liées à la sélection */
@@ -949,6 +1062,236 @@
                 outline: 2px solid var(--couleur-accent);
                 box-shadow: var(--ombre-md);
                 background: rgba(255, 197, 211, 0.1);
+            }
+
+            /* Vues principales : carte / studio de chronologie */
+            body.view-map main {
+                display: flex;
+            }
+
+            body.view-map .timeline {
+                display: none;
+            }
+
+            body.view-timeline main {
+                display: none;
+            }
+
+            body.view-timeline .timeline {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                height: auto;
+            }
+
+
+            .main-tab {
+                background: transparent;
+                border: none;
+                padding: 6px 12px;
+                border-radius: 999px;
+                cursor: pointer;
+                font-size: 0.9rem;
+                text-transform: lowercase;
+                color: var(--couleur-texte);
+                opacity: 0.7;
+                transition: background var(--transition-rapide), opacity var(--transition-rapide), transform var(--transition-rapide);
+            }
+
+            .main-tab:hover {
+                opacity: 1;
+                transform: translateY(-1px);
+            }
+
+            .main-tab.active {
+                background: var(--couleur-accent);
+                color: #111827;
+                opacity: 1;
+            }
+
+            /* --- Vue chronologie : résumé + mini-carte + sections par siècle --- */
+
+            .timeline-section-title {
+                color: var(--couleur-accent);
+                margin-bottom: 0.75rem;
+                font-size: 1rem;
+                font-weight: 600;
+            }
+
+            .timeline-summary {
+                display: grid;
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 0.5rem;
+                padding: 0.75rem 1rem;
+                margin-bottom: 0.75rem;
+                border-radius: 0.75rem;
+                background: var(--couleur-fond-alt);
+                font-size: 0.85rem;
+            }
+
+            .timeline-inline-persons {
+                margin: 0.5rem 0 0.75rem 0;
+                padding: 0.5rem 0.75rem;
+                border-radius: 0.75rem;
+                background: var(--couleur-panneau);
+                border: 1px solid var(--couleur-bordure);
+            }
+
+            .timeline-inline-persons h4 {
+                font-size: 0.85rem;
+                font-weight: 600;
+                margin-bottom: 0.35rem;
+                text-transform: lowercase;
+                opacity: 0.8;
+            }
+
+            .timeline-summary-line {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .timeline-summary .summary-label {
+                opacity: 0.7;
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                font-size: 0.7rem;
+                margin-bottom: 0.15rem;
+            }
+
+            .timeline-summary .summary-value {
+                font-weight: 500;
+            }
+
+            /* mini-carte dans l'onglet chronologie */
+
+            .timeline-mini-map {
+                width: 100%;
+                height: 180px;
+                border-radius: 0.75rem;
+                overflow: hidden;
+                margin-bottom: 1rem;
+                border: 1px solid rgba(0,0,0,0.05);
+            }
+
+            /* listes par siècle pliables */
+
+            .timeline-century-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .timeline-century-group {
+                border-radius: 0.75rem;
+                border: 1px solid rgba(0,0,0,0.05);
+                background: var(--couleur-fond-alt);
+                overflow: hidden;
+            }
+
+            .timeline-century-header {
+                padding: 0.4rem 0.75rem;
+            }
+
+            .timeline-century-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 0.5rem;
+                width: 100%;
+                background: transparent;
+                border: none;
+                font: inherit;
+                cursor: pointer;
+                padding: 0;
+            }
+
+            .timeline-century-toggle .century-label {
+                font-weight: 600;
+            }
+
+            .timeline-century-toggle .century-count {
+                font-size: 0.8rem;
+                opacity: 0.7;
+            }
+
+            .timeline-century-toggle .chevron {
+                font-size: 0.8rem;
+                opacity: 0.7;
+                transition: transform 0.15s ease-out;
+            }
+
+            .timeline-century-group.collapsed .timeline-century-events {
+                display: none;
+            }
+
+            .timeline-century-group.collapsed .timeline-century-toggle .chevron {
+                transform: rotate(-90deg);
+            }
+
+            .timeline-century-events {
+                padding: 0.4rem 0.75rem 0.7rem 0.75rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            /* cartes d’événement dans la vue chronologie */
+
+            .timeline-event-card {
+                padding: 0.45rem 0.6rem;
+                border-radius: 0.6rem;
+                background: #ffffff;
+                cursor: pointer;
+                box-shadow: 0 1px 2px rgba(15,23,42,0.04);
+                transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+            }
+
+            .theme-sombre .timeline-event-card {
+                background: rgba(15,23,42,0.9);
+            }
+
+            .timeline-event-card:hover {
+                transform: translateY(-1px);
+                box-shadow: 0 4px 8px rgba(15,23,42,0.08);
+            }
+
+            .event-date-row {
+                display: flex;
+                justify-content: space-between;
+                font-size: 0.8rem;
+                opacity: 0.8;
+                margin-bottom: 0.1rem;
+            }
+
+            .event-title-row {
+                display: flex;
+                align-items: center;
+                gap: 0.45rem;
+                font-size: 0.9rem;
+                font-weight: 500;
+            }
+
+            .event-title-row .event-icon {
+                font-size: 0.85rem;
+            }
+
+            .timeline-event-card .event-description {
+                margin-top: 0.15rem;
+                font-size: 0.8rem;
+                opacity: 0.8;
+            }
+
+            @media (max-width: 768px) {
+                .timeline-summary {
+                    grid-template-columns: minmax(0, 1fr);
+                }
+            }
+            
+            /* On masque ces onglets en mobile */
+            @media (max-width: 768px) {
+                .main-tabs {
+                    display: none;
+                }
             }
 
             /* Mobile : les colonnes passent l'une sous l'autre */
@@ -959,6 +1302,48 @@
                 
                 .timeline-compare-grid {
                     grid-template-columns: 1fr;
+                }
+            }
+
+            .mobile-tabs {
+                position: fixed;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                height: 48px;
+                background: var(--couleur-panneau);
+                border-top: 1px solid var(--couleur-bordure);
+                display: none; /* par défaut, visible seulement en mobile */
+                z-index: 3000;
+            }
+
+            .mobile-tab {
+                flex: 1;
+                border: none;
+                background: transparent;
+                color: var(--couleur-texte);
+                font-size: 0.8rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+                cursor: pointer;
+            }
+
+            .mobile-tab.active {
+                background: var(--couleur-accent);
+                color: #111827;
+            }
+
+            /* Activation en mobile */
+            @media (max-width: 768px) {
+                .mobile-tabs {
+                    display: flex;
+                }
+
+                /* on réserve un peu de place en bas pour ne pas cacher le contenu */
+                body {
+                    padding-bottom: 52px;
                 }
             }
 
@@ -998,6 +1383,20 @@
                 overflow: auto;
             }
             */
+
+            /* Mode mobile "Événements" : on affiche la sidebar en plein écran, on masque la carte */
+            body.mobile-mode-events .sidebar {
+                position: relative;
+                width: 100%;
+                max-width: none;
+                height: auto;
+                transform: translateX(0); /* au cas où elle était "collapsed" */
+            }
+
+            body.mobile-mode-events .map-container,
+            body.mobile-mode-events .timeline-compare-wrapper {
+                display: none;
+            }
         }
 
         /* Popup personnalisée pour Leaflet */
@@ -1261,9 +1660,698 @@
         .btn-obsidian:hover {
             background: var(--couleur-panneau);
         }
+
+
+        .detail-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 4500;
+            backdrop-filter: blur(6px);
+        }
+
+        .detail-overlay.open {
+            display: flex;
+        }
+
+        .detail-modal {
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            width: min(1100px, 98vw);   /* plus large */
+            max-height: 92vh;           /* plus haut */
+            border-radius: 20px;
+            box-shadow: var(--ombre-lg);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--couleur-bordure);
+            overflow: hidden;
+        }
+
+
+        .detail-header {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--couleur-bordure);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--couleur-panneau);
+        }
+
+        .detail-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-transform: none;
+        }
+
+        .detail-subtitle {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        .detail-close {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+        }
+
+        .detail-close:hover {
+            background: rgba(148, 163, 184, 0.25);
+        }
+
+        .detail-body {
+            padding: 12px 16px 16px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .detail-main {
+            display: grid;
+            grid-template-columns: 2.2fr 3fr; /* un peu plus de place aux stats */
+            gap: 12px;
+        }
+
+        .detail-map {
+            height: 240px; /* au lieu de 200px : plus lisible */
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--couleur-bordure);
+        }
+
+
+        .detail-stats {
+            border-radius: 12px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 8px 10px;
+            background: var(--couleur-panneau);
+        }
+
+        .detail-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 6px 10px;
+        }
+
+        .detail-stat-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            opacity: 0.7;
+        }
+
+        .detail-stat-value {
+            font-size: 0.9rem;
+        }
+
+        .detail-section h3 {
+            font-size: 0.85rem;
+            text-transform: lowercase;
+            margin-bottom: 4px;
+            opacity: 0.8;
+        }
+
+        .detail-timeline-item {
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+            font-size: 0.88rem;
+        }
+
+        .detail-timeline-item strong {
+            color: var(--couleur-accent);
+        }
+
+        .detail-persons-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .detail-person-chip {
+            padding: 3px 8px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            font-size: 0.78rem;
+            cursor: pointer;
+        }
+
+        
+
+        .detail-person-chip:hover {
+            background: rgba(148, 163, 184, 0.15);
+        }
+
+        /* Titres de sections dans les fiches (pays, personnages, etc.) */
+        .detail-section h3 {
+            font-size: 0.82rem;
+            text-transform: lowercase;
+            letter-spacing: 0.12em;
+            opacity: 0.8;
+            margin-bottom: 4px;
+        }
+
+        .detail-section + .detail-section {
+            border-top: 1px solid rgba(148, 163, 184, 0.25);
+            padding-top: 8px;
+        }
+
+        /* Titre cliquable qui ouvre l'index des événements */
+        .detail-section-title-clickable {
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .detail-section-title-clickable::after {
+            content: "↗";
+            font-size: 0.7rem;
+            opacity: 0.6;
+        }
+
+        .detail-section-title-clickable:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        /* Scroll interne pour la chrono condensée et les personnages */
+        .detail-timeline-scroll,
+        .detail-persons-scroll {
+            max-height: 180px;
+            overflow-y: auto;
+            padding-right: 4px;
+            margin-top: 4px;
+        }
+
+        /* Événements cliquables dans la fiche pays */
+        .detail-timeline-item {
+            width: 100%;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            padding: 4px 6px;
+            border-radius: 8px;
+            border: none;
+            background: transparent;
+            font-size: 0.86rem;
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .detail-timeline-item + .detail-timeline-item {
+            margin-top: 2px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .detail-timeline-item:hover {
+            background: rgba(148, 163, 184, 0.12);
+        }
+
+        .detail-timeline-date {
+            font-weight: 600;
+            color: var(--couleur-accent);
+            white-space: nowrap;
+            font-size: 0.8rem;
+        }
+
+        .detail-timeline-separator {
+            opacity: 0.7;
+        }
+
+        .detail-timeline-title {
+            flex: 1;
+        }
+
+        /* Liste de personnages dans la fiche pays : scrollable */
+        .detail-persons-scroll {
+            max-height: 160px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .detail-persons-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .detail-person-chip {
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.7);
+            font-size: 0.78rem;
+            cursor: pointer;
+            background: rgba(15, 23, 42, 0.02);
+        }
+
+        .detail-person-chip:hover {
+            background: rgba(148, 163, 184, 0.18);
+        }
+
+        @media (max-width: 768px) {
+            .detail-modal {
+                width: 96vw;
+                max-height: 90vh;
+                border-radius: 14px;
+            }
+            .detail-main {
+                grid-template-columns: 1fr;
+            }
+            .detail-map {
+                height: 180px;
+            }
+        }
+
+        /* ============================
+        POPUP ANNUAIRE (événements / personnages)
+        ============================ */
+
+        .link-title {
+            all: unset;
+            cursor: pointer;
+            font: inherit;
+            color: inherit;
+        }
+
+        .link-title:hover {
+            color: var(--couleur-accent);
+        }
+
+        .directory-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(15, 23, 42, 0.45);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 4000;
+            backdrop-filter: blur(6px);
+        }
+
+        .directory-overlay.open {
+            display: flex;
+        }
+
+        .directory-modal {
+            background: var(--couleur-fond);
+            color: var(--couleur-texte);
+            width: min(900px, 95vw);
+            max-height: 80vh;
+            border-radius: 18px;
+            box-shadow: var(--ombre-lg);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--couleur-bordure);
+            overflow: hidden;
+        }
+
+        .directory-header {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--couleur-bordure);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            background: var(--couleur-panneau);
+        }
+
+        .directory-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-transform: lowercase;
+        }
+
+        .directory-close {
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 1.1rem;
+            padding: 4px 8px;
+            border-radius: 999px;
+            transition: background 0.15s ease;
+        }
+
+        .directory-close:hover {
+            background: rgba(148, 163, 184, 0.25);
+        }
+
+        .directory-content {
+            padding: 8px 14px 14px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .directory-section {
+            margin-bottom: 10px;
+        }
+
+        .directory-letter {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.16em;
+            color: var(--couleur-texte);
+            opacity: 0.7;
+            padding: 6px 4px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+            margin-bottom: 4px;
+        }
+
+        .directory-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .directory-item {
+            padding: 5px 4px;
+            border-radius: 8px;
+            transition: background 0.12s ease, transform 0.08s ease;
+        }
+
+        .directory-item:hover {
+            background: rgba(148, 163, 184, 0.12);
+            transform: translateY(-1px);
+        }
+
+        .directory-item-title {
+            font-weight: 550;
+            font-size: 0.9rem;
+            text-align: left;
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .directory-item-title-link {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .directory-item-title-link:hover {
+            text-decoration: underline;
+        }
+
+        .directory-item-meta {
+            margin-top: 2px;
+            font-size: 0.78rem;
+            opacity: 0.75;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .directory-chip {
+            padding: 1px 6px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.5);
+        }
+
+        @media (max-width: 768px) {
+            .directory-modal {
+                width: 94vw;
+                max-height: 85vh;
+                border-radius: 14px;
+            }
+        }
+
+        /* ===== AFFICHAGE "STUDIO" EN VUE CHRONOLOGIE (FRISE EN HAUT) ===== */
+
+        body.view-timeline .timeline {
+            /* la timeline occupe quasi tout l'écran sous le header */
+            height: calc(100vh - 64px);
+            max-height: calc(100vh - 64px);
+            margin: 8px 12px 0;
+            border-radius: 18px 18px 0 0;
+            background: var(--couleur-fond);
+            box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+        }
+
+        /* on remplace le grid par une simple colonne :
+        1) frise en haut  (≈ 1/3)
+        2) liste en bas   (≈ 2/3) */
+        body.view-timeline .timeline-country,
+        body.view-timeline .timeline-global {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding: 14px 24px 18px;
+        }
+
+        /* bloc frise : 1/3 de la hauteur */
+        body.view-timeline .timeline-nav {
+            flex: 0 0 32vh;        /* ~ un tiers de la fenêtre */
+            max-height: 260px;
+            min-height: 160px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* piste de la frise : carte "propre" et bien contenue */
+        body.view-timeline .timeline-nav .timeline-track {
+            flex: 1;
+            border-radius: 14px;
+            background: var(--couleur-panneau);
+            border: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-sm);
+            padding: 6px 0;
+        }
+
+        /* bouton ◀ ▶ discrets */
+        body.view-timeline .timeline-arrow {
+            width: 30px;
+            height: 30px;
+            font-size: 0.9rem;
+        }
+
+        /* frise + repères un peu plus sobres */
+        body.view-timeline .timeline-axis {
+            height: 4px;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 197, 211, 0.9),
+                rgba(209, 213, 219, 0.9)
+            );
+            border-radius: 999px;
+        }
+
+        body.view-timeline .timeline-year {
+            font-size: 0.7rem;
+            opacity: 0.65;
+        }
+
+        /* points d'événements légèrement réduits */
+        body.view-timeline .timeline-dot {
+            width: 14px;
+            height: 14px;
+            border-width: 3px;
+        }
+
+        /* bloc liste : occupe le reste et est centré */
+        body.view-timeline .timeline-content,
+        body.view-timeline #timeline-global-content {
+            flex: 1;
+            max-height: none;
+            width: 100%;
+            max-width: 1100px;     /* largeur confortable pour la lecture */
+            margin: 0 auto 8px;
+            background: var(--couleur-panneau);
+            border-radius: 14px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 10px 12px 14px;
+            overflow-y: auto;
+        }
+
+        /* cartes d'évènements un peu resserrées */
+        body.view-timeline .timeline-event {
+            margin-bottom: 8px;
+            padding: 8px 8px;
+            border-radius: 10px;
+            border-left-width: 3px;
+            box-shadow: none;
+        }
+
+        body.view-timeline .timeline-event:hover {
+            transform: translateX(2px);
+            box-shadow: var(--ombre-sm);
+        }
+        /* ====== STUDIO CHRONOLOGIE — TIMELINE LARGE, HAUTE ET ALIGNÉE ====== */
+
+        body.view-timeline .timeline {
+            height: calc(100vh - 64px);
+            margin: 8px auto 0;
+            padding: 0;
+            max-width: 1100px;
+            border-radius: 18px 18px 0 0;
+            background: var(--couleur-fond);
+            box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Studio : timeline en haut (≈ 45% viewport) + liste d'événements en bas (≈ 55%) */
+        body.view-timeline .timeline-country,
+        body.view-timeline .timeline-global {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 10px 20px 18px;
+            gap: 20px;
+        }
+
+        /* --- FR I S E --- */
+        /* La frise fait maintenant ~45% de la hauteur du studio */
+        body.view-timeline .timeline-nav {
+            flex: 0 0 45vh; /* <-- triple hauteur par rapport à l'ancien layout */
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        /* La piste de la frise adopte les mêmes dimensions visuelles que la liste */
+        body.view-timeline .timeline-track {
+            flex: 1;
+            height: 100%;
+            border-radius: 14px;
+            background: var(--couleur-panneau);
+            border: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-sm);
+            padding: 10px 0;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Ligne de fond de la frise */
+        body.view-timeline .timeline-axis {
+            height: 5px;
+            background: linear-gradient(
+                90deg,
+                rgba(255, 197, 211, 0.9),
+                rgba(209, 213, 219, 0.9)
+            );
+            border-radius: 999px;
+        }
+
+        /* Repères d'années */
+        body.view-timeline .timeline-year {
+            font-size: 0.75rem;
+            opacity: 0.65;
+        }
+
+        /* Points d'événements */
+        body.view-timeline .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-width: 3px;
+            box-shadow: 0 0 8px rgba(15, 23, 42, 0.25);
+        }
+
+        body.view-timeline .timeline-dot.selected {
+            transform: translate(-50%, -50%) scale(1.4);
+        }
+
+        /* --- LISTE D'ÉVÉNEMENTS (même largeur visuelle que la frise) --- */
+        body.view-timeline .timeline-content,
+        body.view-timeline #timeline-global-content {
+            flex: 1;
+            max-height: none;
+            max-width: 1100px;
+            margin: 0 auto;
+            background: var(--couleur-panneau);
+            border-radius: 14px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 14px 16px;
+            overflow-y: auto;
+        }
+
+        /* Cartes d’événements compactes & lisibles */
+        body.view-timeline .timeline-event {
+            margin-bottom: 10px;
+            padding: 10px 10px;
+            border-radius: 12px;
+            border-left: 3px solid var(--couleur-accent);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(3px);
+        }
+
+        body.view-timeline .timeline-event:hover {
+            transform: translateX(2px);
+            box-shadow: var(--ombre-sm);
+        }
+
+        /* ===== CORRECTION SCROLL POUR LA VUE CHRONOLOGIE ===== */
+
+        /* Le conteneur principal doit pouvoir scroller si le contenu dépasse */
+        body.view-timeline .timeline {
+            height: calc(100vh - 64px);
+            max-height: calc(100vh - 64px);
+            margin: 8px auto 0;
+            padding: 0;
+            max-width: 1100px;
+            border-radius: 18px 18px 0 0;
+            background: var(--couleur-fond);
+            box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.12);
+
+            /* FIX : permettre le scroll vertical */
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        /* Plus de overflow:hidden dans les blocs internes */
+        body.view-timeline .timeline-country,
+        body.view-timeline .timeline-global {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            padding: 14px 24px 18px;
+
+            /* FIX : retirer overflow:hidden */
+            overflow: visible;
+        }
+
+        /* FIX : la frise a une hauteur fixe (≈ 40% écran) */
+        body.view-timeline .timeline-nav {
+            flex: 0 0 40vh;
+            min-height: 220px;
+            max-height: 380px;
+        }
+
+        /* FIX : liste d’évènements scrolle correctement */
+        body.view-timeline .timeline-content,
+        body.view-timeline #timeline-global-content {
+            flex: 1;
+            max-width: 1100px;
+            margin: 0 auto 12px;
+            background: var(--couleur-panneau);
+            border-radius: 14px;
+            border: 1px solid var(--couleur-bordure);
+            padding: 14px 16px;
+
+            /* IMPORTANT : scroll interne */
+            overflow-y: auto;
+        }
+
+        /* petites ajustements pour éviter que la page entière bloque le scroll */
+        html, body {
+            overscroll-behavior: contain;
+        }
     </style>
 </head>
-<body>
+<body class="view-map mobile-mode-map">
     <!-- Overlay de chargement -->
     <div class="loading-overlay" id="loading-overlay">
         <div class="loading-spinner"></div>
@@ -1278,6 +2366,17 @@
                 <span>Synchronisé</span>
             </div>
         </div>
+
+        <!-- Onglets desktop : carte / chronologie -->
+        <nav class="main-tabs" id="desktop-tabs">
+            <button class="main-tab active" data-main-view="map">
+                carte.
+            </button>
+            <button class="main-tab" data-main-view="timeline">
+                chronologie.
+            </button>
+        </nav>
+
         <div class="header-controls">
             <button id="refresh-btn" class="btn btn-secondary" title="Actualiser les données">
                 🔄
@@ -1297,111 +2396,121 @@
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-content">
 
-                <!-- Continents -->
-                <section class="control-section">
-                    <h3>continents.</h3>
-                    <div class="continent-grid" role="group" aria-label="Filtres par continent">
-                        <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
-                        <button class="btn-continent" data-continent="europe">🌏 Europe</button>
-                        <button class="btn-continent" data-continent="asie">🌏 Asie</button>
-                        <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
-                        <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
-                        <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
-                    </div>
-                </section>
+                <!-- Vue principale de la sidebar -->
+                <div id="sidebar-main">
+                    <!-- Continents -->
+                    <section class="control-section">
+                        <h3>continents.</h3>
+                        <div class="continent-grid" role="group" aria-label="Filtres par continent">
+                            <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
+                            <button class="btn-continent" data-continent="europe">🌏 Europe</button>
+                            <button class="btn-continent" data-continent="asie">🌏 Asie</button>
+                            <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
+                            <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
+                            <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
+                        </div>
+                    </section>
 
-                <!-- Filtre année -->
-                <section class="control-section">
-                    <h3>période.</h3>
-                    <div class="range-control">
-                        <div class="range-label">
-                            <input type="number" 
-                                id="input-annee" 
-                                class="year-input"
-                                min="-500" 
+                    <!-- Filtre année -->
+                    <section class="control-section">
+                        <h3>période.</h3>
+                        <div class="range-control">
+                            <div class="range-label">
+                                <input type="number" 
+                                    id="input-annee" 
+                                    class="year-input"
+                                    min="-500" 
+                                    max="2024" 
+                                    value="2024"
+                                    placeholder="Tapez une année">
+                            </div>
+                            <input type="range" 
+                                id="slider-annee" 
+                                class="range-slider"
+                                min="-2000" 
                                 max="2024" 
                                 value="2024"
-                                placeholder="Tapez une année">
+                                aria-label="Sélecteur d'année">
                         </div>
-                        <input type="range" 
-                            id="slider-annee" 
-                            class="range-slider"
-                            min="-2000" 
-                            max="2024" 
-                            value="2024"
-                            aria-label="Sélecteur d'année">
-                    </div>
-                </section>
+                        <h3>.</h3>
+                        <div class="filter-buttons">
+                            <button class="btn-filter" data-filter="all">tout.</button>
+                            <button class="btn-filter active" data-filter="year">année courante.</button>
+                        </div>
+                    </section>
 
-                <!-- Filtre d'affichage des événements -->
-                <section class="control-section">
-                    <h3>affichage.</h3>
-                    <div class="filter-buttons">
-                        <button class="btn-filter active" data-filter="year">année courante.</button>
-                        <button class="btn-filter" data-filter="all">tout.</button>
-                    </div>
-                </section>
+                    <!-- Liste des événements de l'année -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-events-directory">
+                                tous les événements.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="events-list">
+                            <p class="no-events">Aucun événement.</p>
+                        </div>
+                    </section>
 
-                <!-- Liste des événements de l'année -->
-                <section class="control-section">
-                <h3>tous les événements.</h3>
-                <div class="events-list" id="events-list">
-                    <p class="no-events">Aucun événement.</p>
+                    <!-- Liste des personnages -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-persons-directory">
+                                tous les personnages.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="persons-list">
+                            <p class="no-events">Aucun personnage référencé.</p>
+                        </div>
+                    </section>
+
+                    <!-- Comparaison de pays -->
+                    <section class="control-section" id="compare-section">
+                        <h3>comparer deux pays !</h3>
+                        
+                        <div class="compare-fields">
+                            <label for="compare-country-a">1er pays</label>
+                            <select id="compare-country-a">
+                                <option value="">sélectionner un pays…</option>
+                                <!-- options remplies en JS -->
+                            </select>
+
+                            <label for="compare-country-b">2e pays</label>
+                            <select id="compare-country-b">
+                                <option value="">sélectionner un pays…</option>
+                                <!-- options remplies en JS -->
+                            </select>
+
+                            <div class="compare-buttons">
+                                <button class="btn btn-secondary" id="compare-btn" type="button">
+                                    comparer.
+                                </button>
+                                <button class="btn btn-secondary" id="compare-reset-btn" type="button">
+                                    ✖ réinitialiser.
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section Obsidian -->
+                    <section class="obsidian-section">
+                        <h3>obsidian</h3>
+                        <div class="obsidian-status">
+                            <span>Dernière sync:</span>
+                            <span id="last-sync">Jamais</span>
+                        </div>
+                        <div class="obsidian-actions">
+                            <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
+                                🔄
+                            </button>
+                            <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
+                                👁️
+                            </button>
+                        </div>
+                    </section>
                 </div>
-                </section>
 
-                <!-- Personnages historiques -->
-                <section class="control-section">
-                    <h3>personnages.</h3>
-                    <div class="events-list" id="persons-list">
-                        <p class="no-events">Aucun personnage référencé.</p>
-                    </div>
-                </section>
-                
-                <!-- Comparaison de pays -->
-                <section class="control-section" id="compare-section">
-                    <h3>comparer deux pays !</h3>
-                    
-                    <div class="compare-fields">
-                        <label for="compare-country-a">1er pays</label>
-                        <select id="compare-country-a">
-                            <option value="">sélectionner un pays…</option>
-                            <!-- options remplies en JS -->
-                        </select>
-
-                        <label for="compare-country-b">2e pays</label>
-                        <select id="compare-country-b">
-                            <option value="">sélectionner un pays…</option>
-                            <!-- options remplies en JS -->
-                        </select>
-
-                        <div class="compare-buttons">
-                            <button class="btn btn-secondary" id="compare-btn" type="button">
-                                comparer.
-                            </button>
-                            <button class="btn btn-secondary" id="compare-reset-btn" type="button">
-                                ✖ réinitialiser.
-                            </button>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section Obsidian -->
-                <section class="obsidian-section">
-                    <h3>obsidian</h3>
-                    <div class="obsidian-status">
-                        <span>Dernière sync:</span>
-                        <span id="last-sync">Jamais</span>
-                    </div>
-                    <div class="obsidian-actions">
-                        <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
-                            🔄
-                        </button>
-                        <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
-                            👁️
-                        </button>
-                    </div>
-                </section>
+                <!-- Vue fiche pays (remplie en JS) -->
+                <div id="sidebar-detail" style="display:none;"></div>
             </div>
         </aside>
 
@@ -1424,17 +2533,38 @@
             <div class="timeline-header-right">
                 <!-- Onglets de mode -->
                 <div class="timeline-tabs" id="timeline-tabs">
-                    <button class="btn btn-secondary timeline-tab active" data-mode="country">
-                        timeline du pays
-                    </button>
                     <button class="btn btn-secondary timeline-tab" data-mode="world">
                         timeline mondiale
                     </button>
+                    <button class="btn btn-secondary timeline-tab active" data-mode="country">
+                        timeline du pays
+                    </button>
+                    <button class="btn btn-secondary timeline-tab" data-mode="person">
+                        timeline personnage
+                    </button>
                 </div>
 
-                <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
-                    ▲
-                </button>
+                <!-- Contrôles du studio -->
+                <div class="timeline-header-controls">
+                    <select id="timeline-country-select">
+                        <option value="">pays…</option>
+                    </select>
+
+                    <select id="timeline-person-select">
+                        <option value="">personnage…</option>
+                    </select>
+
+                    <div class="timeline-range-inputs">
+                        <input type="number" id="timeline-from-year" placeholder="de" style="width: 70px;">
+                        <span>→</span>
+                        <input type="number" id="timeline-to-year" placeholder="à" style="width: 70px;">
+                    </div>
+
+                    <!-- Bouton collapse gardé pour la vue carte (caché en studio) -->
+                    <button class="btn btn-secondary" id="toggle-timeline" title="Réduire/Étendre">
+                        ▲
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -1475,6 +2605,66 @@
         </div>
     </footer>
 
+        <!-- Onglets mobile en bas -->
+    <nav class="mobile-tabs" id="mobile-tabs">
+        <button class="mobile-tab active" data-mobile-view="map">
+            🗺 carte
+        </button>
+        <button class="mobile-tab" data-mobile-view="events">
+            📜 événements
+        </button>
+        <button class="mobile-tab" data-mobile-view="timeline">
+            ⏱ chronologie
+        </button>
+    </nav>
+
+    <!-- Popup annuaire (événements / personnages) -->
+    <div class="directory-overlay" id="directory-overlay">
+        <div class="directory-modal">
+            <header class="directory-header">
+                <h2 class="directory-title" id="directory-title"></h2>
+                <button type="button" class="directory-close" id="directory-close" aria-label="Fermer">
+                    ✕
+                </button>
+            </header>
+            <div class="directory-content" id="directory-content">
+                <!-- contenu rempli en JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup fiche pays / personnage -->
+    <div class="detail-overlay" id="detail-overlay">
+        <div class="detail-modal">
+            <header class="detail-header">
+                <div>
+                    <h2 class="detail-title" id="detail-title"></h2>
+                    <p class="detail-subtitle" id="detail-subtitle"></p>
+                </div>
+                <button type="button" class="detail-close" id="detail-close" aria-label="Fermer">
+                    ✕
+                </button>
+            </header>
+
+            <div class="detail-body">
+                <div class="detail-main">
+                    <div id="detail-map" class="detail-map"></div>
+                    <div id="detail-stats" class="detail-stats"></div>
+                </div>
+
+                <section class="detail-section" id="detail-timeline-section">
+                    <h3>chronologie condensée.</h3>
+                    <div id="detail-timeline"></div>
+                </section>
+
+                <section class="detail-section" id="detail-persons-section">
+                    <h3 id="detail-persons-title">personnages majeurs.</h3>
+                    <div id="detail-persons"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
@@ -1496,6 +2686,8 @@
                 this.timelineFixedPxPerYear = 4; // utilisé seulement si mode "fixed"
                 this.timelineDots = [];
                 this.selectedTimelineIndex = null;
+                this.mainView = 'map';        // 'map' ou 'timeline'
+                this.mobileMode = 'map';      // 'map' | 'events' | 'timeline'
                 this.currentTimelineEvents = [];
                 this.compareMode = false;
                 this.countryA = null;
@@ -1510,6 +2702,10 @@
                 this.currentGlobalTimelineEvents = [];
                 this.selectedGlobalTimelineIndex = null;
                 this.personIndex = {}; // { "Napoléon Ier": { nom, events: [...] } }
+                this.personIndex = {};              // index personnages -> { nom, events: [...] }
+                this.currentTimelineContext = null; // { type: 'country' | 'person', name: string }
+                this.detailMap = null;             // mini-carte dans la fiche
+                this.sidebarCountryMap = null;
 
                 // Cache et données
                 this.cache = {
@@ -1535,6 +2731,9 @@
                 this.timelineGlobalZoom = 1;        // 1 = ~1000 ans visibles
                 this.timelineGlobalMinZoom = 0.5;   // dé-zoom max (plus d'années)
                 this.timelineGlobalMaxZoom = 5;     // zoom max (moins d'années)
+
+                this.timelineMiniMap = null;
+                this.timelineMiniLayer = null;
             }
             
             async init() {
@@ -1553,26 +2752,35 @@
                 // Charger les données
                 await this.loadData();
                 this.updateDisplay();
+                // Vue par défaut
+                this.setMainView('map');
+                this.setMobileMode('map');
+
                 
                 console.log("✅ Carte avec sync Obsidian initialisée");
             }
             
             initMap() {
                 this.map = L.map('carte', {
-                    center: [20, 0],
-                    zoom: 2,
+                    center: [25, 10],        // centre un peu plus haut et décalé (Europe / Afrique / Moyen-Orient)
+                    zoom: 3,                 // au lieu de 2 -> plus zoomé dès l'arrivée
+                    minZoom: 3,              // tu ne peux plus dézoomer en dessous (plus de « monde minuscule »)
+                    maxZoom: 18,
+                    maxBounds: [[-85, -180], [85, 180]], // empêche de sortir du monde
+                    maxBoundsViscosity: 1.0,             // effet « rebond » aux bords
+                    worldCopyJump: true,
                     zoomControl: false
                 });
-                
+
                 L.control.zoom({
                     position: 'bottomright'
                 }).addTo(this.map);
-                
+
                 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                     attribution: '© OpenStreetMap contributors',
                     maxZoom: 18
                 }).addTo(this.map);
-                
+
                 this.markers = L.layerGroup().addTo(this.map);
 
                 setTimeout(() => {
@@ -1581,10 +2789,45 @@
             }
             
             initControls() {
+                // Références pour la popup annuaire
+                this.directoryOverlay = document.getElementById('directory-overlay');
+                this.directoryTitleElem = document.getElementById('directory-title');
+                this.directoryContentElem = document.getElementById('directory-content');
                 // Contrôles de base
                 document.getElementById('theme-btn').addEventListener('click', () => {
                     this.toggleTheme();
                 });
+
+                // Onglets desktop carte / chronologie
+                const mainTabs = document.querySelectorAll('.main-tab');
+                mainTabs.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const view = btn.dataset.mainView || 'map';
+                        this.setMainView(view);
+
+                        // Si on passe en vue "chronologie", on affiche automatiquement la timeline mondiale
+                        if (view === 'timeline') {
+                            const worldTab = document.querySelector('.timeline-tab[data-mode="world"]');
+                            if (worldTab) {
+                                // On simule un clic dessus pour tout mettre à jour proprement
+                                worldTab.click();
+                            } else {
+                                // fallback au cas où
+                                this.showGlobalTimeline();
+                            }
+                        }
+                    });
+                });
+
+                // Onglets mobile en bas
+                const mobileTabs = document.querySelectorAll('.mobile-tab');
+                mobileTabs.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const view = btn.dataset.mobileView || 'map';
+                        this.setMobileMode(view);
+                    });
+                });
+
 
                 // Boutons de filtre d'affichage
                 document.querySelectorAll('.btn-filter').forEach(btn => {
@@ -1597,6 +2840,36 @@
                         this.updateDisplay();
                     });
                 });
+
+                // Bouton fiche (pays / personnage)
+                const openDetailBtn = document.getElementById('open-detail-sheet');
+                if (openDetailBtn) {
+                    openDetailBtn.addEventListener('click', () => {
+                        if (!this.currentTimelineContext) return;
+
+                        if (this.currentTimelineContext.type === 'country') {
+                            this.showCountrySheet(this.currentTimelineContext.name);
+                        } else if (this.currentTimelineContext.type === 'person') {
+                            this.showPersonSheet(this.currentTimelineContext.name);
+                        }
+                    });
+                }
+
+                // Fermeture de la fiche
+                const detailOverlay = document.getElementById('detail-overlay');
+                const detailClose = document.getElementById('detail-close');
+
+                if (detailOverlay && detailClose) {
+                    detailClose.addEventListener('click', () => {
+                        detailOverlay.classList.remove('open');
+                    });
+
+                    detailOverlay.addEventListener('click', (e) => {
+                        if (e.target === detailOverlay) {
+                            detailOverlay.classList.remove('open');
+                        }
+                    });
+                }
 
                 // Slider année avec champ de saisie synchronisé
                 const yearSlider = document.getElementById('slider-annee');
@@ -1767,7 +3040,7 @@
                     }
                 });
 
-                // Onglets timeline (pays / monde)
+                // Onglets timeline (pays / monde / personnage)
                 const timelineTabs = document.querySelectorAll('.timeline-tab');
                 const timelineCountry = document.getElementById('timeline-country');
                 const timelineGlobal = document.getElementById('timeline-global');
@@ -1780,21 +3053,68 @@
                         const mode = tab.dataset.mode;
 
                         if (mode === 'country') {
-                            // Afficher la timeline pays
                             if (timelineCountry) timelineCountry.style.display = 'block';
                             if (timelineGlobal) timelineGlobal.style.display = 'none';
                         } else if (mode === 'world') {
-                            // Afficher la timeline mondiale
                             if (timelineCountry) timelineCountry.style.display = 'none';
                             if (timelineGlobal) timelineGlobal.style.display = 'block';
-                            // (Re)construire la timeline mondiale avec les filtres actuels
                             this.showGlobalTimeline();
+                        } else if (mode === 'person') {
+                            if (timelineCountry) timelineCountry.style.display = 'block';
+                            if (timelineGlobal) timelineGlobal.style.display = 'none';
                         }
 
-                        
+                        this.refreshCurrentTimelineView();
                     });
                 });
                 
+                // --- Studio de chronologie : selects & filtre période & play ---
+
+                const studioCountrySelect = document.getElementById('timeline-country-select');
+                const studioPersonSelect = document.getElementById('timeline-person-select');
+                const studioFromInput = document.getElementById('timeline-from-year');
+                const studioToInput = document.getElementById('timeline-to-year');
+
+                // changement de pays = bascule sur l'onglet "pays" + affichage timeline pays
+                if (studioCountrySelect) {
+                    studioCountrySelect.addEventListener('change', (e) => {
+                        const value = e.target.value;
+                        if (!value) return;
+
+                        const tab = document.querySelector('.timeline-tab[data-mode="country"]');
+                        if (tab) tab.click(); // déclenche toute la logique, puis :
+                        this.showTimeline(value);
+                    });
+                }
+
+                // changement de personnage = onglet "personnage" + timeline perso
+                if (studioPersonSelect) {
+                    studioPersonSelect.addEventListener('change', (e) => {
+                        const value = e.target.value;
+                        if (!value) return;
+
+                        const tab = document.querySelector('.timeline-tab[data-mode="person"]');
+                        if (tab) tab.click();
+                        this.showPersonTimeline(value);
+                    });
+                }
+
+                // filtre période : de / à
+                const applyStudioRange = () => {
+                    const fromVal = parseInt(studioFromInput?.value);
+                    const toVal = parseInt(studioToInput?.value);
+
+                    this.timelineFromYear = isNaN(fromVal) ? null : fromVal;
+                    this.timelineToYear = isNaN(toVal) ? null : toVal;
+
+                    this.refreshCurrentTimelineView();
+                };
+
+                if (studioFromInput && studioToInput) {
+                    studioFromInput.addEventListener('change', applyStudioRange);
+                    studioToInput.addEventListener('change', applyStudioRange);
+                }
+
                 // Flèches de navigation dans la timeline
                 const prevBtn = document.getElementById('timeline-prev');
                 const nextBtn = document.getElementById('timeline-next');
@@ -1818,6 +3138,45 @@
                 document.getElementById('refresh-btn').addEventListener('click', () => {
                     this.loadData(true);
                 });
+
+                // Annuaire "Tous les événements" / "Tous les personnages"
+                const openEventsDirBtn = document.getElementById('open-events-directory');
+                const openPersonsDirBtn = document.getElementById('open-persons-directory');
+                const closeDirBtn = document.getElementById('directory-close');
+                const overlay = this.directoryOverlay;
+
+                if (openEventsDirBtn) {
+                    openEventsDirBtn.addEventListener('click', () => {
+                        this.openEventsDirectory();
+                    });
+                }
+
+                if (openPersonsDirBtn) {
+                    openPersonsDirBtn.addEventListener('click', () => {
+                        this.openPersonsDirectory();
+                    });
+                }
+
+                if (overlay && closeDirBtn) {
+                    closeDirBtn.addEventListener('click', () => {
+                        this.closeDirectory();
+                    });
+
+                    // clic sur le fond sombre = fermeture
+                    overlay.addEventListener('click', (e) => {
+                        if (e.target === overlay) {
+                            this.closeDirectory();
+                        }
+                    });
+
+                    // touche Échap = fermeture
+                    window.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') {
+                            this.closeDirectory();
+                        }
+                    });
+                }
+
             }
             
             initObsidianSync() {
@@ -1859,6 +3218,7 @@
                         this.cache.countries = await countriesResponse.json();
                         this.cache.lastSync = new Date();
                         this.buildPersonsIndex();
+                        this.populateTimelineSelectors();
 
                         console.log(`✅ ${this.cache.events.length} événements et ${this.cache.countries.length} pays chargés`);
                         this.setSyncStatus('success', 'Synchronisé');
@@ -1919,24 +3279,385 @@
             buildPersonsIndex() {
                 this.personIndex = {};
 
-                this.cache.events.forEach(ev => {
-                    if (!ev.personnages) return;
+                (this.cache.events || []).forEach(ev => {
+                    const persons = ev.personnages || ev.personnages_list || ev.persons;
+                    if (!persons) return;
 
-                    const noms = Array.isArray(ev.personnages) ? ev.personnages : [ev.personnages];
+                    let list = persons;
+                    if (typeof list === 'string') {
+                        list = list.split(',').map(p => p.trim()).filter(Boolean);
+                    }
 
-                    noms.forEach(nomBrut => {
-                        const nom = (nomBrut || "").trim();
-                        if (!nom) return;
-
-                        if (!this.personIndex[nom]) {
-                            this.personIndex[nom] = {
-                                nom,
-                                events: []
-                            };
+                    list.forEach(name => {
+                        if (!name) return;
+                        if (!this.personIndex[name]) {
+                            this.personIndex[name] = { nom: name, events: [] };
                         }
-                        this.personIndex[nom].events.push(ev);
+                        this.personIndex[name].events.push(ev);
                     });
                 });
+            }
+
+            populateTimelineSelectors() {
+                const countrySelect = document.getElementById('timeline-country-select');
+                const personSelect = document.getElementById('timeline-person-select');
+
+                if (countrySelect) {
+                    countrySelect.innerHTML = `<option value="">pays…</option>`;
+
+                    const countries = (this.cache.countries || [])
+                        .slice()
+                        .sort((a, b) => a.pays.localeCompare(b.pays, 'fr'));
+
+                    countries.forEach(c => {
+                        const opt = document.createElement('option');
+                        opt.value = c.pays;
+                        opt.textContent = c.pays;
+                        countrySelect.appendChild(opt);
+                    });
+                }
+
+                if (personSelect) {
+                    personSelect.innerHTML = `<option value="">personnage…</option>`;
+
+                    const persons = Object.keys(this.personIndex || {})
+                        .slice()
+                        .sort((a, b) => a.localeCompare(b, 'fr'));
+
+                    persons.forEach(name => {
+                        const opt = document.createElement('option');
+                        opt.value = name;
+                        opt.textContent = name;
+                        personSelect.appendChild(opt);
+                    });
+                }
+            }
+
+            filterEventsByTimelinePeriod(events) {
+                if (!events || events.length === 0) return [];
+                const fromY = this.timelineFromYear;
+                const toY = this.timelineToYear;
+
+                if (fromY == null && toY == null) return events;
+
+                return events.filter(ev => {
+                    if (!ev.date || typeof ev.date !== 'string') return false;
+                    const yearStr = ev.date.split('-')[0];
+                    const year = parseInt(yearStr, 10);
+                    if (isNaN(year)) return false;
+
+                    if (fromY != null && year < fromY) return false;
+                    if (toY != null && year > toY) return false;
+                    return true;
+                });
+            }
+            
+            // --- Helpers pour la vue "chronologie" ---
+
+            getEventYear(ev) {
+                if (!ev || !ev.date || typeof ev.date !== 'string') return null;
+                const yearStr = ev.date.split('-')[0];
+                const year = parseInt(yearStr, 10);
+                return isNaN(year) ? null : year;
+            }
+
+            getCenturyLabel(year) {
+                if (year == null) return '?';
+                const abs = Math.abs(year);
+                const centuryNumber = Math.floor((abs - 1) / 100) + 1;
+                if (year <= 0) {
+                    return `${centuryNumber}e s. av. J.-C.`;
+                } else {
+                    return `${centuryNumber}e siècle`;
+                }
+            }
+
+            summarizePeriod(events) {
+                const years = (events || [])
+                    .map(ev => this.getEventYear(ev))
+                    .filter(y => y != null);
+                if (!years.length) return null;
+
+                const minYear = Math.min(...years);
+                const maxYear = Math.max(...years);
+
+                return {
+                    minYear,
+                    maxYear,
+                    label: `${this.getCenturyLabel(minYear)} → ${this.getCenturyLabel(maxYear)}`
+                };
+            }
+
+            groupEventsByCentury(events) {
+                const groups = {};
+
+                (events || []).forEach(ev => {
+                    const year = this.getEventYear(ev);
+                    if (year == null) return;
+
+                    const abs = Math.abs(year);
+                    const centuryNumber = Math.floor((abs - 1) / 100) + 1;
+                    const key = (year <= 0 ? '-' : '') + centuryNumber;
+
+                    if (!groups[key]) {
+                        groups[key] = {
+                            sign: year <= 0 ? -1 : 1,
+                            num: centuryNumber,
+                            label: this.getCenturyLabel(year),
+                            events: []
+                        };
+                    }
+                    groups[key].events.push(ev);
+                });
+
+                const keys = Object.keys(groups);
+                // tri chronologique des siècles
+                keys.sort((a, b) => {
+                    const ga = groups[a];
+                    const gb = groups[b];
+                    const startA = ga.sign === -1 ? -(ga.num * 100) : (ga.num - 1) * 100 + 1;
+                    const startB = gb.sign === -1 ? -(gb.num * 100) : (gb.num - 1) * 100 + 1;
+                    return startA - startB;
+                });
+
+                return keys.map(k => groups[k]);
+            }
+
+            buildTimelineList(events, options = {}) {
+                const {
+                    title,
+                    showCountries = true,
+                    showMiniMap = true,             // NEW
+                    extraSummaryFooterHtml = ''     // NEW : ce qu’on met à la place de la mini-map
+                } = options;
+
+                const summary = this.summarizePeriod(events);
+                const centuryGroups = this.groupEventsByCentury(events);
+
+                let html = '';
+
+                if (title) {
+                    html += `<h3 class="timeline-section-title">${title}</h3>`;
+                }
+
+                if (summary) {
+                    html += `
+                        <div class="timeline-summary">
+                            <div class="timeline-summary-line">
+                                <span class="summary-label">période couverte</span>
+                                <span class="summary-value">${summary.minYear} → ${summary.maxYear}</span>
+                            </div>
+                            <div class="timeline-summary-line">
+                                <span class="summary-label">repère</span>
+                                <span class="summary-value">${summary.label}</span>
+                            </div>
+                            <div class="timeline-summary-line">
+                                <span class="summary-label">évènements</span>
+                                <span class="summary-value">${events.length}</span>
+                            </div>
+                        </div>
+                    `;
+
+                    // 👉 soit mini-map, soit un bloc custom (personnages)
+                    if (showMiniMap) {
+                        html += `<div id="timeline-mini-map" class="timeline-mini-map"></div>`;
+                    } else if (extraSummaryFooterHtml) {
+                        html += extraSummaryFooterHtml;
+                    }
+                }
+
+                html += `<div class="timeline-century-list">`;
+
+                centuryGroups.forEach((group, groupIndex) => {
+                    html += `
+                        <section class="timeline-century-group" data-century-index="${groupIndex}">
+                            <header class="timeline-century-header">
+                                <button type="button" class="timeline-century-toggle" aria-expanded="true">
+                                    <span class="century-label">${group.label}</span>
+                                    <span class="century-count">${group.events.length} évènement(s)</span>
+                                    <span class="chevron">▾</span>
+                                </button>
+                            </header>
+                            <div class="timeline-century-events">
+                    `;
+
+                    group.events.forEach(ev => {
+                        const icon = this.getCategoryIcon(ev.categorie);
+                        const year = this.getEventYear(ev);
+                        const paysList = showCountries ? this.eventCountries(ev).join(', ') : '';
+                        const lat = ev.latitude ?? ev.lat ?? '';
+                        const lng = ev.longitude ?? ev.lng ?? '';
+
+                        const indexGlobal = events.indexOf(ev);
+
+                        html += `
+                            <article class="timeline-event-card"
+                                    data-global-index="${indexGlobal}"
+                                    data-lat="${lat}"
+                                    data-lng="${lng}">
+                                <div class="event-date-row">
+                                    <span class="event-year">${year != null ? year : (ev.date || '')}</span>
+                                    ${paysList ? `<span class="event-country">${paysList}</span>` : ''}
+                                </div>
+                                <div class="event-title-row">
+                                    <span class="event-icon">${icon}</span>
+                                    <span class="event-title">${ev.titre}</span>
+                                </div>
+                                ${ev.description ? `<p class="event-description">${ev.description}</p>` : ''}
+                            </article>
+                        `;
+                    });
+
+                    html += `
+                            </div>
+                        </section>
+                    `;
+                });
+
+                html += `</div>`;
+                return html;
+            }
+
+            setupCenturyCollapsibles(container) {
+                if (!container) return;
+                container.querySelectorAll('.timeline-century-group').forEach(group => {
+                    const btn = group.querySelector('.timeline-century-toggle');
+                    if (!btn) return;
+                    btn.addEventListener('click', () => {
+                        const collapsed = group.classList.toggle('collapsed');
+                        btn.setAttribute('aria-expanded', (!collapsed).toString());
+                    });
+                });
+            }
+
+            initTimelineMiniMap() {
+                const container = document.getElementById('timeline-mini-map');
+                if (!container) return;
+
+                if (this.timelineMiniMap) {
+                    this.timelineMiniMap.invalidateSize();
+                    return;
+                }
+
+                this.timelineMiniMap = L.map(container, {
+                    center: [20, 0],
+                    zoom: 1,
+                    zoomControl: false,
+                    attributionControl: false,
+                    dragging: false,
+                    scrollWheelZoom: false,
+                    doubleClickZoom: false,
+                    boxZoom: false,
+                    keyboard: false,
+                    tap: false
+                });
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    maxZoom: 6
+                }).addTo(this.timelineMiniMap);
+
+                this.timelineMiniLayer = L.layerGroup().addTo(this.timelineMiniMap);
+            }
+
+            updateTimelineMiniMap(events) {
+                this.initTimelineMiniMap();
+                if (!this.timelineMiniMap || !this.timelineMiniLayer) return;
+
+                this.timelineMiniLayer.clearLayers();
+                const coords = [];
+
+                (events || []).forEach(ev => {
+                    const lat = parseFloat(ev.latitude ?? ev.lat);
+                    const lng = parseFloat(ev.longitude ?? ev.lng);
+                    if (!isNaN(lat) && !isNaN(lng)) {
+                        coords.push([lat, lng]);
+                        L.circleMarker([lat, lng], { radius: 4 }).addTo(this.timelineMiniLayer);
+                    }
+                });
+
+                if (coords.length) {
+                    const bounds = L.latLngBounds(coords);
+                    this.timelineMiniMap.fitBounds(bounds, { padding: [10, 10] });
+                } else {
+                    this.timelineMiniMap.setView([20, 0], 1);
+                }
+            }
+
+            setupTimelineListInteractions(container, events, mode = 'world') {
+                if (!container) return;
+
+                this.setupCenturyCollapsibles(container);
+
+                const hasMiniMap = !!container.querySelector('#timeline-mini-map');
+
+                container.querySelectorAll('.timeline-event-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const idx = parseInt(card.getAttribute('data-global-index'), 10);
+                        if (!isNaN(idx)) {
+                            if (mode === 'world') {
+                                this.focusGlobalTimelineEvent(idx);
+                            } else {
+                                this.focusTimelineEvent(idx);
+                            }
+                        }
+
+                        if (hasMiniMap) {
+                            const lat = parseFloat(card.getAttribute('data-lat'));
+                            const lng = parseFloat(card.getAttribute('data-lng'));
+                            if (!isNaN(lat) && !isNaN(lng)) {
+                                this.updateTimelineMiniMap([{ latitude: lat, longitude: lng }]);
+                            }
+                        }
+                    });
+                });
+
+                // mini-carte initiale sur l'ensemble de la période (uniquement si présente)
+                if (hasMiniMap) {
+                    this.updateTimelineMiniMap(events);
+                }
+
+                // Clic sur un personnage dans la vue chronologie (inline sous le résumé)
+                container.querySelectorAll('.timeline-inline-person-chip').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const name = btn.getAttribute('data-person');
+                        if (!name) return;
+                        this.showPersonSheet(name);
+                    });
+                });
+
+                // Clic sur un pays dans la vue chronologie (inline sous le résumé d'un personnage)
+                container.querySelectorAll('.timeline-inline-country-chip').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const country = btn.getAttribute('data-country');
+                        if (!country) return;
+                        this.showCountrySheet(country);
+                    });
+                });
+            }
+
+            autoAdjustGlobalTimelineZoom(events) {
+                if (!events || !events.length) return;
+                const years = events
+                    .map(ev => this.getEventYear(ev))
+                    .filter(y => y != null);
+                if (!years.length) return;
+
+                const span = Math.max(...years) - Math.min(...years);
+
+                let zoom = 1;
+                if (span > 2500) zoom = 0.5;
+                else if (span > 1500) zoom = 0.7;
+                else if (span > 800) zoom = 1;
+                else if (span > 300) zoom = 1.5;
+                else if (span > 120) zoom = 2;
+                else zoom = 3;
+
+                if (typeof this.timelineGlobalMinZoom === 'number' &&
+                    typeof this.timelineGlobalMaxZoom === 'number') {
+                    zoom = Math.max(this.timelineGlobalMinZoom, Math.min(this.timelineGlobalMaxZoom, zoom));
+                }
+
+                this.timelineGlobalZoom = zoom;
             }
 
             updateDisplay() {
@@ -2027,70 +3748,664 @@
             }
 
             showPersonPage(name) {
-                const data = this.personIndex[name];
-                if (!data) return;
+                this.currentTimelineContext = {
+                    type: 'person',
+                    name: name
+                };
+
+                this.showPersonSheet(name);
+            }
+            
+            showPersonTimeline(personName) {
+                this.currentTimelineContext = {
+                    type: 'person',
+                    name: personName
+                };
 
                 const timeline = document.getElementById('timeline');
-                const toggleTimelineBtn = document.getElementById('toggle-timeline');
                 const timelineContent = document.getElementById('timeline-content');
-
-                if (!timeline || !timelineContent) return;
-
-                // s'assurer que la timeline est ouverte
-                timeline.classList.remove('collapsed');
-                if (toggleTimelineBtn) {
-                    toggleTimelineBtn.textContent = '▼';
-                }
-
-                // on force l’onglet "timeline du pays" à être visible
                 const timelineCountry = document.getElementById('timeline-country');
                 const timelineGlobal = document.getElementById('timeline-global');
-                const tabs = document.querySelectorAll('.timeline-tab');
 
-                tabs.forEach(t => t.classList.remove('active'));
-                const countryTab = document.querySelector('.timeline-tab[data-mode="country"]');
-                if (countryTab) countryTab.classList.add('active');
+                if (!timeline || !timelineContent) return;
 
                 if (timelineCountry) timelineCountry.style.display = 'block';
                 if (timelineGlobal) timelineGlobal.style.display = 'none';
 
-                // événements triés
-                const events = [...data.events].sort((a, b) => new Date(a.date) - new Date(b.date));
-
-                let html = `
-                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
-                        👤 ${name} – ${events.length} événement(s)
-                    </h3>
-                `;
-
-                events.forEach((ev, index) => {
-                    const icon = this.getCategoryIcon(ev.categorie);
-                    const paysList = this.eventCountries(ev).join(', ');
-                    const eventId = `timeline-event-person-${index}`;
-
-                    html += `
-                        <div class="timeline-event" id="${eventId}" data-link="${ev.lien || '#'}">
-                            <div class="event-date">${icon} ${ev.date} – ${paysList}</div>
-                            <div class="event-title">${ev.titre}</div>
-                            <div class="event-description">${ev.description || ""}</div>
-                        </div>
+                const p = this.personIndex[personName];
+                if (!p || !p.events || !p.events.length) {
+                    timelineContent.innerHTML = `
+                        <h3 class="timeline-section-title">📜 Timeline – ${personName}</h3>
+                        <p>Aucun événement trouvé pour ${personName}.</p>
                     `;
+                    this.drawTimeline([]);
+                    return;
+                }
+
+                let events = p.events.slice().sort(
+                    (a, b) => new Date(a.date) - new Date(b.date)
+                );
+
+                events = this.filterEventsByTimelinePeriod(events);
+
+                if (!events.length) {
+                    timelineContent.innerHTML = `
+                        <h3 class="timeline-section-title">📜 Timeline – ${personName}</h3>
+                        <p>Aucun événement dans cette période.</p>
+                    `;
+                    this.drawTimeline([]);
+                    return;
+                }
+
+                // frise locale
+                this.drawTimeline(events);
+                this.currentTimelineEvents = events;
+
+                // liste structurée par siècle
+                const title = `📜 Timeline – ${personName}`;
+                timelineContent.innerHTML = this.buildTimelineList(events, {
+                    title,
+                    showCountries: true,
+                    showMiniMap: false,
+                    extraSummaryFooterHtml: this.buildPersonCountriesInline(personName)
                 });
 
-                timelineContent.innerHTML = html;
+                this.setupTimelineListInteractions(timelineContent, events, 'country');
+            }
 
-                // clic = ouvrir la fiche événement si un lien existe
-                document.querySelectorAll('.timeline-event').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const link = el.getAttribute('data-link');
-                        if (link && link !== '#') {
-                            window.open(link, '_blank');
+            showCountrySheet(countryName) {
+                const overlay = document.getElementById('detail-overlay');
+                const titleEl = document.getElementById('detail-title');
+                const subtitleEl = document.getElementById('detail-subtitle');
+                const statsEl = document.getElementById('detail-stats');
+                const timelineEl = document.getElementById('detail-timeline');
+                const personsEl = document.getElementById('detail-persons');
+                const personsTitleEl = document.getElementById('detail-persons-title');
+
+                if (!overlay || !titleEl || !statsEl || !timelineEl || !personsEl) return;
+
+                const country = (this.cache.countries || []).find(
+                    c => c.pays.toLowerCase() === countryName.toLowerCase()
+                );
+
+                const events = (this.cache.events || []).filter(ev =>
+                    this.eventBelongsToCountry(ev, countryName)
+                ).sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                // --- Titre / sous-titre ---
+                titleEl.textContent = countryName;
+                if (personsTitleEl) {
+                    personsTitleEl.textContent = 'personnages majeurs.';
+                }
+
+                if (events.length > 0) {
+                    const years = events
+                        .map(ev => parseInt(ev.date.split('-')[0], 10))
+                        .filter(y => !isNaN(y));
+                    const minY = Math.min(...years);
+                    const maxY = Math.max(...years);
+                    subtitleEl.textContent = `≈ ${events.length} événement(s) de ${minY} à ${maxY}`;
+                } else {
+                    subtitleEl.textContent = `aucun événement encore lié à ce pays.`;
+                }
+
+                // --- Stats ---
+                const categories = {};
+                events.forEach(ev => {
+                    const cat = ev.categorie || 'autre';
+                    categories[cat] = (categories[cat] || 0) + 1;
+                });
+
+                const years = events
+                    .map(ev => parseInt(ev.date.split('-')[0], 10))
+                    .filter(y => !isNaN(y));
+
+                const minY = years.length ? Math.min(...years) : null;
+                const maxY = years.length ? Math.max(...years) : null;
+
+                statsEl.innerHTML = `
+                    <div class="detail-stats-grid">
+                        <div>
+                            <div class="detail-stat-label">événements</div>
+                            <div class="detail-stat-value">${events.length}</div>
+                        </div>
+                        <div>
+                            <div class="detail-stat-label">période</div>
+                            <div class="detail-stat-value">
+                                ${minY !== null ? minY : '?'} – ${maxY !== null ? maxY : '?'}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="detail-stat-label">catégories</div>
+                            <div class="detail-stat-value">
+                                ${Object.keys(categories).length || '–'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // --- Timeline condensée ---
+                if (events.length === 0) {
+                    timelineEl.innerHTML = `<p>Aucun événement à afficher.</p>`;
+                } else {
+                    timelineEl.innerHTML = events.map(ev => `
+                        <div class="detail-timeline-item">
+                            <strong>${ev.date}</strong> — ${ev.titre}
+                        </div>
+                    `).join('');
+                }
+
+                // --- Personnages majeurs (triés par nb d’événements) ---
+                const personsStats = [];
+
+                if (this.personIndex) {
+                    Object.values(this.personIndex).forEach(p => {
+                        const count = (p.events || []).filter(ev =>
+                            this.eventBelongsToCountry(ev, countryName)
+                        ).length;
+                        if (count > 0) {
+                            personsStats.push({ nom: p.nom, count });
                         }
+                    });
+                }
+
+                personsStats.sort((a, b) => b.count - a.count);
+
+                if (personsStats.length === 0) {
+                    personsEl.innerHTML = `<p>Aucun personnage encore relié à ce pays.</p>`;
+                } else {
+                    personsEl.innerHTML = `
+                        <div class="detail-persons-list">
+                            ${personsStats.slice(0, 20).map(p => `
+                                <button class="detail-person-chip" data-person="${p.nom}">
+                                    ${p.nom} (${p.count})
+                                </button>
+                            `).join('')}
+                        </div>
+                    `;
+
+                    // Clic sur une pastille = ouvrir fiche personnage
+                    personsEl.querySelectorAll('.detail-person-chip').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const name = btn.getAttribute('data-person');
+                            this.showPersonSheet(name);
+                        });
+                    });
+                }
+
+                // --- Mini-carte centrée sur le pays ---
+                const mapDiv = document.getElementById('detail-map');
+                if (mapDiv) {
+                    if (!this.detailMap) {
+                        this.detailMap = L.map('detail-map', {
+                            center: [20, 0],
+                            zoom: 3,
+                            zoomControl: false,
+                            attributionControl: false
+                        });
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 10
+                        }).addTo(this.detailMap);
+                    }
+
+                    if (country && country.coordonnees) {
+                        const [lat, lng] = country.coordonnees;
+                        this.detailMap.setView([lat, lng], 4);
+                    }
+                    setTimeout(() => this.detailMap.invalidateSize(), 150);
+                }
+
+                overlay.classList.add('open');
+            }
+
+            showCountrySidebarSheet(countryName) {
+                const main = document.getElementById('sidebar-main');
+                const detail = document.getElementById('sidebar-detail');
+                if (!main || !detail) return;
+
+                const country = (this.cache.countries || []).find(
+                    c => c.pays.toLowerCase() === countryName.toLowerCase()
+                );
+
+                const events = (this.cache.events || [])
+                    .filter(ev => this.eventBelongsToCountry(ev, countryName))
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                const years = events
+                    .map(ev => parseInt((ev.date || '').split('-')[0], 10))
+                    .filter(y => !isNaN(y));
+
+                const minY = years.length ? Math.min(...years) : null;
+                const maxY = years.length ? Math.max(...years) : null;
+
+                const categories = {};
+                events.forEach(ev => {
+                    const cat = ev.categorie || 'autre';
+                    categories[cat] = (categories[cat] || 0) + 1;
+                });
+
+                // Personnages liés à ce pays
+                const personsStats = [];
+                if (this.personIndex) {
+                    Object.values(this.personIndex).forEach(p => {
+                        const count = (p.events || []).filter(ev =>
+                            this.eventBelongsToCountry(ev, countryName)
+                        ).length;
+                        if (count > 0) {
+                            personsStats.push({ nom: p.nom, count });
+                        }
+                    });
+                }
+                personsStats.sort((a, b) => b.count - a.count);
+
+                // HTML de la chronologie condensée (évènements cliquables)
+                const timelineHtml = events.length === 0
+                    ? `<p class="no-events">Aucun événement à afficher.</p>`
+                    : events.map(ev => {
+                        const lien = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        const date = ev.date || '';
+                        const titre = ev.titre || '(sans titre)';
+
+                        return `
+                            <button class="detail-timeline-item"
+                                    ${lien ? `data-lien="${lien}"` : ''}>
+                                <span class="detail-timeline-date">${date}</span>
+                                <span class="detail-timeline-separator">—</span>
+                                <span class="detail-timeline-title">${titre}</span>
+                            </button>
+                        `;
+                    }).join('');
+
+                // HTML de la liste de personnages (scrollable)
+                let personsHtml;
+                if (personsStats.length === 0) {
+                    personsHtml = `<p class="no-events">Aucun personnage encore relié à ce pays.</p>`;
+                } else {
+                    personsHtml = `
+                        <div class="detail-persons-scroll">
+                            <div class="detail-persons-list">
+                                ${personsStats.slice(0, 20).map(p => `
+                                    <button class="detail-person-chip" data-person="${p.nom}">
+                                        ${p.nom} (${p.count})
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // HTML de la fiche dans la sidebar
+                detail.innerHTML = `
+                    <button type="button" id="sidebar-back-btn" class="btn btn-secondary" style="margin-bottom: 8px;">
+                        ← retour
+                    </button>
+
+                    <h3 style="margin-bottom: 8px; font-size: 0.95rem; text-transform: none;">
+                        ${countryName}
+                    </h3>
+
+                    <div id="sidebar-country-map" style="
+                        width: 100%;
+                        height: 140px;
+                        border-radius: 10px;
+                        border: 1px solid var(--couleur-bordure);
+                        margin-bottom: 10px;
+                        overflow: hidden;
+                    "></div>
+
+                    <div class="detail-stats" style="margin-bottom: 10px;">
+                        <div class="detail-stats-grid">
+                            <div>
+                                <div class="detail-stat-label">événements</div>
+                                <div class="detail-stat-value">${events.length}</div>
+                            </div>
+                            <div>
+                                <div class="detail-stat-label">période</div>
+                                <div class="detail-stat-value">
+                                    ${minY !== null ? minY : '?'} – ${maxY !== null ? maxY : '?'}
+                                </div>
+                            </div>
+                            <div>
+                                <div class="detail-stat-label">catégories</div>
+                                <div class="detail-stat-value">
+                                    ${Object.keys(categories).length || '–'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <section class="detail-section" style="margin-bottom: 10px;">
+                        <h3 class="detail-section-title-clickable">chronologie condensée.</h3>
+                        <div class="detail-timeline-scroll">
+                            <div id="sidebar-country-timeline">
+                                ${timelineHtml}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="detail-section">
+                        <h3>personnages majeurs.</h3>
+                        <div id="sidebar-country-persons">
+                            ${personsHtml}
+                        </div>
+                    </section>
+                `;
+
+                // Bouton retour : on ré-affiche la vue principale
+                const backBtn = document.getElementById('sidebar-back-btn');
+                if (backBtn) {
+                    backBtn.addEventListener('click', () => {
+                        detail.style.display = 'none';
+                        main.style.display = 'block';
+                    });
+                }
+
+                // Clic sur un personnage = fiche personnage popup
+                detail.querySelectorAll('.detail-person-chip').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const name = btn.getAttribute('data-person');
+                        if (!name) return;
+                        this.showPersonSheet(name);
                     });
                 });
 
-                // on trace la frise à partir de tous les événements du personnage
-                this.drawTimeline(events);
+                // Clic sur le titre "chronologie condensée." = ouvre l'index des événements
+                const chronoTitle = detail.querySelector('.detail-section-title-clickable');
+                if (chronoTitle && typeof this.openEventsDirectory === 'function') {
+                    chronoTitle.addEventListener('click', () => {
+                        this.openEventsDirectory();
+                    });
+                }
+
+                // Clic sur un événement de la liste = ouvre la fiche individuelle (lien généré)
+                const timelineContainer = detail.querySelector('#sidebar-country-timeline');
+                if (timelineContainer) {
+                    timelineContainer.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const url = btn.getAttribute('data-lien');
+                            if (url) {
+                                window.open(url, '_blank');
+                            }
+                        });
+                    });
+                }
+
+                // Afficher la vue détail dans la sidebar
+                main.style.display = 'none';
+                detail.style.display = 'block';
+
+                // Mini-carte dans la sidebar (on garde ta logique actuelle)
+                const mapDiv = document.getElementById('sidebar-country-map');
+                if (mapDiv) {
+                    if (!this.sidebarCountryMap) {
+                        this.sidebarCountryMap = L.map('sidebar-country-map', {
+                            center: [20, 0],
+                            zoom: 3,
+                            zoomControl: false,
+                            attributionControl: false
+                        });
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 10
+                        }).addTo(this.sidebarCountryMap);
+                    }
+
+                    if (country && country.coordonnees) {
+                        const [lat, lng] = country.coordonnees;
+                        this.sidebarCountryMap.setView([lat, lng], 4);
+                    }
+
+                    setTimeout(() => this.sidebarCountryMap.invalidateSize(), 150);
+                }
+            }
+
+            buildCountryPersonsInline(countryName) {
+                if (!this.personIndex) return '';
+
+                const personsStats = [];
+
+                Object.values(this.personIndex).forEach(p => {
+                    const count = (p.events || []).filter(ev =>
+                        this.eventBelongsToCountry(ev, countryName)
+                    ).length;
+                    if (count > 0) {
+                        personsStats.push({ nom: p.nom, count });
+                    }
+                });
+
+                if (!personsStats.length) {
+                    return `
+                        <section class="timeline-inline-persons">
+                            <h4>personnages majeurs.</h4>
+                            <p class="no-events">Aucun personnage encore relié à ce pays.</p>
+                        </section>
+                    `;
+                }
+
+                personsStats.sort((a, b) => b.count - a.count);
+
+                return `
+                    <section class="timeline-inline-persons">
+                        <h4>personnages majeurs.</h4>
+                        <div class="detail-persons-list">
+                            ${personsStats.slice(0, 20).map(p => `
+                                <button class="detail-person-chip timeline-inline-person-chip"
+                                        data-person="${p.nom}">
+                                    ${p.nom} (${p.count})
+                                </button>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            buildGlobalPersonsInline(events) {
+                if (!this.personIndex) return '';
+
+                // On prend tous les personnages et on compte les évènements
+                // (si tu veux vraiment coller au filtre, adapte avec un Set d'évènements)
+                const personsStats = [];
+
+                Object.values(this.personIndex).forEach(p => {
+                    const count = (p.events || []).length;
+                    if (count > 0) {
+                        personsStats.push({ nom: p.nom, count });
+                    }
+                });
+
+                if (!personsStats.length) {
+                    return `
+                        <section class="timeline-inline-persons">
+                            <h4>personnages majeurs.</h4>
+                            <p class="no-events">Aucun personnage encore relié à ces évènements.</p>
+                        </section>
+                    `;
+                }
+
+                personsStats.sort((a, b) => b.count - a.count);
+
+                return `
+                    <section class="timeline-inline-persons">
+                        <h4>personnages majeurs.</h4>
+                        <div class="detail-persons-list">
+                            ${personsStats.slice(0, 30).map(p => `
+                                <button class="detail-person-chip timeline-inline-person-chip"
+                                        data-person="${p.nom}">
+                                    ${p.nom} (${p.count})
+                                </button>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            buildPersonCountriesInline(personName) {
+                if (!this.personIndex || !this.personIndex[personName]) {
+                    return '';
+                }
+
+                const p = this.personIndex[personName];
+                const countriesSet = new Set();
+
+                (p.events || []).forEach(ev => {
+                    this.eventCountries(ev).forEach(c => countriesSet.add(c));
+                });
+
+                const countries = Array.from(countriesSet)
+                    .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }));
+
+                if (!countries.length) {
+                    return `
+                        <section class="timeline-inline-countries">
+                            <h4>pays associés.</h4>
+                            <p class="no-events">Aucun pays encore relié à ce personnage.</p>
+                        </section>
+                    `;
+                }
+
+                return `
+                    <section class="timeline-inline-countries">
+                        <h4>pays associés.</h4>
+                        <div class="detail-persons-list">
+                            ${countries.map(c => `
+                                <button class="detail-person-chip timeline-inline-country-chip"
+                                        data-country="${c}">
+                                    ${c}
+                                </button>
+                            `).join('')}
+                        </div>
+                    </section>
+                `;
+            }
+
+            showPersonSheet(personName) {
+                const overlay = document.getElementById('detail-overlay');
+                const titleEl = document.getElementById('detail-title');
+                const subtitleEl = document.getElementById('detail-subtitle');
+                const statsEl = document.getElementById('detail-stats');
+                const timelineEl = document.getElementById('detail-timeline');
+                const personsEl = document.getElementById('detail-persons');
+                const personsTitleEl = document.getElementById('detail-persons-title');
+
+                if (!overlay || !titleEl || !statsEl || !timelineEl || !personsEl) return;
+                if (!this.personIndex || !this.personIndex[personName]) return;
+
+                const p = this.personIndex[personName];
+                const events = (p.events || []).slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+                const countriesSet = new Set();
+                events.forEach(ev => {
+                    const countries = this.eventCountries(ev);
+                    if (countries) countries.forEach(c => countriesSet.add(c));
+                });
+                const countriesList = Array.from(countriesSet);
+
+                titleEl.textContent = personName;
+
+                const years = events
+                    .map(ev => parseInt(ev.date.split('-')[0], 10))
+                    .filter(y => !isNaN(y));
+
+                const minY = years.length ? Math.min(...years) : null;
+                const maxY = years.length ? Math.max(...years) : null;
+
+                subtitleEl.textContent = events.length
+                    ? `≈ ${events.length} événement(s) de ${minY} à ${maxY}`
+                    : `aucun événement enregistré.`;
+
+                statsEl.innerHTML = `
+                    <div class="detail-stats-grid">
+                        <div>
+                            <div class="detail-stat-label">événements</div>
+                            <div class="detail-stat-value">${events.length}</div>
+                        </div>
+                        <div>
+                            <div class="detail-stat-label">période</div>
+                            <div class="detail-stat-value">
+                                ${minY !== null ? minY : '?'} – ${maxY !== null ? maxY : '?'}
+                            </div>
+                        </div>
+                        <div>
+                            <div class="detail-stat-label">pays associés</div>
+                            <div class="detail-stat-value">
+                                ${countriesList.length ? countriesList.join(', ') : '–'}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                if (events.length === 0) {
+                    timelineEl.innerHTML = `<p>Aucun événement à afficher.</p>`;
+                } else {
+                    timelineEl.innerHTML = events.map(ev => `
+                        <div class="detail-timeline-item">
+                            <strong>${ev.date}</strong> — ${ev.titre}
+                        </div>
+                    `).join('');
+                }
+
+                // Section pays liés : pastilles de pays
+                if (personsTitleEl) {
+                    personsTitleEl.textContent = 'pays liés.';
+                }
+
+                if (!countriesList.length) {
+                    personsEl.innerHTML = `<p class="no-events">Aucun pays encore relié à ce personnage.</p>`;
+                } else {
+                    personsEl.innerHTML = `
+                        <div class="detail-persons-list">
+                            ${countriesList
+                                .sort((a, b) => a.localeCompare(b, 'fr', { sensitivity: 'base' }))
+                                .map(c => `
+                                    <button class="detail-person-chip detail-country-chip"
+                                            data-country="${c}">
+                                        ${c}
+                                    </button>
+                                `).join('')}
+                        </div>
+                    `;
+                }
+
+                personsEl.querySelectorAll('.detail-country-chip').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const country = btn.getAttribute('data-country');
+                    if (!country) return;
+                    this.showCountrySheet(country);
+                });
+            });
+
+                // Mini carte : centrer sur le premier événement si coords dispo
+                const mapDiv = document.getElementById('detail-map');
+                if (mapDiv) {
+                    if (!this.detailMap) {
+                        this.detailMap = L.map('detail-map', {
+                            center: [20, 0],
+                            zoom: 3,
+                            zoomControl: false,
+                            attributionControl: false
+                        });
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            maxZoom: 10
+                        }).addTo(this.detailMap);
+                    }
+
+                    const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
+                    if (firstWithCoords) {
+                        const [lat, lng] = firstWithCoords.coords;
+                        this.detailMap.setView([lat, lng], 4);
+                    }
+
+                    setTimeout(() => this.detailMap.invalidateSize(), 150);
+                }
+
+                // Clic sur un pays lié = ouvrir la fiche pays (popup)
+                personsEl.querySelectorAll('.detail-country-chip').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const country = btn.getAttribute('data-country');
+                        if (!country) return;
+                        this.showCountrySheet(country);
+                    });
+                });
+
+                overlay.classList.add('open');
             }
 
             updateStats() {
@@ -2230,41 +4545,58 @@
                     iconAnchor: [iconSize/2, iconSize/2]
                 });
                 
-                let popupContent = `
-                    <div style="min-width: 250px;">
-                        <h3 style="margin: 0 0 12px 0; color: var(--couleur-accent);">${country.pays}</h3>
-                        <p><strong>${events.length}</strong> événement(s)</p>
+                // Contenu affiché en survol (tooltip)
+                let hoverContent = `
+                    <div style="min-width: 220px;">
+                        <h3 style="margin: 0 0 8px 0; color: var(--couleur-accent); font-size: 0.95rem;">
+                            ${country.pays}
+                        </h3>
+                        <p style="margin: 0 0 6px 0; font-size: 0.8rem;">
+                            <strong>${events.length}</strong> événement(s)
+                        </p>
                 `;
                 
                 events.slice(0, 3).forEach(event => {
                     const categoryIcon = this.getCategoryIcon(event.categorie);
-                    popupContent += `
-                        <div style="margin: 8px 0; padding: 12px; background: #f0f0f0; border-radius: 6px;">
-                            <div style="color: #3b82f6; font-weight: 600; margin-bottom: 4px;">
+                    hoverContent += `
+                        <div style="margin: 4px 0; padding: 6px 8px; background: rgba(15,23,42,0.05); border-radius: 6px;">
+                            <div style="font-size: 0.78rem; opacity: 0.9; margin-bottom: 2px;">
                                 ${categoryIcon} ${event.date}
                             </div>
-                            <div style="font-weight: 600;">
-                                ${event.lien && event.lien !== '#' 
-                                    ? `<a href="${event.lien}" target="_blank" style="color: #1e40af; text-decoration: underline;">${event.titre}</a>`
-                                    : event.titre
-                                }
+                            <div style="font-size: 0.8rem; font-weight: 600;">
+                                ${event.titre}
                             </div>
-            <div style="font-size: 0.9rem; opacity: 0.8;">${event.description}</div>
-        </div>
+                        </div>
                     `;
                 });
                 
                 if (events.length > 3) {
-                    popupContent += `<p><em>... et ${events.length - 3} autre(s)</em></p>`;
+                    hoverContent += `<p style="margin: 4px 0 0 0; font-size: 0.75rem; opacity: 0.8;">
+                        … et ${events.length - 3} autre(s)
+                    </p>`;
                 }
-                popupContent += '</div>';
+                hoverContent += '</div>';
                 
                 const marker = L.marker([lat, lng], { icon: customIcon })
-                    .bindPopup(popupContent, { maxWidth: 350 })
                     .addTo(this.markers);
                 
+                // Tooltip au survol au lieu du popup au clic
+                marker.bindTooltip(hoverContent, {
+                    direction: 'top',
+                    sticky: true,
+                    opacity: 0.95,
+                    className: 'marker-tooltip'
+                });
+                
+                // Clic = fiche pays dans la sidebar
                 marker.on('click', () => {
-                    this.showTimeline(country.pays, events);
+                    const sidebarEl = document.getElementById('sidebar');
+                    if (sidebarEl) {
+                        sidebarEl.classList.remove('collapsed'); // au cas où elle est fermée
+                    }
+                    if (typeof this.showCountrySidebarSheet === 'function') {
+                        this.showCountrySidebarSheet(country.pays);
+                    }
                 });
 
                 this.markers[country.pays] = marker;
@@ -2283,62 +4615,54 @@
                 return icons[category] || icons.default;
             }
             
-            showTimeline(countryName, eventsIgnorés) {
+            showTimeline(countryName) {
+                this.currentTimelineContext = {
+                    type: 'country',
+                    name: countryName
+                };
+
                 const timelineContent = document.getElementById('timeline-content');
                 const timeline = document.getElementById('timeline');
 
                 if (!timelineContent || !timeline) return;
 
                 timeline.classList.remove('collapsed');
-                document.getElementById('toggle-timeline').textContent = '▼';
+                const toggleBtn = document.getElementById('toggle-timeline');
+                if (toggleBtn) toggleBtn.textContent = '▼';
 
-                // ⚠️ On ignore complètement le paramètre "events"
-                // et on récupère TOUS les événements de ce pays, toutes années confondues.
-                const allEventsForCountry = this.cache.events
+                let events = this.cache.events
                     .filter(ev => this.eventBelongsToCountry(ev, countryName))
                     .sort((a, b) => new Date(a.date) - new Date(b.date));
 
-                let html = `
-                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
-                        📜 Timeline – ${countryName}
-                    </h3>
-                `;
+                events = this.filterEventsByTimelinePeriod(events);
 
-                if (!allEventsForCountry || allEventsForCountry.length === 0) {
-                    html += `<p>Aucun événement trouvé pour ${countryName}.</p>`;
-                    timelineContent.innerHTML = html;
-                    this.drawTimeline([]); // vide la frise
+                if (!events.length) {
+                    timelineContent.innerHTML = `
+                        <h3 class="timeline-section-title">📜 Timeline – ${countryName}</h3>
+                        <p>Aucun événement trouvé pour ${countryName}.</p>
+                    `;
+                    this.drawTimeline([]);
                     return;
                 }
 
-                allEventsForCountry.forEach((event, index) => {
-                    const categoryIcon = this.getCategoryIcon(event.categorie);
-                    const eventId = `timeline-event-${index}`;
+                // frise locale (en bas de l’écran carte)
+                this.drawTimeline(events);
 
-                    html += `
-                        <div class="timeline-event" id="${eventId}" data-link="${event.lien}">
-                            <div class="event-date">${categoryIcon} ${event.date}</div>
-                            <div class="event-title">${event.titre}</div>
-                            <div class="event-description">${event.description || ""}</div>
-                        </div>
-                    `;
+                // liste structurée par siècle + personnages au-dessus
+                const title = `📜 Timeline – ${countryName}`;
+                const personsInlineHtml = this.buildCountryPersonsInline(countryName);
+
+                timelineContent.innerHTML = this.buildTimelineList(events, {
+                    title,
+                    showCountries: false,
+                    showMiniMap: false,                    // 👉 on désactive la mini-map
+                    extraSummaryFooterHtml: personsInlineHtml // 👉 on met la liste des personnages
                 });
 
-                timelineContent.innerHTML = html;
-
-                // Clic sur une carte : ouvre la fiche
-                document.querySelectorAll('.timeline-event').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const link = el.getAttribute('data-link');
-                        if (link && link !== '#') {
-                            window.open(link, '_blank');
-                        }
-                    });
-                });
-
-                // Dessiner la frise sur TOUS les évènements du pays
-                this.drawTimeline(allEventsForCountry);
+                this.currentTimelineEvents = events;
+                this.setupTimelineListInteractions(timelineContent, events, 'country');
             }
+
 
             drawTimeline(events) {
                 const track = document.getElementById("timeline-track");
@@ -2351,8 +4675,13 @@
 
                 if (!events || events.length === 0) return;
 
-                const years = events
-                    .map(ev => parseInt(ev.date.split("-")[0], 10))
+                const years = (events || [])
+                    .map(ev => {
+                        if (!ev.date || typeof ev.date !== "string") return NaN;
+                        const yearStr = ev.date.split("-")[0];
+                        const year = parseInt(yearStr, 10);
+                        return isNaN(year) ? NaN : year;
+                    })
                     .filter(y => !isNaN(y));
 
                 if (years.length === 0) return;
@@ -2411,10 +4740,12 @@
                 const dots = [];
 
                 events.forEach((ev, index) => {
-                    const year = parseInt(ev.date.split("-")[0], 10);
+                    if (!ev.date || typeof ev.date !== "string") return;
+
+                    const yearStr = ev.date.split("-")[0];
+                    const year = parseInt(yearStr, 10);
                     if (isNaN(year)) return;
 
-                    // position horizontale basée sur start = -500
                     const xPos = (year - start) * pxPerYear;
                     const dot = document.createElement("div");
                     dot.className = "timeline-dot";
@@ -2447,25 +4778,59 @@
                     this.focusTimelineEvent(0);
                 }
 
-                // 🎚️ Zoom / dézoom à la molette
+                // Zoom + pan à la molette
                 track.onwheel = (e) => {
                     e.preventDefault();
 
+                    // Shift + molette = scroll horizontal (pan)
+                    if (e.shiftKey) {
+                        track.scrollLeft += e.deltaY; // inverse si tu préfères l’autre sens
+                        return;
+                    }
+
+                    // Sinon : zoom temporel
                     if (e.deltaY > 0) {
-                        // dézoomer (voir plus d'années)
+                        // dé-zoom
                         this.timelineZoom = Math.max(this.timelineMinZoom, this.timelineZoom / 1.6);
                     } else {
-                        // zoomer (voir moins d'années)
+                        // zoom
                         this.timelineZoom = Math.min(this.timelineMaxZoom, this.timelineZoom * 1.6);
                     }
 
-                    // on redessine la timeline avec le nouveau zoom
                     this.drawTimeline(this.currentTimelineEvents);
 
-                    // on recentre sur l'évènement sélectionné si possible
                     if (this.selectedTimelineIndex !== null) {
                         this.focusTimelineEvent(this.selectedTimelineIndex);
                     }
+                };
+
+                // Click & drag pour faire défiler la timeline
+                let isDragging = false;
+                let startX = 0;
+                let startScrollLeft = 0;
+
+                track.onmousedown = (e) => {
+                    isDragging = true;
+                    track.classList.add('dragging');
+                    startX = e.clientX;
+                    startScrollLeft = track.scrollLeft;
+                };
+
+                track.onmouseleave = () => {
+                    isDragging = false;
+                    track.classList.remove('dragging');
+                };
+
+                track.onmouseup = () => {
+                    isDragging = false;
+                    track.classList.remove('dragging');
+                };
+
+                track.onmousemove = (e) => {
+                    if (!isDragging) return;
+                    e.preventDefault();
+                    const dx = e.clientX - startX;
+                    track.scrollLeft = startScrollLeft - dx;
                 };
             }
 
@@ -2474,20 +4839,16 @@
                 const content = document.getElementById('timeline-global-content');
                 if (!track || !content) return;
 
-                // 1) Sélection des événements selon les filtres
                 let events = [];
 
                 if (this.eventDisplayMode === "all") {
-                    // Tous les événements (mode global)
-                    events = [...this.cache.events];
+                    events = this.cache.events.slice();
                 } else {
-                    // Seulement ceux visibles pour l'année sélectionnée
                     events = this.cache.events.filter(ev =>
                         this.isEventVisibleForYear(ev, this.selectedYear)
                     );
                 }
 
-                // Filtre par continent si besoin
                 if (this.selectedContinent !== "tous") {
                     const countriesInContinent = this.cache.countries
                         .filter(country => country.continent === this.selectedContinent)
@@ -2498,45 +4859,34 @@
                     );
                 }
 
-                if (events.length === 0) {
+                events = this.filterEventsByTimelinePeriod(events);
+
+                if (!events.length) {
                     track.innerHTML = "";
                     content.innerHTML = `<p>Aucun événement à afficher en chronologie mondiale.</p>`;
                     return;
                 }
 
-                // Trier par date
+                // tri chronologique
                 events.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-                // 2) Dessiner la frise
+                // zoom automatique de la frise
+                this.autoAdjustGlobalTimelineZoom(events);
+
+                // frise
                 this.drawGlobalTimeline(events);
 
-                // 3) Liste textuelle en dessous (simple)
-                let html = `
-                    <h3 style="color: var(--couleur-accent); margin-bottom: 16px;">
-                        🌍 Chronologie mondiale (${events.length} événement(s))
-                    </h3>
-                `;
-
-                events.forEach((ev, index) => {
-                    const icon = this.getCategoryIcon(ev.categorie);
-                    html += `
-                        <div class="timeline-event" data-global-index="${index}">
-                            <div class="event-date">${icon} ${ev.date} – ${ev.pays}</div>
-                            <div class="event-title">${ev.titre}</div>
-                            <div class="event-description">${ev.description || ""}</div>
-                        </div>
-                    `;
+                // liste épurée + mini résumé + liste des personnages (pas de mini-carte)
+                const title = `🌍 Chronologie mondiale (${events.length} événement(s))`;
+                content.innerHTML = this.buildTimelineList(events, {
+                    title,
+                    showCountries: true,
+                    showMiniMap: false,
+                    extraSummaryFooterHtml: this.buildGlobalPersonsInline(events)
                 });
 
-                content.innerHTML = html;
-
-                // Cliquer sur une carte = focus sur le point dans la frise
-                content.querySelectorAll(".timeline-event").forEach(card => {
-                    card.addEventListener("click", () => {
-                        const idx = parseInt(card.getAttribute("data-global-index"), 10);
-                        this.focusGlobalTimelineEvent(idx);
-                    });
-                });
+                // interactions (pliage des siècles, clic pour focus…)
+                this.setupTimelineListInteractions(content, events, 'world');
             }
 
             drawGlobalTimeline(events) {
@@ -2550,11 +4900,14 @@
 
                 if (!events || events.length === 0) return;
 
-                const years = events
-                    .map(ev => parseInt(ev.date.split("-")[0], 10))
+                const years = (events || [])
+                    .map(ev => {
+                        if (!ev.date || typeof ev.date !== "string") return NaN;
+                        const yearStr = ev.date.split("-")[0];
+                        const year = parseInt(yearStr, 10);
+                        return isNaN(year) ? NaN : year;
+                    })
                     .filter(y => !isNaN(y));
-
-                if (years.length === 0) return;
 
                 const maxYearEvents = Math.max(...years);
 
@@ -2609,15 +4962,18 @@
                 const dots = [];
 
                 events.forEach((ev, index) => {
-                    const year = parseInt(ev.date.split("-")[0], 10);
+                    if (!ev.date || typeof ev.date !== "string") return;
+
+                    const yearStr = ev.date.split("-")[0];
+                    const year = parseInt(yearStr, 10);
                     if (isNaN(year)) return;
 
                     const xPos = (year - start) * pxPerYear;
                     const dot = document.createElement("div");
-                    dot.className = "timeline-dot"; // tu peux changer la classe si tu veux un look spécial
+                    dot.className = "timeline-dot";
                     dot.style.left = xPos + "px";
 
-                    const description = `${ev.date} – ${ev.pays} – ${ev.titre}`;
+                    const description = `${ev.date} – ${Array.isArray(ev.pays) ? ev.pays.join(", ") : ev.pays} – ${ev.titre}`;
 
                     dot.addEventListener("mouseenter", () => {
                         tooltip.textContent = description;
@@ -2652,32 +5008,96 @@
                     next.onclick = () => this.moveGlobalTimeline(1);
                 }
 
-                // 🎚️ Zoom / dézoom à la molette
                 track.onwheel = (e) => {
                     e.preventDefault();
 
+                    // Shift + molette = pan horizontal
+                    if (e.shiftKey) {
+                        track.scrollLeft += e.deltaY;
+                        return;
+                    }
+
+                    // Sinon : zoom global
                     if (e.deltaY > 0) {
-                        // dézoomer (voir plus d’années)
                         this.timelineGlobalZoom = Math.max(
                             this.timelineGlobalMinZoom,
                             this.timelineGlobalZoom / 1.2
                         );
                     } else {
-                        // zoomer (voir moins d’années)
                         this.timelineGlobalZoom = Math.min(
                             this.timelineGlobalMaxZoom,
                             this.timelineGlobalZoom * 1.2
                         );
                     }
 
-                    // on redessine la timeline globale avec le nouveau zoom
                     this.drawGlobalTimeline(this.currentGlobalTimelineEvents);
 
-                    // on recentre sur l’évènement sélectionné si possible
                     if (this.selectedGlobalTimelineIndex !== null) {
                         this.focusGlobalTimelineEvent(this.selectedGlobalTimelineIndex);
                     }
+
+                    let isDragging = false;
+                    let startX = 0;
+                    let startScrollLeft = 0;
+
+                    track.onmousedown = (e) => {
+                        isDragging = true;
+                        track.classList.add('dragging');
+                        startX = e.clientX;
+                        startScrollLeft = track.scrollLeft;
+                    };
+
+                    track.onmouseleave = () => {
+                        isDragging = false;
+                        track.classList.remove('dragging');
+                    };
+
+                    track.onmouseup = () => {
+                        isDragging = false;
+                        track.classList.remove('dragging');
+                    };
+
+                    track.onmousemove = (e) => {
+                        if (!isDragging) return;
+                        e.preventDefault();
+                        const dx = e.clientX - startX;
+                        track.scrollLeft = startScrollLeft - dx;
+                    };
                 };
+            }
+            
+            refreshCurrentTimelineView() {
+                const activeTab = document.querySelector('.timeline-tab.active');
+                const mode = activeTab ? activeTab.dataset.mode : 'country';
+
+                if (mode === 'world') {
+                    this.showGlobalTimeline();
+                    return;
+                }
+
+                if (mode === 'country') {
+                    const current = this.currentTimelineContext && this.currentTimelineContext.type === 'country'
+                        ? this.currentTimelineContext.name
+                        : null;
+
+                    const select = document.getElementById('timeline-country-select');
+                    const name = current || (select && select.value) || null;
+
+                    if (name) this.showTimeline(name);
+                    return;
+                }
+
+                if (mode === 'person') {
+                    const current = this.currentTimelineContext && this.currentTimelineContext.type === 'person'
+                        ? this.currentTimelineContext.name
+                        : null;
+
+                    const select = document.getElementById('timeline-person-select');
+                    const name = current || (select && select.value) || null;
+
+                    if (name) this.showPersonTimeline(name);
+                    return;
+                }
             }
 
             focusGlobalTimelineEvent(index) {
@@ -3406,6 +5826,240 @@
                     resetMapHighlights() {
                         // Placeholder si tu veux plus tard réinitialiser des styles spéciaux de comparaison
                     }
+                
+            // ============================
+            // POPUP ANNUAIRE – GENERIQUE
+            // ============================
+
+            openDirectory(title, innerHtml) {
+                if (!this.directoryOverlay || !this.directoryContentElem || !this.directoryTitleElem) return;
+                this.directoryTitleElem.textContent = title;
+                this.directoryContentElem.innerHTML = innerHtml;
+                this.directoryOverlay.classList.add('open');
+            }
+
+            closeDirectory() {
+                if (!this.directoryOverlay) return;
+                this.directoryOverlay.classList.remove('open');
+            }
+
+            // Annuaire : tous les événements (groupés par pays)
+            openEventsDirectory() {
+                const events = [...(this.cache.events || [])];
+
+                if (events.length === 0) {
+                    this.openDirectory('tous les événements par pays', '<p class="no-events">Aucun événement à afficher.</p>');
+                    return;
+                }
+
+                // Regrouper par pays (en dupliquant l'événement s'il concerne plusieurs pays)
+                const groups = {};
+                events.forEach(ev => {
+                    let countries = this.eventCountries(ev); // gère déjà string / liste
+                    if (!countries || countries.length === 0) {
+                        countries = ['(sans pays)'];
+                    }
+
+                    countries.forEach(rawName => {
+                        const name = (rawName || '(sans pays)').toString().trim();
+                        if (!groups[name]) groups[name] = [];
+                        groups[name].push(ev);
+                    });
+                });
+
+                // Trier les pays par ordre alphabétique
+                const countryNames = Object.keys(groups).sort((a, b) =>
+                    a.localeCompare(b, 'fr', { sensitivity: 'base' })
+                );
+
+                let html = '';
+
+                countryNames.forEach(country => {
+                    const list = groups[country];
+
+                    // Trier les événements de ce pays par titre
+                    list.sort((a, b) => {
+                        const ta = (a.titre || '').toString();
+                        const tb = (b.titre || '').toString();
+                        return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                    });
+
+                    html += `<section class="directory-section">
+                                <div class="directory-letter">${country}</div>
+                                <ul class="directory-list">`;
+
+                    list.forEach(ev => {
+                        const paysList = this.eventCountries(ev).join(', ');
+                        const titre = ev.titre || '(sans titre)';
+                        const date = ev.date || '';
+                        const lien = ev.lien && ev.lien !== '#' ? ev.lien : null;
+
+                        html += `
+                            <li class="directory-item">
+                                <div>
+                                    ${
+                                        lien
+                                            ? `<a href="${lien}" target="_blank" class="directory-item-title directory-item-title-link">${titre}</a>`
+                                            : `<span class="directory-item-title">${titre}</span>`
+                                    }
+                                    <div class="directory-item-meta">
+                                        ${date ? `<span>${date}</span>` : ''}
+                                        ${paysList ? `<span class="directory-chip">${paysList}</span>` : ''}
+                                    </div>
+                                </div>
+                            </li>
+                        `;
+                    });
+
+                    html += `   </ul>
+                            </section>`;
+                });
+
+                this.openDirectory('tous les événements par pays', html);
+            }
+
+            // Annuaire : tous les personnages (ordre alphabétique + lettres)
+            openPersonsDirectory() {
+                const persons = Object.values(this.personIndex || {});
+
+                if (persons.length === 0) {
+                    this.openDirectory('tous les personnages', '<p class="no-events">Aucun personnage référencé.</p>');
+                    return;
+                }
+
+                // Tri alphabétique global
+                persons.sort((a, b) => {
+                    const na = (a.nom || '').toString();
+                    const nb = (b.nom || '').toString();
+                    return na.localeCompare(nb, 'fr', { sensitivity: 'base' });
+                });
+
+                // Regroupement par lettre
+                const groups = {};
+                persons.forEach(p => {
+                    const name = (p.nom || '').toString().trim();
+                    const firstChar = name ? name[0].toUpperCase() : '?';
+                    const letter = /[A-ZÀ-ÖØ-Ý]/.test(firstChar) ? firstChar : '#';
+                    if (!groups[letter]) groups[letter] = [];
+                    groups[letter].push(p);
+                });
+
+                const letters = Object.keys(groups).sort((a, b) =>
+                    a.localeCompare(b, 'fr', { sensitivity: 'base' })
+                );
+
+                let html = '';
+
+                letters.forEach(letter => {
+                    html += `<section class="directory-section">
+                                <div class="directory-letter">${letter}</div>
+                                <ul class="directory-list">`;
+
+                    groups[letter].forEach(p => {
+                        const paysSet = new Set();
+                        (p.events || []).forEach(ev => {
+                            this.eventCountries(ev).forEach(c => paysSet.add(c));
+                        });
+                        const paysList = Array.from(paysSet).join(', ');
+
+                        html += `
+                            <li class="directory-item">
+                                <button type="button"
+                                        class="directory-item-title directory-person-link"
+                                        data-person="${p.nom}">
+                                    ${p.nom}
+                                </button>
+                                <div class="directory-item-meta">
+                                    <span>${(p.events || []).length} événement(s)</span>
+                                    ${paysList ? `<span class="directory-chip">${paysList}</span>` : ''}
+                                </div>
+                            </li>
+                        `;
+                    });
+
+                    html += `   </ul>
+                            </section>`;
+                });
+
+                this.openDirectory('tous les personnages', html);
+
+                // Brancher les clics pour ouvrir la page du personnage
+                if (this.directoryContentElem) {
+                    this.directoryContentElem
+                        .querySelectorAll('.directory-person-link')
+                        .forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const name = btn.getAttribute('data-person');
+                                this.closeDirectory();
+                                this.showPersonPage(name);
+                            });
+                        });
+                }
+            }
+
+            // ============================
+            // Gestion des vues (desktop / mobile)
+            // ============================
+
+            setMainView(view) {
+                this.mainView = (view === 'timeline') ? 'timeline' : 'map';
+
+                document.body.classList.remove('view-map', 'view-timeline');
+                document.body.classList.add(this.mainView === 'timeline' ? 'view-timeline' : 'view-map');
+
+                // Met à jour l'état visuel des onglets desktop
+                document.querySelectorAll('.main-tab').forEach(btn => {
+                    const v = btn.dataset.mainView || 'map';
+                    btn.classList.toggle('active', v === this.mainView);
+                });
+
+                // Gérer l'état "collapsed" de la timeline suivant la vue
+                const timelineEl = document.getElementById('timeline');
+                const toggleTimelineBtn = document.getElementById('toggle-timeline');
+                if (timelineEl && toggleTimelineBtn) {
+                    if (this.mainView === 'timeline') {
+                        timelineEl.classList.remove('collapsed');
+                        toggleTimelineBtn.textContent = '▼';
+                    } else {
+                        timelineEl.classList.add('collapsed');
+                        toggleTimelineBtn.textContent = '▲';
+                    }
+                }
+
+                // Si on repasse en mode carte, on s'assure que le mobile mode est cohérent
+                if (window.innerWidth <= 768 && this.mainView === 'map' && this.mobileMode === 'timeline') {
+                    this.setMobileMode('map');
+                }
+            }
+
+            setMobileMode(mode) {
+                // mobile : 'map' | 'events' | 'timeline'
+                this.mobileMode = (mode === 'events' || mode === 'timeline') ? mode : 'map';
+
+                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline');
+                document.body.classList.add('mobile-mode-' + this.mobileMode);
+
+                // Les onglets mobile
+                document.querySelectorAll('.mobile-tab').forEach(btn => {
+                    const v = btn.dataset.mobileView || 'map';
+                    btn.classList.toggle('active', v === this.mobileMode);
+                });
+
+                // La vue principale associée
+                if (this.mobileMode === 'timeline') {
+                    this.setMainView('timeline');
+                } else {
+                    this.setMainView('map');
+                }
+
+                // Mode "événements" : forcer la sidebar ouverte
+                const sidebarEl = document.getElementById('sidebar');
+                if (sidebarEl) {
+                    if (this.mobileMode === 'events') {
+                        sidebarEl.classList.remove('collapsed');
+                    }
+                }
+            }
         }
         
         // ========================================
@@ -3455,6 +6109,7 @@
             }
         }
         
+
         // ========================================
         // INITIALISATION
         // ========================================

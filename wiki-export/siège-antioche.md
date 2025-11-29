@@ -1,16 +1,16 @@
 ---
 type: évènement
 titre: "Le siège d'Antioche"
-date: "1097"
+date: "1097-01-01"
 perpetuel: false  # ← Optionnel : true pour événements perpétuels
 pays: "Syrie"
 coords: [34.96176, 38.20598]  # ← Trouvez sur Google Maps
-description: "Description courte en une phrase"
+description: "À l’automne 1097, après la traversée éprouvante de l’Anatolie, l’essentiel des forces croisées se dirige vers Antioche, ancienne capitale byzantine de la région et verrou stratégique indispensable à toute progression vers la Palestine ou à tout projet de domination durable de la Syrie."
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
 lien: fiches/siège-antioche.html
 ---
 
-# Le siège d'Antioche
+# **Le siège d'Antioche**
 
 ## I. La Menace franque 
 

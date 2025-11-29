@@ -40,6 +40,14 @@
     ]
   },
   {
+    "pays": "Portugal",
+    "continent": "afrique",
+    "coordonnees": [
+      32.73772323339855,
+      -17.00895629428063
+    ]
+  },
+  {
     "pays": "Empire ottoman",
     "continent": "europe",
     "coordonnees": [
@@ -56,11 +64,27 @@
     ]
   },
   {
+    "pays": "Etats-Unis",
+    "continent": "amerique",
+    "coordonnees": [
+      40.7056297,
+      -74.0080942
+    ]
+  },
+  {
     "pays": "Syrie",
     "continent": "afrique",
     "coordonnees": [
       34.96176,
       38.20598
+    ]
+  },
+  {
+    "pays": "Sultanat mamluk d'Egypte",
+    "continent": "afrique",
+    "coordonnees": [
+      30.02399,
+      31.25946
     ]
   },
   {

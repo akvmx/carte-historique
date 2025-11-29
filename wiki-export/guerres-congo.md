@@ -1,17 +1,17 @@
 ---
 type: évènement
-titre: "Les guerres du Congo et l'imounité, de 1996 à 2019"
+titre: "Les guerres du Congo et l'immunité européenne, de 1996 à 2019"
 date: "1996-10-01"
 perpetuel: true  # ← Optionnel : true pour événements perpétuels
 pays: "République démocratique du Congo"
 coords: [-2.8800, 23.6560]  # ← Trouvez sur Google Maps
-description: "Cycle de guerres, massacres et prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale dénoncée par le docteur Denis Mukwege et de nombreux témoins."
+description: "Le cycle de guerres causé par la prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale."
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
 personnages: "Léopold II"
 lien: fiches/guerres-congo.html
 ---
 
-# Les guerres du Congo et l’impunité (1996–2019)
+# **Les guerres du Congo et l’impunité (1996–2019)**
 
 ## I. Un pays filmé dans la durée : violence, silence et figure du témoin
 
