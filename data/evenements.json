@@ -45,6 +45,27 @@
     "lien": "fiches/bataille-friedland.html"
   },
   {
+    "titre": "La bataille de Leipzig",
+    "date": "1813-10-16",
+    "date_fin": "1813-10-19",
+    "perpetuel": false,
+    "pays": "Allemagne",
+    "coords": [
+      51.18446,
+      14.42367
+    ],
+    "description": "En août 1813, la campagne d’Allemagne atteint un tournant décisif. Après la retraite de Russie, l’Empire français demeure encore une puissance militaire de premier plan, mais fait désormais face à une coalition sans précédent. Le 26 août 1813, dans les environs de Dresde, au cœur du royaume de Saxe, la Grande Armée inflige aux Alliés leur plus grande défaite de l’année.",
+    "categorie": "guerre",
+    "personnages": [
+      "Napoléon Bonaparte",
+      "Gebhard Leberecht von Blücher",
+      "Charles de Schwarzenberg",
+      "Jean-Baptiste Bernadotte",
+      "Joachim Murat"
+    ],
+    "lien": "fiches/bataille-leipzig.html"
+  },
+  {
     "titre": "La campagne d'Espagne",
     "date": "1808-05-02",
     "date_fin": "1814-04-17",
@@ -58,6 +79,21 @@
     "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/campagne-espagne-napoléon.html"
+  },
+  {
+    "titre": "La campagne de France",
+    "date": "1814-01-01",
+    "date_fin": "1814-01-01",
+    "perpetuel": false,
+    "pays": "France",
+    "coords": [
+      46.2276,
+      2.2137
+    ],
+    "description": "Description courte en une phrase",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/campagne-france.html"
   },
   {
     "titre": "La campagne d'Allemagne par Napoléon",
@@ -95,7 +131,7 @@
   },
   {
     "titre": "La guerre du sucre",
-    "date": "1419-014-01",
+    "date": "1419-01-01",
     "date_fin": false,
     "perpetuel": true,
     "pays": "Portugal",
@@ -104,24 +140,9 @@
       -17.00895629428063
     ],
     "description": "Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...",
-    "categorie": "politique",
+    "categorie": "politiques",
     "personnages": null,
     "lien": "fiches/docu-sucre.html"
-  },
-  {
-    "titre": "Le déclin de l'Empire ottoman",
-    "date": "1900-01-01",
-    "date_fin": "1901-01-à1",
-    "perpetuel": true,
-    "pays": "Empire ottoman",
-    "coords": [
-      39.41626,
-      35.379558
-    ],
-    "description": "Pourquoi l'Empire ottoman a décliné.",
-    "categorie": "politique",
-    "personnages": null,
-    "lien": "fiches/déclin-ottoman.html"
   },
   {
     "titre": "Les guerres du Congo et l'immunité européenne, de 1996 à 2019",
@@ -163,10 +184,54 @@
       39.41626,
       35.379558
     ],
-    "description": "Les origines de l'Empire Ottoman.",
+    "description": "Sur les marges byzantines se forment des beyliks frontaliers, peu structurés mais animés par une idéologie de frontière : celle des *ghazi*, combattants de la foi chargés de défendre l’islam et d’entretenir la guerre.",
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/origines-ottoman.html"
+  },
+  {
+    "titre": "La première croisade, en Anatolie",
+    "date": "1097-01-01",
+    "date_fin": "1099-01-01",
+    "perpetuel": false,
+    "pays": "Turquie",
+    "coords": [
+      38.9320501,
+      35.448558
+    ],
+    "description": "Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum.",
+    "categorie": "croisade",
+    "personnages": [
+      "Godefroy de Bouillon",
+      "Raymond de Saint-Gilles",
+      "Tancrède de Hauteville",
+      "Baudouin du Bourg"
+    ],
+    "lien": "fiches/première-croisade.html"
+  },
+  {
+    "titre": "La première croisade, de Tripoli à Jérusalem",
+    "date": "1098-01-01",
+    "date_fin": "1099-01-01",
+    "perpetuel": false,
+    "pays": [
+      "Syrie"
+    ],
+    "coords": [
+      34.96176,
+      38.20598
+    ],
+    "description": "Après les querelles autour de Tripoli, Raymond de Saint-Gilles a réussi, un temps, à réunifier la croisade sous son autorité. Il entraîne l’armée devant Arqa et utilise le siège pour ses propres ambitions : se tailler une principauté personnelle au Liban.",
+    "categorie": "politique",
+    "personnages": [
+      "Godefroy de Bouillon",
+      "Raymond de Saint-Gilles",
+      "Tancrède de Hauteville",
+      "Baudouin du Bourg",
+      "Alexis Ier Comnène",
+      "Al-Afdal Shahanshah"
+    ],
+    "lien": "fiches/première-croisade2.html"
   },
   {
     "titre": "Le siège d'Antioche",
@@ -216,21 +281,6 @@
     "categorie": "politique",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/traité-presbourg.html"
-  },
-  {
-    "titre": "Les Turcs seljukides dans le contexte des croisades",
-    "date": "990-01-01",
-    "date_fin": "1081-01-01",
-    "perpetuel": false,
-    "pays": "Empire Seljuk",
-    "coords": [
-      35.73834183660386,
-      51.357234044865045
-    ],
-    "description": "L'expansion de l'Empire seljuk au Xème siècle.",
-    "categorie": "politique",
-    "personnages": null,
-    "lien": "fiches/turcs-seljukides-croisades.html"
   },
   {
     "titre": "Léopold II dans l'Etat indépendant du Congo",

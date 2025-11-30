@@ -1,12 +1,12 @@
 ---
 type: évènement
 titre: La guerre du sucre
-date: 1419-014-01
+date: 1419-01-01
 perpetuel: true
 pays: Portugal
 coords: [32.73772323339855, -17.00895629428063]
 description: Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...
-categorie: politique
+categorie: politiques
 lien: fiches/docu-sucre.html
 ---
 

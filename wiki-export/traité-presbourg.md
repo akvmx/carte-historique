@@ -11,7 +11,7 @@ personnages: "Napoléon Bonaparte"
 lien: fiches/traité-presbourg.html
 ---
 
-# **Le traité de Presbourg (26 décembre 1805) : paix imposée, ordre continental refondu, guerre différée**
+# **Le traité de Presbourg (26 décembre 1805)**
 
 ## ## I. L’après-Austerlitz à Presbourg : une paix sous contrainte réciproque
 

@@ -12,7 +12,7 @@ personnages:
 lien: fiches/aaa.html
 ---
 
-# Titre principal de votre article
+# **Titre principal de votre article**
 
 ## Déroulement des événements
 

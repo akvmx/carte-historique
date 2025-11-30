@@ -16,19 +16,19 @@
     ]
   },
   {
-    "pays": "Espagne",
-    "continent": "europe",
-    "coordonnees": [
-      40.4168,
-      -3.7038
-    ]
-  },
-  {
     "pays": "Allemagne",
     "continent": "europe",
     "coordonnees": [
       51.18446,
       14.42367
+    ]
+  },
+  {
+    "pays": "Espagne",
+    "continent": "europe",
+    "coordonnees": [
+      40.4168,
+      -3.7038
     ]
   },
   {
@@ -48,14 +48,6 @@
     ]
   },
   {
-    "pays": "Empire ottoman",
-    "continent": "europe",
-    "coordonnees": [
-      39.41626,
-      35.379558
-    ]
-  },
-  {
     "pays": "République démocratique du Congo",
     "continent": "afrique",
     "coordonnees": [
@@ -69,6 +61,22 @@
     "coordonnees": [
       40.7056297,
       -74.0080942
+    ]
+  },
+  {
+    "pays": "Empire ottoman",
+    "continent": "europe",
+    "coordonnees": [
+      39.41626,
+      35.379558
+    ]
+  },
+  {
+    "pays": "Turquie",
+    "continent": "europe",
+    "coordonnees": [
+      38.9320501,
+      35.448558
     ]
   },
   {
@@ -93,14 +101,6 @@
     "coordonnees": [
       48.14685,
       17.09731
-    ]
-  },
-  {
-    "pays": "Empire Seljuk",
-    "continent": "afrique",
-    "coordonnees": [
-      35.73834183660386,
-      51.357234044865045
     ]
   }
 ]

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La première croisade, de Tripoli à Jérusalem</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La première croisade, de Tripoli à Jérusalem</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Politique"</span>
+                    <span class="badge badge-ghost">📅 1098-01-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Syrie</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1098-01-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Politique"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La première croisade, de Tripoli à Jérusalem</strong></h1></p><p><h2>I. Arqa, la lettre d’Alexis et la chute de Raymond</h2></p><p>Après les querelles autour de Tripoli, Raymond de Saint-Gilles a réussi, un temps, à réunifier la croisade sous son autorité. Il entraîne l’armée devant Arqa et utilise le siège pour ses propres ambitions : se tailler une principauté personnelle au Liban. Mais sa position est fragile. Godefroy de Bouillon, qui a renoncé à ses propres rêves d’Antioche pour se retrouver de facto subordonné à Raymond, supporte de moins en moins de risquer la croisade pour un siège interminable et manifestement égoïste. Il demande la levée du siège et, très vite, nombre de pèlerins et plusieurs chefs, notamment Tancrède, se rallient à lui. Tancrède, que Raymond avait jusqu’ici payé pour s’assurer son soutien, estime manifestement que ce n’est plus suffisant.</p><p>C’est dans ce climat tendu qu’arrive, le 10 avril, une lettre de l’empereur byzantin Alexis Ier Comnène. L’empereur propose enfin de rejoindre la croisade avec sa propre armée, de prendre à sa charge les frais des croisés et de conduire le tout vers Jérusalem. Sur le papier, c’est une offre impériale idéale. Le problème est double. D’abord, Alexis ne peut arriver qu’à la fin juin ou au début juillet, autrement dit beaucoup trop tard aux yeux des chefs francs, qui savent qu’ils sont déjà au bout de leurs forces. Ensuite, la lettre vise clairement à se rapprocher de Raymond, son allié le plus loyal parmi les croisés et son meilleur relais contre Bohémond, qui l’a évincé d’Antioche. Alexis espère se ménager l’avenir : ne pas se mettre les croisés à dos au cas où ils réussiraient et pourraient se retourner contre lui, continuer à les utiliser comme il l’a fait en Anatolie, et, en même temps, préserver ses relations anciennes avec les Fatimides, qui contrôlent désormais la Palestine et sont devenus la cible de la croisade.</p><p>Pris entre croisés latins turbulents et califat fatimide, avec lequel Byzance entretient de longue date des relations cordiales, Alexis louvoie. Il envoie cette lettre rassurante aux croisés tout en répondant aux Fatimides, inquiets de l’avancée franque, qu’il ne contrôle pas cette armée, qu’il ne la connaît pas vraiment et qu’ils n’ont rien à craindre de lui. Il ment, comme le veut la tradition raffinée des intrigues byzantines, pour se préserver sur tous les fronts. Raymond, de son côté, est enthousiaste. Une chrétienté unie, mariant la bravoure franque à la poliorcétique et à l’art stratégique grecs, lui paraît la combinaison idéale. Son alliance personnelle avec Alexis ne fait que renforcer cette conviction. Et le délai joué en faveur de l’empereur lui laisserait largement le temps de s’emparer d’Arqa, voire de Tripoli, avant l’arrivée de l’armée impériale, consolidant ainsi sa position de grand seigneur oriental.</p><p>Les autres chefs, Godefroy en tête, sont beaucoup plus catégoriques. Ils refusent l’idée d’attendre : la situation est trop fragile, les hommes trop épuisés. Surtout, aucun n’a oublié qu’Alexis ne leur est pas venu en aide devant Antioche. Ils estiment avoir conquis, seuls, la plus grande part des territoires traversés. Il serait insupportable, à leurs yeux, de voir l’empereur byzantin apparaître à la fin pour leur ravir la gloire. Godefroy cherche par ailleurs à se dégager de la tutelle de Raymond et, si possible, à prendre la tête de la croisade ; sa fermeté correspond exactement aux attentes des chefs et des pèlerins. Elle lui ouvre une brèche politique.</p><p>Raymond sent son autorité vaciller. Avant même la lettre byzantine, il essaye de renforcer sa légitimité en s’appuyant sur le registre du sacré. Le 5 avril, le diacre provençal Pierre Barthélemy, déjà à l’origine de la redécouverte de la Sainte Lance à Antioche, revient avec une nouvelle vision, confirmant la valeur du siège d’Arqa et la légitimité de Raymond comme chef. Cette fois, cependant, beaucoup contestent ouvertement la réalité de ses visions, allant jusqu’à remettre en cause l’authenticité de la Sainte Lance elle-même. Barthélemy, choqué, demande l’ordalie du feu pour prouver sa bonne foi : le 8 avril, il traverse, en portant la lance, un couloir de brandons enflammés. Il en sort vivant et apparemment indemne, mais meurt douze jours plus tard de ses blessures ou de complications.</p><p>S’ensuivent d’interminables querelles d’interprétation. Certains affirment que la mort de Barthélemy prouve que la lance et ses visions étaient fausses. D’autres soulignent qu’il est d’abord sorti vivant du brasier, ce qui prouverait au contraire l’authenticité du miracle. D’autres encore prétendent qu’il a été poussé de nouveau dans le feu ou étouffé par la foule de pèlerins, qui se serait ruée sur lui pour arracher lambeaux de vêtements et lambeaux de peau afin de se constituer des reliques. Quelles que soient les explications, l’épisode discrédite définitivement Raymond : l’usage du sacré à des fins personnelles, ses amitiés byzantines et cet ordalie ambiguë ruinent son prestige. À l’inverse, la stature de Godefroy sort renforcée. Jusqu’ici relégué au second plan, il devient aux yeux de beaucoup le chef naturel de la croisade. S’il parvient à conduire l’armée jusqu’à Jérusalem, c’est lui qui récoltera les lauriers de toute l’expédition.</p><p>Le 13 mai, en larmes, Raymond se résout à lever le siège d’Arqa. Il jure de revenir un jour pour conquérir « sa » principauté, mais pour l’heure son crédit est épuisé. Les croisés quittent Arqa et repassent devant Tripoli. Raymond propose aussitôt de mettre la ville en état de siège. Il se heurte cette fois à un refus unanime. L’émir de Tripoli, soucieux d’éviter un affrontement, libère environ trois cents pèlerins prisonniers, verse quinze mille besants, remet des chevaux et des mulets, et, surtout, fournit des guides pour franchir la corniche libanaise vers le sud. Certains chroniqueurs affirment même qu’il promet, si les Francs s’emparent de Jérusalem, de se reconnaître leur vassal, voire de se convertir. Promesse peu coûteuse : si les Fatimides, bien plus nombreux, écrasent les croisés, cet engagement restera sans conséquences.</p><p><h2>II. De la corniche libanaise au territoire fatimide : faux compromis et vraie rupture</h2></p><p>Le 16 mai, la croisade quitte définitivement la région de Tripoli et s’engage dans l’étroit ruban de terre coincé entre la montagne et la mer, le long de la corniche libanaise, où une embuscade bien menée pourrait les anéantir façon Thermopyles. Rien de tel ne se produit. Les guides fournis par Tripoli sont bientôt relayés par des guides chrétiens libanais, heureux de voir passer une armée chrétienne dans une région dominée depuis des décennies par des pouvoirs musulmans. La proximité constante de la mer permet encore aux flottes croisées de ravitailler ponctuellement l’armée. Plus au sud, dans les eaux contrôlées par les Fatimides, cette option disparaîtra.</p><p>Le 19 mai, les croisés franchissent le Nahr al-Kalb, le « fleuve du Chien », et campent devant Beyrouth. Ils entrent alors en territoire fatimide. Or, le rapport entre croisés et Fatimides est déjà lourd de malentendus. Les Fatimides, ennemis de longue date des Turcs seldjoukides, avaient cherché à s’allier aux Francs sous les murs d’Antioche, sur la base d’un partage : la Syrie pour les Turcs et leurs adversaires, la Palestine pour eux. Une forme de « Yalta » avant l’heure. Les chefs croisés n’avaient précisément ni accepté ni rejeté cet accord, laissant l’ambassade égyptienne partir satisfaite sans engagement écrit. Peu après, profitant de la défaite de Kerbogha, les Fatimides avaient repris Jérusalem aux Turcs de Sökmân et s’étaient emparés de la Palestine en 1098, convaincus que le flou des discussions et l’absence d’opposition franque signifiait un accord tacite.</p><p>Les croisés, eux, n’ont jamais entendu l’affaire ainsi. Leur objectif reste Jérusalem, quel que soit le maître actuel de la ville. Pendant que les Fatimides reconstituent leur domaine, les Francs continuent à manœuvrer en Syrie du Nord, puis à descendre vers Tripoli. Leur silence ne vaut pas consentement. Le vizir al-Afdal, puissant homme fort du califat fatimide, comprend tardivement le malentendu. Il tente alors un compromis minimal : une ambassade franque, revenue du Caire, est raccompagnée jusqu’à Arqa. Les Égyptiens proposent de garantir et de sécuriser le pèlerinage à Jérusalem, à condition que les contingents viennent désarmés, en groupes limités, comme de simples pèlerins. Autrement dit, ils reconnaissent la dimension spirituelle du voyage mais refusent tout contrôle militaire latin sur la ville sainte.</p><p>La réponse des croisés est unanime : refus catégorique. Ils n’ont pas traversé l’Europe et l’Anatolie, survécu aux sièges d’Antioche et d’Arqa, pour se contenter d’un pèlerinage sous escorte, en renonçant à l’idée d’une conquête. Forts de cette certitude, ils pénètrent sans hésitation en territoire fatimide. Leur réputation de barbares auprès des populations locales n’incite guère les garnisons à tenter des assauts désespérés. Beyrouth, comme de nombreuses autres villes côtières, préfère négocier. Seule Saïda, le 20 mai, offre une résistance sérieuse et tente une sortie avant d’être durement repoussée.</p><p>Les autres villes – Tyr, Acre, Haïfa, Césarée, Arsouf et d’autres – composent, payent, ou se déclarent villes ouvertes. Les croisés ne cherchent pas à imposer partout des garnisons ; ils visent désormais le but ultime. Devant Tyr, le 23 mai 1099, la croisade a la surprise et la joie de voir arriver des renforts venus de Syrie du Nord et du comté d’Édesse, commandés par Baudouin du Bourg, cousin de Baudouin de Boulogne et de Godefroy. Cela prouve qu’il reste encore, au nord, des seigneurs qui prennent au sérieux leur vœu d’aller jusqu’à Jérusalem, même si d’autres sont déjà occupés à consolider leurs propres principautés.</p><p>Réunis, les contingents avancent à l’intérieur des terres. Le 3 juin, ils entrent à Ramla, ville désertée, où ils laissent une petite garnison et installent un évêque. Certains posent alors une question stratégique : pourquoi ne pas marcher d’abord sur l’Égypte, s’emparer du Caire, puis revenir, en position de force, prendre Jérusalem ? L’idée, loin d’être absurde, reviendra plusieurs fois dans l’histoire des croisades. Mais, en 1099, l’armée franque ne compte plus que mille deux cents à mille cinq cents chevaliers et cinq à douze mille fantassins. Même avec la conviction que « Dieu pilote tout », un tel plan relève de l’illusion. Dans leur état, ils ne peuvent espérer un succès que par un coup de force rapide, concentré sur la ville sainte. La marche vers le sud reprend donc, dans la direction de Jérusalem.</p><p><h2>III. L’approche de Jérusalem et la préparation d’un siège désespéré</h2></p><p>À Emmaüs, sur les conseils de chrétiens locaux, Godefroy détache deux détachements en avant-garde. Le premier, dirigé par Baudouin du Bourg et Tancrède, se dirige vers Bethléem, qu’il atteint le 7 juin 1099. Les chrétiens de la ville les accueillent en libérateurs. Le second détachement, commandé par Gaston de Béarn, a pour mission de vérifier la sécurité de la route vers Jérusalem. Elle est dégagée : aucun obstacle majeur ne se dresse entre les croisés et la ville sainte.</p><p>Ce même 7 juin 1099, au petit matin, l’armée franque et les pèlerins aperçoivent enfin Jérusalem. Après près de quatre années de marche et plus de quatre mille kilomètres parcourus, ils se trouvent en vue du but. Exténués, à bout de forces, beaucoup avancent en priant, certains à genoux, d’autres en larmes. L’émotion mystique est immense. Mais le moment de l’exaltation passée, la réalité militaire s’impose brutalement. La ville est défendue par Iftikhar al-Dawla, gouverneur fatimide qui a pris la menace au sérieux. Il a renforcé les murailles, multiplié les préparatifs, empoisonné ou rendu inutilisables les sources proches, bouché les puits, coupé les canalisations, caché ou regroupé le bétail à l’abri, expulsé tous les chrétiens de la ville pour éviter les complicités intérieures, et rassemblé une garnison solide composée de soldats soudanais et arabes aguerris.</p><p>Face à cela, les croisés sont peu nombreux, épuisés, mal approvisionnés et surtout installés sur un plateau aride, brûlant, sans eau, au pied des murailles qu’ils désirent plus que tout. Ils ne connaissent rien des éventuels renforts fatimides, ignorent si al-Afdal préparera une grande armée de secours depuis l’Égypte. Leur progression depuis Antioche s’est faite finalement sans heurts majeurs, en dépit de tension diplomatiques et de quelques retournements de situation décisifs. Mais ce qui les attend devant Jérusalem est d’une autre nature : un siège difficile, dans des conditions climatiques extrêmes, contre une garnison préparée, sans garantie de renforts, sans flotte pour ravitailler par mer. Le voyage touche à son terme, mais la phase la plus ardue commence.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

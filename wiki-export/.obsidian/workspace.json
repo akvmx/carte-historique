@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docu-sucre.md",
+                "file": "première-croisade.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "docu-sucre"
+              "title": "première-croisade"
             }
           }
         ],
@@ -56,7 +56,7 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": true
               },
               "icon": "lucide-folder-closed",
               "title": "Explorateur de fichiers"
@@ -187,24 +187,29 @@
   },
   "active": "4eb3d06865edbc2f",
   "lastOpenFiles": [
-    "siège-antioche.md",
-    "bataille-austerlitz.md",
-    "bataille-eylau.md",
-    "bataille-friedland.md",
-    "campagne-espagne-napoléon.md",
-    "campagne-napoléon-allemagne.md",
-    "croisades-de-secours.md",
-    "déclin-ottoman.md",
-    "docu-sucre.md",
-    "état-indépendant-du-congo.md",
-    "guerres-congo.md",
-    "nouvelle-amsterdam-débuts.md",
     "origines-ottoman.md",
+    "première-croisade.md",
+    "turcs-seljukides-croisades.md",
+    "première-croisade2.md",
+    "croisades-de-secours.md",
+    "siège-antioche.md",
     "sultanat-mamluk.md",
     "traité-presbourg.md",
-    "turcs-seljukides-croisades.md",
-    "guerre-hollande-france.md",
+    "bataille-austerlitz.md",
+    "docu-sucre.md",
+    "campagne-napoléon-allemagne.md",
+    "cent-jours.md",
+    "campagne-france.md",
+    "campagne-espagne-napoléon.md",
+    "bataille-leipzig.md",
+    "bataille-friedland.md",
+    "bataille-eylau.md",
+    "nouvelle-amsterdam-débuts.md",
+    "guerres-congo.md",
     "templates/evènement.md",
+    "déclin-ottoman.md",
+    "état-indépendant-du-congo.md",
+    "guerre-hollande-france.md",
     "Untitled",
     "Sans titre.base",
     "Sans titre 1.base",

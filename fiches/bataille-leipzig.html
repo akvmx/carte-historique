@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La bataille de Leipzig</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La bataille de Leipzig</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1813-10-16</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Allemagne</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1813-10-16</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1>La bataille de Leipzig (1813)</h1></p><p><h2>La stratégie de la sixième coalition </h2></p><p>En août 1813, la campagne d’Allemagne atteint un tournant décisif. Après la retraite de Russie, l’Empire français demeure encore une puissance militaire de premier plan, mais fait désormais face à une coalition sans précédent. Le 26 août 1813, dans les environs de Dresde, au cœur du royaume de Saxe, la Grande Armée inflige aux Alliés leur plus grande défaite de l’année. Profitant d’un orage violent qui détrempe la poudre et rend les armes à feu presque inutilisables, Napoléon lance la cavalerie de Murat contre les troupes autrichiennes restées imprudemment en ligne sous le déluge. Privés d’une partie de leurs moyens de défense, incapables de riposter efficacement, les hommes de la coalition deviennent des cibles faciles pour les charges de cavalerie. Malgré un rapport de forces défavorable, la victoire est française.</p><p>Dans le quartier général allié, la défaite de Dresde a d’abord l’effet d’un choc moral. Certains se demandent si l’entreprise même de faire la guerre à Napoléon n’est pas une erreur. La discussion tourne à l’aigre avant que les responsables politiques et militaires ne reviennent à une appréciation plus froide de la situation. Si la bataille est une humiliation, l’heure n’est pas au découragement. La sixième coalition a pour elle le nombre et la profondeur stratégique. Elle réunit la moitié de l’Europe : Autriche, Russie, Prusse, Suède, Royaume-Uni, Espagne, Portugal, mais aussi des contingents français royalistes prêts à se soulever si l’Empereur venait à être vaincu. Face à ce bloc, les ressources françaises sont plus limitées. L’Empire ne peut aligner qu’environ 450 000 hommes, dont près de 100 000 sont immobilisés dans des places fortes assiégées, loin du champ de bataille principal. Les Alliés disposent, eux, d’environ 550 000 soldats, largement financés et soutenus par la puissance maritime et commerciale britannique.</p><p>Conscients que l’affrontement direct avec Napoléon tourne en général à leur désavantage, les dirigeants de la coalition adoptent un principe stratégique nouveau : il faut, autant que possible, éviter de livrer bataille à l’Empereur en personne. La supériorité numérique doit être exploitée non en cherchant un choc décisif immédiat, mais en épuisant son armée de manière indirecte. Le plan adopté, conçu autour des idées de Schwarzenberg, repose sur deux axes : concentrer systématiquement la supériorité numérique contre les maréchaux plutôt que contre Napoléon lui-même ; n’engager l’Empereur que dans des conditions d’écrasante supériorité. L’objectif est d’entamer progressivement l’instrument militaire français, de forcer Napoléon à se replier, de le priver de ses appuis, puis d’imposer la bataille au moment choisi par la coalition. Ce plan, parfois nommé plan de Trachenberg, est mis en œuvre par trois grands commandants alliés : le prince de Schwarzenberg, général autrichien à la tête de l’armée de Bohême, Blücher, le Prussien farouchement déterminé à venger son pays, et Bernadotte, ancien maréchal de l’Empire devenu prince héritier de Suède, désormais adversaire de la France qu’il avait servie. Leur action coordonnée, soutenue par l’Angleterre sur le plan financier, doit conduire à un affrontement gigantesque où se décidera le sort de l’Europe.</p><p>Au même moment, dans une université allemande, la défaite annoncée ou la victoire attendue de Napoléon nourrit une réflexion philosophique. Dans un cours de philosophie pratique, Hegel analyse la séquence révolutionnaire et impériale comme un moment charnière de l’histoire universelle. Il souligne que, depuis quelques années seulement, la face de l’Europe s’est profondément transformée. Sous l’impulsion de la Révolution française, relayée et diffusée par l’expansion napoléonienne, de nouveaux États sont apparus, des privilèges ont été abolis, la torture abandonnée, l’égalité civile entre juifs et chrétiens proclamée, des constitutions, des codes pénaux et des codes civils ont été promulgués. Dans cette perspective, Napoléon, empereur des Français et protecteur des Allemands, incarne pour Hegel le « héros des temps modernes », l’agent par lequel les idées de liberté, d’égalité et de rationalisation de l’État se propagent à travers le continent. Le philosophe n’ignore pas pour autant que ce processus se heurte à des résistances puissantes. Les aristocraties héréditaires d’Angleterre, d’Espagne, de Prusse, de Russie et d’Autriche se battront jusqu’au bout pour préserver leur ordre social, leurs privilèges et leur mode de gouvernement, fondés sur la monarchie de droit divin, l’alliance avec l’Église, et le maintien de la superstition et de l’ignorance comme instruments de pouvoir. Renverser Napoléon, c’est espérer étouffer l’héritage de la Révolution ; mais, selon Hegel, même si l’Empereur devait être détruit, la modernité politique qu’il a contribué à mettre en mouvement ne disparaîtrait pas. Les idées se sont enracinées, et leur reflux total est désormais improbable. Il annonce au passage que la lutte sera terrible : des milliers d’hommes mourront, des capitales brûleront, les combats seront sanglants, le continent sera ravagé avant que l’issue ne se dessine.</p><p><h2>III. L’effondrement progressif de Napoléon </h2></p><p>Sur le terrain, la stratégie alliée montre rapidement son efficacité. Si Dresde marque un succès éclatant pour Napoléon, ce dernier ne parvient pas à capitaliser durablement sur cette victoire. Sitôt l’Empereur éloigné, les armées coalisées reprennent l’initiative contre ses maréchaux. Bernadotte bat les Français à Grossbeeren le 21 août, Blücher les vainc à Katzbach le 26 août. Après Dresde, un corps français lancé à la poursuite de l’ennemi, mal soutenu par les autres maréchaux, est détruit à Kulm le 30 août. Ainsi, en quelques jours, trois victoires alliées viennent compenser l’échec de Dresde, confirmant que la méthode choisie — fuir Napoléon, frapper ses lieutenants — fonctionne. Napoléon tente alors de reprendre l’ascendant par une manœuvre de grande ampleur. Il décide de s’en prendre d’abord à l’armée qu’il juge la plus vulnérable, celle de Blücher. Il se porte vers l’est pour l’attaquer, tout en confiant le front nord à Ney, chargé de contenir Bernadotte. Sur le papier, le plan porte la marque habituelle de sa virtuosité opérative : fixer un adversaire, en détruire un autre par une concentration brutale, puis se retourner contre le premier. Mais la coalition, désormais prudente, refuse le jeu. Quand Napoléon approche, Blücher recule. Lorsqu’il se replie vers le sud pour parer à un autre mouvement, ses adversaires avancent ailleurs. Pendant tout le mois de septembre 1813, la campagne se transforme en un vaste chassé-croisé à travers la Saxe : marches forcées, contre-marches, occasions manquées, fatigue accumulée. La grande armée parcourt de longues distances sans obtenir la bataille décisive qu’elle recherche, tandis que les Alliés la harcèlent et se renforcent.</p><p>La coalition, en effet, n’entend pas se contenter d’user l’ennemi. Elle souhaite aussi l’encercler et l’isoler. Les renforts financés par l’Angleterre et recrutés en Russie descendent vers le sud pour renforcer l’armée de Bohême. Blücher et Bernadotte envisagent une manœuvre convergente vers Leipzig par l’ouest, l’objectif étant de marcher sur les arrières de Napoléon, de couper ses communications avec la France et de le forcer à une retraite précipitée ou à une bataille dans une position défavorable. De son côté, l’Empereur envisage un temps de se dérober vers le nord-est pour dégager les garnisons françaises assiégées, se saisir de Berlin et contraindre ainsi la Prusse à capituler. Une telle manœuvre lui permettrait de reconstituer sa masse et de reprendre l’initiative. Mais le contexte politique rend ce choix très risqué. La Bavière vient déjà de changer de camp, et d’autres États allemands surveillent l’évolution des forces pour se prononcer. Quitter la Saxe reviendrait à abandonner un espace stratégique clé et à accélérer les défections. Napoléon renonce à cette option et accepte l’idée d’un affrontement en Saxe, autour de Leipzig.</p><p><h2>La bataille des Nations et l’épuisement de la grande armée </h2></p><p>C’est dans ce cadre que s’organise la “bataille des Nations”. La coalition concentre des forces considérables : environ 300 000 hommes et 1 500 pièces d’artillerie, issus de toutes les puissances engagées, du grand empire autrichien aux plus petits duchés allemands. La Grande Armée aligne environ 160 000 soldats et 720 canons. Le rapport de forces brut est d’environ deux contre un. La veille du combat, des pluies torrentielles s’abattent sur la région, transformant les chemins et les plaines en bourbiers. La symbolique de cette tempête n’échappe à personne : jamais encore autant de soldats n’ont été rassemblés sur un seul théâtre d’opérations, et chacun sent que se joue là le sort non seulement de l’Empire, mais de l’équilibre politique européen. Le 16 octobre, dès l’aube, la Grande Armée prend ses positions autour de Leipzig. Au sud, Napoléon fait face à l’armée de Bohême commandée par Schwarzenberg, forte d’environ 230 000 hommes, mais dont seule une partie a pu franchir les rivières gonflées par les pluies et se déployer. Les terrains autour de la Pleisse et de l’Elster sont difficilement praticables, et une part importante des troupes coalisées reste bloquée à l’est des cours d’eau ou en arrière. Au matin, sur la ligne principale à hauteur des villages qui s’étendent du sud-est au sud-ouest de la ville, le rapport de forces est à peu près équilibré : environ 100 000 Français répondent à près de 100 000 coalisés. Si le XIᵉ corps français, retardé, avait été à l’heure, la supériorité locale aurait pu devenir décisive. </p><p>Napoléon décide de saisir cette fenêtre. Constatant que l’ennemi est mal rassemblé et dispersé, il entend porter l’effort sur le centre gauche allié, à proximité de villages où se trouvent non seulement les lignes autrichiennes, russes et prussiennes, mais aussi l’état-major de Schwarzenberg, l’Empereur d’Autriche et le roi de Prusse. Pour cela, il organise une grande batterie, rassemblant une centaine de pièces d’artillerie, destinée à ouvrir la voie à l’infanterie. Les canons concentrent leurs tirs sur un secteur limité, labourent les positions adverses, créent des brèches que l’infanterie française vient aussitôt exploiter à la baïonnette. Le combat devient rapidement un corps à corps acharné, rythmé par les alternances de salves d’artillerie et de charges de fantassins.</p><p>Une fois les premières lignes enfoncées, Murat rassemble la cavalerie pour porter le coup décisif. Revêtu de ses uniformes éclatants, fidèle à sa réputation de panache, il mène personnellement les charges au cœur du dispositif ennemi. Malgré le déluge de feu déclenché par une batterie de 120 canons coalisés pour couvrir l’état-major, les cavaliers français progressent jusqu’à proximité du point où se trouvent les têtes couronnées et les principaux généraux alliés. Pendant un instant, la possibilité d’une percée décisive, capable d’emporter la bataille et de mettre fin à la campagne, semble à portée de main. Mais deux facteurs viennent briser cet élan. D’abord, les renforts coalisés, longtemps immobilisés par les rivières et les marais, atteignent enfin le front sud et se jettent dans la mêlée pour colmater les brèches. Ensuite, la situation sur le front nord devient critique pour les Français. À mesure que Napoléon concentre ses réserves vers le sud, Blücher, à la tête de l’armée de Silésie, descend la rivière pour attaquer les positions françaises autour de Möckern, au nord de Leipzig. Les combats y sont tout aussi acharnés que dans le sud : chaque village, chaque rue est disputé pied à pied. Une explosion massive, provoquée par un boulet prussien tombé sur les réserves de poudre, ajoute à la confusion. Le maréchal Marmont, chargé de la défense de ce secteur, réclame désespérément des renforts, que Napoléon ne peut plus lui envoyer sans dégarnir dangereusement le front de Schwarzenberg.</p><p>Au fil de la journée, la dynamique bascule. Si, à midi, l’Empereur pouvait encore espérer emporter la décision au sud, l’arrivée progressive de nouvelles troupes coalisées, l’usure de ses propres unités et la pression croissante au nord renversent les équilibres. Vers la fin de l’après-midi, les Alliés engagent jusqu’à 130 000 hommes sur le front sud, tandis que leurs renforts continuent d’affluer en arrière. La Grande Armée, elle, a épuisé ses réserves engagées dans les attaques de la mi-journée. Les Français combattent avec acharnement, mais pour chaque soldat mis hors de combat du côté allié, un autre vient prendre sa place.</p><p> À la tombée de la nuit, vers vingt heures, les troupes françaises sont à bout de force, de munitions et de poudre. Elles ont tenu tête à un adversaire numériquement très supérieur, infligé des pertes considérables, manqué de peu la rupture du centre ennemi, mais elles ne disposent plus des moyens de poursuivre l’effort. La coalition, qui craignait tant d’affronter Napoléon en rase campagne, a réussi à l’attirer dans une bataille où la loi du nombre finit par s’imposer. L’Empereur, constatant l’épuisement de ses troupes et la dégradation de la situation au nord comme au sud, renonce à continuer les attaques et se replie dans ses quartiers pour la nuit. L’enjeu n’est plus désormais la victoire, mais la préservation de ce qui peut l’être et l’organisation d’une retraite ordonnée vers la France, dans un environnement où les défections des alliés allemands et la poursuite de la coalition menacent chacun de ses mouvements.</p><p><h2>IV. La recomposition des fronts</h2></p><p>Le 16 octobre 1813, dans les plaines détrempées de Saxe, s’accomplit l’un des renversements les plus significatifs des guerres napoléoniennes. La Grande Armée, déjà lourdement éprouvée par les mois précédents, affronte simultanément Russes, Autrichiens et Prussiens, conformément au vaste dispositif élaboré par la Sixième Coalition. La journée s’achève sur un constat accablant : malgré l’engagement de 125 000 Français et alliés sur le front sud, Napoléon échoue à enfoncer les 138 000 coalisés qui lui font face. Si les pertes s’équilibrent à un niveau effroyable — environ trente mille morts, blessés ou prisonniers dans chaque camp — l’arrivée annoncée d’une armée russe supplémentaire forte de 80 000 hommes rend impossible toute perspective de succès français.</p><p>La situation est tout aussi préoccupante sur les autres axes. À l’ouest, un corps autrichien franchit la Pleisse et verrouille définitivement les possibilités de soutien du IVᵉ corps vers le VIᵉ, lequel doit affronter seul les attaques de Blücher. Ce dernier, avec soixante mille hommes, bouscule Marmont autour de Möckern : à un contre deux, le maréchal ne peut empêcher la progression prussienne. Si environ 7 000 pertes sont recensées de part et d’autre, la Coalition peut reconstituer instantanément ses effectifs là où Napoléon n’attend que trente mille renforts, tandis que Bernadotte s’avance encore avec soixante-dix mille hommes en réserve. À l’issue de cette première journée, l’Empereur comprend que les données stratégiques ont irrémédiablement changé : malgré la ténacité de ses hommes, il n’existe plus de « raison d’espérer ».</p><p>Se pose alors une question politique majeure : les contingents étrangers de l’Empire : accepteront-ils de prolonger le combat pour ce qui apparaît désormais comme une cause perdue ? La dimension multinationale de la Grande Armée, force autant que fragilité, devient cruciale. Poniatowski, symbole de la fidélité polonaise, incarne l’attachement de certains alliés à Napoléon. Mais cette loyauté peut-elle survivre à l’effondrement militaire imminent, notamment dans le cas saxon, où le roi Frédéric-Auguste persiste à soutenir la France alors que ses troupes hésitent à mourir pour un Empire en déroute ?</p><p>Le 17 octobre, la pluie interrompt les opérations. Napoléon, abattu mais lucide, ordonne un resserrement méthodique de ses lignes : repli général au nord derrière les rives inondées de la Parthe, immobilité au sud, et surtout préparation discrète de la retraite. Le général Bertrand reçoit l’ordre de construire secrètement six ponts supplémentaires pour assurer l’évacuation. Dans le camp adverse, les souverains coalisés — roi de Prusse, tsar de Russie, empereur d’Autriche, roi de Suède — se félicitent d’un tournant stratégique décisif : Napoléon est acculé. Pourtant, un obstacle demeure : Bernadotte, dont l’ambition politique rivalise avec son prudentialisme militaire. L’ancien maréchal français, devenu prince héritier de Suède, rechigne à engager ses troupes au moment décisif, paralysant un temps la manœuvre d’encerclement. Après d’âpres discussions, un compromis est trouvé : un corps entier est placé sous commandement suédois pour forcer la main de Bernadotte. L’opération peut enfin être lancée : la Coalition s’apprête à refermer son étau sur Leipzig.</p><p>À l’aube du 18 octobre, les coalisés alignent près de 300 000 hommes en arc de cercle au sud et à l’est de Leipzig. Leur objectif est clair : former un front continu de plus de vingt kilomètres, sans brèche, puis avancer inexorablement vers la ville. Napoléon, contraint, adopte une posture défensive. L’idée est de tenir jusqu’à la nuit, infliger un maximum de pertes à l’ennemi, puis effectuer une retraite générale ordonnée dès la tombée du jour. Cette journée concentre l’une des densités de feu les plus terrifiantes de toute l’époque napoléonienne. Au nord, Steiner et Bernadotte convergent, soutenus par un bombardement intensif. Les désertions commencent dans les rangs saxons, dont certains régiments se rendent et passent aux Russes sans combattre. Au sud, les attaques coalisées contre Probstheida prennent un caractère d’acharnement presque mystique : Prussiens avide de revanche contre l’humiliation de 1806, Russes convaincus d’accomplir une mission quasi religieuse depuis l’incendie de Moscou, et Autrichiens soucieux d’empêcher que la Prusse ou la Russie ne tirent seuls profit de la chute française.</p><p>À Probstheida, la bataille atteint un paroxysme de violence. Murat, égal à sa légende, chante, exhorte, galvanise ses hommes sous des délu­ges ininterrompus de mitraille. Les assauts prussiens franchissent successivement des murs, puis se brisent sur des feux croisés savamment organisés. À l’est, Schönefeld devient le théâtre d’un affrontement apocalyptique : Marmont défend chaque maison, chaque jardin, chaque muraille, tandis que de Langeron, noble français rallié à la Russie, met en batterie près de 150 canons, complétés par les fusées Congreve britanniques — armes peu précises mais psychologiquement dévastatrices. Les Français, retranchés dans les hauteurs, les maisons, les cimetières, transforment le village en forteresse improvisée. Drouot, maître absolu de l’artillerie impériale, organise ses batteries avec un sang-froid quasi surnaturel. L’assaut russe finit par enfoncer une brèche, mais la Jeune Garde, lancée par Napoléon en personne, rétablit miraculeusement la situation. Toutefois, ces succès tactiques n’ont plus de portée stratégique. L’Empereur ne peut compenser l’infériorité numérique ni l’épuisement matériel. Dans l’ensemble du dispositif, l’armée française recule néanmoins lentement et méthodiquement, exécutant la manœuvre prévue : création d’un demi-cercle défensif autour de Leipzig pour permettre la retraite nocturne. Le soir venu, les coalisés hésitent : Napoléon recule-t-il par contrainte ou prépare-t-il un nouveau coup de théâtre ? L’incertitude renforce leur prudence. Mais l’Empereur, lui, sait que la retraite est inévitable. Ce qu’il ignore encore, c’est que le lendemain fera basculer la défaite en catastrophe.</p><p>L’aube du 19 octobre 1813 révèle le dernier acte de la tragédie. Les Français, encore intacts sur plusieurs points, ne sont pas anéantis, et leurs défenseurs reçoivent Napoléon avec une ferveur quasi héroïque : blessés, invalides, vétérans, conscrits, Saxons eux-mêmes applaudissent son passage dans Leipzig. Mais derrière cette loyauté poignante, tout s’effondre. L’Empereur franchit la rivière en direction de Lindenau et découvre, médusé, qu’aucun des ponts supplémentaires ordonnés deux jours plus tôt n’a été construit. Un seul pont permet l’évacuation de 120 000 à 130 000 hommes. L’état-major, peut-être convaincu d’une victoire encore possible, a omis l’ordre essentiel : assurer la retraite. Les rues se retrouvent saturées d’hommes, de chariots, de blessés</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La première croisade, en Anatolie</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La première croisade, en Anatolie</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Croisade"</span>
+                    <span class="badge badge-ghost">📅 1097-01-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Turquie</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1097-01-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Croisade"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La première croisade en Anatolie</strong></h1></p><p><h2> I. De Constantinople à Nicée</h2></p><p>Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum, qu’ils ne peuvent stratégiquement laisser derrière eux. Kilidj Arslan, le sultan, sous-estime gravement la menace. Il a écrasé sans peine les bandes précédentes venues avec Pierre l’Ermite et pense avoir affaire à la même qualité d’adversaires. Il part donc à l’est combattre l’émir turc d’Ismend, qu’il juge plus dangereux, en laissant à Nicée une garnison solide, sa femme, ses trésors et l’essentiel de ses biens. Lorsque des messagers l’alertent sur l’ampleur du danger, il revient trop tard. Le siège est déjà bien avancé. </p><p>Kilidj Arslan tente néanmoins de renverser la situation en personne, dirigeant une contre-attaque violente qui inflige aux croisés des pertes sérieuses. La bataille tourne finalement à la déroute pour les Turcs, contraints de fuir et d’abandonner la ville à sa garnison. Celle-ci pourrait pourtant tenir longtemps, car Nicée est bordée d’un lac par lequel arrive le ravitaillement. C’est ici que l’empire byzantin s’impose comme acteur décisif. Les Grecs font transporter par voie de terre une flotte sur des rondins, sur plusieurs kilomètres, afin de compléter le blocus par le lac. Là où les croisés, manquant de moyens, piétinaient, les Byzantins obtiennent la reddition de la ville, le 10 juin 1097, mais à l’empereur et non aux croisés. Ces derniers ont pourtant assuré la majeure partie du combat et du siège. Ils se voient soustraire leur victoire et le butin. Le ressentiment est immédiat et profond.</p><p>Nicée est une ville emblématique de la chrétienté, siège de conciles majeurs. Sa prise a une portée symbolique importante et la nouvelle se propage rapidement en Europe. Le succès, inattendu pour beaucoup, convainc nombre de sceptiques de prendre la croix, notamment les grandes cités portuaires italiennes comme Pise, Gênes et Venise, dont les flottes joueront plus tard un rôle indispensable dans l’installation durable des États latins d’Orient. Alexis Comnène, pourtant, utilise ce prestige à son profit. Il suit les croisés pour « consolider » les conquêtes derrière eux et profite de la situation pour exiger des seigneurs de second rang les mêmes serments que leurs chefs : toute ville reprise sur les Turcs doit être remise à Byzance. Des barons ambitieux comme Tancrède, qui comptaient s’enrichir, sont humiliés publiquement et forcés de céder. La rancœur, déjà vive après l’affaire de Nicée, s’accroît encore.</p><p>Dans le même temps, il faut reconnaître que les croisés dépendent étroitement de l’appareil byzantin. Une troupe impériale, commandée par le général Tatikios, les accompagne, avec des guides nombreux. Sans ces guides, ils seraient presque incapables de se repérer en Anatolie, qu’ils ignorent totalement. Ils ne connaissent ni le terrain ni les méthodes de combat turques. Étienne de Blois illustre cette naïveté : après Nicée, il estime pouvoir atteindre Jérusalem en cinq semaines. Il faudra en réalité deux ans pour y parvenir. Derrière la défiance naissante et les accusations de trahison, la croisade reste encore matériellement dépendante de Byzance.</p><p><h2>II. La traversée anatolienne : premières confrontations avec les Turcs et mise à l’épreuve de l’armée franque</h2></p><p>Après Nicée, les croisés s’enfoncent en Anatolie. Leur progression initiale est rapide, mais les Turcs se ressaisissent. Kilidj Arslan, son vassal Hassan et son ancien ennemi, l’émir d’Ismend, comprennent qu’ils doivent s’unir face à cette armée occidentale. En face, les croisés se divisent en plusieurs colonnes pour alléger la pression sur le ravitaillement, ce qui pourrait passer pour une imprudence mais répond d’abord à une nécessité logistique élémentaire.</p><p>Le 1er juillet, au matin, le premier corps d’armée, commandé par Bohémond, est encerclé par les forces turques. La situation est critique. La rapidité de la manœuvre du second corps, qui accourt à son secours, renverse le rapport de force. Les Turcs sont battus et leur campement pillé. Eux qui étaient jusque-là invaincus prennent la mesure de l’adversaire. La bataille, cependant, est rude pour les Francs. Ils y reconnaissent pour la première fois en leurs ennemis des combattants à leur mesure, là où ils considéraient les Byzantins et leurs machines de guerre comme des auxiliaires lourds, peu respectés et peu respectables. La confrontation installe une estime mutuelle durable, qui marquera l’imaginaire des siècles suivants.</p><p>Les Turcs, dans leur retraite, appliquent une politique systématique de terre brûlée. Les campagnes sont ravagées, les ressources pillées. Le ravitaillement devient presque impossible. La chaleur est écrasante, l’eau rare. Les chevaux meurent, les chevaliers doivent monter sur des bœufs, les bagages sont chargés sur des porcs et des chèvres. La frustration s’exprime en accusations contre les Grecs : efféminés, hérétiques, traîtres, coupables de tous les malheurs. Dans ce chaos, Godefroy de Bouillon, blessé par un ours, manque de mourir, tandis que Raymond de Saint-Gilles tombe gravement malade. Malgré ces épreuves, la croisade avance, portée par une discipline, une foi et un entêtement qui frappent l’adversaire. Sur leur route, les croisés libèrent villes, villages et forteresses. Le plus souvent, ils les remettent à des officiers byzantins, respectant encore, au moins en apparence, les serments prêtés à Alexis. Parfois cependant, ils confient ces positions à des princes arméniens qui les ont aidés et promettent d’administrer au nom de l’empereur. Ces princes n’envisagent en réalité cette loyauté que de manière très opportuniste. Cette politique double, voire triple, prépare un paysage politique d’une grande complexité, où les liens de vassalité, d’alliance et de rivalité s’entrecroisent.</p><p>En quatre mois, une masse de combattants et de non-combattants réussit à franchir l’Anatolie brûlée par l’été. L’exploit ne sera jamais reproduit par aucune autre croisade. Cette traversée, pourtant, ne doit pas être réduite à un simple « Paris–Dakar médiéval ». Elle est le laboratoire où se mettent en place les trois dynamiques décisives pour la suite : la confrontation directe franco-turque, l’émergence des Aragniens comme acteurs autonomes, et la dégradation irréversible des relations entre Francs et Grecs.</p><p><h2>III. L’Arménie cilicienne et les prémices des États latins : jeux croisés d’alliances et fracture du camp chrétien</h2></p><p>Les Arméniens, longtemps relégués dans l’ombre du récit occidental des croisades, jouent dès cette phase un rôle majeur. Ils se sont installés en nombre en Cilicie et dans les régions voisines après les raids turcs dans la vallée de l’Araxe, qui les ont chassés de leurs terres d’origine. La domination byzantine y est trop lointaine et trop intermittente pour s’imposer réellement. Entre pouvoir impérial et pouvoir turc, les princes arméniens ont développé un art consommé du double jeu pour préserver une indépendance de fait. </p><p>L’arrivée des croisés leur offre une occasion inespérée de transformer ce double jeu en triple jeu. Les princes arméniens peuvent désormais arbitrer entre trois protecteurs potentiels : Byzance, les Turcs et les Francs. La plupart d’entre eux sont chrétiens apostoliques arméniens, comme le prince Kogh Vasil. Trois figures, cependant, se distinguent par leur profil : Thoros à Édesse, Gabriel à Mélitène et Tatoul à Marach. Tous trois sont d’anciens lieutenants de Philaretos, un Arménien qui, jusqu’en 1090, avait constitué un État quasi autonome, officiellement soumis à Byzance. Ils sont orthodoxes, donc héritiers de la culture administrative byzantine, mais gouvernent des populations majoritairement rattachées à l’Église arménienne. Cette distance religieuse les rend suspects aux yeux de leurs sujets et les oblige à des intrigues encore plus complexes entre pouvoirs arabes, turcs, byzantins et désormais francs. Face à ces perspectives, deux croisés cadets, Tancrède et Baudouin de Boulogne, perçoivent immédiatement le potentiel politique de la Cilicie arménienne. Avec chacun une petite troupe, ils quittent le gros de l’armée le 10 septembre pour gagner la Cilicie, région à forte population arménienne qu’ils entendent bien « libérer », mais surtout contrôler. Leur coopération tourne rapidement à la rivalité. Malgré ces querelles, ils prennent sans grandes difficultés plusieurs villes ciliciennes, dont le port d’Alexandrette, position stratégique majeure pour l’approvisionnement maritime. Mais leurs effectifs sont trop réduits pour tenir durablement la région. Ils laissent des garnisons dans certains points clés, puis rejoignent le gros de l’armée à Marach, la ville de Tatoul, vers la fin septembre.</p><p>Cette expédition, même écourtée, n’est pas inutile. Elle contribue à sécuriser temporairement le flanc droit de la croisade et à ouvrir une voie d’approvisionnement par le port d’Alexandrette. Surtout, elle permet aux princes arméniens de passer derrière les croisés pour récupérer les positions abandonnées et jeter les bases de ce qui deviendra le royaume de Petite Arménie, futur allié occasionnel des États latins. Les Arméniens ne visent pas la « cause chrétienne » abstraite, mais la construction de leurs propres royaumes, en utilisant alternativement et simultanément les différents protecteurs. Baudouin, revenu à Marach, quitte de nouveau l’armée le 5 octobre, cette fois vers l’est, officiellement pour protéger le flanc gauche de la croisade. En réalité, il part tenter une nouvelle fois sa chance. C’est ainsi qu’il fonde le premier État latin d’Orient, le comté d’Édesse, au mépris total du serment prêté à Alexis. L’unité juridique du camp chrétien est brisée dès avant l’arrivée à Antioche. La logique des seigneuries autonomes, orientées vers leur propre expansion, l’emporte sur celle de la croisade collective sous tutelle byzantine.</p><p>La traversée de l’Anatolie et les opérations qui l’accompagnent ont donc une portée structurelle. Sur le plan militaire, les croisés et les Turcs s’y découvrent et s’y estiment. Le prestige militaire turc, jusqu’ici intact, subit un choc réel. Ce choc explique une part de la réussite de la première croisade : déstabilisés, impressionnés par la ténacité franque, les Turcs peinent à retrouver l’initiative et ne commencent à se ressaisir qu’à partir de 1100–1101, lors de leurs premières grandes victoires contre des contingents croisés. Sur le plan politique, les Arméniens saisissent l’occasion de se dégager à la fois de la tutelle byzantine et de la domination turque, en jouant les puissances les unes contre les autres avec une remarquable habileté. Enfin, les relations entre Francs et Grecs se détériorent durablement. Au début de la campagne, les Francs remettent encore les villes aux Byzantins. Progressivement, ils les considèrent comme responsables de leurs maux, les accusent de lâcheté, de trahison et d’hérésie. De leur côté, les Byzantins voient en eux des hommes brutaux, arriérés, peu fiables. Cette méfiance réciproque culminera lors de la question d’Antioche et pèsera lourd dans la chute conjointe de l’Empire byzantin et des États latins. Ce n’est pas seulement faute d’ennemis extérieurs, mais aussi faute d’entraide, que les deux ensembles s’effondreront.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

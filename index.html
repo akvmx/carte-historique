@@ -2349,6 +2349,118 @@
         html, body {
             overscroll-behavior: contain;
         }
+
+        /* ==============================
+        VERSION "FULL-WIDTH" des barres chrono
+        ============================== */
+
+        body.view-timeline .timeline-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--couleur-bordure);
+            background: radial-gradient(circle at top left,
+                rgba(255, 197, 211, 0.14),
+                transparent 55%
+            );
+        }
+
+        /* Bloc gauche = titre + sous-texte */
+        body.view-timeline .timeline-header-left {
+            width: 100%;
+        }
+
+        body.view-timeline .timeline-header-left h2 {
+            font-size: 1.08rem;
+            margin-bottom: 4px;
+        }
+
+        body.view-timeline .timeline-header-left .detail-subtitle {
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        /* Bloc droit = onglets + filtres empilés mais FULL WIDTH */
+        body.view-timeline .timeline-header-right {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        /* ======= BARRE 1 : Onglets pleine largeur ======= */
+        body.view-timeline .timeline-tabs {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 8px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--couleur-bordure);
+        }
+
+        body.view-timeline .timeline-tabs .btn {
+            flex: 1;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            border-radius: 10px;
+            transition: 0.15s;
+        }
+
+        body.view-timeline .timeline-tabs .btn.active {
+            background: var(--couleur-accent);
+            color: var(--couleur-texte-sombre);
+            box-shadow: 0 1px 4px rgba(15, 23, 42, 0.25);
+        }
+
+        /* petit espace entre les onglets */
+        body.view-timeline .timeline-tabs .btn + .btn {
+            margin-left: 6px;
+        }
+
+        /* ======= BARRE 2 : Filtres pleine largeur ======= */
+        body.view-timeline .timeline-header-controls {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: rgba(15, 23, 42, 0.05);
+            border: 1px solid var(--couleur-bordure);
+        }
+
+        body.view-timeline .timeline-header-controls select,
+        body.view-timeline .timeline-header-controls input {
+            flex: 1;
+            padding: 6px 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            background: rgba(15, 23, 42, 0.03);
+        }
+
+        /* Range inputs (de → à) dans une cellule flexible */
+        body.view-timeline .timeline-range-inputs {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        body.view-timeline .timeline-range-inputs span {
+            opacity: 0.55;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            body.view-timeline .timeline-header-controls {
+                flex-direction: column;
+                gap: 6px;
+            }
+        }
     </style>
 </head>
 <body class="view-map mobile-mode-map">
@@ -3884,16 +3996,34 @@
                     </div>
                 `;
 
-                // --- Timeline condensée ---
                 if (events.length === 0) {
-                    timelineEl.innerHTML = `<p>Aucun événement à afficher.</p>`;
+                    timelineEl.innerHTML = `<p class="no-events">Aucun événement à afficher.</p>`;
                 } else {
-                    timelineEl.innerHTML = events.map(ev => `
-                        <div class="detail-timeline-item">
-                            <strong>${ev.date}</strong> — ${ev.titre}
-                        </div>
-                    `).join('');
+                    timelineEl.innerHTML = events.map(ev => {
+                        const lien  = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        const date  = ev.date  || '';
+                        const titre = ev.titre || '(sans titre)';
+
+                        return `
+                            <button class="detail-timeline-item"
+                                    ${lien ? `data-lien="${lien}"` : ''}>
+                                <span class="detail-timeline-date">${date}</span>
+                                <span class="detail-timeline-separator">—</span>
+                                <span class="detail-timeline-title">${titre}</span>
+                            </button>
+                        `;
+                    }).join('');
                 }
+                
+                // Clic sur un événement de la chronologie = ouvrir la fiche individuelle (si lien dispo)
+                timelineEl.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const url = btn.getAttribute('data-lien');
+                        if (url) {
+                            window.open(url, '_blank');
+                        }
+                    });
+                });
 
                 // --- Personnages majeurs (triés par nb d’événements) ---
                 const personsStats = [];
@@ -3936,8 +4066,15 @@
                 // --- Mini-carte centrée sur le pays ---
                 const mapDiv = document.getElementById('detail-map');
                 if (mapDiv) {
+                    // Si une ancienne carte existe mais n'est pas attachée au bon conteneur, on la détruit
+                    if (this.detailMap && this.detailMap._container !== mapDiv) {
+                        this.detailMap.remove();
+                        this.detailMap = null;
+                    }
+
+                    // Initialisation si nécessaire
                     if (!this.detailMap) {
-                        this.detailMap = L.map('detail-map', {
+                        this.detailMap = L.map(mapDiv, {
                             center: [20, 0],
                             zoom: 3,
                             zoomControl: false,
@@ -3948,10 +4085,20 @@
                         }).addTo(this.detailMap);
                     }
 
-                    if (country && country.coordonnees) {
-                        const [lat, lng] = country.coordonnees;
-                        this.detailMap.setView([lat, lng], 4);
-                    }
+                    // Ici tu recentres selon le contexte :
+                    // 👉 pour un PAYS :
+                    // if (country && country.coordonnees) {
+                    //     const [lat, lng] = country.coordonnees;
+                    //     this.detailMap.setView([lat, lng], 4);
+                    // }
+
+                    // 👉 pour un PERSONNAGE :
+                    // const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
+                    // if (firstWithCoords) {
+                    //     const [lat, lng] = firstWithCoords.coords;
+                    //     this.detailMap.setView([lat, lng], 4);
+                    // }
+
                     setTimeout(() => this.detailMap.invalidateSize(), 150);
                 }
 
@@ -4134,11 +4281,18 @@
                 main.style.display = 'none';
                 detail.style.display = 'block';
 
-                // Mini-carte dans la sidebar (on garde ta logique actuelle)
+                // Mini-carte dans la sidebar
                 const mapDiv = document.getElementById('sidebar-country-map');
                 if (mapDiv) {
+                    // Si une ancienne carte existe mais est attachée à un autre conteneur, on la détruit
+                    if (this.sidebarCountryMap && this.sidebarCountryMap._container !== mapDiv) {
+                        this.sidebarCountryMap.remove();
+                        this.sidebarCountryMap = null;
+                    }
+
+                    // Initialisation si nécessaire
                     if (!this.sidebarCountryMap) {
-                        this.sidebarCountryMap = L.map('sidebar-country-map', {
+                        this.sidebarCountryMap = L.map(mapDiv, {
                             center: [20, 0],
                             zoom: 3,
                             zoomControl: false,
@@ -4149,12 +4303,16 @@
                         }).addTo(this.sidebarCountryMap);
                     }
 
+                    // Recentrage sur le pays si coordonnées disponibles
                     if (country && country.coordonnees) {
                         const [lat, lng] = country.coordonnees;
                         this.sidebarCountryMap.setView([lat, lng], 4);
                     }
 
-                    setTimeout(() => this.sidebarCountryMap.invalidateSize(), 150);
+                    // Correction du bug d'affichage quand on change de contenu dans la sidebar
+                    setTimeout(() => {
+                        this.sidebarCountryMap.invalidateSize();
+                    }, 150);
                 }
             }
 
@@ -4333,14 +4491,31 @@
                 `;
 
                 if (events.length === 0) {
-                    timelineEl.innerHTML = `<p>Aucun événement à afficher.</p>`;
+                    timelineEl.innerHTML = `<p class="no-events">Aucun événement à afficher.</p>`;
                 } else {
-                    timelineEl.innerHTML = events.map(ev => `
-                        <div class="detail-timeline-item">
-                            <strong>${ev.date}</strong> — ${ev.titre}
-                        </div>
-                    `).join('');
+                    timelineEl.innerHTML = events.map(ev => {
+                        const lien  = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        const date  = ev.date  || '';
+                        const titre = ev.titre || '(sans titre)';
+
+                        return `
+                            <button class="detail-timeline-item"
+                                    ${lien ? `data-lien="${lien}"` : ''}>
+                                <span class="detail-timeline-date">${date}</span>
+                                <span class="detail-timeline-separator">—</span>
+                                <span class="detail-timeline-title">${titre}</span>
+                            </button>
+                        `;
+                    }).join('');
                 }
+
+                // Clic sur un événement = ouvrir la fiche individuelle
+                timelineEl.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const url = btn.getAttribute('data-lien');
+                        if (url) window.open(url, '_blank');
+                    });
+                });
 
                 // Section pays liés : pastilles de pays
                 if (personsTitleEl) {
@@ -4372,11 +4547,18 @@
                 });
             });
 
-                // Mini carte : centrer sur le premier événement si coords dispo
+                // --- Mini-carte centrée sur un événement du personnage ---
                 const mapDiv = document.getElementById('detail-map');
                 if (mapDiv) {
+                    // Si une ancienne carte existe mais n'est pas attachée au bon conteneur, on la détruit
+                    if (this.detailMap && this.detailMap._container !== mapDiv) {
+                        this.detailMap.remove();
+                        this.detailMap = null;
+                    }
+
+                    // Initialisation si nécessaire
                     if (!this.detailMap) {
-                        this.detailMap = L.map('detail-map', {
+                        this.detailMap = L.map(mapDiv, {
                             center: [20, 0],
                             zoom: 3,
                             zoomControl: false,
@@ -4387,11 +4569,19 @@
                         }).addTo(this.detailMap);
                     }
 
-                    const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
-                    if (firstWithCoords) {
-                        const [lat, lng] = firstWithCoords.coords;
-                        this.detailMap.setView([lat, lng], 4);
-                    }
+                    // Ici tu recentres selon le contexte :
+                    // 👉 pour un PAYS :
+                    // if (country && country.coordonnees) {
+                    //     const [lat, lng] = country.coordonnees;
+                    //     this.detailMap.setView([lat, lng], 4);
+                    // }
+
+                    // 👉 pour un PERSONNAGE :
+                    // const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
+                    // if (firstWithCoords) {
+                    //     const [lat, lng] = firstWithCoords.coords;
+                    //     this.detailMap.setView([lat, lng], 4);
+                    // }
 
                     setTimeout(() => this.detailMap.invalidateSize(), 150);
                 }

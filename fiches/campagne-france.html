@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La campagne de France</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La campagne de France</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1814-01-01</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">France</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1814-01-01</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La campagne de France</strong></h1></p><p>À l’automne 1813, l’Europe bascule. La défaite de Leipzig, « bataille des Nations », marque le point de rupture où s’effondre la Grande Armée. Sur les quelque 450 000 hommes engagés six mois plus tôt, Napoléon ne ramène en France qu’un noyau d’environ 60 000 soldats, tandis que 190 000 restent dispersés dans des places fortes, blessés, prisonniers ou disparus. La retraite, déjà compromise par les difficultés logistiques et la désorganisation du commandement, se transforme en déroute lorsque le pont sur l’Elster explose prématurément, abandonnant des milliers d’hommes sur la rive ennemie. Même parmi les plus fidèles, comme Murat, la confiance s’effrite. L’Empire napoléonien, encore dominant un an plus tôt, chancelle désormais sous la pression d’une coalition qui a retrouvé unité et détermination.</p><p>Après Leipzig, les souverains alliés se réunissent à Francfort pour définir l’objectif politique de la guerre. Le système continental – cause initiale du conflit – est considéré comme détruit. Reste à savoir que faire de Napoléon et de l’édifice impérial. Les visions divergent. L’empereur d’Autriche, soucieux d’équilibrer l’Europe sans la livrer ni à la Russie ni à la Prusse, se montre conciliant ; d’autres, comme Blücher ou Nesselrode, souhaitent l’abaissement total de la puissance française, voire la chute personnelle de Napoléon. Mais malgré leurs désaccords, chacun mobilise tous les moyens disponibles : 170 000 hommes doivent envahir la France par les Pays-Bas, 130 000 par le Rhin, 220 000 via la Suisse, auxquels s’ajoutent 300 000 réservistes. Au sud, 60 000 Autrichiens, 60 000 Napolitains, 70 000 Espagnols et Anglo-Portugais complètent un dispositif dépassant le million d’hommes. Jamais la France n’a fait face à une telle masse. Dans ce contexte, Metternich déploie une stratégie diplomatique soigneusement calibrée. Déjà, lors du congrès de Prague, il avait joué des exigences territoriales pour acculer Napoléon à refuser des conditions de paix trop radicales. En novembre 1813, il renouvelle la manœuvre : il pose en médiateur et propose un retour de la France à ses « frontières naturelles », formulation assez floue pour créer l’illusion d’un compromis possible. Il sait que Napoléon refusera, d’autant que la proposition n’émane pas de l’ensemble des Alliés, que les opérations militaires continuent et que l’Angleterre n’a pas validé l’offre. L’essentiel n’est pas la sincérité : Metternich veut retourner l’opinion publique française contre l’Empereur. Le peuple, épuisé par vingt ans de guerre, ne réclame qu’une chose – la paix – ; en laissant croire que Napoléon rejette systématiquement des offres raisonnables, il devient pour les Français le seul responsable de la poursuite des hostilités.</p><p>La stratégie fonctionne. La « déclaration de Francfort », imprimée à 20 000 exemplaires, affirme que la guerre est menée contre Napoléon et non contre la France. Dans les salons parisiens comme dans les journaux, l’Empereur est accusé d’obstination, d’aveuglement, de mener le pays à la ruine. Pourtant, en coulisses, Napoléon finit par accepter les conditions, envoie Caulaincourt comme plénipotentiaire et libère même le pape et le roi d’Espagne. Mais il est trop tard : l’Angleterre rejette toute idée de frontières naturelles, car Anvers – clé de la mer du Nord – resterait entre les mains françaises. Metternich, soutenu par Londres, laisse pourrir la situation : l’opinion française se retourne, et l’invasion peut commencer sans heurts politiques.</p><p>Or, Napoléon est exsangue. Son armée est dispersée en garnisons lointaines, ses finances effondrées. Le déficit atteint 52 millions de francs, les crédits militaires dépassent 7 millions. Pour lever une armée, il doit accroître les impôts (sel, fenêtres, salaires publics) et appeler 300 000 conscrits supplémentaires – alors que le pays vient d’en fournir 600 000 en moins de deux ans. La conscription s’effondre : un cinquième seulement se présente. Le matériel manque, les recrues n’ont parfois ni uniformes ni fusils complets. La génération des « Marie-Louise », jeunes hommes de vingt ans à peine, constitue l’ultime réservoir de l’Empire. Au début de janvier 1814, trois grandes armées alliées franchissent les frontières. Les préfets n’ont pas le temps d’organiser les levées en masse. Dans certaines villes, les envahisseurs sont accueillis en libérateurs. Napoléon quitte Paris le 24 janvier, embrasse sa famille pour la dernière fois – il ne les reverra jamais – et rejoint Châlons pour arrêter la progression ennemie. Malgré la disproportion des forces, il tente de jouer ce qu’il maîtrise mieux que quiconque : la position centrale. Mais la bataille de Brienne (29 janvier) est indécise ; la Rothière (1er février), nettement défavorable. Pour la première fois depuis longtemps, l’Empereur se retrouve à 1 contre 6 et doit reculer.</p><p>Cependant, les Alliés, trop confiants, se dispersent. Blücher, surtout, étire dangereusement son armée. Alors, Napoléon saisit l’occasion et inaugure ce qui demeure l’un des épisodes tactiques les plus extraordinaires de sa carrière : la campagne des Six-Jours. Entre Sézanne, Champaubert, Montmirail, Château-Thierry et Vauchamps, la Grande Armée anéantit l’équivalent d’une armée entière. À Champaubert, les conscrits écrasent une division russe prise au dépourvu. À Montmirail, les Français, 15 000 contre 30 000, repoussent les attaques prussiennes. À Vauchamps, la manœuvre d’enveloppement et l’artillerie massée réduisent l’armée de Silésie à la moitié de ses effectifs. En six jours, Napoléon reprend l’avantage local, regagne l’initiative et prouve qu’il n’a rien perdu de son génie. Mais rien ne permet d’élargir ces victoires. Schwarzenberg, alerté, resserre son dispositif derrière la Seine. À Montereau, Napoléon remporte encore une bataille brillante, mais l’inertie de ses maréchaux – notamment Victor – ruine la possibilité d’un encerclement décisif. Dans le même temps, les négociations de Châtillon évoluent. Les Alliés exigent désormais un retour aux frontières de 1792, bien plus restrictives que les « frontières naturelles ». Napoléon refuse catégoriquement : accepter ce recul équivaudrait à reconnaître la défaite. Il tente alors de négocier une paix séparée avec l’Autriche, misant sur les inquiétudes de Vienne face à l’ambition russe. Mais la spirale des événements lui échappe.</p><p>La chute décisive survient le 3 mars 1814, avec la reddition de Soissons. La ville, tenue par une petite garnison franco-polonaise, devait barrer la route à Blücher ; elle cède sans combat. L’armée de Silésie échappe ainsi à l’encerclement. L’occasion stratégique que Napoléon attendait depuis un mois disparaît en un instant. La guerre peut encore se poursuivre, mais plus aucune victoire locale ne peut inverser le destin de l’Empire. Dans le même temps, un autre acteur, silencieux mais déterminant, joue sa dernière carte : Talleyrand. Depuis Paris, il informe la coalition de la faiblesse militaire et morale du régime, promet une transition sûre, organise le ralliement des élites financières et prépare le retour des Bourbons. Les événements lui donnent raison : Bordeaux se proclame ville ouverte le 12 mars, acclamant Louis XVIII. À Reims et à Troyes, les maréchaux n’opposent qu’une résistance tiède. L’armée est épuisée, le pays à bout ; et peu à peu, les maréchaux eux-mêmes cessent d’y croire. Lorsque les Alliés marchent sur Paris fin mars, Marmont tente de défendre la capitale, mais ses forces sont balayées. Le 31, Paris capitule. Le Sénat, manœuvré par Talleyrand, prononce la déchéance de Napoléon. À Fontainebleau, l’Empereur réunit ses maréchaux et propose de continuer la lutte ; Ney répond que l’armée obéira désormais aux généraux, non plus à lui. Napoléon abdique une première fois en faveur de son fils, mais un événement scelle définitivement son sort : dans la nuit du 5 avril, Marmont, commandant le VIᵉ corps, se rend sans conditions à l’ennemi. Privé de ses dernières forces, l’Empereur ne peut plus négocier. Le 6 avril, il abdique sans condition, pour lui et pour Napoléon I.</p><p>Ainsi se clôt la campagne de France : par les armes, par la lassitude d’un pays exténué, par les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi par la logique interne d’un système impérial qui n’a pas survécu à la catastrophe russe. Le 20 avril 1814, dans la cour du Cheval-Blanc à Fontainebleau, Napoléon adresse à sa Garde des adieux devenus légendaires avant de partir vers son exil à l’île d’Elbe. L’épopée impériale prend fin dans les larmes des vieux grognards, mais l’histoire, elle, n’a pas encore dit son dernier mot.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>
