@@ -29,7 +29,7 @@
               "state": {
                 "file": "personnes/Napoléon Bonaparte.md",
                 "mode": "source",
-                "source": true
+                "source": false
               },
               "icon": "lucide-file",
               "title": "Napoléon Bonaparte"
@@ -187,10 +187,12 @@
   },
   "active": "4eb3d06865edbc2f",
   "lastOpenFiles": [
+    "campagne-espagne-napoléon.md",
+    "siège-antioche.md",
+    "docu-sucre.md",
+    "personnes/Napoléon Bonaparte.md",
     "templates/personne.md",
     "guerres-congo.md",
-    "personnes/Napoléon Bonaparte.md",
-    "docu-sucre.md",
     "première-croisade.md",
     "personnes",
     "personne.md",
@@ -200,14 +202,12 @@
     "turcs-seljukides-croisades.md",
     "première-croisade2.md",
     "croisades-de-secours.md",
-    "siège-antioche.md",
     "sultanat-mamluk.md",
     "traité-presbourg.md",
     "bataille-austerlitz.md",
     "campagne-napoléon-allemagne.md",
     "cent-jours.md",
     "campagne-france.md",
-    "campagne-espagne-napoléon.md",
     "bataille-leipzig.md",
     "bataille-friedland.md",
     "bataille-eylau.md",

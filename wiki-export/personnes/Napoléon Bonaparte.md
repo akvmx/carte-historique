@@ -13,14 +13,36 @@ bio_courte: "Général de la Révolution française devenu empereur, figure maje
 sources: ""
 ---
 
-# Jeunesse
+## Jeunesse
 
-Texte…
+Napoleone di Buonaparte naît le 15 août 1769 à Ajaccio, en Corse, peu après l’annexion de l’île par la France. Second enfant de Charles Bonaparte, avocat et notable insulaire, et de Maria Letizia Ramolino, il appartient à une petite noblesse corse intégrée à la monarchie française.
 
-# Carrière militaire
+Envoyé très tôt en France continentale, il passe quelques mois au collège d’Autun pour apprendre le français, langue qu’il maîtrise rapidement mais qu’il parlera toujours avec un accent marqué. Il entre ensuite à l’École royale militaire de Brienne-le-Château (1779–1784), où il subit les moqueries liées à ses origines corses et à son niveau de langue. Élève globalement moyen, il se distingue cependant en mathématiques et dans les jeux militaires, où il manifeste déjà des aptitudes au commandement.
 
-Texte…
+Admis à l’École militaire de Paris (1784–1785), il se forme à l’artillerie, arme alors très technique, et y confirme ses aptitudes scientifiques. Il sort sous-lieutenant et est affecté à différents régiments, notamment à Auxonne. Pendant la Révolution française, il se rapproche un temps des courants jacobins, tout en restant très attaché aux intérêts corses, avant de rompre durablement avec Pascal Paoli et de se fixer définitivement en France après 1793.
 
-# Empire
+Sa carrière militaire s’accélère avec le siège de Toulon (1793), où, jeune officier d’artillerie, il propose un plan de prise du port qui contribue à la victoire républicaine et lui vaut une rapide promotion au grade de général de brigade.
 
-Texte…
+## Ascension politique et conquêtes militaires
+
+Sous le Directoire, Bonaparte bénéficie d’une série de commandements décisifs. Nommé à la tête de l’armée d’Italie (1796–1797), il mène une campagne fulgurante contre les Autrichiens et leurs alliés, marquée par des victoires comme Arcole et Rivoli, qui imposent la France comme première puissance continentale et font de lui une figure centrale du nouveau régime.
+
+En 1798, il dirige l’expédition d’Égypte à la tête de l’armée d’Orient. La campagne, ponctuée par la victoire terrestre des Pyramides mais compromise par la destruction de la flotte française à Aboukir, a pour objectif de frapper les intérêts britanniques et d’ouvrir à la France une voie d’influence vers le Levant. Elle contribue aussi à la construction de son image de chef militaire conquérant et de « héros » scientifique et civilisateur.
+
+De retour en France, il profite de la fragilité du Directoire et mène le coup d’État du 18 brumaire an VIII (9 novembre 1799). Il devient Premier consul, puis consul à vie en 1802 après plébiscite. Le 18 mai 1804, un sénatus-consulte proclame l’Empire ; Napoléon est sacré empereur des Français le 2 décembre 1804, à Notre-Dame de Paris, en présence du pape Pie VII.
+
+Sur le plan militaire, il conduit les armées françaises dans une série de campagnes qui redessinent profondément la carte de l’Europe. Ses victoires majeures – Arcole et Rivoli en Italie, Marengo (1800), Austerlitz (1805), Iéna (1806), Friedland (1807) – brisent successivement plusieurs coalitions dirigées et financées par la Grande-Bretagne et regroupant les principales monarchies européennes. L’Empire français atteint son extension maximale autour de 1810.
+
+## Gouvernement intérieur 
+
+Chef d’État autoritaire, Napoléon met en place un régime fortement centralisé, qui combine héritage révolutionnaire et restauration de l’ordre social. Il consolide l’œuvre juridique de la Révolution en promulguant le Code civil (ou Code Napoléon) et en réorganisant l’administration autour des préfets, d’une justice hiérarchisée et de grands corps d’État.
+
+Le Concordat de 1801 avec le pape rétablit la paix religieuse en France en reconnaissant le catholicisme comme religion « de la majorité des Français », sans revenir au statut de religion d’État. La cérémonie du sacre, en 1804, confère à l’Empire une légitimité dynastique et religieuse en s’inscrivant à la fois dans l’héritage carolingien et dans celui des monarchies européennes, tout en manifestant la primauté de l’empereur sur le pape.
+
+Sur le plan économique et social, Napoléon favorise la stabilisation monétaire, la création de la Banque de France, le développement des infrastructures (routes, ports, canaux) et la promotion d’une élite administrative et militaire fondée sur le mérite, même si la noblesse d’Empire réintroduit, sous une forme nouvelle, une hiérarchie sociale héréditaire. Ses réformes, parfois qualifiées de « révolution stabilisée », structurent durablement l’État français et influencent de nombreux pays placés sous domination ou influence française.
+
+## Déclin
+
+À partir de 1808, l’Empire entre dans une phase de surextension et de fragilisation. La guerre d’Espagne, déclenchée par l’intervention française contre la monarchie bourbonienne espagnole, se transforme en conflit d’usure marqué par une guérilla très violente et par des pertes considérables. La campagne de Russie de 1812, conclue par la retraite catastrophique de la Grande Armée, accélère le retournement du rapport de forces en Europe.
+
+Les défaites de 1813–1814, notamment à Leipzig, conduisent les puissances coalisées à envahir la France. Napoléon abdique une première fois en avril 1814 et est exilé sur l’île d’Elbe, tout en conservant le titre d’empereur. Il en revient en mars 1815, ouvre la période dite des Cent-Jours, reprend le pouvoir à Paris et tente une dernière offensive contre la coalition. La défaite de Waterloo (18 juin 1815) entraîne sa seconde abdication et son exil, cette fois sur l’île de Sainte-Hélène, au milieu de l’Atlantique, sous surveillance britannique. Il y meurt le 5 mai 1821, probablement d’un cancer de l’estomac, dans des conditions matérielles et politiques qui nourrissent rapidement controverses et légendes.

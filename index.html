@@ -7,7 +7,8 @@
     
     <!-- Leaflet CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
-    
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
     <style>
         /* Variables CSS optimisées */
         :root {
@@ -1829,18 +1830,15 @@
         }
 
         .detail-modal {
-            background: var(--couleur-fond);
-            color: var(--couleur-texte);
-            width: min(1100px, 98vw);   /* plus large */
-            max-height: 92vh;           /* plus haut */
-            border-radius: 20px;
+            background: var(--couleur-panneau);
+            width: calc(100vw - 4cm);   /* marge fixe autour */
+            height: calc(100vh - 4cm);  /* marge fixe haut/bas */
+            border-radius: 24px;
             box-shadow: var(--ombre-lg);
             display: flex;
             flex-direction: column;
-            border: 1px solid var(--couleur-bordure);
             overflow: hidden;
         }
-
 
         .detail-header {
             padding: 10px 16px;
@@ -2095,21 +2093,6 @@
                 display: flex;
             }
 
-            .detail-modal {
-                background: var(--couleur-fond);
-                color: var(--couleur-texte);
-                /* 🟣 quasi plein écran : 2rem ≈ 2 cm de marge autour */
-                width: min(calc(100vw - 4rem), 1400px);
-                height: calc(100vh - 4rem);
-                max-height: calc(100vh - 4rem);
-                border-radius: 24px;
-                box-shadow: var(--ombre-lg);
-                display: flex;
-                flex-direction: column;
-                border: 1px solid var(--couleur-bordure);
-                overflow: hidden;
-            }
-
             .detail-header {
                 padding: var(--espacement-md) var(--espacement-lg);
                 border-bottom: 1px solid var(--couleur-bordure);
@@ -2177,26 +2160,43 @@
                 max-height: 38vh;
                 overflow-y: auto;
             }
-
+            
             /* style de la bio longue */
             .person-bio {
                 white-space: pre-wrap;
                 line-height: 1.5;
             }
 
-            /* Sur petit écran, on garde ton comportement existant,
-            mais tu peux laisser ton @media actuel qui réduit la modal */
-            @media (max-width: 768px) {
-                .detail-modal {
-                    width: 96vw;
-                    height: auto;
-                    max-height: 90vh;
-                    border-radius: 14px;
-                }
+            .md-content h1 {
+                font-size: 1.8rem;
+                margin: 1rem 0;
+                font-weight: 700;
+            }
 
-                .detail-main {
-                    grid-template-columns: 1fr;
-                }
+            .md-content h2 {
+                font-size: 1.45rem;
+                margin: 1rem 0 0.5rem;
+                font-weight: 600;
+            }
+
+            .md-content h3 {
+                font-size: 1.2rem;
+                margin: 0.8rem 0 0.4rem;
+                font-weight: 600;
+            }
+
+            .md-content p {
+                margin: 0.5rem 0;
+                line-height: 1.55;
+            }
+
+            .md-content ul,
+            .md-content ol {
+                margin: 0.5rem 0 0.5rem 1.2rem;
+            }
+
+            .md-content strong {
+                font-weight: 600;
             }
         }
 
@@ -2875,6 +2875,18 @@
                         </h3>
                         <div class="events-list" id="persons-list">
                             <p class="no-events">Aucun personnage référencé.</p>
+                        </div>
+                    </section>
+
+                    <!-- Liste des pays -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-countries-directory">
+                                tous les pays.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="countries-list">
+                            <p class="no-events">Aucun pays référencé.</p>
                         </div>
                     </section>
 
@@ -3609,9 +3621,10 @@
                     this.loadData(true);
                 });
 
-                // Annuaire "Tous les événements" / "Tous les personnages"
+                // Annuaire "Tous les événements" / "Tous les personnages" / "Tous les pays"
                 const openEventsDirBtn = document.getElementById('open-events-directory');
                 const openPersonsDirBtn = document.getElementById('open-persons-directory');
+                const openCountriesDirBtn = document.getElementById('open-countries-directory');
                 const closeDirBtn = document.getElementById('directory-close');
                 const overlay = this.directoryOverlay;
 
@@ -3624,6 +3637,12 @@
                 if (openPersonsDirBtn) {
                     openPersonsDirBtn.addEventListener('click', () => {
                         this.openPersonsDirectory();
+                    });
+                }
+
+                if (openCountriesDirBtn) {
+                    openCountriesDirBtn.addEventListener('click', () => {
+                        this.openCountriesDirectory();
                     });
                 }
 
@@ -4189,6 +4208,7 @@
                     this.updateStats();
                     this.updateEventsList();
                     this.updatePersonsList();
+                    this.updateCountriesList();
                 });
 
                 // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
@@ -4268,6 +4288,94 @@
                 });
             }
 
+            updateCountriesList() {
+                const container = document.getElementById('countries-list');
+                if (!container || !this.cache || !Array.isArray(this.cache.countries)) return;
+
+                // On respecte le filtre de continent de la carte
+                let filteredCountries = this.cache.countries;
+                if (this.selectedContinent !== "tous") {
+                    filteredCountries = this.cache.countries.filter(
+                        country => country.continent === this.selectedContinent
+                    );
+                }
+
+                const allEvents = this.cache.events || [];
+
+                // Pour chaque pays : on récupère tous les events + la date la plus récente
+                const entries = filteredCountries.map(country => {
+                    const eventsForCountry = allEvents.filter(ev =>
+                        this.eventBelongsToCountry(ev, country.pays)
+                    );
+
+                    if (!eventsForCountry.length) {
+                        return null;
+                    }
+
+                    let lastTimestamp = -Infinity;
+                    eventsForCountry.forEach(ev => {
+                        if (!ev.date) return;
+                        const d = new Date(ev.date);
+                        if (!isNaN(d.getTime()) && d.getTime() > lastTimestamp) {
+                            lastTimestamp = d.getTime();
+                        }
+                    });
+
+                    return {
+                        country,
+                        events: eventsForCountry,
+                        lastTimestamp
+                    };
+                }).filter(Boolean);
+
+                if (!entries.length) {
+                    container.innerHTML = '<p class="no-events">Aucun pays référencé.</p>';
+                    return;
+                }
+
+                // Tri : pays dont le dernier événement est le plus récent en premier
+                entries.sort((a, b) => {
+                    if (b.lastTimestamp !== a.lastTimestamp) {
+                        return b.lastTimestamp - a.lastTimestamp;
+                    }
+                    return a.country.pays.localeCompare(b.country.pays, 'fr', { sensitivity: 'base' });
+                });
+
+                let html = '';
+                entries.forEach(entry => {
+                    const c = entry.country;
+                    const events = entry.events;
+                    let lastYear = '';
+
+                    if (entry.lastTimestamp && entry.lastTimestamp !== -Infinity) {
+                        lastYear = new Date(entry.lastTimestamp).getFullYear();
+                    }
+
+                    html += `
+                        <div class="event-item country-item" data-country="${c.pays}">
+                            <div class="event-title">${c.pays}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+
+                // Clic sur un pays de la liste = ouvre la fiche pays dans la sidebar
+                container.querySelectorAll('.country-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const name = el.getAttribute('data-country');
+                        if (!name) return;
+                        if (typeof this.showCountrySidebarSheet === 'function') {
+                            this.showCountrySidebarSheet(name);
+                        } else {
+                            // fallback si un jour tu veux : this.showCountrySheet(name);
+                            this.showCountrySheet && this.showCountrySheet(name);
+                        }
+                    });
+                });
+            }
+
             showPersonPage(name) {
                 this.currentTimelineContext = {
                     type: 'person',
@@ -4342,6 +4450,13 @@
                 const timelineEl = document.getElementById('detail-timeline');
                 const personsEl = document.getElementById('detail-persons');
                 const personsTitleEl = document.getElementById('detail-persons-title');
+
+                const bioSection = document.getElementById('detail-bio-section');
+                const bioEl = document.getElementById('detail-bio');
+                if (bioSection && bioEl) {
+                    bioSection.style.display = 'none';
+                    bioEl.innerHTML = '';
+                }
 
                 if (!overlay || !titleEl || !statsEl || !timelineEl || !personsEl) return;
 
@@ -4957,7 +5072,15 @@
                     const bio = p.bioLongue || p.bioCourte || '';
                     if (bio) {
                         bioSection.style.display = 'block';
-                        bioEl.innerHTML = `<p class="person-bio">${bio}</p>`;
+                        // 🔥 Convertir Markdown → HTML avec Marked
+                        const rendered = marked.parse(bio);
+
+                        // 🔥 Injecter le HTML converti
+                        bioEl.innerHTML = `
+                            <div class="person-bio md-content">
+                                ${rendered}
+                            </div>
+                        `;
                     } else {
                         bioSection.style.display = 'none';
                         bioEl.innerHTML = '';
@@ -6863,6 +6986,101 @@
                                 const name = btn.getAttribute('data-person');
                                 this.closeDirectory();
                                 this.showPersonPage(name);
+                            });
+                        });
+                }
+            }
+
+            // Annuaire : tous les pays (ordre alphabétique + lettres)
+            openCountriesDirectory() {
+                const countries = this.cache.countries || [];
+
+                if (!countries.length) {
+                    this.openDirectory(
+                        'tous les pays',
+                        '<p class="no-events">Aucun pays référencé.</p>'
+                    );
+                    return;
+                }
+
+                // Tri alphabétique global
+                const sorted = [...countries].sort((a, b) => {
+                    const na = (a.pays || '').toString();
+                    const nb = (b.pays || '').toString();
+                    return na.localeCompare(nb, 'fr', { sensitivity: 'base' });
+                });
+
+                // Regroupement par lettre
+                const groups = {};
+                sorted.forEach(c => {
+                    const name = (c.pays || '(sans nom)').toString().trim();
+                    const firstChar = name ? name[0].toUpperCase() : '?';
+                    const letter = /[A-ZÀ-ÖØ-Ý]/.test(firstChar) ? firstChar : '#';
+                    if (!groups[letter]) groups[letter] = [];
+                    groups[letter].push(c);
+                });
+
+                const letters = Object.keys(groups).sort((a, b) =>
+                    a.localeCompare(b, 'fr', { sensitivity: 'base' })
+                );
+
+                let html = '';
+
+                letters.forEach(letter => {
+                    html += `<section class="directory-section">
+                                <div class="directory-letter">${letter}</div>
+                                <ul class="directory-list">`;
+
+                    groups[letter].forEach(country => {
+                        const name = (country.pays || '(sans nom)').toString();
+                        const continent = country.continent || '';
+
+                        // évènements liés à ce pays
+                        const events = this.getEventsForCountry(name) || [];
+                        const years = events
+                            .map(ev => parseInt((ev.date || '').split('-')[0], 10))
+                            .filter(y => !isNaN(y));
+
+                        const minY = years.length ? Math.min(...years) : null;
+                        const maxY = years.length ? Math.max(...years) : null;
+
+                        const periodLabel = (minY !== null && maxY !== null)
+                            ? `${minY} – ${maxY}`
+                            : (minY !== null ? `${minY}` : 'période inconnue');
+
+                        html += `
+                            <li class="directory-item">
+                                <button type="button"
+                                        class="directory-item-title directory-country-link"
+                                        data-country="${name}">
+                                    ${name}
+                                </button>
+                                <div class="directory-item-meta">
+                                    ${continent ? `<span class="directory-chip">${continent}</span>` : ''}
+                                    <span>${events.length} événement(s)</span>
+                                    ${years.length ? `<span>${periodLabel}</span>` : ''}
+                                </div>
+                            </li>
+                        `;
+                    });
+
+                    html += `   </ul>
+                            </section>`;
+                });
+
+                this.openDirectory('tous les pays', html);
+
+                // Clic sur un pays = ouvrir la fiche pays dans la sidebar
+                if (this.directoryContentElem) {
+                    this.directoryContentElem
+                        .querySelectorAll('.directory-country-link')
+                        .forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const countryName = btn.getAttribute('data-country');
+                                this.closeDirectory();
+                                this.showCountrySidebarSheet(countryName);
+                                // Si un jour tu veux la version popup :
+                                // this.showCountrySheet(countryName);
                             });
                         });
                 }
