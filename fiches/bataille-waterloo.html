@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La bataille de Waterloo</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">La bataille de Waterloo</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Guerre"</span>
+                    <span class="badge badge-ghost">📅 1815-06-18</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Belgique</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1815-06-18</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Guerre"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>La bataille de Waterloo</strong></h1></p><p><h2> I. De Ligny à Waterloo : une dernière carte à jouer</h2></p><p>Nous sommes en Belgique, le 16 juin 1815. En Wallonie, près de Ligny, 60 000 Français affrontent 90 000 Prussiens. Malgré l’infériorité numérique, la bataille tourne à l’avantage de Napoléon, qui manque de peu d’anéantir l’armée de Blücher. Au même moment, à une dizaine de kilomètres au nord-ouest, Ney retient 38 000 Anglo-Néerlandais avec seulement 20 000 hommes. La première manche de la campagne est donc gagnée : l’Empereur empêche la jonction des alliés et garde l’initiative. Pour la suite, il confie à Grouchy 30 000 hommes avec ordre de poursuivre les Prussiens, qu’il croit en retraite vers Namur. Lui-même, avec environ 75 000 soldats, marche pour affronter Wellington, solidement installé sur un plateau au sud de Bruxelles. Napoléon ignore que Blücher ne se dirige pas vers Namur mais vers Wavre, à seulement 16 km de Waterloo : les deux armées alliées ne sont en réalité séparées que par quelques heures de marche.</p><p>Le contexte est désespéré. En Europe, plus de 800 000 hommes marchent contre la France. À l’intérieur, la Gironde, le Sud, la Bretagne s’agitent ; les royalistes sont prêts à aider l’envahisseur. Napoléon sait qu’il joue sa dernière carte politique autant que militaire. Comme si le destin voulait le briser jusque dans sa chair, son corps le lâche : migraines, douleurs gastriques, hémorroïdes rendent difficile la concentration et l’équitation, au moment précis où se joue la survie du régime. Le 17 juin à 19 h 30, Napoléon arrive en vue des positions de Wellington. Instinctivement, il veut attaquer aussitôt : selon lui, les Anglo-Néerlandais ne pourront lui résister. Son état-major le met en garde : le duc est un excellent tacticien défensif, rôdé par six ans de guerre en Espagne. Wellington lui-même reconnaît le génie de son adversaire et déclare que « la présence de l’Empereur équivaut à 40 000 hommes ». Les Britanniques envisagent même un repli. Mais dans la nuit du 17 au 18 juin, vers 2 h du matin, Wellington reçoit une lettre de Blücher : le vieux maréchal prussien promet d’arriver avec 50 000 hommes. Fort de cette assurance, le duc décide de tenir à Waterloo. Napoléon, lui, renonce à attaquer sous le déluge : la poudre est humide, les hommes épuisés, le terrain impraticable. L’offensive est reportée au lendemain. À l’aube du 18, tout est en place : Wellington a disposé son armée derrière le revers de la crête de Mont-Saint-Jean, cachée du tir ennemi, et a fortifié trois avant-postes essentiels – les fermes de Hougoumont, de la Haye-Sainte et de Papelotte. Son plan est simple : tenir coûte que coûte jusqu’à l’arrivée des Prussiens. Celui de Napoléon l’est tout autant : fixer la gauche ennemie autour de Hougoumont, briser le centre anglo-allié avec le Ier corps de d’Erlon, appuyé par une partie du IIe corps, et compter sur Grouchy pour contenir Blücher.</p><p><h2>II. La bataille de Waterloo : erreurs, acharnement et bascule du destin</h2></p><p>Vers 11 h, le 18 juin 1815, le bombardement français commence. Quatre-vingts canons de la « grande batterie » ouvrent le feu sur la crête alliée. Mais le sol détrempé, gorgé d’eau après une journée de pluie, absorbe les boulets au lieu de les faire ricocher : la puissance de l’artillerie est considérablement réduite, alors même que Napoléon a besoin d’un succès rapide. Sur la gauche, l’Empereur confie à son frère Jérôme l’attaque de Hougoumont. Mal encadrée, peu préparée, l’assaut piétine. Plutôt que de se contenter de fixer l’ennemi et de se retirer, Jérôme s’entête. Quand Wellington renforce la garnison avec les Coldstream Guards et les Scots Guards, Hougoumont devient un gouffre à effectifs : Jérôme y envoie successivement une première, puis une seconde division, immobilisant une part essentielle du IIe corps dans un combat secondaire. Le plan initial – dégager des renforts pour le centre – est ainsi saboté.</p><p>Vers 13 h, d’Erlon lance le Ier corps à l’assaut du plateau : 14 000 hommes marchent vers la crête, 6 000 autres attaquent Papelotte et la Haye-Sainte. Une partie du dispositif anglo-néerlandais plie, mais la Haye-Sainte, tenue par des Allemands aguerris, résiste avec acharnement. La contre-charge de la cavalerie lourde britannique, mal coordonnée, est d’abord un succès, puis vire au désastre : après s’être trop avancée, elle est écrasée par la riposte de la cavalerie française et les tirs de la grande batterie. À ce stade, Français et alliés subissent tous deux des pertes terribles ; le sort de la bataille reste incertain. Vers 13 h 30–14 h, un éclaireur vient avertir Napoléon que des troupes prussiennes apparaissent derrière le bois de Paris. L’Empereur comprend qu’une menace existentielle se dessine sur sa droite. Où est Grouchy ? Pourquoi n’a-t-il pas fixé Blücher à Wavre ? Un moment, Napoléon envisage même la retraite. Mais malade, cloué par la douleur, il délègue la conduite tactique principale à Ney et reste moins présent qu’à l’ordinaire au cœur de l’action.</p><p>À 16 h, Ney commet l’erreur décisive. Trompé par la fumée, les mouvements de repli et l’évacuation des blessés, il croit que l’armée de Wellington vacille. Sans ordre clair de l’Empereur, il lance une immense charge de cavalerie contre la crête, sans appui sérieux d’infanterie ni préparation d’artillerie suffisante. Des milliers de cuirassiers surgissent sur le plateau dans une vision d’apocalypse – « mer d’acier », « mer de casques et de sabres » selon un témoin – mais les fantassins alliés se reforment en carrés hérissés de baïonnettes. Les chevaux refusent de se jeter sur ces hérissons d’acier, et la cavalerie française, prise sous des feux croisés et la mitraille, se fait hacher. Ney, héroïque jusqu’à l’absurde, perd quatre chevaux sous lui, remonte chaque fois en selle, mais ne peut renverser la situation. Napoléon, pour ne pas laisser l’initiative lui échapper, engage les réserves de cavalerie pour soutenir Ney. Treize charges successives n’entament pas la solidité des carrés britanniques. Pendant ce temps, rien n’est coordonné : la cavalerie néglige de neutraliser les batteries ennemies, les assauts d’infanterie des Ier et IIe corps sont désynchronisés, la grande batterie tire davantage sur la pente que sur les hommes. L’usure s’installe côté français.</p><p>À partir de 17 h 30, la menace prussienne devient concrète. Le VIe corps français, déployé entre Papelotte et Plancenoit, est débordé par un nombre croissant de Prussiens. Une première ligne est rompue ; Blücher vise désormais Plancenoit, village-clef qui couvre la ligne de retraite française. Napoléon doit détourner une partie de sa Garde : la Jeune Garde, puis deux divisions de la Vieille Garde, sont envoyées contre les Prussiens. Les combats de rue à Plancenoit sont d’une sauvagerie extrême, le village brûle, change plusieurs fois de mains, mais la position est finalement stabilisée – au prix d’une dispersion des meilleures troupes de l’Empereur. Pendant ce temps, Ney s’acharne sur la Haye-Sainte. Vers 18 h 30, après un bombardement massif et un assaut furieux, la ferme tombe aux mains des Français : le centre de Wellington est désormais directement menacé. Vers 19 h 30, la situation est paradoxalement équilibrée : Blücher est contenu, la Haye-Sainte est prise, mais l’armée française est épuisée, amputée d’une partie de sa cavalerie, et Grouchy n’a toujours pas paru. Napoléon décide alors de jouer son ultime atout : la Garde impériale.</p><p><h2>III. La chute de la Garde et la fin de l’Empire</h2></p><p>Vers 20 h, la Garde, auréolée de son prestige – survivants d’Austerlitz, de la Russie, de la Bérézina – se met en marche vers la crête de Mont-Saint-Jean. Dans l’imaginaire des soldats français, elle est invincible ; dans celui des alliés, son arrivée est le moment de vérité. L’Empereur espère qu’elle percera le centre anglo-allié pendant que, quelque part sur la droite, Grouchy devrait, en théorie, retenir les Prussiens. Mais la mission est devenue impossible. Les troupes de Wellington, bien que saignées, tiennent encore. Une division hollandaise intacte vient renforcer le point d’impact. Sous le feu croisé des fusils et des canons, la Garde avance, vacille, puis, pour la première fois de son histoire, recule. La nouvelle se propage comme une onde de choc dans l’armée française : « La Garde recule ! ». Les unités préparées à suivre son mouvement se débandent, la panique gagne. La déroute devient générale : soldats et officiers se bousculent pour fuir, les lignes se dissolvent.</p><p>Sur la droite, les Prussiens exploitent leur succès, enfoncent les dernières résistances à Plancenoit et menacent la route de repli. La Vieille Garde forme ses carrés pour couvrir la retraite, subit un bombardement acharné, se fait abattre rang après rang, donnant naissance à la légende de Cambronne – qui aurait lancé aux Anglais venus le sommer de se rendre que « la Garde meurt et ne se rend pas », formule probablement forgée après coup mais fidèle à l’esprit du sacrifice. Grouchy, lui, est resté à Wavre, trompé ou paralysé par une arrière-garde prussienne. À 16 km à peine du champ de bataille, il ne joue aucun rôle dans la décision. Waterloo consacre donc la défaite militaire de Napoléon, mais aussi l’échec d’une campagne pensée pour rétablir l’ordre dans une France en quasi guerre civile. En quelques heures, tout s’effondre : l’Empire, déjà vacillant, ne se relèvera pas.</p><p><strong>Politiquement, la défaite ouvre la voie au retour des Bourbons. Fouché intrigue, Talleyrand manœuvre, les puissances alliées entendent écraser définitivement l’héritage napoléonien et encadrer les aspirations libérales issues de la Révolution. Napoléon tente un moment de fuir vers l’Amérique, mais, bloqué et trahi, il se rend aux Anglais à Rochefort. Exilé à Sainte-Hélène, il sort de la scène, laissant derrière lui une légende qui alimentera les débats politiques européens pendant tout le XIXe siècle : affrontement entre aristocratie réactionnaire et bourgeoisie libérale, entre absolutisme et constitutionalisme, entre ancien monde et ordre nouveau.</strong></p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

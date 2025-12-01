@@ -131,6 +131,157 @@
             align-items: center;
         }
 
+        /* Header avec indicateur de synchronisation */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--espacement-md);
+            background: var(--couleur-panneau);
+            border-bottom: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-sm);
+            position: relative;
+            z-index: 1000;
+            gap: var(--espacement-md);
+            flex-wrap: wrap;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: var(--espacement-sm);
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        /* 🕵️‍♀️ Barre de recherche globale */
+
+        .global-search {
+            position: relative;
+            flex: 1;
+            max-width: 420px;
+            min-width: 220px;
+        }
+
+        .global-search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--couleur-bordure);
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.85rem;
+            outline: none;
+            transition: box-shadow var(--transition-rapide),
+                        border-color var(--transition-rapide),
+                        background-color var(--transition-rapide);
+        }
+
+        body.theme-sombre .global-search-input {
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--couleur-texte);
+            border-color: var(--couleur-bordure);
+        }
+
+        .global-search-input:focus {
+            border-color: var(--couleur-accent);
+            box-shadow: 0 0 0 2px rgba(255, 197, 211, 0.4);
+        }
+
+        .global-search-results {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            max-height: 420px;
+            background: var(--couleur-panneau);
+            border-radius: 12px;
+            border: 1px solid var(--couleur-bordure);
+            box-shadow: var(--ombre-lg);
+            padding: 6px 0;
+            display: none;
+            overflow-y: auto;
+            z-index: 2000;
+        }
+
+        .global-search-results.open {
+            display: block;
+        }
+
+        .global-search-group {
+            padding: 4px 0 6px;
+        }
+
+        .global-search-group-title {
+            padding: 4px 14px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            opacity: 0.6;
+        }
+
+        .global-search-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .global-search-item {
+            width: 100%;
+            border: none;
+            background: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+            padding: 6px 14px;
+            gap: 2px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .global-search-item:hover {
+            background: rgba(148, 163, 184, 0.18);
+        }
+
+        .global-search-item-title {
+            font-weight: 500;
+        }
+
+        .global-search-item-meta {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .global-search-empty {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .main-tabs {
+                order: 2;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .global-search {
+                order: 3;
+                width: 100%;
+                max-width: none;
+            }
+
+            .header-controls {
+                order: 4;
+                width: 100%;
+                justify-content: flex-end;
+            }
+        }
+
         .btn {
             background: var(--couleur-accent);
             color: white;
@@ -1928,6 +2079,125 @@
             .detail-map {
                 height: 180px;
             }
+
+            /* Popup fiche pays / personnage : plein écran avec marges */
+            .detail-overlay {
+                position: fixed;
+                inset: 0;
+                background: rgba(15, 23, 42, 0.55);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 9999;
+            }
+
+            .detail-overlay.open {
+                display: flex;
+            }
+
+            .detail-modal {
+                background: var(--couleur-fond);
+                color: var(--couleur-texte);
+                /* 🟣 quasi plein écran : 2rem ≈ 2 cm de marge autour */
+                width: min(calc(100vw - 4rem), 1400px);
+                height: calc(100vh - 4rem);
+                max-height: calc(100vh - 4rem);
+                border-radius: 24px;
+                box-shadow: var(--ombre-lg);
+                display: flex;
+                flex-direction: column;
+                border: 1px solid var(--couleur-bordure);
+                overflow: hidden;
+            }
+
+            .detail-header {
+                padding: var(--espacement-md) var(--espacement-lg);
+                border-bottom: 1px solid var(--couleur-bordure);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: var(--espacement-md);
+            }
+
+            .detail-body {
+                padding: 12px 16px 16px;
+                font-size: 0.9rem;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                flex: 1;            /* occupe toute la hauteur de la modal */
+                overflow: hidden;   /* le scroll se fait dans les blocs internes */
+            }
+
+
+            /* Carte + stats */
+            .detail-main {
+                display: grid;
+                grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+                gap: var(--espacement-md);
+                min-height: 0;
+            }
+
+            .detail-map {
+                background: var(--couleur-fond);
+                border-radius: var(--arrondi-lg);
+                overflow: hidden;
+                min-height: 0;
+            }
+
+            .detail-stats {
+                background: var(--couleur-fond);
+                border-radius: var(--arrondi-lg);
+                padding: var(--espacement-md);
+                overflow: auto;
+                min-height: 0;
+            }
+
+            /* Sections (bio, chronologie, pays) : chacune scrollable si besoin */
+            .detail-section {
+                background: var(--couleur-fond);
+                border-radius: var(--arrondi-lg);
+                padding: var(--espacement-md);
+                min-height: 0;
+                max-height: 35vh;      /* chaque bloc peut scroller */
+                overflow: auto;
+            }
+
+            /* bio particulièrement scrollable */
+            .detail-main {
+                display: grid;
+                grid-template-columns: 2.2fr 3fr;
+                gap: 12px;
+                min-height: 0;
+            }
+
+            /* chaque section peut scroller si elle est très longue */
+            .detail-section {
+                min-height: 0;
+                max-height: 38vh;
+                overflow-y: auto;
+            }
+
+            /* style de la bio longue */
+            .person-bio {
+                white-space: pre-wrap;
+                line-height: 1.5;
+            }
+
+            /* Sur petit écran, on garde ton comportement existant,
+            mais tu peux laisser ton @media actuel qui réduit la modal */
+            @media (max-width: 768px) {
+                .detail-modal {
+                    width: 96vw;
+                    height: auto;
+                    max-height: 90vh;
+                    border-radius: 14px;
+                }
+
+                .detail-main {
+                    grid-template-columns: 1fr;
+                }
+            }
         }
 
         /* ============================
@@ -2461,6 +2731,26 @@
                 gap: 6px;
             }
         }
+
+        #detail-panel {
+            max-width: calc(100% - 4rem);  /* ≈ 2rem de marge de chaque côté */
+            margin: 2rem auto;
+            height: calc(100% - 4rem);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-body {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 1.5rem;
+            height: calc(100% - 60px); /* en gros, sous le header de la fiche */
+            overflow: hidden;
+        }
+
+        .detail-section {
+            overflow-y: auto;
+        }
     </style>
 </head>
 <body class="view-map mobile-mode-map">
@@ -2488,6 +2778,19 @@
                 chronologie.
             </button>
         </nav>
+
+        <!-- Barre de recherche globale -->
+        <div class="global-search" id="global-search">
+            <input
+                type="search"
+                id="global-search-input"
+                class="global-search-input"
+                placeholder="Rechercher un évènement ou un personnage…"
+                autocomplete="off"
+                spellcheck="false"
+            >
+            <div id="global-search-results" class="global-search-results"></div>
+        </div>
 
         <div class="header-controls">
             <button id="refresh-btn" class="btn btn-secondary" title="Actualiser les données">
@@ -2764,10 +3067,17 @@
                     <div id="detail-stats" class="detail-stats"></div>
                 </div>
 
+                <section class="detail-section" id="detail-bio-section" style="display:none;">
+                    <h3>biographie.</h3>
+                    <div id="detail-bio"></div>
+                </section>
+                
                 <section class="detail-section" id="detail-timeline-section">
                     <h3>chronologie condensée.</h3>
                     <div id="detail-timeline"></div>
                 </section>
+
+
 
                 <section class="detail-section" id="detail-persons-section">
                     <h3 id="detail-persons-title">personnages majeurs.</h3>
@@ -2813,24 +3123,26 @@
                 this.timelineGlobalDots = [];
                 this.currentGlobalTimelineEvents = [];
                 this.selectedGlobalTimelineIndex = null;
-                this.personIndex = {}; // { "Napoléon Ier": { nom, events: [...] } }
                 this.personIndex = {};              // index personnages -> { nom, events: [...] }
                 this.currentTimelineContext = null; // { type: 'country' | 'person', name: string }
-                this.detailMap = null;             // mini-carte dans la fiche
+                this.detailMap = null;              // mini-carte dans la fiche
                 this.sidebarCountryMap = null;
 
                 // Cache et données
                 this.cache = {
                     countries: [],
                     events: [],
+                    persons: [],
                     lastSync: null
                 };
                 
                 // URLs des données (adaptez selon votre structure)
                 this.dataUrls = {
                     events: 'data/evenements.json',
-                    countries: 'data/pays.json'
+                    countries: 'data/pays.json',
+                    persons: 'data/personnes.json'
                 };
+
                 
                 this.init();
 
@@ -2905,10 +3217,56 @@
                 this.directoryOverlay = document.getElementById('directory-overlay');
                 this.directoryTitleElem = document.getElementById('directory-title');
                 this.directoryContentElem = document.getElementById('directory-content');
+                
                 // Contrôles de base
                 document.getElementById('theme-btn').addEventListener('click', () => {
                     this.toggleTheme();
                 });
+
+                // 🔎 Barre de recherche globale (événements + personnages)
+                const searchInput   = document.getElementById('global-search-input');
+                const searchResults = document.getElementById('global-search-results');
+
+                if (searchInput && searchResults) {
+                    // Saisie : lancer la recherche à partir de 2 caractères
+                    searchInput.addEventListener('input', (e) => {
+                        const value = (e.target.value || '').trim();
+                        if (value.length < 2) {
+                            searchResults.innerHTML = '';
+                            searchResults.classList.remove('open');
+                            return;
+                        }
+                        this.updateGlobalSearchResults(value);
+                    });
+
+                    // Focus : si déjà des résultats pour la valeur courante, on les réaffiche
+                    searchInput.addEventListener('focus', () => {
+                        const value = (searchInput.value || '').trim();
+                        if (value.length >= 2 && searchResults.innerHTML.trim() !== '') {
+                            searchResults.classList.add('open');
+                        }
+                    });
+
+                    // Échap pour nettoyer / fermer
+                    searchInput.addEventListener('keydown', (e) => {
+                        if (e.key === 'Escape') {
+                            searchInput.value = '';
+                            searchResults.innerHTML = '';
+                            searchResults.classList.remove('open');
+                            searchInput.blur();
+                        }
+                    });
+
+                    // Fermeture si clic en dehors
+                    document.addEventListener('click', (e) => {
+                        const wrapper = document.getElementById('global-search');
+                        if (!wrapper) return;
+                        if (!wrapper.contains(e.target)) {
+                            searchResults.innerHTML = '';
+                            searchResults.classList.remove('open');
+                        }
+                    });
+                }
 
                 // Onglets desktop carte / chronologie
                 const mainTabs = document.querySelectorAll('.main-tab');
@@ -3318,26 +3676,39 @@
                 
                 try {
                     console.log("📦 Chargement des données...");
+                    const cacheBuster = forceReload ? ('?t=' + Date.now()) : '';
                     
-                    // Charger événements et pays en parallèle
-                    const [eventsResponse, countriesResponse] = await Promise.all([
-                        fetch(this.dataUrls.events + (forceReload ? '?t=' + Date.now() : '')),
-                        fetch(this.dataUrls.countries + (forceReload ? '?t=' + Date.now() : ''))
+                    // Charger événements, pays et personnages en parallèle
+                    const [eventsResponse, countriesResponse, personsResponse] = await Promise.all([
+                        fetch(this.dataUrls.events + cacheBuster),
+                        fetch(this.dataUrls.countries + cacheBuster),
+                        fetch(this.dataUrls.persons + cacheBuster).catch(() => null)
                     ]);
                     
-                    if (eventsResponse.ok && countriesResponse.ok) {
-                        this.cache.events = await eventsResponse.json();
-                        this.cache.countries = await countriesResponse.json();
-                        this.cache.lastSync = new Date();
-                        this.buildPersonsIndex();
-                        this.populateTimelineSelectors();
-
-                        console.log(`✅ ${this.cache.events.length} événements et ${this.cache.countries.length} pays chargés`);
-                        this.setSyncStatus('success', 'Synchronisé');
-                        this.showNotification('📦 Données mises à jour', 'success');
-                    } else {
-                        throw new Error('Erreur de chargement des données');
+                    if (!eventsResponse.ok || !countriesResponse.ok) {
+                        throw new Error('Erreur de chargement des données principales');
                     }
+
+                    this.cache.events = await eventsResponse.json();
+                    this.cache.countries = await countriesResponse.json();
+                    this.cache.persons = [];
+
+                    if (personsResponse && personsResponse.ok) {
+                        try {
+                            const personsJson = await personsResponse.json();
+                            this.cache.persons = Array.isArray(personsJson) ? personsJson : [];
+                        } catch (e) {
+                            console.warn('⚠️ Impossible de parser personnes.json, on continue sans les fiches personnages.', e);
+                        }
+                    }
+
+                    this.cache.lastSync = new Date();
+                    this.buildPersonsIndex();
+                    this.populateTimelineSelectors();
+
+                    console.log(`✅ ${this.cache.events.length} événements, ${this.cache.countries.length} pays et ${this.cache.persons.length} personnages chargés`);
+                    this.setSyncStatus('success', 'Synchronisé');
+                    this.showNotification('📦 Données mises à jour', 'success');
                     
                 } catch (error) {
                     console.error("❌ Erreur de chargement:", error);
@@ -3389,8 +3760,30 @@
             }
             
             buildPersonsIndex() {
-                this.personIndex = {};
+                const index = {};
 
+                // 1) Métadonnées Obsidian (data/personnes.json)
+                (this.cache.persons || []).forEach(meta => {
+                    if (!meta || !meta.nom) return;
+
+                    index[meta.nom] = {
+                        nom: meta.nom,
+                        titre: meta.titre || meta.nom,
+                        events: [],
+                        naissance: meta.naissance || null,
+                        mort: meta.mort || null,
+                        lieuNaissance: meta.lieu_naissance || null,
+                        lieuMort: meta.lieu_mort || null,
+                        fonction: meta.fonction || null,
+                        paysPrincipaux: Array.isArray(meta.pays_principaux) ? meta.pays_principaux : [],
+                        image: meta.image || null,
+                        bioCourte: meta.bio_courte || null,
+                        bioLongue: meta.bio_longue || null,
+                        sources: meta.sources || null
+                    };
+                });
+
+                // 2) Évènements : on rattache les événements aux personnes
                 (this.cache.events || []).forEach(ev => {
                     const persons = ev.personnages || ev.personnages_list || ev.persons;
                     if (!persons) return;
@@ -3402,12 +3795,28 @@
 
                     list.forEach(name => {
                         if (!name) return;
-                        if (!this.personIndex[name]) {
-                            this.personIndex[name] = { nom: name, events: [] };
+                        if (!index[name]) {
+                            // Personnage cité seulement dans les événements (pas encore de fiche Obsidian)
+                            index[name] = {
+                                nom: name,
+                                titre: name,
+                                events: [],
+                                naissance: null,
+                                mort: null,
+                                lieuNaissance: null,
+                                lieuMort: null,
+                                fonction: null,
+                                paysPrincipaux: [],
+                                image: null,
+                                bioCourte: null,
+                                sources: null
+                            };
                         }
-                        this.personIndex[name].events.push(ev);
+                        index[name].events.push(ev);
                     });
                 });
+
+                this.personIndex = index;
             }
 
             populateTimelineSelectors() {
@@ -4434,7 +4843,7 @@
                     </section>
                 `;
             }
-
+            
             showPersonSheet(personName) {
                 const overlay = document.getElementById('detail-overlay');
                 const titleEl = document.getElementById('detail-title');
@@ -4444,72 +4853,139 @@
                 const personsEl = document.getElementById('detail-persons');
                 const personsTitleEl = document.getElementById('detail-persons-title');
 
+                const bioSection = document.getElementById('detail-bio-section');
+                const bioEl = document.getElementById('detail-bio');
+
                 if (!overlay || !titleEl || !statsEl || !timelineEl || !personsEl) return;
                 if (!this.personIndex || !this.personIndex[personName]) return;
 
                 const p = this.personIndex[personName];
-                const events = (p.events || []).slice().sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                // Évènements liés triés par date
+                const events = (p.events || []).slice().sort(
+                    (a, b) => new Date(a.date) - new Date(b.date)
+                );
+
+                // Pays associés
                 const countriesSet = new Set();
-                events.forEach(ev => {
-                    const countries = this.eventCountries(ev);
-                    if (countries) countries.forEach(c => countriesSet.add(c));
-                });
+                if (Array.isArray(p.paysPrincipaux)) {
+                    p.paysPrincipaux.forEach(c => { if (c) countriesSet.add(c); });
+                }
+                if (countriesSet.size === 0) {
+                    events.forEach(ev => {
+                        this.eventCountries(ev).forEach(c => countriesSet.add(c));
+                    });
+                }
                 const countriesList = Array.from(countriesSet);
 
-                titleEl.textContent = personName;
+                // Titre
+                const displayName = p.titre || p.nom || personName;
+                titleEl.textContent = displayName;
 
+                // Sous-titre : fonction + dates de vie formatées
                 const years = events
-                    .map(ev => parseInt(ev.date.split('-')[0], 10))
+                    .map(ev => parseInt((ev.date || '').split('-')[0], 10))
                     .filter(y => !isNaN(y));
-
                 const minY = years.length ? Math.min(...years) : null;
                 const maxY = years.length ? Math.max(...years) : null;
 
-                subtitleEl.textContent = events.length
-                    ? `≈ ${events.length} événement(s) de ${minY} à ${maxY}`
-                    : `aucun événement enregistré.`;
+                const datesLabel = (() => {
+                    const birth = p.naissance ? this.formatDateHuman(p.naissance) : '';
+                    const death = p.mort ? this.formatDateHuman(p.mort) : '';
+                    if (birth && death) return `${birth} – ${death}`;
+                    if (birth && !death) return `né·e ${birth}`;
+                    if (!birth && death) return `mort·e ${death}`;
+                    return '';
+                })();
 
-                statsEl.innerHTML = `
-                    <div class="detail-stats-grid">
+                const subtitleParts = [];
+                if (p.fonction) subtitleParts.push(p.fonction);
+                if (datesLabel)  subtitleParts.push(datesLabel);
+
+                if (!subtitleParts.length) {
+                    if (events.length) {
+                        subtitleParts.push(
+                            `≈ ${events.length} événement(s) de ${minY !== null ? minY : '?'} à ${maxY !== null ? maxY : '?'}`
+                        );
+                    } else {
+                        subtitleParts.push('aucun événement enregistré.');
+                    }
+                }
+                subtitleEl.textContent = subtitleParts.join(' • ');
+
+                // Stats biographiques (inchangé, sauf si tu veux aussi formater les dates ici)
+                let statsHtml = '<div class="detail-stats-grid">';
+                if (p.naissance || p.lieuNaissance) {
+                    const naissance = p.naissance ? this.formatDateHuman(p.naissance) : '';
+                    statsHtml += `
                         <div>
-                            <div class="detail-stat-label">événements</div>
-                            <div class="detail-stat-value">${events.length}</div>
-                        </div>
-                        <div>
-                            <div class="detail-stat-label">période</div>
+                            <div class="detail-stat-label">naissance</div>
                             <div class="detail-stat-value">
-                                ${minY !== null ? minY : '?'} – ${maxY !== null ? maxY : '?'}
+                                ${naissance || ''}${p.lieuNaissance ? ` – ${p.lieuNaissance}` : ''}
                             </div>
                         </div>
+                    `;
+                }
+                if (p.mort || p.lieuMort) {
+                    const mort = p.mort ? this.formatDateHuman(p.mort) : '';
+                    statsHtml += `
                         <div>
-                            <div class="detail-stat-label">pays associés</div>
+                            <div class="detail-stat-label">mort</div>
                             <div class="detail-stat-value">
-                                ${countriesList.length ? countriesList.join(', ') : '–'}
+                                ${mort || ''}${p.lieuMort ? ` – ${p.lieuMort}` : ''}
                             </div>
+                        </div>
+                    `;
+                }
+                statsHtml += `
+                    <div>
+                        <div class="detail-stat-label">événements liés</div>
+                        <div class="detail-stat-value">${events.length}</div>
+                    </div>
+                    <div>
+                        <div class="detail-stat-label">pays associés</div>
+                        <div class="detail-stat-value">
+                            ${countriesList.length ? countriesList.join(', ') : '–'}
                         </div>
                     </div>
                 `;
+                statsHtml += '</div>';
+                statsEl.innerHTML = statsHtml;
 
+                // 🟣 Biographie longue : on privilégie bioLongue, puis bioCourte
+                if (bioSection && bioEl) {
+                    const bio = p.bioLongue || p.bioCourte || '';
+                    if (bio) {
+                        bioSection.style.display = 'block';
+                        bioEl.innerHTML = `<p class="person-bio">${bio}</p>`;
+                    } else {
+                        bioSection.style.display = 'none';
+                        bioEl.innerHTML = '';
+                    }
+                }
+
+                // Chronologie condensée : uniquement les événements, dates jolies
                 if (events.length === 0) {
                     timelineEl.innerHTML = `<p class="no-events">Aucun événement à afficher.</p>`;
                 } else {
-                    timelineEl.innerHTML = events.map(ev => {
-                        const lien  = ev.lien && ev.lien !== '#' ? ev.lien : null;
-                        const date  = ev.date  || '';
-                        const titre = ev.titre || '(sans titre)';
+                    const timelineHtml = events.map(ev => {
+                        const lien    = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        const dateStr = ev.date ? this.formatDateHuman(ev.date) : '';
+                        const titre   = ev.titre || '(sans titre)';
 
                         return `
                             <button class="detail-timeline-item"
                                     ${lien ? `data-lien="${lien}"` : ''}>
-                                <span class="detail-timeline-date">${date}</span>
+                                <span class="detail-timeline-date">${dateStr}</span>
                                 <span class="detail-timeline-separator">—</span>
                                 <span class="detail-timeline-title">${titre}</span>
                             </button>
                         `;
                     }).join('');
+                    timelineEl.innerHTML = timelineHtml;
                 }
 
-                // Clic sur un événement = ouvrir la fiche individuelle
+                // Évènements cliquables -> fiche évènement
                 timelineEl.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
                     btn.addEventListener('click', () => {
                         const url = btn.getAttribute('data-lien');
@@ -4517,9 +4993,9 @@
                     });
                 });
 
-                // Section pays liés : pastilles de pays
+                // Pays associés en pastilles
                 if (personsTitleEl) {
-                    personsTitleEl.textContent = 'pays liés.';
+                    personsTitleEl.textContent = 'pays associés.';
                 }
 
                 if (!countriesList.length) {
@@ -4538,25 +5014,16 @@
                         </div>
                     `;
                 }
-
-                personsEl.querySelectorAll('.detail-country-chip').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const country = btn.getAttribute('data-country');
-                    if (!country) return;
-                    this.showCountrySheet(country);
-                });
-            });
-
+                
                 // --- Mini-carte centrée sur un événement du personnage ---
                 const mapDiv = document.getElementById('detail-map');
                 if (mapDiv) {
-                    // Si une ancienne carte existe mais n'est pas attachée au bon conteneur, on la détruit
+                    // Si la mini-carte existante n'est plus attachée au bon div, on la recrée
                     if (this.detailMap && this.detailMap._container !== mapDiv) {
                         this.detailMap.remove();
                         this.detailMap = null;
                     }
 
-                    // Initialisation si nécessaire
                     if (!this.detailMap) {
                         this.detailMap = L.map(mapDiv, {
                             center: [20, 0],
@@ -4569,21 +5036,16 @@
                         }).addTo(this.detailMap);
                     }
 
-                    // Ici tu recentres selon le contexte :
-                    // 👉 pour un PAYS :
-                    // if (country && country.coordonnees) {
-                    //     const [lat, lng] = country.coordonnees;
-                    //     this.detailMap.setView([lat, lng], 4);
-                    // }
+                    // On cherche un événement avec des coordonnées [lat, lng]
+                    const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
+                    if (firstWithCoords) {
+                        const [lat, lng] = firstWithCoords.coords;
+                        this.detailMap.setView([lat, lng], 4);
+                    }
 
-                    // 👉 pour un PERSONNAGE :
-                    // const firstWithCoords = events.find(ev => Array.isArray(ev.coords) && ev.coords.length === 2);
-                    // if (firstWithCoords) {
-                    //     const [lat, lng] = firstWithCoords.coords;
-                    //     this.detailMap.setView([lat, lng], 4);
-                    // }
-
-                    setTimeout(() => this.detailMap.invalidateSize(), 150);
+                    setTimeout(() => {
+                        this.detailMap.invalidateSize();
+                    }, 150);
                 }
 
                 // Clic sur un pays lié = ouvrir la fiche pays (popup)
@@ -4748,10 +5210,12 @@
                 
                 events.slice(0, 3).forEach(event => {
                     const categoryIcon = this.getCategoryIcon(event.categorie);
+                    const dateStr      = this.formatDateHuman(event.date);
+
                     hoverContent += `
                         <div style="margin: 4px 0; padding: 6px 8px; background: rgba(15,23,42,0.05); border-radius: 6px;">
                             <div style="font-size: 0.78rem; opacity: 0.9; margin-bottom: 2px;">
-                                ${categoryIcon} ${event.date}
+                                ${categoryIcon} ${dateStr}
                             </div>
                             <div style="font-size: 0.8rem; font-weight: 600;">
                                 ${event.titre}
@@ -5447,9 +5911,11 @@
                 currentYearEvents.forEach(event => {
                     const categoryIcon = this.getCategoryIcon(event.categorie);
                     
+                    const dateStr = this.formatDateHuman(event.date);
+
                     html += `
                         <div class="event-item" onclick="historicalMap.focusOnCountry('${event.pays}')">
-                            <div class="event-date">${categoryIcon} ${event.date}</div>
+                            <div class="event-date">${categoryIcon} ${dateStr}</div>
                             <div class="event-title">${event.titre}</div>
                             <div class="event-country">${event.pays}</div>
                         </div>
@@ -5613,6 +6079,217 @@
                 }, 3000);
             }
             
+            // Formate une date "YYYY", "YYYY-MM", "YYYY-MM-DD" en français
+            // ex. "2012-12-01" -> "1er décembre 2012"
+            formatDateHuman(dateStr) {
+                if (!dateStr) return '';
+                if (typeof dateStr !== 'string') {
+                    dateStr = String(dateStr);
+                }
+                const cleaned = dateStr.trim();
+                if (!cleaned) return '';
+
+                const match = cleaned.match(/^(-?\d{1,4})(?:-(\d{1,2})(?:-(\d{1,2}))?)?$/);
+                if (!match) {
+                    // Format exotique : on renvoie brut
+                    return cleaned;
+                }
+
+                let year  = parseInt(match[1], 10);
+                const month = match[2] ? parseInt(match[2], 10) : null;
+                const day   = match[3] ? parseInt(match[3], 10) : null;
+
+                const monthNames = [
+                    'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
+                    'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'
+                ];
+
+                const isBC = year <= 0;
+                if (isBC) {
+                    year = Math.abs(year);
+                }
+
+                let result;
+                if (month && day) {
+                    const dayStr   = (day === 1) ? '1er' : String(day);
+                    const monthStr = monthNames[month - 1] || '';
+                    result = `${dayStr} ${monthStr} ${year}`;
+                } else if (month) {
+                    const monthStr = monthNames[month - 1] || '';
+                    result = `${monthStr} ${year}`;
+                } else {
+                    result = `${year}`;
+                }
+
+                if (isBC) {
+                    result += ' av. J.-C.';
+                }
+
+                return result;
+            }
+
+            // Prépare la petite ligne de meta pour un personnage (dates de vie ou borne des événements)
+            formatPersonMeta(person) {
+                if (!person) return '';
+
+                const parts = [];
+
+                if (person.naissance || person.mort) {
+                    const birth = person.naissance ? this.formatDateHuman(person.naissance) : '';
+                    const death = person.mort ? this.formatDateHuman(person.mort) : '';
+
+                    if (birth && death) {
+                        parts.push(`${birth} – ${death}`);
+                    } else if (birth) {
+                        parts.push(`né·e ${birth}`);
+                    } else if (death) {
+                        parts.push(`✝ ${death}`);
+                    }
+                }
+
+                // À défaut, on prend la période couverte par ses événements
+                if (parts.length === 0 && Array.isArray(person.events) && person.events.length) {
+                    const years = person.events
+                        .map(ev => this.getEventYear(ev))
+                        .filter(y => y != null)
+                        .sort((a, b) => a - b);
+
+                    if (years.length) {
+                        const first = years[0];
+                        const last  = years[years.length - 1];
+                        parts.push(first === last ? `${first}` : `${first} – ${last}`);
+                    }
+                }
+
+                return parts.join(' · ');
+            }
+
+            // Met à jour la liste des résultats de la barre de recherche globale
+            updateGlobalSearchResults(query) {
+                const input     = document.getElementById('global-search-input');
+                const container = document.getElementById('global-search-results');
+                if (!input || !container) return;
+
+                const trimmed = (query || '').trim();
+                if (trimmed.length < 2) {
+                    container.innerHTML = '';
+                    container.classList.remove('open');
+                    return;
+                }
+
+                const q = trimmed.toLowerCase();
+
+                // Événements : filtre sur le titre
+                const events = (this.cache.events || []).filter(ev => {
+                    const title = (ev.titre || '').toString().toLowerCase();
+                    return title.includes(q);
+                });
+
+                // Personnages : filtre sur le nom
+                const persons = Object.values(this.personIndex || {}).filter(p => {
+                    const name = (p.nom || '').toString().toLowerCase();
+                    return name.includes(q);
+                });
+
+                if (!events.length && !persons.length) {
+                    container.innerHTML = `<div class="global-search-empty">Aucun résultat</div>`;
+                    container.classList.add('open');
+                    return;
+                }
+
+                const maxEvents  = 15;
+                const maxPersons = 15;
+
+                let html = '<div class="global-search-groups">';
+
+                // Groupe ÉVÉNEMENTS
+                if (events.length) {
+                    html += `
+                        <div class="global-search-group">
+                            <div class="global-search-group-title">événements</div>
+                            <ul class="global-search-list">
+                    `;
+                    events.slice(0, maxEvents).forEach(ev => {
+                        const title   = ev.titre || '(sans titre)';
+                        const dateStr = ev.date ? this.formatDateHuman(ev.date) : '';
+                        const lien    = ev.lien && ev.lien !== '#' ? ev.lien : '';
+
+                        html += `
+                            <li>
+                                <button type="button"
+                                        class="global-search-item"
+                                        data-type="event"
+                                        ${lien ? `data-lien="${lien}"` : ''}>
+                                    <span class="global-search-item-title">${title}</span>
+                                    ${dateStr ? `<span class="global-search-item-meta">${dateStr}</span>` : ''}
+                                </button>
+                            </li>
+                        `;
+                    });
+                    html += `
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                // Groupe PERSONNAGES
+                if (persons.length) {
+                    html += `
+                        <div class="global-search-group">
+                            <div class="global-search-group-title">personnages</div>
+                            <ul class="global-search-list">
+                    `;
+                    persons.slice(0, maxPersons).forEach(p => {
+                        const meta = this.formatPersonMeta(p);
+                        html += `
+                            <li>
+                                <button type="button"
+                                        class="global-search-item"
+                                        data-type="person"
+                                        data-person="${p.nom}">
+                                    <span class="global-search-item-title">${p.nom}</span>
+                                    ${meta ? `<span class="global-search-item-meta">${meta}</span>` : ''}
+                                </button>
+                            </li>
+                        `;
+                    });
+                    html += `
+                            </ul>
+                        </div>
+                    `;
+                }
+
+                html += '</div>';
+                container.innerHTML = html;
+                container.classList.add('open');
+
+                // Gestion des clics sur les résultats
+                container.querySelectorAll('.global-search-item').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const type = btn.getAttribute('data-type');
+
+                        if (type === 'event') {
+                            const url = btn.getAttribute('data-lien');
+                            if (url) {
+                                // 👉 fiche événement
+                                window.open(url, '_blank');
+                            }
+                        } else if (type === 'person') {
+                            const name = btn.getAttribute('data-person');
+                            if (name) {
+                                // 👉 fiche personnage (popup)
+                                this.showPersonSheet(name);
+                            }
+                        }
+
+                        container.innerHTML = '';
+                        container.classList.remove('open');
+                        input.blur();
+                    });
+                });
+            }
+
             exportData() {
                 const data = {
                     countries: this.cache.countries,
@@ -5735,12 +6412,14 @@
                             html += `<p class="no-events">Aucun événement pour ${countryA}.</p>`;
                         } else {
                             eventsA.forEach((ev, index) => {
-                                const icon = this.getCategoryIcon(ev.categorie);
+                                const icon    = this.getCategoryIcon(ev.categorie);
+                                const dateStr = this.formatDateHuman(ev.date);
+
                                 html += `
                                     <div class="timeline-event compare-event" 
                                         data-side="A" 
                                         data-index="${index}">
-                                        <div class="event-date">${icon} ${ev.date}</div>
+                                        <div class="event-date">${icon} ${dateStr}</div>
                                         <div class="event-title">${ev.titre}</div>
                                         <div class="event-description">${ev.description || ""}</div>
                                     </div>
@@ -5758,12 +6437,14 @@
                             html += `<p class="no-events">Aucun événement pour ${countryB}.</p>`;
                         } else {
                             eventsB.forEach((ev, index) => {
-                                const icon = this.getCategoryIcon(ev.categorie);
+                                const icon    = this.getCategoryIcon(ev.categorie);
+                                const dateStr = this.formatDateHuman(ev.date);
+
                                 html += `
                                     <div class="timeline-event compare-event" 
                                         data-side="B" 
                                         data-index="${index}">
-                                        <div class="event-date">${icon} ${ev.date}</div>
+                                        <div class="event-date">${icon} ${dateStr}</div>
                                         <div class="event-title">${ev.titre}</div>
                                         <div class="event-description">${ev.description || ""}</div>
                                     </div>

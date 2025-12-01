@@ -1,0 +1,33 @@
+[
+  {
+    "nom": "Napoléon Bonaparte",
+    "titre": "Napoléon Ier",
+    "naissance": "1769-08-15",
+    "mort": "1821-05-05",
+    "lieu_naissance": "Ajaccio",
+    "lieu_mort": "Île Saint-Hélène",
+    "fonction": "Empereur",
+    "pays_principaux": [
+      "France",
+      "Italie"
+    ],
+    "image": "images/napoleon-bonaparte.jpg",
+    "bio_courte": "Général de la Révolution française devenu empereur, figure majeure de l’Europe du tournant XVIIIe–XIXe siècle.",
+    "bio_longue": "# Jeunesse\n\nTexte…\n\n# Carrière militaire\n\nTexte…\n\n# Empire\n\nTexte…",
+    "sources": ""
+  },
+  {
+    "nom": "personne",
+    "titre": "",
+    "naissance": null,
+    "mort": null,
+    "lieu_naissance": "",
+    "lieu_mort": "",
+    "fonction": "",
+    "pays_principaux": [],
+    "image": "images/napoleon.jpg",
+    "bio_courte": "Général de la Révolution française devenu empereur, figure majeure de l’Europe du tournant XVIIIe–XIXe siècle.",
+    "bio_longue": "# Jeunesse\n\nTexte…\n\n# Carrière militaire\n\nTexte…\n\n# Empire\n\nTexte…",
+    "sources": "Thiers, Tulard, etc."
+  }
+]

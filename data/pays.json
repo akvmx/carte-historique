@@ -24,6 +24,14 @@
     ]
   },
   {
+    "pays": "Belgique",
+    "continent": "europe",
+    "coordonnees": [
+      50.697477,
+      4.3828378
+    ]
+  },
+  {
     "pays": "Espagne",
     "continent": "europe",
     "coordonnees": [
@@ -37,6 +45,14 @@
     "coordonnees": [
       46.2276,
       2.2137
+    ]
+  },
+  {
+    "pays": "Autriche",
+    "continent": "europe",
+    "coordonnees": [
+      48.21,
+      16.37
     ]
   },
   {

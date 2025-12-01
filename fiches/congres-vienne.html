@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Congrès de Vienne</title>
+    <style>
+        :root {
+            --accent: #FFC5D3;
+            --accent-soft: rgba(255, 197, 211, 0.18);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 32px 16px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            margin-bottom: 16px;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 24px 22px 26px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.97rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.9rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <a href="../index.html" class="back-link">← Retour à la carte</a>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Le Congrès de Vienne</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ "Politique"</span>
+                    <span class="badge badge-ghost">📅 1814-09-18</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Autriche</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">1814-09-18</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">"Politique"</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h1><strong>Titre principal de votre article</strong></h1></p><p><h2>I. Waterloo et l’effondrement définitif de l’Empire napoléonien</h2></p><p>Le 18 juin 1815, sur les plaines détrempées au sud de Bruxelles, l’armée de Napoléon Ier affronte l’armée anglo-germano-néerlandaise du duc de Wellington. Le terrain rend l’artillerie française largement inopérante : les boulets s’enfoncent dans la boue au lieu de ricocher, ce qui prive l’Empereur de son principal atout tactique. Pressé par la situation stratégique – 1 200 000 soldats coalisés se préparent à envahir la France – Napoléon choisit néanmoins d’engager la bataille. Les difficultés apparaissent très tôt. Sur l’aile gauche française, Jérôme Bonaparte s’acharne, bien au-delà des intentions initiales, contre le complexe défensif de Hougoumont, que les Britanniques, les Guards et les contingents alliés tiennent avec une ténacité remarquable. Ce qui devait être une simple diversion se transforme en gouffre à effectifs : plusieurs milliers d’hommes du IIe corps sont immobilisés dans un combat secondaire, sans effet décisif sur la ligne ennemie. Sur la droite, le Ier corps, lancé à l’assaut du plateau, est d’abord repoussé par la cavalerie lourde britannique, avant que celle-ci, à son tour, ne soit brisée par les contre-charges françaises et les tirs de la grande batterie. Le champ de bataille reste longtemps indécis, mais la France s’épuise.</p><p>La rupture intervient à la fin de l’après-midi, lorsque les troupes prussiennes de Blücher débouchent par l’est, menaçant la droite et l’arrière de l’Armée du Nord. Malgré des charges répétées de cavalerie et l’engagement final de la Garde impériale contre le centre anglo-allié, les Français ne parviennent pas à rétablir la situation. La Garde recule, événement symboliquement catastrophique : la panique se propage et la bataille de Waterloo se conclut par une défaite sans appel. Trois ans après la catastrophe de Russie et un peu plus d’un an après une première abdication, Napoléon est définitivement vaincu au champ de bataille. L’Europe se prépare à pénétrer une nouvelle fois en territoire français. L’Empereur, acculé, se rend à Rochefort dans l’espoir de gagner les Amériques, mais la Royal Navy verrouille l’Atlantique. Pour éviter de tomber aux mains des Prussiens, il se rend aux Britanniques et est finalement interné à Sainte-Hélène. Louis XVIII, de son côté, se prépare à remonter sur le trône d’un royaume occupé, exsangue, après près d’un quart de siècle de guerre.</p><p><h2>II. Le Congrès de Vienne : partage de l’héritage napoléonien et ordre conservateur</h2></p><p>Pendant que se joue Waterloo, les représentants des puissances européennes sont réunis à Vienne. Le Congrès (1814-1815) a un double objectif : démanteler l’Empire napoléonien et refonder un ordre européen stable pour le siècle à venir. Autour de la table, on trouve les quatre grandes puissances victorieuses (Royaume-Uni, Autriche, Russie, Prusse) mais aussi des délégués français, suédois, espagnols, allemands, néerlandais, etc. Les intérêts sont divergents. Londres, qui domine désormais sans partage le commerce colonial et les mers, cherche avant tout à préserver sa suprématie maritime et industrielle. Pour cela, elle souhaite empêcher l’émergence d’une puissance continentale hégémonique. Castlereagh, son représentant, défend une politique d’équilibre des puissances, quitte à réintégrer une France vaincue dans le jeu diplomatique comme contrepoids aux ambitions russes et prussiennes.</p><p>Metternich, chancelier d’Autriche, poursuit une logique similaire. L’Autriche entend contenir simultanément Prusse et Russie, conserver son influence en Allemagne et en Italie, et éviter l’unification de ces deux espaces. D’où la création d’une Confédération germanique morcelée et le démembrement de la péninsule italienne en une mosaïque de petits États placés, de facto, sous tutelle viennoise. La Russie d’Alexandre Ier, forte du rôle décisif qu’elle a joué dans la défaite de Napoléon, revendique un prestige particulier et d’importants gains territoriaux, notamment en Pologne. Le tsar investit le Congrès d’une dimension quasi mystique : il se voit comme le restaurateur de l’ordre chrétien et le garant d’une croisade anti-révolutionnaire. La France, représentée par Talleyrand, réussit un tour de force diplomatique : bien que vaincue, elle se pose en défenseur de « l’équilibre européen » contre les prétentions de la Russie et de la Prusse. Talleyrand exploite les rivalités entre les vainqueurs pour limiter le démembrement de la France et la réintégrer rapidement dans le « Concert européen ».</p><p>Au-delà des découpages de frontières, le Congrès de Vienne porte un projet idéologique : tenter de « refermer la parenthèse » ouverte en 1789. Il s’agit non seulement d’abattre l’Empire, mais d’endiguer la diffusion des principes issus de la Révolution et du bonapartisme (égalité civile, codes écrits, limitation du pouvoir aristocratique). Or, la domination française a profondément transformé les structures politiques et sociales du continent : en Espagne, en Allemagne, en Italie, en Pologne, les élites et une partie des populations entendent conserver constitutions, chartes, codes civils, abolition du servage ou des droits féodaux La chute de Napoléon ouvre donc une ligne de fracture durable : d’un côté, une aristocratie restaurée qui défend un conservatisme monarchique, hostile à l’héritage révolutionnaire ; de l’autre, une bourgeoisie et des classes moyennes urbaines et rurales qui entendent préserver les acquis de 1789–1815, autrement dit un libéralisme constitutionnel. Après le retour de Napoléon pendant les Cent-Jours, les puissances se montrent beaucoup plus sévères envers la France : occupation par 150 000 hommes, indemnité de guerre de 700 millions de francs (soit environ 5 à 7 % du PIB), payables sur cinq ans. Selon la formule de Castlereagh, il s’agit d’« épuiser » suffisamment le pays pour le neutraliser durablement.</p><p><h2>III. La <strong><em>Restauration</strong></em> en France</h2></p><p>Louis XVIII retrouve son trône à la faveur de la Seconde Restauration, mais l’état du royaume est paradoxal. D’un côté, la France est ruinéé, occupée, traumatisée par un quart de siècle de conflits. De l’autre, elle dispose d’institutions modernisées : administration préfectorale, justice hiérarchisée, Code civil, économie progressivement intégrée au marché européen. Le roi doit gouverner une société profondément divisée. On peut, schématiquement, distinguer deux France. D’un côté, un « peuple royaliste » : noblesse et clergé hostiles à la Révolution, populations rurales de l’Ouest et du Midi marquées par les guerres de Vendée et attachées au trône et à l’autel. De l’autre, une France révolutionnaire et libérale : bourgeoisies urbaines, fonctionnaires, professions indépendantes, mais aussi millions de petits propriétaires paysans qui ont acquis la terre à la faveur de la Révolution et refusent tout retour à l’ordre seigneurial.</p><p>Conscient de cette fracture, Louis XVIII choisit une voie médiane : la Charte de 1814. Ce texte, octroyé par le roi, instaure une monarchie limitée. Il reconfirme les principaux acquis civils de la période révolutionnaire et impériale (égalité devant la loi, maintien des codes, garantie – relative – des libertés publiques), mais dans un cadre politique fortement censitaire. La Chambre des pairs, nommée, représente l’aristocratie ; la Chambre des députés est élue par un corps électoral extrêmement restreint (environ 100 000 électeurs payant au moins 300 francs d’impôts), ce qui réserve la représentation politique à la haute bourgeoisie et à la noblesse. La stratégie de Louis XVIII est claire : il entend ne pas être « le roi de deux peuples », mais le souverain d’une seule nation réconciliée. Par analogie avec Henri IV, il accepte d’enrober la monarchie dans les principes des Lumières et de 1789 pour désamorcer les tensions. Cependant, la défaite des Cent-Jours et la présence des armées étrangères créent un climat de vengeance. Dans l’Ouest et le Midi, on assiste, à partir de l’automne 1815, à la « Terreur blanche » : exactions contre les anciens bonapartistes ou supposés tels, règlements de comptes locaux, épuration de l’administration. Ce contexte influe sur les premières élections législatives : la Chambre des députés élue en 1815, rapidement surnommée « Chambre introuvable », est massivement dominée par les ultra-royalistes, « plus royalistes que le roi », qui rêvent d’un retour pur et simple à l’Ancien Régime et entendent « en finir » avec les héritiers de 1789 par une politique de répression et d’exception.</p><p>Louis XVIII se trouve ainsi pris au piège de sa propre construction institutionnelle : sa monarchie de compromis repose sur un Parlement qui, dès 1815, lui échappe et pousse à une restauration intégrale de l’ordre d’Ancien Régime. Tandis que la Sainte-Alliance (Autriche, Russie, Prusse) s’organise pour étouffer les mouvements libéraux sur le continent, la France de la Restauration devient l’un des principaux laboratoires de la confrontation entre conservatisme monarchique et libéralisme bourgeois, prolongement direct des tensions ouvertes par l’époque napoléonienne.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

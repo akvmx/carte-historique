@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "première-croisade.md",
+                "file": "personnes/Napoléon Bonaparte.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "première-croisade"
+              "title": "Napoléon Bonaparte"
             }
           }
         ],
@@ -187,8 +187,16 @@
   },
   "active": "4eb3d06865edbc2f",
   "lastOpenFiles": [
-    "origines-ottoman.md",
+    "templates/personne.md",
+    "guerres-congo.md",
+    "personnes/Napoléon Bonaparte.md",
+    "docu-sucre.md",
     "première-croisade.md",
+    "personnes",
+    "personne.md",
+    "congres-vienne.md",
+    "bataille-waterloo.md",
+    "origines-ottoman.md",
     "turcs-seljukides-croisades.md",
     "première-croisade2.md",
     "croisades-de-secours.md",
@@ -196,7 +204,6 @@
     "sultanat-mamluk.md",
     "traité-presbourg.md",
     "bataille-austerlitz.md",
-    "docu-sucre.md",
     "campagne-napoléon-allemagne.md",
     "cent-jours.md",
     "campagne-france.md",
@@ -205,16 +212,11 @@
     "bataille-friedland.md",
     "bataille-eylau.md",
     "nouvelle-amsterdam-débuts.md",
-    "guerres-congo.md",
     "templates/evènement.md",
-    "déclin-ottoman.md",
-    "état-indépendant-du-congo.md",
-    "guerre-hollande-france.md",
     "Untitled",
     "Sans titre.base",
     "Sans titre 1.base",
     "Sans titre 2.base",
-    "Sans titre.md",
     "templates"
   ]
 }

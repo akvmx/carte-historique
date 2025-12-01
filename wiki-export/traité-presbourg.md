@@ -13,7 +13,7 @@ lien: fiches/traité-presbourg.html
 
 # **Le traité de Presbourg (26 décembre 1805)**
 
-## ## I. L’après-Austerlitz à Presbourg : une paix sous contrainte réciproque
+## I. L’après-Austerlitz à Presbourg : une paix sous contrainte réciproque
 
 À peine quelques semaines après la victoire d’Austerlitz, les délégations autrichienne et française se réunissent au palais palatin de Presbourg (Bratislava). Le décor mondain – concerts, vins, civilités – masque mal l’âpreté des discussions. L’année 1805 a livré un verdict ambivalent : Trafalgar a anéanti les ambitions navales françaises tandis qu’Austerlitz a balayé l’armée austro-russe sur le continent. Aucun camp n’a « les mains libres » : l’Angleterre tient les mers, la France tient la terre. Dans ce tête-à-tête diplomatique, Paris veut convertir son triomphe tactique en géopolitique durable ; Vienne cherche à éviter l’anéantissement, à préserver l’essentiel de sa puissance danubienne et à différer une recomposition trop brutale de l’espace germanique et italien.
 

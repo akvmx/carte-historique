@@ -66,6 +66,21 @@
     "lien": "fiches/bataille-leipzig.html"
   },
   {
+    "titre": "La bataille de Waterloo",
+    "date": "1815-06-18",
+    "date_fin": "1815-06-19",
+    "perpetuel": false,
+    "pays": "Belgique",
+    "coords": [
+      50.697477,
+      4.3828378
+    ],
+    "description": "C’est la dernière grande bataille de Napoléon, où l’armée française est vaincue par les forces anglaises et leurs alliés.",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/bataille-waterloo.html"
+  },
+  {
     "titre": "La campagne d'Espagne",
     "date": "1808-05-02",
     "date_fin": "1814-04-17",
@@ -109,6 +124,25 @@
     "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/campagne-napoléon-allemagne.html"
+  },
+  {
+    "titre": "Le Congrès de Vienne",
+    "date": "1814-09-18",
+    "date_fin": "1815-06-08",
+    "perpetuel": false,
+    "pays": "Autriche",
+    "coords": [
+      48.21,
+      16.37
+    ],
+    "description": "\"C’est la réorganisation de l’Europe après la chute de Napoléon. En France, la monarchie conservatrice revient au pouvoir et doit trouver un équilibre avec les idées révolutionnaires",
+    "categorie": "politique",
+    "personnages": [
+      "Alexandre Ier",
+      "Frédéric Guillaume III de Prusse",
+      "Francois Ier d’Autriche"
+    ],
+    "lien": "fiches/congres-vienne.html"
   },
   {
     "titre": "Croisades de secours",

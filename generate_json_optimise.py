@@ -14,7 +14,9 @@ from datetime import datetime
 EXPORT_FOLDER = "wiki-export"
 OUTPUT_EVENTS_FILE = "data/evenements.json"
 OUTPUT_PAYS_FILE = "data/pays.json"
+OUTPUT_PERSONNES_FILE = "data/personnes.json"  # 🔸 NOUVEAU
 OUTPUT_HTML_FOLDER = "fiches"
+
 
 def normalize_date(date_str):
     """
@@ -23,46 +25,48 @@ def normalize_date(date_str):
     """
     if not date_str:
         return None
-    
+
     # Nettoyer la chaîne (enlever guillemets et espaces)
     date_str = str(date_str).strip().strip('"').strip("'")
-    
+
     # Si déjà au format complet YYYY-MM-DD
     if re.match(r'^\d{4}-\d{2}-\d{2}$', date_str):
         return date_str
-    
+
     # Si format année-mois YYYY-MM
     if re.match(r'^\d{4}-\d{2}$', date_str):
         return f"{date_str}-01"
-    
+
     # Si format année seule (1 à 4 chiffres)
     if re.match(r'^\d{1,4}$', date_str):
         # Pad l'année à 4 chiffres (990 → 0990)
         year = date_str.zfill(4)
         return f"{year}-01-01"
-    
+
     print(f"⚠️ Format de date non reconnu: {date_str}")
     return date_str
+
 
 def create_directories():
     """Créer les dossiers nécessaires"""
     for folder in ['data', OUTPUT_HTML_FOLDER]:
         Path(folder).mkdir(exist_ok=True)
 
+
 def parse_frontmatter(content):
     """Extraire le front matter YAML simple"""
     if not content.startswith('---'):
         return None, content
-    
+
     try:
         # Trouver la fin du front matter
         end_marker = content.find('---', 3)
         if end_marker == -1:
             return None, content
-            
+
         frontmatter = content[3:end_marker].strip()
         markdown_content = content[end_marker + 3:].strip()
-        
+
         # Parser YAML simple
         metadata = {}
         for line in frontmatter.split('\n'):
@@ -71,20 +75,20 @@ def parse_frontmatter(content):
                 key, value = line.split(':', 1)
                 key = key.strip()
                 value = value.strip()
-                
+
                 # Nettoyer les guillemets
                 if value.startswith('"') and value.endswith('"'):
                     value = value[1:-1]
                 elif value.startswith("'") and value.endswith("'"):
                     value = value[1:-1]
-                
+
                 # Parser les coordonnées
                 if key == 'coords':
 
                     # Retirer les commentaires après #
                     if '#' in value:
                         value = value.split('#')[0].strip()
-                    
+
                     # Parser le tableau
                     if value.startswith('[') and value.endswith(']'):
                         coords_str = value[1:-1]
@@ -102,46 +106,47 @@ def parse_frontmatter(content):
                 # Parser les booléens
                 elif key == 'perpetuel':
                     metadata[key] = value.lower() in ('true', 'yes', '1')
-                
-                # Normaliser les dates
-                elif key in ('date', 'date_fin'):
+
+                # Normaliser les dates (événements + personnes)
+                elif key in ('date', 'date_fin', 'naissance', 'mort'):
                     if '#' in value:
                         value = value.split('#')[0].strip()
-                    
+
                     normalized = normalize_date(value)
                     if normalized:
                         metadata[key] = normalized
 
-                # Champs pouvant contenir plusieurs valeurs sur une ligne (séparées par des virgules)
-                elif key in ('pays', 'personnages'):
+                # Champs pouvant contenir plusieurs valeurs sur une ligne
+                # (séparées par des virgules)
+                elif key in ('pays', 'personnages', 'pays_principaux'):
                     if '#' in value:
                         value = value.split('#')[0].strip()
-                    # ex : "France, Russie, Pologne"
                     if ',' in value:
                         items = [v.strip() for v in value.split(',') if v.strip()]
                         metadata[key] = items
                     else:
                         metadata[key] = value
-                
+
                 else:
                     # Retirer les commentaires pour les autres champs aussi
                     if '#' in value:
                         value = value.split('#')[0].strip()
                     metadata[key] = value
-                    
+
         return metadata, markdown_content
-        
+
     except Exception as e:
         print(f"❌ Erreur parsing front matter: {e}")
         return None, content
+
 
 def determine_continent(coords):
     """Déterminer le continent à partir des coordonnées"""
     if not coords or len(coords) != 2:
         return "inconnu"
-    
+
     lat, lng = coords
-    
+
     # Zones approximatives
     if -35 <= lat <= 37 and -20 <= lng <= 55:
         return "afrique"
@@ -155,6 +160,7 @@ def determine_continent(coords):
         return "oceanie"
     else:
         return "autre"
+
 
 def generate_html(metadata, content, filename):
     """Générer le fichier HTML pour une fiche évènement (style épuré)"""
@@ -445,128 +451,197 @@ def generate_html(metadata, content, filename):
     try:
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(html)
+        return True
     except Exception as e:
         print(f"❌ Erreur lors de l'écriture du HTML {html_path}: {e}")
+        return False
+
 
 def main():
     """Fonction principale"""
     print("Génération des fichiers JSON...")
-    
+
     # Créer les dossiers
     create_directories()
-    
+
     if not os.path.exists(EXPORT_FOLDER):
         print(f"Dossier {EXPORT_FOLDER} introuvable")
         print(f"Créez le dossier {EXPORT_FOLDER} et ajoutez vos fichiers .md")
         return
-    
+
     evenements = []
     pays_dict = {}
-    stats = {'processed': 0, 'events': 0, 'countries': 0, 'errors': 0}
-    
-    # Traiter tous les fichiers .md
-    for filename in os.listdir(EXPORT_FOLDER):
-        if not filename.endswith('.md'):
-            continue
-            
-        filepath = os.path.join(EXPORT_FOLDER, filename)
-        stats['processed'] += 1
-        
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
-            
-            metadata, markdown_content = parse_frontmatter(content)
-            
-            if not metadata or metadata.get('type') != 'évènement':
-                print(f"⏭️ Ignoré: {filename} (pas un événement)")
-                continue
-            
-            # Validation des champs requis
-            required = ['titre', 'date', 'pays', 'coords']
-            missing = [field for field in required if field not in metadata]
-            if missing:
-                print(f"Champs manquants dans {filename}: {missing}")
-                stats['errors'] += 1
-                continue
-            
-            # Créer l'événement
-            html_filename = filename.replace('.md', '.html')
-            
-            # Nettoyer la catégorie (enlever guillemets superflus)
-            categorie = metadata.get('categorie', 'general')
-            categorie = categorie.strip('"').strip("'")
+    personnes = []  # 🔸 NOUVEAU
 
-            evenement = {
-                "titre": metadata['titre'],
-                "date": metadata['date'],
-                "date_fin": metadata.get('date_fin', False),      # ← Optionnel
-                "perpetuel": metadata.get('perpetuel', False),  # ← Optionnel
-                "pays": metadata['pays'],
-                "coords": metadata['coords'],
-                "description": metadata.get('description', ''),
-                "categorie": categorie,
-                "personnages": metadata.get('personnages'),
-                "lien": f"fiches/{html_filename}"
-            }
-            evenements.append(evenement)
-            stats['events'] += 1
-            
-            # Gérer les pays (un événement peut concerner plusieurs pays)
-            pays_field = metadata['pays']  # str ou liste
-            continent = determine_continent(metadata['coords'])
-            
-            if isinstance(pays_field, list):
-                pays_list = pays_field
-            else:
-                pays_list = [pays_field]
+    stats = {'processed': 0, 'events': 0, 'countries': 0, 'persons': 0, 'errors': 0}
 
-            for pays_name in pays_list:
-                if not pays_name:
+    # Traiter tous les fichiers .md (y compris dans les sous-dossiers)
+    for root, dirs, files in os.walk(EXPORT_FOLDER):
+        for filename in files:
+            if not filename.endswith('.md'):
+                continue
+
+            filepath = os.path.join(root, filename)
+            stats['processed'] += 1
+
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    content = f.read()
+
+                metadata, markdown_content = parse_frontmatter(content)
+
+                if not metadata:
+                    print(f"⏭️ Ignoré: {os.path.relpath(filepath, EXPORT_FOLDER)} (pas de front matter)")
                     continue
-                pays_key = pays_name.lower().strip()
-                if pays_key not in pays_dict:
-                    pays_dict[pays_key] = {
-                        "pays": pays_name,
-                        "continent": continent,
-                        "coordonnees": metadata['coords']
+
+                doc_type = metadata.get('type')
+
+                # -----------------------------------
+                # 1) TRAITEMENT DES ÉVÉNEMENTS
+                # -----------------------------------
+                if doc_type == 'évènement':
+                    # Validation des champs requis
+                    required = ['titre', 'date', 'pays', 'coords']
+                    missing = [field for field in required if field not in metadata]
+                    if missing:
+                        print(f"Champs manquants dans {os.path.relpath(filepath, EXPORT_FOLDER)}: {missing}")
+                        stats['errors'] += 1
+                        continue
+
+                    # Créer l'événement
+                    html_filename = filename.replace('.md', '.html')
+
+                    # Nettoyer la catégorie (enlever guillemets superflus)
+                    categorie = metadata.get('categorie', 'general')
+                    categorie = categorie.strip('"').strip("'")
+
+                    evenement = {
+                        "titre": metadata['titre'],
+                        "date": metadata['date'],
+                        "date_fin": metadata.get('date_fin', False),
+                        "perpetuel": metadata.get('perpetuel', False),
+                        "pays": metadata['pays'],
+                        "coords": metadata['coords'],
+                        "description": metadata.get('description', ''),
+                        "categorie": categorie,
+                        "personnages": metadata.get('personnages'),
+                        "lien": f"fiches/{html_filename}"
                     }
-                    stats['countries'] += 1
-            
-            # Générer HTML
-            if generate_html(metadata, markdown_content, filename):
-                print(f"✅ Traité: {filename}")
-            else:
-                print(f"⚠️ HTML non généré pour: {filename}")
-                
-        except Exception as e:
-            print(f"Erreur avec {filename}: {e}")
-            stats['errors'] += 1
-    
+                    evenements.append(evenement)
+                    stats['events'] += 1
+
+                    # Gérer les pays (un événement peut concerner plusieurs pays)
+                    pays_field = metadata['pays']  # str ou liste
+                    continent = determine_continent(metadata['coords'])
+
+                    if isinstance(pays_field, list):
+                        pays_list = pays_field
+                    else:
+                        pays_list = [pays_field]
+
+                    for pays_name in pays_list:
+                        if not pays_name:
+                            continue
+                        pays_key = pays_name.lower().strip()
+                        if pays_key not in pays_dict:
+                            pays_dict[pays_key] = {
+                                "pays": pays_name,
+                                "continent": continent,
+                                "coordonnees": metadata['coords']
+                            }
+                            stats['countries'] += 1
+
+                    # Générer HTML
+                    if generate_html(metadata, markdown_content, filename):
+                        print(f"✅ Traité (événement): {os.path.relpath(filepath, EXPORT_FOLDER)}")
+                    else:
+                        print(f"⚠️ HTML non généré pour: {os.path.relpath(filepath, EXPORT_FOLDER)}")
+
+                # -----------------------------------
+                # 2) TRAITEMENT DES PERSONNES
+                # -----------------------------------
+                elif doc_type in ('personne', 'person', 'personnage'):
+                    # nom par défaut = 'nom' ou 'titre' ou nom de fichier
+                    nom = metadata.get('nom') or metadata.get('titre') or filename.replace('.md', '')
+
+                    # pays_principaux → tableau
+                    pays_principaux = metadata.get('pays_principaux') or []
+                    if isinstance(pays_principaux, str):
+                        pays_principaux = [p.strip() for p in pays_principaux.split(',') if p.strip()]
+
+                    # bio courte : YAML > sinon 1er paragraphe du contenu
+                    bio_courte = metadata.get('bio_courte')
+                    if not bio_courte:
+                        blocs = [p.strip() for p in markdown_content.split('\n\n') if p.strip()]
+                        bio_courte = blocs[0] if blocs else ""
+                    
+                    # 🟣 bio longue : YAML "bio_longue" > sinon tout le contenu Obsidian
+                    bio_longue = metadata.get('bio_longue') or markdown_content.strip()
+
+                    personne = {
+                        "nom": nom,
+                        "titre": metadata.get('titre', nom),
+                        "naissance": metadata.get('naissance'),
+                        "mort": metadata.get('mort'),
+                        "lieu_naissance": metadata.get('lieu_naissance'),
+                        "lieu_mort": metadata.get('lieu_mort'),
+                        "fonction": metadata.get('fonction'),
+                        "pays_principaux": pays_principaux,
+                        "image": metadata.get('image'),
+                        "bio_courte": bio_courte,
+                        "bio_longue": bio_longue,
+                        "sources": metadata.get('sources')
+                    }
+
+                    personnes.append(personne)
+                    stats['persons'] += 1
+                    print(f"✅ Traité (personne): {os.path.relpath(filepath, EXPORT_FOLDER)}")
+
+                else:
+                    print(f"⏭️ Ignoré: {os.path.relpath(filepath, EXPORT_FOLDER)} (type inconnu ou non géré: {doc_type})")
+                    continue
+
+            except Exception as e:
+                print(f"Erreur avec {os.path.relpath(filepath, EXPORT_FOLDER)}: {e}")
+                stats['errors'] += 1
+
     # Sauvegarder les JSON
     try:
+        # Événements
         with open(OUTPUT_EVENTS_FILE, 'w', encoding='utf-8') as f:
             json.dump(evenements, f, ensure_ascii=False, indent=2)
-        
+
+        # Pays
         pays_list = list(pays_dict.values())
         with open(OUTPUT_PAYS_FILE, 'w', encoding='utf-8') as f:
             json.dump(pays_list, f, ensure_ascii=False, indent=2)
-        
+
+        # Personnes 🔸 NOUVEAU
+        if personnes:
+            with open(OUTPUT_PERSONNES_FILE, 'w', encoding='utf-8') as f:
+                json.dump(personnes, f, ensure_ascii=False, indent=2)
+
         print("\n" + "="*50)
         print("GÉNÉRATION TERMINÉE")
         print(f"Fichiers traités: {stats['processed']}")
         print(f"Événements créés: {stats['events']}")
         print(f"Pays créés: {stats['countries']}")
-        print(f"Fichiers HTML: {stats['events']}")
+        print(f"Personnes créées: {stats['persons']}")
+        print(f"Fichiers HTML (événements): {stats['events']}")
         print(f"Erreurs: {stats['errors']}")
-        print(f"JSON sauvés: {OUTPUT_EVENTS_FILE}, {OUTPUT_PAYS_FILE}")
+        print(f"JSON sauvés: {OUTPUT_EVENTS_FILE}, {OUTPUT_PAYS_FILE}", end='')
+        if personnes:
+            print(f", {OUTPUT_PERSONNES_FILE}")
+        else:
+            print("")
         print("="*50)
-        
-        if stats['events'] > 0:
+
+        if stats['events'] > 0 or stats['persons'] > 0:
             print("🎉 Actualisez votre carte pour voir les changements !")
-        
+
     except Exception as e:
         print(f"Erreur sauvegarde JSON: {e}")
+
 
 if __name__ == "__main__":
     main()
