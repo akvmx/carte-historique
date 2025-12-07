@@ -6,7 +6,7 @@ date_fin: "1814-01-01"  # ← Optionnel : pour événements avec durée
 perpetuel: false  # ← Optionnel : true pour événements perpétuels
 pays: "France"
 coords: [46.2276,2.2137]  # ← Trouvez sur Google Maps
-description: "Description courte en une phrase"
+description: "La campagne de France, c'est les armes, la lassitude d’un pays exténué, les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi un système impérial qui n’a pas survécu à la catastrophe russe. "
 categorie: "guerre"  # ← politique, guerre, science, culture, economie, social
 personnages: Napoléon Bonaparte
 lien: fiches/campagne-france.html

@@ -24,7 +24,7 @@
       54.71467,
       20.43912
     ],
-    "description": "Description courte en une phrase",
+    "description": "La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis.",
     "categorie": "politique",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-eylau.html"
@@ -39,7 +39,7 @@
       54.44668,
       21.01586
     ],
-    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de « clore » les guerres de la Révolution.",
+    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de *clore* les guerres de la Révolution.",
     "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-friedland.html"
@@ -56,13 +56,7 @@
     ],
     "description": "En août 1813, la campagne d’Allemagne atteint un tournant décisif. Après la retraite de Russie, l’Empire français demeure encore une puissance militaire de premier plan, mais fait désormais face à une coalition sans précédent. Le 26 août 1813, dans les environs de Dresde, au cœur du royaume de Saxe, la Grande Armée inflige aux Alliés leur plus grande défaite de l’année.",
     "categorie": "guerre",
-    "personnages": [
-      "Napoléon Bonaparte",
-      "Gebhard Leberecht von Blücher",
-      "Charles de Schwarzenberg",
-      "Jean-Baptiste Bernadotte",
-      "Joachim Murat"
-    ],
+    "personnages": "Napoléon Bonaparte",
     "lien": "fiches/bataille-leipzig.html"
   },
   {
@@ -105,7 +99,7 @@
       46.2276,
       2.2137
     ],
-    "description": "Description courte en une phrase",
+    "description": "La campagne de France, c'est les armes, la lassitude d’un pays exténué, les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi un système impérial qui n’a pas survécu à la catastrophe russe. ",
     "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/campagne-france.html"
@@ -137,11 +131,7 @@
     ],
     "description": "\"C’est la réorganisation de l’Europe après la chute de Napoléon. En France, la monarchie conservatrice revient au pouvoir et doit trouver un équilibre avec les idées révolutionnaires",
     "categorie": "politique",
-    "personnages": [
-      "Alexandre Ier",
-      "Frédéric Guillaume III de Prusse",
-      "Francois Ier d’Autriche"
-    ],
+    "personnages": "Alexandre Pavlovitch Romanov",
     "lien": "fiches/congres-vienne.html"
   },
   {
