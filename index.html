@@ -2940,6 +2940,18 @@
                         </div>
                     </section>
 
+                    <!-- Notes Obsidian -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-notes-directory">
+                                notes obsidian.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="notes-list">
+                            <p class="no-events">Aucune note pour le moment.</p>
+                        </div>
+                    </section>
+
                     <!-- Liste des personnages -->
                     <section class="control-section">
                         <h3>
@@ -3714,7 +3726,7 @@
 
                 // Annuaire "Tous les événements" / "Tous les personnages" / "Tous les pays"
                 const openEventsDirBtn = document.getElementById('open-events-directory');
-                const openNotesDirBtnMain = document.getElementById('open-notes-directory-main');
+                const openNotesDirBtn = document.getElementById('open-notes-directory');
                 const openPersonsDirBtn = document.getElementById('open-persons-directory');
                 const openCountriesDirBtn = document.getElementById('open-countries-directory');
                 const closeDirBtn = document.getElementById('directory-close');
@@ -3726,8 +3738,8 @@
                     });
                 }
 
-                if (openNotesDirBtnMain) {
-                    openNotesDirBtnMain.addEventListener('click', () => {
+                if (openNotesDirBtn) {
+                    openNotesDirBtn.addEventListener('click', () => {
                         this.openNotesDirectory();
                     });
                 }
@@ -4324,9 +4336,6 @@
                     this.updatePersonsList();
                     this.updateCountriesList();
                     this.updateNotesList();
-                    if (this.mainView === 'notes' && typeof this.renderNotesPanel === 'function') {
-                        this.renderNotesPanel();
-                    }
                 });
 
                 // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
@@ -6210,50 +6219,6 @@
                 });
             }
 
-            renderNotesPanel() {
-                const grid = document.getElementById('notes-tab-list');
-                if (!grid) return;
-
-                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
-
-                if (!notes.length) {
-                    grid.innerHTML = '<p class="no-events">Aucune note.</p>';
-                    return;
-                }
-
-                notes.sort((a, b) => {
-                    const ta = (a.titre || a.title || '').toString();
-                    const tb = (b.titre || b.title || '').toString();
-                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
-                });
-
-                grid.innerHTML = notes.map((note, index) => {
-                    const titre = note.titre || note.title || '(sans titre)';
-                    const date  = note.date ? this.formatDateHuman(note.date) : '';
-                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
-                    const desc  = (note.description || '').toString().slice(0, 220);
-
-                    return `
-                        <article class="note-card" data-note-index="${index}">
-                            <div class="note-title">${titre}</div>
-                            <div class="note-meta">
-                                ${date ? `<span>${date}</span>` : '<span>note</span>'}
-                                ${pays ? `<span class="directory-chip">${pays}</span>` : ''}
-                            </div>
-                            ${desc ? `<div class="note-description">${desc}</div>` : ''}
-                        </article>
-                    `;
-                }).join('');
-
-                grid.querySelectorAll('.note-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const idx = parseInt(card.getAttribute('data-note-index'), 10);
-                        const note = notes[idx];
-                        this.openNote(note);
-                    });
-                });
-            }
-
             openNote(note) {
                 if (!note) return;
 
@@ -6264,7 +6229,7 @@
 
                 const url = note.lien || note.url || note.link;
                 if (url && url !== '#') {
-                    window.location.href = url;
+                    window.open(url, '_blank');
                     return;
                 }
 
@@ -7403,7 +7368,7 @@
                 }
 
                 // Vue notes : on met à jour la grille dédiée
-                if (this.mainView === 'notes' && typeof this.renderNotesPanel === 'function') {
+                if (this.mainView === 'notes') {
                     this.renderNotesPanel();
                 }
 
