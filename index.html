@@ -757,6 +757,67 @@
             min-height: 0;
         }
 
+        .notes-panel {
+            display: none;
+            flex: 1;
+            padding: var(--espacement-lg);
+            background: var(--couleur-panneau);
+            border-left: 1px solid var(--couleur-bordure);
+            overflow-y: auto;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--espacement-md);
+            margin-bottom: var(--espacement-lg);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--espacement-md);
+        }
+
+        .note-card {
+            background: var(--couleur-fond);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            padding: var(--espacement-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--espacement-sm);
+            box-shadow: var(--ombre-sm);
+            transition: transform var(--transition-rapide), box-shadow var(--transition-rapide);
+            cursor: pointer;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .note-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .note-meta {
+            display: flex;
+            gap: var(--espacement-sm);
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--couleur-texte);
+            opacity: 0.8;
+        }
+
+        .note-description {
+            font-size: 0.9rem;
+            color: var(--couleur-texte);
+            opacity: 0.9;
+        }
+
         #carte {
             width: 100%;
             height: 100%;
@@ -2751,6 +2812,16 @@
         .detail-section {
             overflow-y: auto;
         }
+
+        body.view-notes .sidebar,
+        body.view-notes .map-container,
+        body.view-notes .timeline {
+            display: none;
+        }
+
+        body.view-notes .notes-panel {
+            display: block;
+        }
     </style>
 </head>
 <body class="view-map mobile-mode-map">
@@ -2776,6 +2847,9 @@
             </button>
             <button class="main-tab" data-main-view="timeline">
                 chronologie.
+            </button>
+            <button class="main-tab" data-main-view="notes">
+                notes.
             </button>
         </nav>
 
@@ -2960,6 +3034,18 @@
             </button>
             <div id="carte"></div>
         </section>
+
+        <!-- Vue notes -->
+        <section class="notes-panel" id="notes-panel">
+            <div class="notes-header">
+                <div>
+                    <h2>notes.</h2>
+                    <p style="opacity:0.7;">Toutes les notes Obsidian, même sans coordonnée.</p>
+                </div>
+                <button class="btn btn-secondary" id="open-notes-directory-main">annuaire des notes</button>
+            </div>
+            <div class="notes-grid" id="notes-tab-list"></div>
+        </section>
     </main>
 
     <!-- Timeline -->
@@ -3054,6 +3140,9 @@
         </button>
         <button class="mobile-tab" data-mobile-view="timeline">
             ⏱ chronologie
+        </button>
+        <button class="mobile-tab" data-mobile-view="notes">
+            🗒️ notes
         </button>
     </nav>
 
@@ -7247,10 +7336,16 @@
             // ============================
 
             setMainView(view) {
-                this.mainView = (view === 'timeline') ? 'timeline' : 'map';
+                this.mainView = (view === 'timeline') ? 'timeline' : (view === 'notes' ? 'notes' : 'map');
 
-                document.body.classList.remove('view-map', 'view-timeline');
-                document.body.classList.add(this.mainView === 'timeline' ? 'view-timeline' : 'view-map');
+                document.body.classList.remove('view-map', 'view-timeline', 'view-notes');
+                if (this.mainView === 'timeline') {
+                    document.body.classList.add('view-timeline');
+                } else if (this.mainView === 'notes') {
+                    document.body.classList.add('view-notes');
+                } else {
+                    document.body.classList.add('view-map');
+                }
 
                 // Met à jour l'état visuel des onglets desktop
                 document.querySelectorAll('.main-tab').forEach(btn => {
@@ -7269,19 +7364,29 @@
                         timelineEl.classList.add('collapsed');
                         toggleTimelineBtn.textContent = '▲';
                     }
+                    timelineEl.style.display = (this.mainView === 'notes') ? 'none' : '';
+                }
+
+                // Vue notes : on met à jour la grille dédiée
+                if (this.mainView === 'notes') {
+                    this.renderNotesPanel();
                 }
 
                 // Si on repasse en mode carte, on s'assure que le mobile mode est cohérent
-                if (window.innerWidth <= 768 && this.mainView === 'map' && this.mobileMode === 'timeline') {
-                    this.setMobileMode('map');
+                if (window.innerWidth <= 768) {
+                    if (this.mainView === 'map' && this.mobileMode === 'timeline') {
+                        this.setMobileMode('map');
+                    } else if (this.mainView === 'notes' && this.mobileMode !== 'notes') {
+                        this.setMobileMode('notes');
+                    }
                 }
             }
 
             setMobileMode(mode) {
-                // mobile : 'map' | 'events' | 'timeline'
-                this.mobileMode = (mode === 'events' || mode === 'timeline') ? mode : 'map';
+                // mobile : 'map' | 'events' | 'timeline' | 'notes'
+                this.mobileMode = (mode === 'events' || mode === 'timeline' || mode === 'notes') ? mode : 'map';
 
-                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline');
+                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline', 'mobile-mode-notes');
                 document.body.classList.add('mobile-mode-' + this.mobileMode);
 
                 // Les onglets mobile
@@ -7293,6 +7398,8 @@
                 // La vue principale associée
                 if (this.mobileMode === 'timeline') {
                     this.setMainView('timeline');
+                } else if (this.mobileMode === 'notes') {
+                    this.setMainView('notes');
                 } else {
                     this.setMainView('map');
                 }
