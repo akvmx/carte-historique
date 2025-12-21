@@ -472,13 +472,16 @@ def main():
     evenements = []
     pays_dict = {}
     personnes = []  # 🔸 NOUVEAU
+    notes = []
 
-    stats = {'processed': 0, 'events': 0, 'countries': 0, 'persons': 0, 'errors': 0}
+    stats = {'processed': 0, 'events': 0, 'countries': 0, 'persons': 0, 'notes': 0, 'errors': 0}
 
     # Traiter tous les fichiers .md (y compris dans les sous-dossiers)
     for root, dirs, files in os.walk(EXPORT_FOLDER):
         for filename in files:
             if not filename.endswith('.md'):
+                continue
+            if 'templates' in os.path.join(root, filename):
                 continue
 
             filepath = os.path.join(root, filename)
@@ -489,10 +492,7 @@ def main():
                     content = f.read()
 
                 metadata, markdown_content = parse_frontmatter(content)
-
-                if not metadata:
-                    print(f"⏭️ Ignoré: {os.path.relpath(filepath, EXPORT_FOLDER)} (pas de front matter)")
-                    continue
+                metadata = metadata or {}
 
                 doc_type = metadata.get('type')
 
@@ -598,8 +598,39 @@ def main():
                     print(f"✅ Traité (personne): {os.path.relpath(filepath, EXPORT_FOLDER)}")
 
                 else:
-                    print(f"⏭️ Ignoré: {os.path.relpath(filepath, EXPORT_FOLDER)} (type inconnu ou non géré: {doc_type})")
-                    continue
+                    print(f"ℹ️ Ajout comme note simple: {os.path.relpath(filepath, EXPORT_FOLDER)} (type: {doc_type})")
+
+                # -----------------------------------
+                # NOTE GENERIQUE (toujours ajoutée)
+                # -----------------------------------
+                titre = metadata.get('titre') or metadata.get('title')
+                if not titre:
+                    m = re.search(r'^#\\s+(.*)', markdown_content, re.MULTILINE)
+                    if m:
+                        titre = m.group(1).strip()
+                if not titre:
+                    titre = filename.replace('.md', '').replace('-', ' ').strip()
+
+                description = metadata.get('description')
+                if not description:
+                    cleaned = re.sub(r'\\s+', ' ', markdown_content).strip()
+                    description = cleaned[:320] + ('…' if len(cleaned) > 320 else '')
+
+                categorie_note = metadata.get('categorie') or metadata.get('type') or 'note'
+                if isinstance(categorie_note, str):
+                    categorie_note = categorie_note.strip('"').strip("'")
+
+                note = {
+                    "titre": titre,
+                    "date": metadata.get('date', ''),
+                    "pays": metadata.get('pays', []),
+                    "coords": metadata.get('coords', []),
+                    "description": description,
+                    "categorie": categorie_note,
+                    "lien": metadata.get('lien') or metadata.get('link') or metadata.get('url') or f"fiches/{filename.replace('.md', '.html')}"
+                }
+                notes.append(note)
+                stats['notes'] += 1
 
             except Exception as e:
                 print(f"Erreur avec {os.path.relpath(filepath, EXPORT_FOLDER)}: {e}")
@@ -621,19 +652,26 @@ def main():
             with open(OUTPUT_PERSONNES_FILE, 'w', encoding='utf-8') as f:
                 json.dump(personnes, f, ensure_ascii=False, indent=2)
 
+        # Notes
+        if notes:
+            with open('data/notes.json', 'w', encoding='utf-8') as f:
+                json.dump(notes, f, ensure_ascii=False, indent=2)
+
         print("\n" + "="*50)
         print("GÉNÉRATION TERMINÉE")
         print(f"Fichiers traités: {stats['processed']}")
         print(f"Événements créés: {stats['events']}")
         print(f"Pays créés: {stats['countries']}")
         print(f"Personnes créées: {stats['persons']}")
+        print(f"Notes créées: {stats['notes']}")
         print(f"Fichiers HTML (événements): {stats['events']}")
         print(f"Erreurs: {stats['errors']}")
-        print(f"JSON sauvés: {OUTPUT_EVENTS_FILE}, {OUTPUT_PAYS_FILE}", end='')
+        saved_files = [OUTPUT_EVENTS_FILE, OUTPUT_PAYS_FILE]
         if personnes:
-            print(f", {OUTPUT_PERSONNES_FILE}")
-        else:
-            print("")
+            saved_files.append(OUTPUT_PERSONNES_FILE)
+        if notes:
+            saved_files.append("data/notes.json")
+        print(f"JSON sauvés: {', '.join(saved_files)}")
         print("="*50)
 
         if stats['events'] > 0 or stats['persons'] > 0:

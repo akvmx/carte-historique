@@ -1,0 +1,265 @@
+[
+  {
+    "titre": "La première croisade, en Anatolie",
+    "date": "1097-01-01",
+    "pays": "Turquie",
+    "coords": [],
+    "description": "Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum.",
+    "categorie": "croisade",
+    "lien": "fiches/première-croisade.html"
+  },
+  {
+    "titre": "La campagne d'Allemagne par Napoléon",
+    "date": "1813-01-01",
+    "pays": "Allemagne",
+    "coords": [],
+    "description": "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.",
+    "categorie": "guerre",
+    "lien": "fiches/campagne-napoléon-allemagne.html"
+  },
+  {
+    "titre": "La campagne d'Espagne",
+    "date": "1808-05-02",
+    "pays": "Espagne",
+    "coords": [],
+    "description": "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique.",
+    "categorie": "guerre",
+    "lien": "fiches/campagne-espagne-napoléon.html"
+  },
+  {
+    "titre": "La bataille de Leipzig",
+    "date": "1813-10-16",
+    "pays": "Allemagne",
+    "coords": [],
+    "description": "En août 1813, la campagne d’Allemagne atteint un tournant décisif. Après la retraite de Russie, l’Empire français demeure encore une puissance militaire de premier plan, mais fait désormais face à une coalition sans précédent. Le 26 août 1813, dans les environs de Dresde, au cœur du royaume de Saxe, la Grande Armée inflige aux Alliés leur plus grande défaite de l’année.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-leipzig.html"
+  },
+  {
+    "titre": "Léopold II dans l'Etat indépendant du Congo",
+    "date": "1885-01-01",
+    "pays": "République démocratique du Congo",
+    "coords": [
+      -2.88,
+      23.656
+    ],
+    "description": "les ravages de Léopold II au Congo",
+    "categorie": "politique",
+    "lien": "fiches/état-indépendant-du-Congo.html"
+  },
+  {
+    "titre": "Montée au pouvoir du Sultanat Mamluk",
+    "date": "1250-01-01",
+    "pays": "Sultanat mamluk d'Egypte",
+    "coords": [
+      30.02399,
+      31.25946
+    ],
+    "description": "Comment les Mamluks ont dead ça.",
+    "categorie": "politique",
+    "lien": "fiches/sultanat-mamluk.html"
+  },
+  {
+    "titre": "La bataille de Waterloo",
+    "date": "1815-06-18",
+    "pays": "Belgique",
+    "coords": [],
+    "description": "C’est la dernière grande bataille de Napoléon, où l’armée française est vaincue par les forces anglaises et leurs alliés.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-waterloo.html"
+  },
+  {
+    "titre": "Les cent jours",
+    "date": "1814-01=01",
+    "pays": "France",
+    "coords": [],
+    "description": "Les Cent-Jours commencent comme une crise de légitimité, se poursuivent comme une crise militaire, et ne peuvent se terminer que dans le choc inévitable avec l’Europe coalisée",
+    "categorie": "guerre",
+    "lien": "fiches/cent-jours.html"
+  },
+  {
+    "titre": "La guerre du sucre",
+    "date": "1419-01-01",
+    "pays": "Portugal",
+    "coords": [
+      32.73772323339855,
+      -17.00895629428063
+    ],
+    "description": "Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...",
+    "categorie": "politiques",
+    "lien": "fiches/docu-sucre.html"
+  },
+  {
+    "titre": "Les origines de l'Empire Ottoman",
+    "date": "1299-01-01",
+    "pays": "Empire ottoman",
+    "coords": [
+      39.41626,
+      35.379558
+    ],
+    "description": "Sur les marges byzantines se forment des beyliks frontaliers, peu structurés mais animés par une idéologie de frontière : celle des *ghazi*, combattants de la foi chargés de défendre l’islam et d’entretenir la guerre.",
+    "categorie": "politique",
+    "lien": "fiches/empire-ottoman.html"
+  },
+  {
+    "titre": "Le développement de New York",
+    "date": "1664-01-01",
+    "pays": "Etats-Unis",
+    "coords": [
+      40.7056297,
+      -74.0080942
+    ],
+    "description": "Le développement de New York à l'époque de la Nouvelle Amsterdam.",
+    "categorie": "politique",
+    "lien": "fiches/nouvelle-amsterdam-débuts.html"
+  },
+  {
+    "titre": "La signature du traité de Presbourg par Napoléon et son impact",
+    "date": "1805-12-26",
+    "pays": "Slovaquie",
+    "coords": [],
+    "description": "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse.",
+    "categorie": "politique",
+    "lien": "fiches/traité-presbourg.html"
+  },
+  {
+    "titre": "La bataille d'Eylau",
+    "date": "1809-10-01",
+    "pays": "Russie",
+    "coords": [],
+    "description": "La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis.",
+    "categorie": "politique",
+    "lien": "fiches/bataille-eylau.html"
+  },
+  {
+    "titre": "Le Congrès de Vienne",
+    "date": "1814-09-18",
+    "pays": "Autriche",
+    "coords": [],
+    "description": "C’est la réorganisation de l’Europe après la chute de Napoléon. En France, la monarchie conservatrice revient au pouvoir et doit trouver un équilibre avec les idées révolutionnaires",
+    "categorie": "politique",
+    "lien": "fiches/congre-vienne.html"
+  },
+  {
+    "titre": "La campagne de France",
+    "date": "1814-01-01",
+    "pays": "France",
+    "coords": [],
+    "description": "La campagne de France, c'est les armes, la lassitude d’un pays exténué, les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi un système impérial qui n’a pas survécu à la catastrophe russe.",
+    "categorie": "guerre",
+    "lien": "fiches/campagne-france.html"
+  },
+  {
+    "titre": "Croisades de secours",
+    "date": "1100-01-01",
+    "pays": "France",
+    "coords": [
+      46.2276,
+      2.2137
+    ],
+    "description": "La lancée de croisades de secours à l'issue de la Première Croisade à Jérusalem.",
+    "categorie": "politique",
+    "lien": "fiches/croisades de secours.html"
+  },
+  {
+    "titre": "La bataille d'Austerlitz",
+    "date": "1805-12-02",
+    "pays": "République tchèque",
+    "coords": [],
+    "description": "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-austerlitz.html"
+  },
+  {
+    "titre": "Les guerres du Congo et l'immunité européenne, de 1996 à 2019",
+    "date": "1996-10-01",
+    "pays": "République démocratique du Congo",
+    "coords": [],
+    "description": "Le cycle de guerres causé par la prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale.",
+    "categorie": "guerre",
+    "lien": "fiches/guerres-congo.html"
+  },
+  {
+    "titre": "L'après Eylau",
+    "date": "1807-02-01",
+    "pays": "Russie",
+    "coords": [],
+    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de *clore* les guerres de la Révolution.",
+    "categorie": "guerre",
+    "lien": "fiches/bataille-friedland.html"
+  },
+  {
+    "titre": "Le siège d'Antioche",
+    "date": "1097-01-01",
+    "pays": "Syrie",
+    "coords": [],
+    "description": "À l’automne 1097, après la traversée éprouvante de l’Anatolie, l’essentiel des forces croisées se dirige vers Antioche, ancienne capitale byzantine de la région et verrou stratégique indispensable à toute progression vers la Palestine ou à tout projet de domination durable de la Syrie.",
+    "categorie": "politique",
+    "lien": "fiches/siège-antioche.html"
+  },
+  {
+    "titre": "La première croisade, de Tripoli à Jérusalem",
+    "date": "1098-01-01",
+    "pays": [
+      "Syrie"
+    ],
+    "coords": [],
+    "description": "Après les querelles autour de Tripoli, Raymond de Saint-Gilles a réussi, un temps, à réunifier la croisade sous son autorité. Il entraîne l’armée devant Arqa et utilise le siège pour ses propres ambitions : se tailler une principauté personnelle au Liban.",
+    "categorie": "politique",
+    "lien": "fiches/première-croisade2.html"
+  },
+  {
+    "titre": "Les Turcs seljukides dans le contexte des croisades",
+    "date": "990-01-01",
+    "pays": "Empire Seljuk",
+    "coords": [],
+    "description": "L'expansion de l'Empire seljuk au Xème siècle.",
+    "categorie": "politique",
+    "lien": "fiches/turcs-seljukides-croisades.html"
+  },
+  {
+    "titre": "Alexandre Ier",
+    "date": "",
+    "pays": [],
+    "coords": [],
+    "description": "Né en 1777 au sein d’une dynastie fracturée, Alexandre Pavlovitch grandit dans un environnement familial marqué par les rivalités politiques. Écartelé entre la cour de sa grand-mère Catherine II, qui le forma pour en faire son héritier, et celle de son père Paul, qui se considérait spolié du trône, il développa très tô…",
+    "categorie": "personne",
+    "lien": "fiches/Alexandre Ier.html"
+  },
+  {
+    "titre": "Prince de Galilée, Régent d’Antioche",
+    "date": "",
+    "pays": [],
+    "coords": [],
+    "description": "## Origines et identité politique Tancrède de Hauteville apparaît dans les sources comme un jeune membre d’une branche collatérale de la dynastie normande installée en Italie méridionale. Né entre 1072 et 1075, fils d’Emma (dont la filiation, fille ou sœur de Robert Guiscard, demeure discutée) et du « bon marquis » Odo…",
+    "categorie": "personne",
+    "lien": "fiches/Tancrède de Hauteville.html"
+  },
+  {
+    "titre": "Comté d’Édesse, Baudouin Ier",
+    "date": "",
+    "pays": [],
+    "coords": [],
+    "description": "## Un cadet sans perspectives devenu architecte de conquête Baudouin de Boulogne apparaît d’abord, dans le cadre de la Première croisade, comme une figure secondaire : le « petit frère » de Godefroy de Bouillon, récemment sorti des ordres, sans fief, sans héritage et déterminé à saisir la moindre occasion de fortune. S…",
+    "categorie": "personne",
+    "lien": "fiches/Baudoin de Boulogne.html"
+  },
+  {
+    "titre": "Raymong IV",
+    "date": "",
+    "pays": [],
+    "coords": [],
+    "description": "## Origines et ascension Raymond IV de Saint-Gilles, issu de l’une des plus importantes lignées aristocratiques du Midi, naît dans un environnement politique fragmenté mais favorable à l’essor d’un pouvoir comtal relativement indépendant. Bien qu’il ne soit pas l’aîné, il parvient, au fil de plusieurs décennies, à surp…",
+    "categorie": "personne",
+    "lien": "fiches/Raymond de Saint-Gilles.html"
+  },
+  {
+    "titre": "Napoléon Ier",
+    "date": "",
+    "pays": [],
+    "coords": [],
+    "description": "## Jeunesse Napoleone di Buonaparte naît le 15 août 1769 à Ajaccio, en Corse, peu après l’annexion de l’île par la France. Second enfant de Charles Bonaparte, avocat et notable insulaire, et de Maria Letizia Ramolino, il appartient à une petite noblesse corse intégrée à la monarchie française. Envoyé très tôt en France…",
+    "categorie": "personne",
+    "lien": "fiches/Napoléon Bonaparte.html"
+  }
+]

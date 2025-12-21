@@ -757,6 +757,67 @@
             min-height: 0;
         }
 
+        .notes-panel {
+            display: none;
+            flex: 1;
+            padding: var(--espacement-lg);
+            background: var(--couleur-panneau);
+            border-left: 1px solid var(--couleur-bordure);
+            overflow-y: auto;
+        }
+
+        .notes-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: var(--espacement-md);
+            margin-bottom: var(--espacement-lg);
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: var(--espacement-md);
+        }
+
+        .note-card {
+            background: var(--couleur-fond);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            padding: var(--espacement-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--espacement-sm);
+            box-shadow: var(--ombre-sm);
+            transition: transform var(--transition-rapide), box-shadow var(--transition-rapide);
+            cursor: pointer;
+        }
+
+        .note-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--ombre-md);
+        }
+
+        .note-title {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .note-meta {
+            display: flex;
+            gap: var(--espacement-sm);
+            flex-wrap: wrap;
+            font-size: 0.85rem;
+            color: var(--couleur-texte);
+            opacity: 0.8;
+        }
+
+        .note-description {
+            font-size: 0.9rem;
+            color: var(--couleur-texte);
+            opacity: 0.9;
+        }
+
         #carte {
             width: 100%;
             height: 100%;
@@ -2751,6 +2812,16 @@
         .detail-section {
             overflow-y: auto;
         }
+
+        body.view-notes .sidebar,
+        body.view-notes .map-container,
+        body.view-notes .timeline {
+            display: none;
+        }
+
+        body.view-notes .notes-panel {
+            display: block;
+        }
     </style>
 </head>
 <body class="view-map mobile-mode-map">
@@ -2776,6 +2847,9 @@
             </button>
             <button class="main-tab" data-main-view="timeline">
                 chronologie.
+            </button>
+            <button class="main-tab" data-main-view="notes">
+                notes.
             </button>
         </nav>
 
@@ -2948,6 +3022,18 @@
             </button>
             <div id="carte"></div>
         </section>
+
+        <!-- Vue notes -->
+        <section class="notes-panel" id="notes-panel">
+            <div class="notes-header">
+                <div>
+                    <h2>notes.</h2>
+                    <p style="opacity:0.7;">Toutes les notes Obsidian, même sans coordonnée.</p>
+                </div>
+                <button class="btn btn-secondary" id="open-notes-directory-main">annuaire des notes</button>
+            </div>
+            <div class="notes-grid" id="notes-tab-list"></div>
+        </section>
     </main>
 
     <!-- Timeline -->
@@ -3042,6 +3128,9 @@
         </button>
         <button class="mobile-tab" data-mobile-view="timeline">
             ⏱ chronologie
+        </button>
+        <button class="mobile-tab" data-mobile-view="notes">
+            🗒️ notes
         </button>
     </nav>
 
@@ -3145,6 +3234,7 @@
                     countries: [],
                     events: [],
                     persons: [],
+                    notes: [],
                     lastSync: null
                 };
                 
@@ -3152,7 +3242,8 @@
                 this.dataUrls = {
                     events: 'data/evenements.json',
                     countries: 'data/pays.json',
-                    persons: 'data/personnes.json'
+                    persons: 'data/personnes.json',
+                    notes: 'data/notes.json'
                 };
 
                 
@@ -3623,6 +3714,7 @@
 
                 // Annuaire "Tous les événements" / "Tous les personnages" / "Tous les pays"
                 const openEventsDirBtn = document.getElementById('open-events-directory');
+                const openNotesDirBtnMain = document.getElementById('open-notes-directory-main');
                 const openPersonsDirBtn = document.getElementById('open-persons-directory');
                 const openCountriesDirBtn = document.getElementById('open-countries-directory');
                 const closeDirBtn = document.getElementById('directory-close');
@@ -3631,6 +3723,12 @@
                 if (openEventsDirBtn) {
                     openEventsDirBtn.addEventListener('click', () => {
                         this.openEventsDirectory();
+                    });
+                }
+
+                if (openNotesDirBtnMain) {
+                    openNotesDirBtnMain.addEventListener('click', () => {
+                        this.openNotesDirectory();
                     });
                 }
 
@@ -3698,10 +3796,11 @@
                     const cacheBuster = forceReload ? ('?t=' + Date.now()) : '';
                     
                     // Charger événements, pays et personnages en parallèle
-                    const [eventsResponse, countriesResponse, personsResponse] = await Promise.all([
+                    const [eventsResponse, countriesResponse, personsResponse, notesResponse] = await Promise.all([
                         fetch(this.dataUrls.events + cacheBuster),
                         fetch(this.dataUrls.countries + cacheBuster),
-                        fetch(this.dataUrls.persons + cacheBuster).catch(() => null)
+                        fetch(this.dataUrls.persons + cacheBuster).catch(() => null),
+                        fetch(this.dataUrls.notes + cacheBuster).catch(() => null)
                     ]);
                     
                     if (!eventsResponse.ok || !countriesResponse.ok) {
@@ -3711,6 +3810,7 @@
                     this.cache.events = await eventsResponse.json();
                     this.cache.countries = await countriesResponse.json();
                     this.cache.persons = [];
+                    this.cache.notes = [];
 
                     if (personsResponse && personsResponse.ok) {
                         try {
@@ -3721,11 +3821,25 @@
                         }
                     }
 
+                    if (notesResponse && notesResponse.ok) {
+                        try {
+                            const notesJson = await notesResponse.json();
+                            this.cache.notes = Array.isArray(notesJson) ? notesJson : [];
+                        } catch (e) {
+                            console.warn('⚠️ Impossible de parser notes.json, on continue sans les notes dédiées.', e);
+                        }
+                    }
+
+                    // Fallback : si aucune note dédiée, on réutilise la liste des événements
+                    if (!this.cache.notes || this.cache.notes.length === 0) {
+                        this.cache.notes = [...this.cache.events];
+                    }
+
                     this.cache.lastSync = new Date();
                     this.buildPersonsIndex();
                     this.populateTimelineSelectors();
 
-                    console.log(`✅ ${this.cache.events.length} événements, ${this.cache.countries.length} pays et ${this.cache.persons.length} personnages chargés`);
+                    console.log(`✅ ${this.cache.events.length} événements, ${this.cache.countries.length} pays, ${this.cache.persons.length} personnages et ${this.cache.notes.length} notes chargés`);
                     this.setSyncStatus('success', 'Synchronisé');
                     this.showNotification('📦 Données mises à jour', 'success');
                     
@@ -4209,6 +4323,10 @@
                     this.updateEventsList();
                     this.updatePersonsList();
                     this.updateCountriesList();
+                    this.updateNotesList();
+                    if (this.mainView === 'notes' && typeof this.renderNotesPanel === 'function') {
+                        this.renderNotesPanel();
+                    }
                 });
 
                 // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
@@ -6048,6 +6166,113 @@
                 eventsList.innerHTML = html;
             }
 
+            updateNotesList() {
+                const notesContainer = document.getElementById('notes-list');
+                if (!notesContainer) return;
+
+                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
+
+                if (!notes.length) {
+                    notesContainer.innerHTML = '<p class="no-events">Aucune note.</p>';
+                    return;
+                }
+
+                notes.sort((a, b) => {
+                    const ta = (a.titre || a.title || '').toString();
+                    const tb = (b.titre || b.title || '').toString();
+                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                });
+
+                let html = '';
+                notes.forEach((note, index) => {
+                    const titre = note.titre || note.title || '(sans titre)';
+                    const date  = note.date ? this.formatDateHuman(note.date) : '';
+                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
+
+                    html += `
+                        <div class="event-item note-item" data-note-index="${index}">
+                            ${date ? `<div class="event-date">🗒️ ${date}</div>` : '<div class="event-date">🗒️ note</div>'}
+                            <div class="event-title">${titre}</div>
+                            ${pays ? `<div class="event-country">${pays}</div>` : ''}
+                        </div>
+                    `;
+                });
+
+                notesContainer.innerHTML = html;
+
+                notesContainer.querySelectorAll('.note-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const indexStr = el.getAttribute('data-note-index');
+                        const idx = parseInt(indexStr, 10);
+                        const note = notes[idx];
+                        this.openNote(note);
+                    });
+                });
+            }
+
+            renderNotesPanel() {
+                const grid = document.getElementById('notes-tab-list');
+                if (!grid) return;
+
+                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
+
+                if (!notes.length) {
+                    grid.innerHTML = '<p class="no-events">Aucune note.</p>';
+                    return;
+                }
+
+                notes.sort((a, b) => {
+                    const ta = (a.titre || a.title || '').toString();
+                    const tb = (b.titre || b.title || '').toString();
+                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                });
+
+                grid.innerHTML = notes.map((note, index) => {
+                    const titre = note.titre || note.title || '(sans titre)';
+                    const date  = note.date ? this.formatDateHuman(note.date) : '';
+                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
+                    const desc  = (note.description || '').toString().slice(0, 220);
+
+                    return `
+                        <article class="note-card" data-note-index="${index}">
+                            <div class="note-title">${titre}</div>
+                            <div class="note-meta">
+                                ${date ? `<span>${date}</span>` : '<span>note</span>'}
+                                ${pays ? `<span class="directory-chip">${pays}</span>` : ''}
+                            </div>
+                            ${desc ? `<div class="note-description">${desc}</div>` : ''}
+                        </article>
+                    `;
+                }).join('');
+
+                grid.querySelectorAll('.note-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const idx = parseInt(card.getAttribute('data-note-index'), 10);
+                        const note = notes[idx];
+                        this.openNote(note);
+                    });
+                });
+            }
+
+            openNote(note) {
+                if (!note) return;
+
+                // Si des coordonnées sont disponibles, on centre la carte pour situer la note
+                if (Array.isArray(note.coords) && note.coords.length === 2 && this.map) {
+                    this.map.setView(note.coords, 6);
+                }
+
+                const url = note.lien || note.url || note.link;
+                if (url && url !== '#') {
+                    window.location.href = url;
+                    return;
+                }
+
+                // Pas de lien : on affiche simplement un rappel
+                const titre = note.titre || note.title || 'note';
+                this.showNotification(`📄 ${titre} (aucun lien disponible)`, 'info');
+            }
+
             focusOnCountry(countryName) {
                 // Trouver le pays
                 const country = this.cache.countries.find(c => 
@@ -6912,6 +7137,61 @@
                 this.openDirectory('tous les événements par pays', html);
             }
 
+            // Annuaire : toutes les notes Obsidian (inclut les notes hors carte)
+            openNotesDirectory() {
+                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
+
+                if (!notes.length) {
+                    this.openDirectory('toutes les notes', '<p class="no-events">Aucune note à afficher.</p>');
+                    return;
+                }
+
+                notes.sort((a, b) => {
+                    const ta = (a.titre || a.title || '').toString();
+                    const tb = (b.titre || b.title || '').toString();
+                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                });
+
+                let html = `<section class="directory-section"><ul class="directory-list">`;
+
+                notes.forEach((note, index) => {
+                    const titre = note.titre || note.title || '(sans titre)';
+                    const date  = note.date ? this.formatDateHuman(note.date) : '';
+                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
+
+                    html += `
+                        <li class="directory-item">
+                            <button type="button"
+                                    class="directory-item-title directory-note-link"
+                                    data-note-index="${index}">
+                                ${titre}
+                            </button>
+                            <div class="directory-item-meta">
+                                ${date ? `<span>${date}</span>` : ''}
+                                ${pays ? `<span class="directory-chip">${pays}</span>` : ''}
+                            </div>
+                        </li>
+                    `;
+                });
+
+                html += `</ul></section>`;
+
+                this.openDirectory('toutes les notes', html);
+
+                if (this.directoryContentElem) {
+                    this.directoryContentElem
+                        .querySelectorAll('.directory-note-link')
+                        .forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const indexStr = btn.getAttribute('data-note-index');
+                                const idx = parseInt(indexStr, 10);
+                                const note = notes[idx];
+                                this.openNote(note);
+                            });
+                        });
+                }
+            }
+
             // Annuaire : tous les personnages (ordre alphabétique + lettres)
             openPersonsDirectory() {
                 const persons = Object.values(this.personIndex || {});
@@ -7091,10 +7371,16 @@
             // ============================
 
             setMainView(view) {
-                this.mainView = (view === 'timeline') ? 'timeline' : 'map';
+                this.mainView = (view === 'timeline') ? 'timeline' : (view === 'notes' ? 'notes' : 'map');
 
-                document.body.classList.remove('view-map', 'view-timeline');
-                document.body.classList.add(this.mainView === 'timeline' ? 'view-timeline' : 'view-map');
+                document.body.classList.remove('view-map', 'view-timeline', 'view-notes');
+                if (this.mainView === 'timeline') {
+                    document.body.classList.add('view-timeline');
+                } else if (this.mainView === 'notes') {
+                    document.body.classList.add('view-notes');
+                } else {
+                    document.body.classList.add('view-map');
+                }
 
                 // Met à jour l'état visuel des onglets desktop
                 document.querySelectorAll('.main-tab').forEach(btn => {
@@ -7113,19 +7399,29 @@
                         timelineEl.classList.add('collapsed');
                         toggleTimelineBtn.textContent = '▲';
                     }
+                    timelineEl.style.display = (this.mainView === 'notes') ? 'none' : '';
+                }
+
+                // Vue notes : on met à jour la grille dédiée
+                if (this.mainView === 'notes' && typeof this.renderNotesPanel === 'function') {
+                    this.renderNotesPanel();
                 }
 
                 // Si on repasse en mode carte, on s'assure que le mobile mode est cohérent
-                if (window.innerWidth <= 768 && this.mainView === 'map' && this.mobileMode === 'timeline') {
-                    this.setMobileMode('map');
+                if (window.innerWidth <= 768) {
+                    if (this.mainView === 'map' && this.mobileMode === 'timeline') {
+                        this.setMobileMode('map');
+                    } else if (this.mainView === 'notes' && this.mobileMode !== 'notes') {
+                        this.setMobileMode('notes');
+                    }
                 }
             }
 
             setMobileMode(mode) {
-                // mobile : 'map' | 'events' | 'timeline'
-                this.mobileMode = (mode === 'events' || mode === 'timeline') ? mode : 'map';
+                // mobile : 'map' | 'events' | 'timeline' | 'notes'
+                this.mobileMode = (mode === 'events' || mode === 'timeline' || mode === 'notes') ? mode : 'map';
 
-                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline');
+                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline', 'mobile-mode-notes');
                 document.body.classList.add('mobile-mode-' + this.mobileMode);
 
                 // Les onglets mobile
@@ -7137,6 +7433,8 @@
                 // La vue principale associée
                 if (this.mobileMode === 'timeline') {
                     this.setMainView('timeline');
+                } else if (this.mobileMode === 'notes') {
+                    this.setMainView('notes');
                 } else {
                     this.setMainView('map');
                 }
