@@ -2866,6 +2866,18 @@
                         </div>
                     </section>
 
+                    <!-- Notes Obsidian -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-notes-directory">
+                                notes obsidian.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="notes-list">
+                            <p class="no-events">Aucune note pour le moment.</p>
+                        </div>
+                    </section>
+
                     <!-- Liste des personnages -->
                     <section class="control-section">
                         <h3>
@@ -3145,6 +3157,7 @@
                     countries: [],
                     events: [],
                     persons: [],
+                    notes: [],
                     lastSync: null
                 };
                 
@@ -3152,7 +3165,8 @@
                 this.dataUrls = {
                     events: 'data/evenements.json',
                     countries: 'data/pays.json',
-                    persons: 'data/personnes.json'
+                    persons: 'data/personnes.json',
+                    notes: 'data/notes.json'
                 };
 
                 
@@ -3623,6 +3637,7 @@
 
                 // Annuaire "Tous les événements" / "Tous les personnages" / "Tous les pays"
                 const openEventsDirBtn = document.getElementById('open-events-directory');
+                const openNotesDirBtn = document.getElementById('open-notes-directory');
                 const openPersonsDirBtn = document.getElementById('open-persons-directory');
                 const openCountriesDirBtn = document.getElementById('open-countries-directory');
                 const closeDirBtn = document.getElementById('directory-close');
@@ -3631,6 +3646,12 @@
                 if (openEventsDirBtn) {
                     openEventsDirBtn.addEventListener('click', () => {
                         this.openEventsDirectory();
+                    });
+                }
+
+                if (openNotesDirBtn) {
+                    openNotesDirBtn.addEventListener('click', () => {
+                        this.openNotesDirectory();
                     });
                 }
 
@@ -3698,10 +3719,11 @@
                     const cacheBuster = forceReload ? ('?t=' + Date.now()) : '';
                     
                     // Charger événements, pays et personnages en parallèle
-                    const [eventsResponse, countriesResponse, personsResponse] = await Promise.all([
+                    const [eventsResponse, countriesResponse, personsResponse, notesResponse] = await Promise.all([
                         fetch(this.dataUrls.events + cacheBuster),
                         fetch(this.dataUrls.countries + cacheBuster),
-                        fetch(this.dataUrls.persons + cacheBuster).catch(() => null)
+                        fetch(this.dataUrls.persons + cacheBuster).catch(() => null),
+                        fetch(this.dataUrls.notes + cacheBuster).catch(() => null)
                     ]);
                     
                     if (!eventsResponse.ok || !countriesResponse.ok) {
@@ -3711,6 +3733,7 @@
                     this.cache.events = await eventsResponse.json();
                     this.cache.countries = await countriesResponse.json();
                     this.cache.persons = [];
+                    this.cache.notes = [];
 
                     if (personsResponse && personsResponse.ok) {
                         try {
@@ -3721,11 +3744,25 @@
                         }
                     }
 
+                    if (notesResponse && notesResponse.ok) {
+                        try {
+                            const notesJson = await notesResponse.json();
+                            this.cache.notes = Array.isArray(notesJson) ? notesJson : [];
+                        } catch (e) {
+                            console.warn('⚠️ Impossible de parser notes.json, on continue sans les notes dédiées.', e);
+                        }
+                    }
+
+                    // Fallback : si aucune note dédiée, on réutilise la liste des événements
+                    if (!this.cache.notes || this.cache.notes.length === 0) {
+                        this.cache.notes = [...this.cache.events];
+                    }
+
                     this.cache.lastSync = new Date();
                     this.buildPersonsIndex();
                     this.populateTimelineSelectors();
 
-                    console.log(`✅ ${this.cache.events.length} événements, ${this.cache.countries.length} pays et ${this.cache.persons.length} personnages chargés`);
+                    console.log(`✅ ${this.cache.events.length} événements, ${this.cache.countries.length} pays, ${this.cache.persons.length} personnages et ${this.cache.notes.length} notes chargés`);
                     this.setSyncStatus('success', 'Synchronisé');
                     this.showNotification('📦 Données mises à jour', 'success');
                     
@@ -4209,6 +4246,7 @@
                     this.updateEventsList();
                     this.updatePersonsList();
                     this.updateCountriesList();
+                    this.updateNotesList();
                 });
 
                 // Si l'onglet "Timeline mondiale" est actif, on la met aussi à jour
@@ -6048,6 +6086,69 @@
                 eventsList.innerHTML = html;
             }
 
+            updateNotesList() {
+                const notesContainer = document.getElementById('notes-list');
+                if (!notesContainer) return;
+
+                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
+
+                if (!notes.length) {
+                    notesContainer.innerHTML = '<p class="no-events">Aucune note.</p>';
+                    return;
+                }
+
+                notes.sort((a, b) => {
+                    const ta = (a.titre || a.title || '').toString();
+                    const tb = (b.titre || b.title || '').toString();
+                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                });
+
+                let html = '';
+                notes.forEach((note, index) => {
+                    const titre = note.titre || note.title || '(sans titre)';
+                    const date  = note.date ? this.formatDateHuman(note.date) : '';
+                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
+
+                    html += `
+                        <div class="event-item note-item" data-note-index="${index}">
+                            ${date ? `<div class="event-date">🗒️ ${date}</div>` : '<div class="event-date">🗒️ note</div>'}
+                            <div class="event-title">${titre}</div>
+                            ${pays ? `<div class="event-country">${pays}</div>` : ''}
+                        </div>
+                    `;
+                });
+
+                notesContainer.innerHTML = html;
+
+                notesContainer.querySelectorAll('.note-item').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const indexStr = el.getAttribute('data-note-index');
+                        const idx = parseInt(indexStr, 10);
+                        const note = notes[idx];
+                        this.openNote(note);
+                    });
+                });
+            }
+
+            openNote(note) {
+                if (!note) return;
+
+                // Si des coordonnées sont disponibles, on centre la carte pour situer la note
+                if (Array.isArray(note.coords) && note.coords.length === 2 && this.map) {
+                    this.map.setView(note.coords, 6);
+                }
+
+                const url = note.lien || note.url || note.link;
+                if (url && url !== '#') {
+                    window.open(url, '_blank');
+                    return;
+                }
+
+                // Pas de lien : on affiche simplement un rappel
+                const titre = note.titre || note.title || 'note';
+                this.showNotification(`📄 ${titre} (aucun lien disponible)`, 'info');
+            }
+
             focusOnCountry(countryName) {
                 // Trouver le pays
                 const country = this.cache.countries.find(c => 
@@ -6910,6 +7011,61 @@
                 });
 
                 this.openDirectory('tous les événements par pays', html);
+            }
+
+            // Annuaire : toutes les notes Obsidian (inclut les notes hors carte)
+            openNotesDirectory() {
+                const notes = Array.isArray(this.cache.notes) ? [...this.cache.notes] : [];
+
+                if (!notes.length) {
+                    this.openDirectory('toutes les notes', '<p class="no-events">Aucune note à afficher.</p>');
+                    return;
+                }
+
+                notes.sort((a, b) => {
+                    const ta = (a.titre || a.title || '').toString();
+                    const tb = (b.titre || b.title || '').toString();
+                    return ta.localeCompare(tb, 'fr', { sensitivity: 'base' });
+                });
+
+                let html = `<section class="directory-section"><ul class="directory-list">`;
+
+                notes.forEach((note, index) => {
+                    const titre = note.titre || note.title || '(sans titre)';
+                    const date  = note.date ? this.formatDateHuman(note.date) : '';
+                    const pays  = Array.isArray(note.pays) ? note.pays.join(', ') : (note.pays || '');
+
+                    html += `
+                        <li class="directory-item">
+                            <button type="button"
+                                    class="directory-item-title directory-note-link"
+                                    data-note-index="${index}">
+                                ${titre}
+                            </button>
+                            <div class="directory-item-meta">
+                                ${date ? `<span>${date}</span>` : ''}
+                                ${pays ? `<span class="directory-chip">${pays}</span>` : ''}
+                            </div>
+                        </li>
+                    `;
+                });
+
+                html += `</ul></section>`;
+
+                this.openDirectory('toutes les notes', html);
+
+                if (this.directoryContentElem) {
+                    this.directoryContentElem
+                        .querySelectorAll('.directory-note-link')
+                        .forEach(btn => {
+                            btn.addEventListener('click', () => {
+                                const indexStr = btn.getAttribute('data-note-index');
+                                const idx = parseInt(indexStr, 10);
+                                const note = notes[idx];
+                                this.openNote(note);
+                            });
+                        });
+                }
             }
 
             // Annuaire : tous les personnages (ordre alphabétique + lettres)
