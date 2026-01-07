@@ -8,7 +8,7 @@ pays: "Turquie"
 coords: [38.9320501, 35.448558]  # ← Trouvez sur Google Maps
 description: "Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum."
 categorie: "croisade"  # ← politique, guerre, science, culture, economie, social
-personnages: Godefroy de Bouillon, Raymond de Saint-Gilles, Tancrède de Hauteville, Baudouin du Bourg
+personnages: Godefroy de Bouillon, Raymond de Saint-Gilles, Tancrède de Hauteville
 lien: fiches/première-croisade.html
 ---
 

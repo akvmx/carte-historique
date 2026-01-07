@@ -120,6 +120,21 @@
     "lien": "fiches/campagne-napoléon-allemagne.html"
   },
   {
+    "titre": "Les cent jours",
+    "date": "1814-01=01",
+    "date_fin": "1815-01_01",
+    "perpetuel": false,
+    "pays": "France",
+    "coords": [
+      46.2276,
+      2.2137
+    ],
+    "description": "Les Cent-Jours commencent comme une crise de légitimité, se poursuivent comme une crise militaire, et ne peuvent se terminer que dans le choc inévitable avec l’Europe coalisée",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/cent-jours.html"
+  },
+  {
     "titre": "Le Congrès de Vienne",
     "date": "1814-09-18",
     "date_fin": "1815-06-08",
@@ -228,8 +243,7 @@
     "personnages": [
       "Godefroy de Bouillon",
       "Raymond de Saint-Gilles",
-      "Tancrède de Hauteville",
-      "Baudouin du Bourg"
+      "Tancrède de Hauteville"
     ],
     "lien": "fiches/première-croisade.html"
   },
@@ -250,10 +264,7 @@
     "personnages": [
       "Godefroy de Bouillon",
       "Raymond de Saint-Gilles",
-      "Tancrède de Hauteville",
-      "Baudouin du Bourg",
-      "Alexis Ier Comnène",
-      "Al-Afdal Shahanshah"
+      "Tancrède de Hauteville"
     ],
     "lien": "fiches/première-croisade2.html"
   },
@@ -284,11 +295,7 @@
     ],
     "description": "Comment les Mamluks ont dead ça.",
     "categorie": "politique",
-    "personnages": [
-      "Nur ad-Din",
-      "Shirkuh",
-      "Salah ad-Din"
-    ],
+    "personnages": "",
     "lien": "fiches/sultanat-mamluk.html"
   },
   {
@@ -305,6 +312,21 @@
     "categorie": "politique",
     "personnages": "Napoléon Bonaparte",
     "lien": "fiches/traité-presbourg.html"
+  },
+  {
+    "titre": "Les Turcs seljukides dans le contexte des croisades",
+    "date": "990-01-01",
+    "date_fin": "1081-01-01",
+    "perpetuel": false,
+    "pays": "Empire Seljuk",
+    "coords": [
+      35.73834183660386,
+      51.357234044865045
+    ],
+    "description": "L'expansion de l'Empire seljuk au Xème siècle.",
+    "categorie": "politique",
+    "personnages": null,
+    "lien": "fiches/turcs-seljukides-croisades.html"
   },
   {
     "titre": "Léopold II dans l'Etat indépendant du Congo",

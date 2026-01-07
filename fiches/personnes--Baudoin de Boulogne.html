@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comté d’Édesse, Baudouin Ier</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Comté d’Édesse, Baudouin Ier</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Général</span>
+                    <span class="badge badge-ghost">📅 Date inconnue</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Pays inconnu</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">Date inconnue</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Général</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h2>Un cadet sans perspectives devenu architecte de conquête</h2></p><p>Baudouin de Boulogne apparaît d’abord, dans le cadre de la Première croisade, comme une figure secondaire : le « petit frère » de Godefroy de Bouillon, récemment sorti des ordres, sans fief, sans héritage et déterminé à saisir la moindre occasion de fortune. Son identité initiale se définit par un double manque : absence de position territoriale en Occident et absence de rôle majeur dans l’encadrement politico-religieux de la croisade. Ce déficit structurel explique l’extraordinaire plasticité de sa trajectoire, marquée par un opportunisme assumé et par une capacité exceptionnelle à transformer les contraintes extérieures en marges de manœuvre. Lors de la traversée de l’Anatolie en 1097, Baudouin se distingue déjà par sa tendance à s’émanciper du cadre collégial. Son conflit avec Tancrède en Cilicie, qui mène à des affrontements directs entre chrétiens latins et à la perte de contingents normands que les Turcs massacrent après refus d’asile, révèle un trait permanent : une conception strictement instrumentale des alliances latines, au profit de ses ambitions propres. Si cet épisode aurait pu entraîner une sanction de la part des chefs, son utilité stratégique, sécuriser le flanc oriental de la croisade en surveillant l’Euphrate, lui permet d’éviter toute mise à l’écart durable. De fait, Baudouin saisit immédiatement un espace politique qui s’ouvrait à lui : l’Est de l’Euphrate, zone de populations chrétiennes (Arméniens, Syriaques) en quête de protection. Grâce à Basgrat, notable arménien qui structure son insertion locale, il s’avance sans résistance majeure. Les communautés chrétiennes, hostiles aux garnisons turques et méfiantes envers Byzance jugée oppressive, le reçoivent en libérateur. Il occupe ainsi, sans véritable combat, les forteresses essentielles de Ravendan et de Tell Bashir, assurant le contrôle du couloir de l’Euphrate.</p><p>Ce phénomène préfigure un point central de son parcours : <strong>la mobilisation des sociétés locales non latines</strong>, arméniennes, syriaques, arabes, pour légitimer une domination occidentale encore numériquement marginale. Baudouin comprend d’emblée que sa survie dépend moins de renforts croisés que de la capacité à incorporer les élites autochtones dans un dispositif de pouvoir. En février 1098, il franchit une nouvelle étape décisive : l’adoption par Thoros, prince arménien d’Édesse, qui cherche à s’assurer un protecteur face à la menace de l’émir de Mossoul (Kerbogha). Le rituel de l’adoption, déroutant pour les Latins mais traditionnel en milieu arménien, marque l’intégration fictive de Baudouin au lignage local. Lorsque Thoros est assassiné par une conjuration populaire, Baudouin demeure immobile : ni intervention pour sauver son bienfaiteur, ni dénonciation de l’acte. La neutralité active qu’il adopte révèle une habileté politique aiguë : il reçoit la ville sans entacher son entrée de responsabilité directe, posture idéale pour s’imposer comme successeur « légitime » auprès des chrétiens d’Édesse comme auprès de ses pairs croisés. Ainsi naît <strong>le premier État latin d’Orient : le comté d’Édesse</strong>, placé sous le commandement d’un prince occidental qui a construit son autorité par une hybridation entre structures locales et ambitions latines. L’immédiateté de son accession au pouvoir, enrichie du trésor accumulé par Thoros, confère à Baudouin des moyens matériels inédits parmi les chefs croisés.</p><p><h2>Gouverner une société multiconfessionnelle</h2></p><p>Établi à Édesse avec moins de cent chevaliers, Baudouin doit maintenir un pouvoir qui repose sur un rapport numérique défavorable. Il choisit alors une stratégie pragmatique : préserver les élites locales, garantir le libre exercice des cultes (arménien, syriaque, latin, voire musulman) et s’appuyer sur les notables pour administrer le territoire. Loin d’une idéologie de domination uniformisante, il met en place une politique d’intégration relative des élites, choisissant ses alliés parmi les Arméniens, les Syriens ou même certains dignitaires musulmans lorsqu’ils peuvent stabiliser les frontières. Cette politique « multiconfessionnelle » n’est pourtant pas exempte de coercition. Confronté à des complots d’élites locales inquiètes de la montée en puissance latine, il recourt à la répression violente : amputations, aveuglements, rançons. Mais ces méthodes s’inscrivent moins dans une logique de persécution religieuse que dans un effort d’établir durablement son autorité dans un paysage social fragmenté. Le mariage avec une princesse arménienne, décision jugée choquante par certains Latins, atteste de son refus de reproduire des modèles occidentaux dans un environnement oriental. L’alliance matrimoniale sert ici une politique d’enracinement, conçue pour stabiliser sa présence dans un espace majoritairement non latin.</p><p>Sur le plan militaire, sa réussite est spectaculaire. L’achat stratégique de l’émirat de Samasota à Balduk étend ses frontières sans guerre, sécurise l’arrière-pays d’Édesse et prive les Turcs de leur base la plus proche du comté. Sa résistance victorieuse au siège de Kerbogha en mai–juin 1098 constitue un apport décisif à la Première croisade : en retardant de trois semaines l’arrivée de l’armée de Mossoul devant Antioche, il contribue directement au succès des Latins. L’importance de cet événement est capitale : sans Édesse, sans la capacité de Baudouin à absorber le choc de l’armée de Kerbogha, la situation devant Antioche aurait pu se renverser au détriment total des croisés. La prospérité du comté attire d’ailleurs bon nombre de croisés affamés quittant Antioche : phénomène qui illustre la fonction d’Édesse comme « poumon » de la croisade, mais aussi la fragilité de l’équilibre entre Latins et autochtones, dont les terres sont redistribuées aux nouveaux venus.</p><p>Ainsi, Baudouin invente une forme de gouvernement latin adaptée au Levant : <strong>un État minoritaire, enraciné dans des structures locales, reposant sur la tolérance stratégique et sur une autorité centralisée</strong>. Ce modèle deviendra celui des « poulains », ces Latins d’Orient polyglottes et pragmatiques, opposés dans l’historiographie aux croisés nouvellement arrivés d’Europe.</p><p><h2>Affirmation royale et héritage politique<em></em></h2></p><p>En occupant Édesse, Baudouin pensait sans doute avoir atteint un sommet. Mais la mort de son frère Godefroy à Jérusalem en juillet 1100 transforme brutalement ses perspectives : les barons du royaume réclament sa venue pour occuper le trône. Le cadre politique se reconfigure alors : l’ancien cadet sans terres devient, par la force des circonstances et par la reconnaissance de ses pairs, le <strong>premier roi de Jérusalem à porter effectivement le titre royal</strong>. Son accession n’est pas sans conflit : Tancrède, alors prince de Galilée et figure dominante du royaume, s’oppose à sa légitimité. Baudouin doit franchir villes fortifiées et oppositions locales pour se frayer un chemin jusqu’à Jérusalem. Une fois couronné, il stabilise néanmoins rapidement son autorité en adoptant les mêmes principes qu’à Édesse : alliance avec les élites locales chrétiennes, consolidation des routes et des places fortes, coopération nécessaire avec les forces franques qui restent dispersées et souvent concurrentes. La suite de son règne, bien que ne figurant qu’en filigrane dans ton texte, se dessine déjà dans cette période fondatrice : <strong>Baudouin est un souverain capable d’arbitrer entre ambitions latines rivales, de ménager les populations orientales et d’exploiter à son profit les rivalités entre princes musulmans</strong>.</p><p>La caractéristique principale de son héritage apparaît clairement : Baudouin de Boulogne n’est pas seulement un chef de guerre, mais <strong>un constructeur d’État</strong>, sans doute l’un des premiers à penser la domination latine en Orient dans les termes d’une gouvernance durable et d’une intégration relative des sociétés locales. Sa trajectoire, de cadet dépourvu de fief à roi d’un territoire multiculturel, atteste une capacité stratégique et politique qui dépasse le cadre classique du récit croisade.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

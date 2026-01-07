@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>À qui appartiennent les médias américains ?</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">À qui appartiennent les médias américains ?</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Médias</span>
+                    <span class="badge badge-ghost">📅 YYYY-MM-DD</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Nom du pays</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">YYYY-MM-DD</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Médias</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p>La diffusion d’informations biaisées et factuellement erronées est devenue extrêmement courante sur les réseaux sociaux, souvent sans qu’aucune vérification préalable ne soit effectuée. Certains individus utilisent leurs plateformes afin de promouvoir leurs propres biais personnels et leurs agendas, cherchant ainsi à contrôler ce que les populations pensent. Une telle situation présente un danger considérable pour la démocratie. Il est particulièrement frappant d’observer des chaînes de télévision issues de l’ensemble du territoire américain lire exactement le même script. Cette uniformité demeure troublante, quel que soit le nombre de fois où elle est constatée. L’idée selon laquelle les États-Unis bénéficieraient d’une presse libre relève ainsi de l’illusion. Les services de renseignement américains ont identifié très tôt que le moyen le plus efficace de contrôler un pays consistait à maîtriser les titres médiatiques. De l’opération Mockingbird, au cours de laquelle la CIA a recruté des journalistes américains afin de diffuser une propagande gouvernementale, jusqu’aux relations entretenues entre le Pentagone et Hollywood, lesquelles ont influencé des productions telles que Iron Man, Top Gun et Transformers afin de garantir la conformité des scénarios à un récit pro-américain, le contrôle narratif s’est imposé comme un instrument central du pouvoir.</p><p>Un événement particulier a toutefois profondément modifié le paysage médiatique aux États-Unis. À la suite d’un lobbying intense exercé par les entreprises de télécommunications et de médias, le président Bill Clinton a promulgué le <strong><em>Telecommunications Act</strong></em>, lequel a entraîné une dérégulation de la propriété médiatique et déclenché la plus vaste concentration de pouvoir médiatique de l’histoire américaine. Les grands groupes ont progressivement absorbé les autres acteurs, donnant naissance aux monopoles contemporains. C’est dans ce contexte qu’est apparue l’expression « médias corporatifs ». Les principales chaînes de télévision américaines, telles que CBS, NBC et ABC, ainsi que les grands journaux nationaux, sont détenus par des capitaux importants, la concentration de cette propriété devenant de plus en plus sévère. Les médias dominants ne sont pas la propriété du peuple, mais celle d’individus fortunés, lesquels dictent les contenus diffusés. Certains débats ne sont pas autorisés dans les médias américains. Les deux principaux partis politiques et leurs donateurs ont atteint un consensus sur ce qui sert leurs intérêts respectifs et coopèrent activement pour empêcher toute discussion susceptible de remettre en cause cet équilibre. Les médias corporatifs existent afin de promouvoir l’agenda de l’establishment oligarchique qui en détient la propriété. Les responsables de ces structures refusent de renoncer au contrôle de l’information et de la définition de ce qui constitue l’actualité.</p><p>Avant d’identifier les acteurs dirigeant ces monopoles et leurs marques respectives, il convient d’examiner l’unique élément qu’ils ne contrôlaient pas initialement, ainsi que l’ampleur des moyens déployés pour modifier cette situation. TikTok a été présenté comme une menace grave pour la sécurité nationale des Américains, qualifié de logiciel espion chinois, de simple « malbouffe pour le cerveau », d’outil militarisé et même d’arme pointée vers la population américaine. Cette rhétorique a suscité un sentiment de malaise. Démocrates et républicains se sont soudainement unis dans une croisade anti-TikTok, alimentant la peur afin de promouvoir une interdiction nationale de l’application. Pourtant, l’examen des éléments disponibles révèle que même la CIA a reconnu l’absence de preuves démontrant que le gouvernement chinois avait accédé aux données ou les utilisait de manière malveillante. L’enjeu réel concernait le contrôle. L’une des plus grandes plateformes de réseaux sociaux au monde, ainsi que son algorithme, n’étaient pas gérés depuis la Silicon Valley, mais depuis un pays étranger, ce qui produisait un effet jugé profondément inquiétant. TikTok connaît une popularité massive, avec plus d’un milliard d’utilisateurs dans le monde et 170 millions d’utilisateurs actifs mensuels aux États-Unis. Près d’un tiers des adultes américains, et une majorité des moins de trente ans, utilisent la plateforme, près de 40 % des adultes de moins de trente ans déclarant y obtenir régulièrement leurs informations. Il est dès lors remarquable que cette application soit menacée de disparition. Les jeunes Américains y obtenaient leurs informations, leur culture et leurs contenus politiques via une plateforme échappant à toute influence américaine directe. Cette réalité est devenue impossible à ignorer lorsque Israël a commis un génocide en Palestine.</p><p>Dans les médias corporatifs, un récit dominant s’est imposé, notamment à travers des affirmations selon lesquelles des bébés auraient été décapités. En parallèle, sur TikTok et les réseaux sociaux, une réalité différente a émergé, à travers des témoignages, des vidéos et des prises de parole contestant ce narratif. Des déclarations explicites de soldats israéliens exprimant leur indifférence au sort des civils palestiniens ont circulé. Des internautes ont remis en cause le rôle géopolitique des États-Unis, du Royaume-Uni et de la France, soulignant les intérêts stratégiques liés aux ressources et aux bases militaires. Des appels au boycott ont resurgi dans l’espace numérique. C’est à ce moment que l’establishment a commencé à exprimer explicitement ses préoccupations. TikTok a été décrit comme une chaîne d’information permanente pour de nombreux jeunes, accusée d’amplifier l’antisémitisme et l’anti-sionisme sans conséquences. Des responsables politiques ont affirmé que des jeunes instruits obtenaient leurs informations principalement via les réseaux sociaux, en particulier TikTok, qualifiant cette situation de problème grave pour la démocratie. Il a été souligné que les contenus mentionnant les Palestiniens y étaient disproportionnellement plus nombreux que sur d’autres plateformes.</p><p>TikTok s’est alors vu imposer un ultimatum : interdiction ou vente. L’accord conclu prévoit que la plateforme soit détenue majoritairement par des investisseurs américains et contrôlée par un conseil d’administration disposant de compétences étendues en matière de sécurité nationale et de cybersécurité, en partenariat avec le gouvernement américain. Oracle a été désignée comme prestataire de sécurité de confiance, et l’algorithme doit être hébergé, entraîné et exploité aux États-Unis. La campagne anti-TikTok a abouti. La plateforme a été intégrée dans un système fondé sur le profit corporatif, l’influence institutionnelle et la discipline narrative. Le contrôle de l’algorithme constitue un élément central de cette transformation. Cette situation conduit à l’identification du premier des quatre grands acteurs monopolistiques des médias et des technologies contemporaines : <strong><em>Larry Ellison</strong></em>.</p><p>Larry Ellison constitue ainsi le premier des quatre grands acteurs qui monopolisent aujourd’hui les médias et les technologies modernes. Les épisodes précédemment décrits ne sont rendus possibles que grâce au soutien de contributeurs financiers permettant l’indépendance éditoriale et la mobilisation de ressources nécessaires à ce type de travail. La structure Paramount Skydance Corporation, détenue par Larry Ellison et son fils David, représente un empire médiatique de grande ampleur. Elle comprend notamment CBS, l’ensemble de ses affiliés et stations locales, MTV, VH1, BET, Comedy Central, Nickelodeon, Paramount Pictures, Showtime, Paramount Plus, ainsi que de nombreux autres actifs. Cet ensemble couvre aussi bien des programmes d’information majeurs, tels que 60 Minutes et Face the Nation, que des franchises cinématographiques comme Top Gun, Mission Impossible, Transformers, Terminator et Star Trek. Les Ellison sont également engagés dans une compétition avec Netflix pour l’acquisition de Warner Brothers. En cas de succès, ils deviendraient l’un des plus importants conglomérats médiatiques au monde. Cette perspective suscite de profondes inquiétudes. Larry Ellison est un centiardaire et a, à une période donnée, été l’homme le plus riche du monde. Il est le fondateur d’Oracle, entreprise dont les origines sont directement liées à des travaux effectués pour la CIA. Oracle collabore aujourd’hui avec l’ensemble du gouvernement américain, incluant les agences de renseignement, les agences de sécurité nationale et le Pentagone. Larry Ellison est également un acteur politique majeur, ayant financé à la fois des responsables démocrates et républicains, et soutenant activement le président Donald Trump. Par ailleurs, il est le plus important donateur privé de l’armée israélienne. Il a publiquement affirmé que le renouveau de l’État juif constituait un élément fondamental de l’histoire collective, rappelant que, après deux mille ans d’apatridie, le peuple juif dispose désormais d’un État défendu par les forces de défense israéliennes. Larry Ellison entretient une relation personnelle étroite avec le Premier ministre israélien Benjamin Netanyahu. En 2021, il lui a proposé un siège au conseil d’administration d’Oracle et a accueilli le Premier ministre et sa famille sur son île privée à Hawaï.</p><p>Ainsi, l’acteur central de l’accord TikTok se situe au sommet d’un empire médiatique en expansion rapide et se positionne pour devenir l’un des individus les plus puissants du monde médiatique. Il a d’ores et déjà commencé à mobiliser ses actifs afin de promouvoir ses orientations politiques, notamment par la nomination de Barry Weiss au poste de rédactrice en chef de CBS. Ce mécanisme illustre le fonctionnement de la propriété médiatique dans le cadre de la fabrication du consentement, à travers la convergence de la richesse, des infrastructures, de l’accès politique et du pouvoir médiatique au sein d’une seule et même personne. <strong>Larry Ellison ne constitue cependant qu’un élément d’un système plus vaste.</strong></p><p>Afin de comprendre l’ampleur de cette concentration, il convient d’examiner les autres membres de ce que l’on peut qualifier de « quatre grands ». Disney constitue l’une des marques les plus emblématiques au monde et incarne, en apparence, l’imaginaire et le divertissement. Toutefois, derrière cette image se dissimule un conglomérat contrôlant l’un des plus vastes écosystèmes médiatiques de la planète. Disney a enregistré des revenus dépassant 94 milliards de dollars en 2025. L’entreprise détient notamment <strong>ABC News, ESPN, Marvel, Star Wars, Pixar, FX, National Geographic, Hulu, 20th Century Studios, Searchlight Pictures, Disney Plus</strong>, ainsi que des dizaines de réseaux internationaux couvrant l’actualité, le sport, le cinéma, la télévision et le streaming à l’échelle mondiale. Disney est une société cotée en bourse. Ses trois principaux actionnaires sont <strong>Vanguard</strong>, <strong>BlackRock</strong> et <strong>State Street</strong>. L’entreprise est donc principalement détenue par des capitaux institutionnels qui investissent également dans des sociétés d’armement et de défense étroitement liées à l’armée américaine, ainsi que dans des entreprises militaires israéliennes telles qu’Elbit Systems et RADA Electronic Industries, lesquelles ont été impliquées dans des crimes commis contre les Palestiniens. Ces investisseurs institutionnels détiennent également des participations dans les autres membres des « quatre grands » et exercent une influence considérable sur leurs orientations. Le système est structuré de manière à maximiser le profit, à éviter toute controverse susceptible de déstabiliser les marchés, à maintenir la stabilité politique et réglementaire, et à préserver les relations avec les annonceurs et les gouvernements.</p><p>Vanguard, BlackRock et State Street n’exercent pas un contrôle direct sur les contenus de Disney, mais influencent les incitations économiques. Or, ces incitations façonnent les comportements. La recherche du profit implique l’alignement sur les limites idéologiques acceptables. Tel est le fonctionnement des médias corporatifs. Disney n’échappe pas à cette logique. Bob Iger, directeur général de longue date de l’entreprise, s’est toujours montré prudent dans la gestion des enjeux politiques susceptibles d’affecter la rentabilité et s’est même enregistré comme indépendant. Néanmoins, cette prudence n’a pas empêché Disney de faire un don de deux millions de dollars à Israël après le 7 octobre, sans que cela ne soit considéré comme franchissant une ligne problématique du point de vue corporatif. Comcast constitue le plus grand groupe de télécommunications et de médias aux États-Unis. Il détient notamment NBC, MSNBC, CNBC, Universal Pictures, Peacock, Telemundo, Sky News, ainsi qu’un portefeuille considérable dans le domaine du sport et du divertissement. À l’instar de Disney, la majorité de ses actions est détenue par les mêmes investisseurs institutionnels. L’entreprise est dirigée par Brian Roberts, fils de son fondateur Ralph Roberts. Brian Roberts a également fait un don de deux millions de dollars à Israël après le 7 octobre.</p><p>Comcast illustre de manière exemplaire ce qui se produit lorsque les médias s’écartent des récits autorisés. Progressivement, les rédactions apprennent quelles histoires posent problème et lesquelles n’en posent pas. Des pressions politiques directes ont été exercées sur MSNBC à la suite de contenus critiques à l’égard d’Hillary Clinton, conduisant à un contrôle accru des sujets traités. Comcast détient certains des plus grands médias d’information américains, y compris MSNBC, souvent perçue comme libérale. Au cours des deux dernières années, Mehdi Hasan et Ayman Mohyeldin ont perdu leurs émissions phares sur MSNBC. Ces suppressions ont été officiellement justifiées par des changements de programmation et des réorganisations internes. En réalité, ces deux journalistes étaient parmi les rares figures de la télévision américaine de grande écoute à donner régulièrement la parole à des voix palestiniennes durant le génocide à Gaza. Des reportages évoquant des violences commises par des soldats israéliens ou l’usage de matériel militaire ayant entraîné la mort de civils, y compris des enfants, ont contribué à cette marginalisation. La question palestinienne constitue une ligne rouge. Elle suffit à provoquer l’annulation d’une émission, car elle ne s’inscrit pas dans le récit approuvé par l’establishment. Ce phénomène s’est répété à de nombreuses reprises dans les médias américains. MSNBC n’est pas un média indépendant, mais une composante d’un vaste conglomérat corporatif. Son apparente orientation libérale fonctionne comme une façade destinée à donner l’illusion du choix, tout en participant pleinement au modèle de la fabrication du consentement.</p><p>Ce système ne repose pas sur une opposition entre biais libéral et biais conservateur. Selon le modèle de la propagande, les deux pôles s’inscrivent dans le même cadre de présupposés. Si le système fonctionne efficacement, il doit même apparaître comme libéral, car cette apparence permet de borner plus efficacement la pensée critique : les limites idéologiques acceptées par les médias dits libéraux deviennent ainsi infranchissables (<em>cf Pr. Chomsky</em>). Comcast est une multinationale disposant de contrats gouvernementaux, exposée aux régulations et dépendante des annonceurs. Les voix dissidentes représentent un risque et une responsabilité. Cette logique ne concerne pas uniquement MSNBC ou Comcast, mais l’ensemble des médias corporatifs.</p><p>Le dernier des quatre grands acteurs est <strong>Warner Brothers Discovery</strong>. Le groupe détient CNN, HBO, Warner Brothers Pictures, DC, Rocksteady Studios, Discovery, TNT, TBS, Cartoon Network, The Travel Channel et Max, couvrant l’information mondiale, la télévision premium, le cinéma, le sport et le streaming. Son directeur général a publiquement exprimé son soutien à Israël, soulignant son rôle en tant que démocratie et sa signification personnelle pour les générations futures. CNN constitue un exemple central des liens entre médias corporatifs et establishment politique, notamment les élites du renseignement, de la politique étrangère et du militarisme. La chaîne se présente comme indépendante et objective, mais repose principalement sur des sources institutionnelles telles que la Maison-Blanche, le Pentagone, le département d’État, les services de renseignement, les forces de police et les porte-parole d’entreprises. Ces sources bénéficient d’un accès constant et sont systématiquement présentées comme crédibles. L’accès constitue la monnaie centrale de ce système.</p><p>Durant le génocide à Gaza, CNN s’est appuyée sur son accès à l’armée et au gouvernement israéliens pour façonner son récit, relayant notamment des affirmations provenant directement des plus hautes autorités. Lorsque l’activité médiatique dépend de ces institutions pour l’approvisionnement en informations, leur perspective devient la réalité dominante. Toute remise en cause entraîne une perte d’accès, mécanisme fondamental de la fabrication du consentement en faveur de l’establishment. Bien que ne faisant pas partie des quatre grands, la famille Murdoch mérite une mention particulière en raison de son empire médiatique couvrant les États-Unis, le Royaume-Uni et l’Australie. Les Murdoch sont réputés pour leurs scandales, leurs biais éditoriaux et l’usage stratégique de leurs médias à des fins politiques. Ils constituent un exemple paradigmatique de la fabrication du consentement en période de guerre, qu’il s’agisse de l’Irak, de Gaza ou de l’Iran. Les conflits armés se révèlent extrêmement profitables pour les réseaux d’information, comme l’illustrent les hausses spectaculaires de revenus enregistrées lors des débuts de la guerre en Irak. La guerre représente un moteur économique majeur pour ces entreprises.</p><p>Un dernier élément relie les quatre grands acteurs : l’idéologie. Il existe une vision du monde partagée qui détermine ce qui est perçu comme raisonnable ou extrême. Durant la guerre froide, cet élément structurant était l’anticommunisme. Aujourd’hui, il s’agit de la sécurité nationale, du terrorisme et, de manière particulièrement visible dans l’ensemble de ce développement, du sionisme. Les investisseurs institutionnels, les dirigeants des grands conglomérats médiatiques et les figures telles que Murdoch ont tous exprimé leur adhésion à cette idéologie et apporté un soutien concret à Israël, mobilisant leurs actifs médiatiques en ce sens. Le sionisme constitue une idéologie politique intégrée au modèle de propagande américain et à ses incitations financières. Les grandes entreprises technologiques évoluent dans le même environnement de contrôle, de levier politique et d’intérêts économiques. Il n’est pas fortuit que nombre de ces plateformes aient réduit au silence des voix palestiniennes ou critiques lors du génocide à Gaza. Quatre entreprises atteignent aujourd’hui presque chaque foyer américain et, conjointement avec les grandes plateformes technologiques, façonnent l’information consommée par une majorité de la population mondiale. Il ne s’agit pas d’une simple statistique médiatique, mais d’une description du pouvoir. Pour la première fois dans l’histoire de l’humanité, le récit, l’information, le divertissement, la technologie et la distribution sont concentrés entre les mains de quelques corporations, liées aux mêmes institutions financières, aux mêmes gouvernements et à la même idéologie. Tel est le visage de l’empire contemporain.</p><p><em>TikTok n’a jamais constitué la menace</em>. La véritable menace résidait dans le fait que, pendant un court laps de temps, des millions de personnes ont accédé simultanément à une réalité différente, en dehors du système. Une telle situation ne peut perdurer, car lorsque quelques corporations décident de ce que le monde voit, elles ne façonnent pas seulement les opinions, mais l’histoire elle-même. La question n’est désormais plus de savoir si ce système existe, mais si les individus sont disposés à le reconnaître et à agir en conséquence.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

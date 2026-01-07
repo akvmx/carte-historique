@@ -8,7 +8,7 @@ pays: Syrie,
 coords: [34.96176, 38.20598]  # ← Trouvez sur Google Maps
 description: "Après les querelles autour de Tripoli, Raymond de Saint-Gilles a réussi, un temps, à réunifier la croisade sous son autorité. Il entraîne l’armée devant Arqa et utilise le siège pour ses propres ambitions : se tailler une principauté personnelle au Liban."
 categorie: "politique"  # ← politique, guerre, science, culture, economie, social
-personnages: Godefroy de Bouillon, Raymond de Saint-Gilles, Tancrède de Hauteville, Baudouin du Bourg, Alexis Ier Comnène, Al-Afdal Shahanshah
+personnages: Godefroy de Bouillon, Raymond de Saint-Gilles, Tancrède de Hauteville
 lien: fiches/première-croisade2.html
 ---
 

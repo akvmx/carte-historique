@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raymong IV</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Raymong IV</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Général</span>
+                    <span class="badge badge-ghost">📅 Date inconnue</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Pays inconnu</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">Date inconnue</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Général</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h2>Origines et ascension</h2></p><p>Raymond IV de Saint-Gilles, issu de l’une des plus importantes lignées aristocratiques du Midi, naît dans un environnement politique fragmenté mais favorable à l’essor d’un pouvoir comtal relativement indépendant. Bien qu’il ne soit pas l’aîné, il parvient, au fil de plusieurs décennies, à surpasser son frère Guillaume en constituant patiemment un ensemble territorial considérable : Provence, Toulouse, Quercy, une partie de l’Auvergne et du Languedoc. Cette construction s’effectue principalement par accumulation juridique (héritages, achats, mariages), négociation politique et gestion souple de rapports féodo-vassaliques, plutôt que par la guerre, à laquelle il recourt néanmoins lorsque les circonstances l’imposent.</p><p>Son comportement politique révèle un trait majeur : une grande attention portée aux formes collectives de décision. Respectueux de l’arbitrage des conseils de barons et des cadres juridiques validés par l’Église, il recherche systématiquement la légitimité procédurale avant tout recours à la force. Dans le contexte méridional, où les vassaux disposent d’une autonomie réelle, cette attitude procède moins de la faiblesse que de la norme politique régionale. Elle explique cependant l’incompréhension durable de nombreux contemporains, notamment ceux issus des principautés du Nord, moins familiers de ces pratiques.</p><p>Lorsqu’il se croise à l’automne 1095 — vraisemblablement après une information directe ou indirecte du pape Urbain II — Raymond apparaît déjà comme l’un des plus puissants seigneurs d’Occident. Son armée est la plus nombreuse et la mieux organisée ; il est aussi le seul à avoir déjà combattu des forces musulmanes, dans le cadre des campagnes menées aux côtés d’Alphonse VI de Castille contre les Almoravides. Par ses liens étroits avec l’ordre clunisien et avec l’épiscopat méridional, il semble naturel qu’Urbain ait vu en lui un pilier de la future expédition.</p><p>L’historiographie traditionnelle lui attribue des traits négatifs — vanité, jalousie, inconstance — principalement en raison des récits normands et de la réception médiévale ultérieure, influencées par la propagande anti-byzantine et les ambitions de la maison de Hauteville. Cependant, une relecture critique des sources, amorcée par J. et L. Hill, Joshua Prawer et d’autres médiévistes, laisse entrevoir un portrait différent : celui d’un chef méthodique, attaché à la cohérence institutionnelle de la croisade, soucieux de la protection des pèlerins, et animé d’un sens aigu du respect des serments (envers le pape comme envers Alexis Ier). Cette double loyauté — pontificale et impériale — permet d’éclairer plusieurs de ses décisions controversées, notamment son refus initial de l’hommage à Alexis ou sa politique prudente face à Antioche.</p><p>Raymond se distingue également par une constante : la volonté d’assurer la cohésion du groupe croisé. Cette orientation explique sa position lors des sièges (Antioche, Arqa), son insistance sur la discipline collective et son refus d’actions susceptibles d’entraîner la fragmentation du commandement. Loin d’être guidées par la seule ambition, plusieurs de ses initiatives procèdent d’une conception quasi institutionnelle de la croisade comme entreprise commune, devant respecter des engagements juridiques et des objectifs spirituels.</p><p><h2>Implantation territoriale</h2></p><p>À plus de cinquante ans au départ, Raymond reste un chef de guerre remarquablement aguerri. Les sources arabes comme latines relèvent sa valeur militaire, sa présence constante en première ligne et le respect qu’il inspire à ses adversaires. Ses capacités organisationnelles — gestion du ravitaillement, protection des pèlerins, coordination logistique — sont reconnues par la recherche contemporaine comme l’un de ses apports majeurs à la réussite de la croisade. Après la prise de Jérusalem, il refuse le titre royal, conformément à une conception spirituelle de l’entreprise qui exclut l’appropriation immédiate du sanctuaire. Il se réoriente ensuite vers la région de Tripoli, non par appétit désordonné de conquête, mais selon une logique stratégique : créer un espace tampon capable de relier Antioche et Jérusalem, de sécuriser les routes des pèlerins, et de limiter les ambitions normandes. Son installation à Tortose, la construction du Mont-Pèlerin (Qalʿat Saint-Gilles) et la prise de Djébaïl (Byblos) constituent les jalons de ce futur comté. Ses relations avec Byzance demeurent un élément structurant de cette phase. Fidèle à ses engagements, il restitue les territoires septentrionaux que l'empereur revendique et obtient en retour assistance logistique et reconnaissance pour son implantation tripolitaine. Cette dimension éclaire sa position ambivalente dans les récits latins, souvent déformée par les chroniqueurs normands, mais plus favorablement représentée dans les traditions byzantines et syriaques.</p><p>Capturé en Cilicie puis transféré à Antioche où règne désormais Tancrède, Raymond suscite un vaste mouvement d’indignation parmi les clercs et les barons occidentaux rescapés des croisades de renfort. Sa libération — obtenue au prix de serments complexes et de renoncements territoriaux au nord — témoigne de l’estime dont il bénéficie parmi ceux qui l’ont effectivement côtoyé, et relativise l’image négative transmise par certains chroniqueurs ultérieurs. Délivré, il reprend aussitôt sa stratégie tripolitaine. Malgré un effectif désormais réduit (quelques centaines de combattants), il remporte plusieurs succès militaires spectaculaires, notamment face aux forces coalisées de Tripoli, Damas et Homs. Ses victoires, abondamment commentées par les auteurs musulmans, consolident sa réputation d’excellent tacticien et facilitent l’implantation latine au Liban. C’est dans ce contexte qu’il fonde le Mont-Pèlerin, forteresse majeure du futur comté. C’est également dans ce cadre qu’il reçoit l’appui déterminant de Byzantins et de Génois, confirmant que son implantation n’est pas une initiative solitaire mais une politique construite, cohérente et diplomatiquement encadrée. </p><p>Raymond meurt en février 1105, probablement affaibli par l’âge et les efforts de siège. Sa disparition laisse un territoire encore morcelé, confié provisoirement à Guillaume de Cerdagne en attendant l’arrivée de son fils Bertrand. Le comté de Tripoli, l’un des quatre États latins d’Orient, se constituera autour des fondations posées par Raymond et revendiquera longtemps son héritage. Les réévaluations modernes montrent toutefois un personnage nettement plus complexe : chef méthodique, profondément religieux mais politiquement réaliste, doté d’une grande capacité d’organisation, et probablement l’un des moteurs essentiels de la cohésion croisée entre 1096 et 1099. Il demeure, pour une partie de la recherche, le seul chef réellement fidèle à l’esprit juridique, spirituel et communautaire de la première croisade, et peut être considéré, à titre d’hypothèse raisonnable, comme l’un de ses principaux architectes politiques.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

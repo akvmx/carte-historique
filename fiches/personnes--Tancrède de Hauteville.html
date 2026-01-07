@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tancrède de Hauteville</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Tancrède de Hauteville</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Général</span>
+                    <span class="badge badge-ghost">📅 Date inconnue</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Pays inconnu</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">Date inconnue</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Général</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h2>Origines et identité politique</h2></p><p>Tancrède de Hauteville apparaît dans les sources comme un jeune membre d’une branche collatérale de la dynastie normande installée en Italie méridionale. Né entre 1072 et 1075, fils d’Emma (dont la filiation, fille ou sœur de Robert Guiscard, demeure discutée) et du « bon marquis » Odon, il appartient à un milieu aristocratique où l’expérience militaire, la mobilité et l’ambition constituent les voies naturelles d’ascension. Cette incertitude généalogique, loin d’être un détail, éclaire la position intermédiaire qu’il occupe dans le système normand : soit neveu, soit cousin de Bohémond de Tarente, il n’est pas un vassal subalterne, mais un parent dont la proximité autorise à la fois coopération et opposition. Avant la croisade, les éléments biographiques sont ténus ; rien ne distingue Tancrède sinon son insertion dans une lignée rompu aux campagnes balkaniques et à la politique d’expansion des Normands d’Italie. C’est cette absence de perspectives en Italie, où l’aristocratie militaire est saturée, qui explique sa décision de suivre Bohémond lorsqu’est proclamée la croisade. Mais l’adhésion n’est ni docile ni passive : Tancrède jouit d’une forte popularité dans les contingents normands, au point que certains chroniqueurs notent qu’elle surpassait celle de Bohémond lui-même. Cette position initiale, chef naturel, apprécié des hommes, mais jaloux d’indépendance, conditionnera tout son parcours.</p><p>Sur le plan spirituel et idéologique, Tancrède reflète l’ambivalence de la chevalerie normande : attiré par la gloire guerrière, il se reconnaît aussi dans le cadre moral fourni par l’Église. La croisade lui permet d’unifier ces deux horizons, comme le souligne Raoul de Caen : il peut être un « soldat du Christ » sans renoncer aux impératifs de réputation et de butin qui structurent la société chevaleresque. Ainsi se dessine, dès l’origine, un profil complexe : velléitaire face à toute autorité qui limiterait son champ d’action, mais capable d’une discipline intérieure lorsque l’entreprise le justifie.</p><p><h2>Un acteur central de la Première croisade</h2></p><p>Dès les premiers mois, Tancrède refuse de se comporter en simple lieutenant. Son attitude envers l’Empire byzantin en fournit l’indice le plus net : il cherche systématiquement à échapper au serment d’hommage exigé par Alexis Ier, traversant le Bosphore en avance, s’opposant frontalement à Bohémond lorsque celui-ci choisit la conciliation, et adoptant des positions ouvertement provocatrices lors des tentatives de négociation. Cette défiance inaugurale vis-à-vis de Byzance conditionne les relations futures entre la principauté d’Antioche et Constantinople. En Cilicie, son autonomie s’affirme pleinement. L’expédition parallèle menée avec Baudouin de Boulogne révèle la profondeur de leur antagonisme : rivalités de conquête, refus d’ouvrir les portes des villes, affrontements directs entre troupes latines, puis massacre de contingents normands à Tarse, événement qui marque durablement Tancrède et son entourage. La compétition entre les deux hommes, qui se prolongera jusque dans la politique du royaume de Jérusalem, s’enracine dans cette séquence où chacun cherche à se tailler une base territoriale.</p><p>Sur le plan militaire, Tancrède se distingue par une mobilité et une audace constantes. Il sécurise les voies d’accès à Antioche par la prise du col de Belën, tient avec ténacité les tours avancées autour de la ville assiégée, puis s’illustre lors de la marche vers Jérusalem, notamment à Bethléem où il entre le premier, à l’invitation des chrétiens locaux. Durant le siège de Jérusalem, il prend part aux opérations de reconnaissance, participe à la recherche des matériaux nécessaires aux machines de siège et entre dans la ville presque aussitôt après Godefroy, portant son étendard au Haram al-Sharif. Son attitude lors du sac de la ville, complexe à analyser, révèle encore une fois cette tension entre ambition et prudence politique. S’il tente d’organiser la rançon de prisonniers regroupés dans la mosquée al-Aqsa, il ne s’oppose pas, en définitive, à leur mise à mort lorsque le contexte stratégique l’impose. La chronique de l’Anonyme normand, qui le présente comme indigné par cette exécution, relève de la construction idéalisée : d’autres sources, moins favorables, décrivent un rapport plus pragmatique à la violence.</p><p>Une fois Jérusalem prise, Tancrède participe activement à la structuration du jeune royaume : il devient prince de Galilée, administre la région autour de Tibériade et de Nazareth, s’emploie à protéger les voies stratégiques et attire à lui une noblesse normande fidèle. Mais son autonomie croissante inquiète Baudouin Ier, alors nouveau roi : leurs relations deviennent rapidement conflictuelles, d’autant que Tancrède avait publiquement soutenu le patriarche Daimbert contre Baudouin dans la crise de succession de 1100.</p><p><h2>Régence</h2></p><p>En 1101, la capture de Bohémond par les Seldjoukides permet à Tancrède d’accéder à une position centrale : la régence de la principauté d’Antioche. Il s’y impose avec une autorité incontestée. Les Normands d’Antioche, profondément attachés à la lignée de Hauteville, exigent qu’il prête serment à Bohémond absent, mais reconnaissent immédiatement en lui un chef énergique, capable de maintenir la cohésion interne et d’assurer la défense extérieure. Sa politique diffère cependant de celle de son oncle : Tancrède concentre son action sur l’espace régional plutôt que sur de vastes ambitions impériales. Il s’emploie à consolider les frontières, à affermir les liens de dépendance avec les seigneuries locales et à stabiliser les rapports entre Latins, Arméniens, Syriaques, Maronites et Grecs. Les sources relèvent en particulier son sens du compromis religieux : il confirme les possessions arméniennes de la montagne de l’Amanus, favorise les institutions monastiques orientales et adopte une titulature bilingue (grecque et latine) sur certaines monnaies, geste à forte valeur symbolique qui montre sa capacité à manier les codes culturels locaux tout en affirmant la souveraineté latine.</p><p>Sur le plan militaire, sa régence se caracterise par une grande activité : reconquête de la Cilicie au détriment des Byzantins ; siège victorieux de Laodicée après une longue résistance byzantine ; défense régulière contre les raids de Ridwân d’Alep ; interventions vers Djabala, Marqab et les ports du littoral. Cette énergie, combinée à une diplomatie pragmatique, renforce considérablement la principauté, qui atteint sous lui un niveau de cohésion inconnu depuis la prise d’Antioche. Ses relations avec Baudouin Ier restent néanmoins tendues. Tancrède refuse d’abord de reconnaître son autorité sur la Galilée, puis sur certains territoires disputés. Lorsque Bernard de Valence, patriarche d’Antioche et fidèle de Bohémond, intervient dans ces querelles, Tancrède doit composer avec une opposition ecclésiastique qui n’affaiblit pas sa position militaire mais limite parfois sa liberté d’action. La libération de Bohémond en 1103 force Tancrède à céder la principauté, mais il conserve d’importants domaines. Sa seconde régence, après la défaite de Bohémond face aux Byzantins en 1104 (traité de Déabolis), est encore plus structurante : Tancrède devient alors le véritable souverain d’Antioche, réaffirmant son autorité par une politique résolue et souvent indépendante des orientations latines venues de Jérusalem.</p><p>Tancrède meurt en 1112, laissant une principauté consolidée et un modèle politique normand durable : autorité militaire forte, coexistence religieuse pragmatique, capacité d’adaptation aux sociétés locales. Sa postérité fut paradoxale : célébré dans la littérature (Tasse, Monteverdi, Voltaire) comme l’archétype du chevalier croisé, il fut pourtant longtemps sous-estimé par l’historiographie au profit de figures plus spectaculaires comme Bohémond. Les travaux contemporains tendent à réévaluer son rôle fondamental dans la structuration des États latins d’Orient.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

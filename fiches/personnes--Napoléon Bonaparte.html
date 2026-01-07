@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Napoléon Ier</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Napoléon Ier</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Général</span>
+                    <span class="badge badge-ghost">📅 Date inconnue</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Pays inconnu</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">Date inconnue</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Général</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p><h2>Jeunesse</h2></p><p>Napoleone di Buonaparte naît le 15 août 1769 à Ajaccio, en Corse, peu après l’annexion de l’île par la France. Second enfant de Charles Bonaparte, avocat et notable insulaire, et de Maria Letizia Ramolino, il appartient à une petite noblesse corse intégrée à la monarchie française.</p><p>Envoyé très tôt en France continentale, il passe quelques mois au collège d’Autun pour apprendre le français, langue qu’il maîtrise rapidement mais qu’il parlera toujours avec un accent marqué. Il entre ensuite à l’École royale militaire de Brienne-le-Château (1779–1784), où il subit les moqueries liées à ses origines corses et à son niveau de langue. Élève globalement moyen, il se distingue cependant en mathématiques et dans les jeux militaires, où il manifeste déjà des aptitudes au commandement.</p><p>Admis à l’École militaire de Paris (1784–1785), il se forme à l’artillerie, arme alors très technique, et y confirme ses aptitudes scientifiques. Il sort sous-lieutenant et est affecté à différents régiments, notamment à Auxonne. Pendant la Révolution française, il se rapproche un temps des courants jacobins, tout en restant très attaché aux intérêts corses, avant de rompre durablement avec Pascal Paoli et de se fixer définitivement en France après 1793.</p><p>Sa carrière militaire s’accélère avec le siège de Toulon (1793), où, jeune officier d’artillerie, il propose un plan de prise du port qui contribue à la victoire républicaine et lui vaut une rapide promotion au grade de général de brigade.</p><p><h2>Ascension politique et conquêtes militaires</h2></p><p>Sous le Directoire, Bonaparte bénéficie d’une série de commandements décisifs. Nommé à la tête de l’armée d’Italie (1796–1797), il mène une campagne fulgurante contre les Autrichiens et leurs alliés, marquée par des victoires comme Arcole et Rivoli, qui imposent la France comme première puissance continentale et font de lui une figure centrale du nouveau régime.</p><p>En 1798, il dirige l’expédition d’Égypte à la tête de l’armée d’Orient. La campagne, ponctuée par la victoire terrestre des Pyramides mais compromise par la destruction de la flotte française à Aboukir, a pour objectif de frapper les intérêts britanniques et d’ouvrir à la France une voie d’influence vers le Levant. Elle contribue aussi à la construction de son image de chef militaire conquérant et de « héros » scientifique et civilisateur.</p><p>De retour en France, il profite de la fragilité du Directoire et mène le coup d’État du 18 brumaire an VIII (9 novembre 1799). Il devient Premier consul, puis consul à vie en 1802 après plébiscite. Le 18 mai 1804, un sénatus-consulte proclame l’Empire ; Napoléon est sacré empereur des Français le 2 décembre 1804, à Notre-Dame de Paris, en présence du pape Pie VII.</p><p>Sur le plan militaire, il conduit les armées françaises dans une série de campagnes qui redessinent profondément la carte de l’Europe. Ses victoires majeures – Arcole et Rivoli en Italie, Marengo (1800), Austerlitz (1805), Iéna (1806), Friedland (1807) – brisent successivement plusieurs coalitions dirigées et financées par la Grande-Bretagne et regroupant les principales monarchies européennes. L’Empire français atteint son extension maximale autour de 1810.</p><p><h2>Gouvernement intérieur </h2></p><p>Chef d’État autoritaire, Napoléon met en place un régime fortement centralisé, qui combine héritage révolutionnaire et restauration de l’ordre social. Il consolide l’œuvre juridique de la Révolution en promulguant le Code civil (ou Code Napoléon) et en réorganisant l’administration autour des préfets, d’une justice hiérarchisée et de grands corps d’État.</p><p>Le Concordat de 1801 avec le pape rétablit la paix religieuse en France en reconnaissant le catholicisme comme religion « de la majorité des Français », sans revenir au statut de religion d’État. La cérémonie du sacre, en 1804, confère à l’Empire une légitimité dynastique et religieuse en s’inscrivant à la fois dans l’héritage carolingien et dans celui des monarchies européennes, tout en manifestant la primauté de l’empereur sur le pape.</p><p>Sur le plan économique et social, Napoléon favorise la stabilisation monétaire, la création de la Banque de France, le développement des infrastructures (routes, ports, canaux) et la promotion d’une élite administrative et militaire fondée sur le mérite, même si la noblesse d’Empire réintroduit, sous une forme nouvelle, une hiérarchie sociale héréditaire. Ses réformes, parfois qualifiées de « révolution stabilisée », structurent durablement l’État français et influencent de nombreux pays placés sous domination ou influence française.</p><p><h2>Déclin</h2></p><p>À partir de 1808, l’Empire entre dans une phase de surextension et de fragilisation. La guerre d’Espagne, déclenchée par l’intervention française contre la monarchie bourbonienne espagnole, se transforme en conflit d’usure marqué par une guérilla très violente et par des pertes considérables. La campagne de Russie de 1812, conclue par la retraite catastrophique de la Grande Armée, accélère le retournement du rapport de forces en Europe.</p><p>Les défaites de 1813–1814, notamment à Leipzig, conduisent les puissances coalisées à envahir la France. Napoléon abdique une première fois en avril 1814 et est exilé sur l’île d’Elbe, tout en conservant le titre d’empereur. Il en revient en mars 1815, ouvre la période dite des Cent-Jours, reprend le pouvoir à Paris et tente une dernière offensive contre la coalition. La défaite de Waterloo (18 juin 1815) entraîne sa seconde abdication et son exil, cette fois sur l’île de Sainte-Hélène, au milieu de l’Atlantique, sous surveillance britannique. Il y meurt le 5 mai 1821, probablement d’un cancer de l’estomac, dans des conditions matérielles et politiques qui nourrissent rapidement controverses et légendes.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

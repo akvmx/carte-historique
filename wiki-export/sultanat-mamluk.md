@@ -7,7 +7,7 @@ pays: "Sultanat mamluk d'Egypte"
 coords: [30.02399, 31.25946]
 description: "Comment les Mamluks ont dead ça."
 categorie: "politique"
-personnages: Nur ad-Din, Shirkuh, Salah ad-Din
+personnages:
 lien: "fiches/sultanat-mamluk.html"
 ---
 

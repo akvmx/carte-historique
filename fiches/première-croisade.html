@@ -6,8 +6,8 @@
     <title>La première croisade, en Anatolie</title>
     <style>
         :root {
-            --accent: #FFC5D3;
-            --accent-soft: rgba(255, 197, 211, 0.18);
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
             --bg-page: #f9fafb;
             --bg-card: #ffffff;
             --border-subtle: #e5e7eb;
@@ -25,12 +25,12 @@
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 32px 16px;
+            padding: 24px 12px;
         }
 
         .page {
@@ -41,27 +41,29 @@
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            text-decoration: none;
-            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.6);
             margin-bottom: 16px;
-            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
+            cursor: pointer;
         }
 
         .back-link:hover {
             border-color: var(--accent);
             color: var(--accent);
+            transform: translateX(-1px);
         }
 
         .event-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
-            padding: 24px 22px 26px;
+            padding: 20px 18px 22px;
             box-shadow: var(--shadow-card);
             border: 1px solid var(--border-subtle);
         }
@@ -149,12 +151,12 @@
 
         .content {
             margin-top: 4px;
-            font-size: 0.97rem;
+            font-size: 0.96rem;
             color: #1f2933;
         }
 
         .content p {
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
         .content h1,
@@ -211,7 +213,14 @@
 </head>
 <body>
     <div class="page">
-        <a href="../index.html" class="back-link">← Retour à la carte</a>
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
 
         <article class="event-card">
             <header class="event-header">

@@ -1,10 +1,10 @@
 ---
 type: "personne"
 nom: "Tancrède de Hauteville"
-titre: Prince de Galilée, Régent d’Antioche
+titre: Tancrède de Hauteville
 naissance: 1072-01-01
 mort: "1112-01-01"
-lieu_naissance: "Italie méridionale"
+lieu_naissance: "Italie"
 lieu_mort: "Antioche"
 fonction: Chef militaire de la Première croisade, Régent d’Antioche
 pays_principaux: Antioche, Jérusalem, Cilicie

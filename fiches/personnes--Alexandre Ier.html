@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alexandre Ier</title>
+    <style>
+        :root {
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
+            --bg-page: #f9fafb;
+            --bg-card: #ffffff;
+            --border-subtle: #e5e7eb;
+            --text-main: #111827;
+            --text-muted: #6b7280;
+            --radius-lg: 18px;
+            --shadow-card: 0 18px 40px rgba(15, 23, 42, 0.08);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 24px 12px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 960px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.6);
+            margin-bottom: 16px;
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+        }
+
+        .back-link:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateX(-1px);
+        }
+
+        .event-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            padding: 20px 18px 22px;
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .event-title-block {
+            max-width: 75%;
+        }
+
+        .event-kicker {
+            font-size: 0.78rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+
+        .event-title {
+            font-size: clamp(1.6rem, 3vw, 2.1rem);
+            font-weight: 650;
+            line-height: 1.2;
+        }
+
+        .event-subtitle {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        .event-badge-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 6px;
+            text-align: right;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            background: var(--accent-soft);
+            color: var(--accent);
+            border: 1px solid rgba(248, 250, 252, 0.9);
+        }
+
+        .badge-ghost {
+            background: transparent;
+            border-color: rgba(148, 163, 184, 0.5);
+            color: var(--text-muted);
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px 16px;
+            padding: 14px 14px 16px;
+            margin-bottom: 16px;
+            border-radius: 14px;
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+
+        .meta-item-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .meta-item-value {
+            font-size: 0.9rem;
+        }
+
+        .content {
+            margin-top: 4px;
+            font-size: 0.96rem;
+            color: #1f2933;
+        }
+
+        .content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .content h1,
+        .content h2,
+        .content h3 {
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .content h1 { font-size: 1.35rem; }
+        .content h2 { font-size: 1.2rem; }
+        .content h3 { font-size: 1.05rem; }
+
+        .content ul,
+        .content ol {
+            margin: 0.8rem 0 0.8rem 1.4rem;
+        }
+
+        .content li {
+            margin-bottom: 0.25rem;
+        }
+
+        .footnote {
+            margin-top: 22px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px dashed rgba(148, 163, 184, 0.8);
+            padding-top: 10px;
+        }
+
+        @media (max-width: 720px) {
+            body {
+                padding: 18px 10px 22px;
+            }
+            .event-card {
+                padding: 18px 16px 20px;
+            }
+            .event-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .event-title-block {
+                max-width: 100%;
+            }
+            .event-badge-stack {
+                align-items: flex-start;
+            }
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
+
+        <article class="event-card">
+            <header class="event-header">
+                <div class="event-title-block">
+                    <div class="event-kicker">évènement historique</div>
+                    <h1 class="event-title">Alexandre Ier</h1>
+                </div>
+                <div class="event-badge-stack">
+                    <span class="badge">🏷️ Général</span>
+                    <span class="badge badge-ghost">📅 Date inconnue</span>
+                </div>
+            </header>
+
+            <section class="meta-grid">
+                <div>
+                    <div class="meta-item-label">pays</div>
+                    <div class="meta-item-value">Pays inconnu</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">période</div>
+                    <div class="meta-item-value">Date inconnue</div>
+                </div>
+                <div>
+                    <div class="meta-item-label">catégorie</div>
+                    <div class="meta-item-value">Général</div>
+                </div>
+            </section>
+
+            <section class="content">
+            <p>Né en 1777 au sein d’une dynastie fracturée, Alexandre Pavlovitch grandit dans un environnement familial marqué par les rivalités politiques. Écartelé entre la cour de sa grand-mère Catherine II, qui le forma pour en faire son héritier, et celle de son père Paul, qui se considérait spolié du trône, il développa très tôt une culture de la dissimulation et un tempérament ambivalent. Cette dualité fut renforcée par l’éducation éclairée dispensée par son précepteur La Harpe : nourri des idéaux des Lumières, séduit par les perspectives d’un gouvernement constitutionnel, Alexandre demeurait néanmoins profondément conscient des équilibres sociaux de l’Empire et de la nécessité de réformes graduelles, compatibles avec l’autorité autocratique et la prééminence de la noblesse.</p><p>Lorsque son père Paul Ier fut assassiné en mars 1801 dans un complot auquel Alexandre avait consenti sans envisager – ou sans vouloir assumer – son issue mortelle, il monta sur le trône avec un programme initial d’ouverture politique. Les premières années de son règne furent marquées par un libéralisme modéré : relâchement de la censure, réorganisation des universités, encouragement de la pensée économique moderne, et institution d’un cercle officieux de conseillers réformateurs. Toutefois, ses hésitations récurrentes et la préservation de la décision nobiliaire en matière de servage (oukase de 1803) révèlent rapidement les limites structurelles de son progressisme.</p><p>En politique étrangère, Alexandre poursuivit d’abord une stratégie de médiation entre la France napoléonienne et la Grande-Bretagne, préoccupé par l’expansion continentale de la première et la domination commerciale de la seconde. Cette diplomatie subtile échoua et l’entraîna vers les coalitions antifrançaises, puis vers la défaite à Austerlitz (1805) et Friedland (1807). Cette dernière bataille l’incita à accepter l’alliance franco-russe conclue à Tilsit (8 juillet 1807), compromis ambigu qui lui offrait un répit mais fragilisait son prestige intérieur. Il mit cette période à profit pour envisager une vaste refonte institutionnelle : sous l’impulsion de Speranski, conseiller d’État, un projet constitutionnel fut élaboré en 1809. Jugé menaçant par la noblesse, ce programme lui aliéna ses soutiens traditionnels. Alexandre sacrifia Speranski en 1812, alors que le coût du blocus continental, la baisse de la valeur monétaire et la montée des critiques compromettaient gravement son autorité.</p><p>L’invasion napoléonienne de 1812 transforma cependant l’image du souverain. Malgré des suspicions persistantes de faiblesse stratégique après l’abandon de Moscou, la victoire finale sur Napoléon fit d’Alexandre un acteur central de la recomposition politique européenne. Réputé libérateur en Allemagne en 1813 et arbitre en France en 1814, il associa son nom à la restauration des monarchies et à l’élaboration de la Sainte-Alliance (1815), qui affirmait une légitimité politique fondée sur la tradition chrétienne. Cette orientation traduisait l’évolution personnelle du tsar : progressivement détaché du rationalisme de sa jeunesse, il adopta une religiosité morale, marquée par l’influence de la baronne de Krüdener, qui l’amena à articuler réformes modérées et défense de l’ordre dynastique.</p><p>Dans l’Empire, cependant, sa politique intérieure demeura profondément contradictoire. S’il affranchit les serfs dans les provinces baltes – sans leur attribuer la terre –, il maintint en Russie même les formes les plus coercitives du servage, jusqu’à rétablir la déportation en Sibérie pour les récalcitrants. Les élites militaires et intellectuelles, transformées par la « guerre nationale » contre Napoléon et par l’expérience de l’occupation en Europe occidentale, devinrent de plus en plus critiques. Au lieu de canaliser cette effervescence, Alexandre renforça la censure universitaire, réduisit l’enseignement philosophique à des contenus conformes à la morale religieuse et confia de larges prérogatives au général Araktcheïev, symbole de militarisme bureaucratique et d’arbitraire administratif.</p><p>À partir de 1820, gagnés par un conservatisme de plus en plus rigide, le tsar et ses conseillers étouffèrent les mouvements réformateurs : répression des sociétés secrètes, méfiance envers la franc-maçonnerie, contrôle des écoles d’enseignement mutuel, retrait des attributions culturelles aux organismes jugés trop cosmopolites. Tandis que l’économie souffrait de la chute des prix agricoles et que les campagnes manifestaient de plus en plus ouvertement le désir d’affranchissement, le fossé se creusa entre le souverain et une partie de la noblesse éclairée, dont certains envisageaient explicitement le tyrannicide.</p><p>La mort soudaine d’Alexandre Ier en 1825, survenue avant la mise en œuvre de tout projet constitutionnel tangible, laissa l’Empire dans une situation de tension extrême. L’insurrection décembriste, qui suivit immédiatement son décès, révéla l’ambivalence durable de son règne : celui d’un monarque oscillant sans cesse entre réformes promises et conservatisme imposé, idéal moral et realpolitik, autocratie éclairée et paralysie institutionnelle. Son héritage demeure celui d’un tsar qui voulut réformer sans briser l’ordre ancien, et qui, ce faisant, nourrît les contradictions qui éclatèrent dès ses funérailles.</p>
+            </section>
+        </article>
+    </div>
+</body>
+</html>

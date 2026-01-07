@@ -16,6 +16,7 @@ OUTPUT_EVENTS_FILE = "data/evenements.json"
 OUTPUT_PAYS_FILE = "data/pays.json"
 OUTPUT_PERSONNES_FILE = "data/personnes.json"  # 🔸 NOUVEAU
 OUTPUT_HTML_FOLDER = "fiches"
+OUTPUT_NOTES_FILE = "data/notes.json"
 
 
 def normalize_date(date_str):
@@ -139,6 +140,28 @@ def parse_frontmatter(content):
         print(f"❌ Erreur parsing front matter: {e}")
         return None, content
 
+def extract_note_title(markdown_content, fallback_filename):
+    """
+    Titre = premier H1 markdown (# ...), sinon nom de fichier.
+    """
+    for line in (markdown_content or "").splitlines():
+        line = line.strip()
+        if line.startswith("# "):
+            return line[2:].strip() or Path(fallback_filename).stem
+    return Path(fallback_filename).stem.replace("-", " ").replace("_", " ").strip()
+
+
+def make_note_html_filename(filepath):
+    """
+    Fabrique un nom HTML stable à partir du chemin relatif dans wiki-export
+    (évite les collisions si sous-dossiers).
+    """
+    rel = os.path.relpath(filepath, EXPORT_FOLDER)
+    stem = rel[:-3] if rel.lower().endswith(".md") else rel
+    stem = stem.replace(os.sep, "--")
+    stem = re.sub(r"[^\wÀ-ÖØ-öø-ÿ\- ]+", "", stem, flags=re.UNICODE).strip()
+    stem = stem.replace(" ", "-")
+    return stem + ".html"
 
 def determine_continent(coords):
     """Déterminer le continent à partir des coordonnées"""
@@ -162,8 +185,10 @@ def determine_continent(coords):
         return "autre"
 
 
-def generate_html(metadata, content, filename):
-    """Générer le fichier HTML pour une fiche évènement (style épuré)"""
+def generate_html(metadata, content, filename, is_event=False, title_override=None):
+    """Générer le fichier HTML pour une fiche (évènement ou note)"""
+    if metadata is None:
+        metadata = {}
 
     # Conversion markdown basique
     html_content = content
@@ -190,7 +215,7 @@ def generate_html(metadata, content, filename):
     else:
         pays_str = pays_meta
 
-    titre = metadata.get('titre', 'Sans titre')
+    titre = title_override or metadata.get('titre') or 'Untitled'
     date = metadata.get('date', 'Date inconnue')
     categorie = metadata.get('categorie', 'Général').title()
 
@@ -203,8 +228,8 @@ def generate_html(metadata, content, filename):
     <title>""" + titre + """</title>
     <style>
         :root {
-            --accent: #FFC5D3;
-            --accent-soft: rgba(255, 197, 211, 0.18);
+            --accent: #3b82f6; /* même bleu que la carte */
+            --accent-soft: rgba(59, 130, 246, 0.10);
             --bg-page: #f9fafb;
             --bg-card: #ffffff;
             --border-subtle: #e5e7eb;
@@ -222,12 +247,12 @@ def generate_html(metadata, content, filename):
 
         body {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: radial-gradient(circle at top left, #fee2e2 0, #f9fafb 40%, #eef2ff 100%);
+            background: radial-gradient(circle at top left, #eff6ff 0, #f9fafb 40%, #eef2ff 100%);
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
             justify-content: center;
-            padding: 32px 16px;
+            padding: 24px 12px;
         }
 
         .page {
@@ -238,27 +263,29 @@ def generate_html(metadata, content, filename):
         .back-link {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            font-size: 0.85rem;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            font-size: 1.1rem;
             color: var(--text-muted);
-            text-decoration: none;
-            padding: 6px 10px;
+            background: rgba(255, 255, 255, 0.85);
             border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.4);
+            border: 1px solid rgba(148, 163, 184, 0.6);
             margin-bottom: 16px;
-            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
+            cursor: pointer;
         }
 
         .back-link:hover {
             border-color: var(--accent);
             color: var(--accent);
+            transform: translateX(-1px);
         }
 
         .event-card {
             background: var(--bg-card);
             border-radius: var(--radius-lg);
-            padding: 24px 22px 26px;
+            padding: 20px 18px 22px;
             box-shadow: var(--shadow-card);
             border: 1px solid var(--border-subtle);
         }
@@ -346,12 +373,12 @@ def generate_html(metadata, content, filename):
 
         .content {
             margin-top: 4px;
-            font-size: 0.97rem;
+            font-size: 0.96rem;
             color: #1f2933;
         }
 
         .content p {
-            margin-bottom: 0.9rem;
+            margin-bottom: 0.8rem;
         }
 
         .content h1,
@@ -408,7 +435,14 @@ def generate_html(metadata, content, filename):
 </head>
 <body>
     <div class="page">
-        <a href="../index.html" class="back-link">← Retour à la carte</a>
+        <button 
+            type="button" 
+            class="back-link"
+            onclick="if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../index.html'; }"
+            aria-label="Revenir à la page précédente"
+        >
+            ←
+        </button>
 
         <article class="event-card">
             <header class="event-header">
@@ -456,6 +490,61 @@ def generate_html(metadata, content, filename):
         print(f"❌ Erreur lors de l'écriture du HTML {html_path}: {e}")
         return False
 
+def generate_html_note(title, content, filepath):
+    """Générer un HTML simple pour une note (même sans YAML)."""
+
+    html_content = content or ""
+
+    # Markdown très basique (même logique que ton generate_html)
+    html_content = re.sub(r'^### (.*)', r'<h3>\1</h3>', html_content, flags=re.MULTILINE)
+    html_content = re.sub(r'^## (.*)', r'<h2>\1</h2>', html_content, flags=re.MULTILINE)
+    html_content = re.sub(r'^# (.*)', r'<h1>\1</h1>', html_content, flags=re.MULTILINE)
+    html_content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html_content)
+    html_content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', html_content)
+    html_content = re.sub(r'\n\n', r'</p><p>', html_content)
+    html_content = '<p>' + html_content + '</p>'
+
+    html = f"""<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{title}</title>
+<link rel="stylesheet" href="fiches/1-style-fiche.css">
+</head>
+<body>
+<div class="page">
+    <button type="button" class="back-link"
+        onclick="if (window.history.length > 1) {{ window.history.back(); }} else {{ window.location.href = './index.html'; }}">
+        ←
+    </button>
+
+    <article class="event-card">
+        <header class="event-header">
+            <div class="event-title-block">
+                <div class="event-kicker">note</div>
+                <h1 class="event-title">{title}</h1>
+            </div>
+        </header>
+
+        <section class="content">
+            {html_content}
+        </section>
+    </article>
+</div>
+</body>
+</html>"""
+
+    html_filename = make_note_html_filename(filepath)
+    html_path = os.path.join(OUTPUT_HTML_FOLDER, html_filename)
+
+    try:
+        with open(html_path, 'w', encoding='utf-8') as f:
+            f.write(html)
+        return html_filename
+    except Exception as e:
+        print(f"❌ Erreur lors de l'écriture du HTML note {html_path}: {e}")
+        return None
 
 def main():
     """Fonction principale"""
@@ -472,11 +561,14 @@ def main():
     evenements = []
     pays_dict = {}
     personnes = []  # 🔸 NOUVEAU
+    notes = []
 
     stats = {'processed': 0, 'events': 0, 'countries': 0, 'persons': 0, 'errors': 0}
 
     # Traiter tous les fichiers .md (y compris dans les sous-dossiers)
     for root, dirs, files in os.walk(EXPORT_FOLDER):
+        dirs[:] = [d for d in dirs if d not in ('.obsidian', 'templates')]
+
         for filename in files:
             if not filename.endswith('.md'):
                 continue
@@ -490,11 +582,26 @@ def main():
 
                 metadata, markdown_content = parse_frontmatter(content)
 
-                if not metadata:
-                    print(f"⏭️ Ignoré: {os.path.relpath(filepath, EXPORT_FOLDER)} (pas de front matter)")
-                    continue
+                # --- NOTES : on indexe TOUT, même sans front matter ---
+                doc_type = metadata.get('type') if metadata else None
 
-                doc_type = metadata.get('type')
+                # 1) Si c'est un évènement : on met juste un lien vers son HTML évènement (pas de HTML note séparé)
+                if doc_type == 'évènement' and metadata:
+                    title = metadata.get('titre') or extract_note_title(markdown_content, filename)
+                    notes.append({
+                        "titre": title,
+                        "html": f"fiches/{filename.replace('.md', '.html')}"
+                    })
+
+                # 2) Sinon (note libre, personne, etc.) : on génère un HTML note simple
+                else:
+                    title = extract_note_title(markdown_content if metadata else content, filename)
+                    html_filename = generate_html_note(title, markdown_content if metadata else content, filepath)
+                    if html_filename:
+                        notes.append({
+                            "titre": title,
+                            "html": f"fiches/{html_filename}"
+                        })
 
                 # -----------------------------------
                 # 1) TRAITEMENT DES ÉVÉNEMENTS
@@ -621,6 +728,11 @@ def main():
             with open(OUTPUT_PERSONNES_FILE, 'w', encoding='utf-8') as f:
                 json.dump(personnes, f, ensure_ascii=False, indent=2)
 
+        # Notes (annuaire)
+        notes_sorted = sorted(notes, key=lambda n: (n.get("titre", "") or "").lower())
+        with open(OUTPUT_NOTES_FILE, 'w', encoding='utf-8') as f:
+            json.dump(notes_sorted, f, ensure_ascii=False, indent=2)
+
         print("\n" + "="*50)
         print("GÉNÉRATION TERMINÉE")
         print(f"Fichiers traités: {stats['processed']}")
@@ -629,7 +741,7 @@ def main():
         print(f"Personnes créées: {stats['persons']}")
         print(f"Fichiers HTML (événements): {stats['events']}")
         print(f"Erreurs: {stats['errors']}")
-        print(f"JSON sauvés: {OUTPUT_EVENTS_FILE}, {OUTPUT_PAYS_FILE}", end='')
+        print(f"JSON sauvés: {OUTPUT_EVENTS_FILE}, {OUTPUT_PAYS_FILE}, {OUTPUT_NOTES_FILE}", end='')
         if personnes:
             print(f", {OUTPUT_PERSONNES_FILE}")
         else:

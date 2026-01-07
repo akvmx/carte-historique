@@ -35,6 +35,20 @@
     "sources": null
   },
   {
+    "nom": "Franklin Roosevelt",
+    "titre": "",
+    "naissance": null,
+    "mort": null,
+    "lieu_naissance": "",
+    "lieu_mort": "",
+    "fonction": "",
+    "pays_principaux": [],
+    "image": "images/napoleon.jpg",
+    "bio_courte": "Général de la Révolution française devenu empereur, figure majeure de l’Europe du tournant XVIIIe–XIXe siècle.",
+    "bio_longue": "# Jeunesse\n\nTexte…\n\n# Carrière militaire\n\nTexte…\n\n# Empire\n\nTexte…\n\nprésident libéral \nriche mais condamne quand même la cupidité et les fraudeurs fiscaux \nil veut assainir les environnements bancaires et financiers",
+    "sources": "Thiers, Tulard, etc."
+  },
+  {
     "nom": "Napoléon Bonaparte",
     "titre": "Napoléon Ier",
     "naissance": "1769-08-15",
@@ -70,10 +84,10 @@
   },
   {
     "nom": "Tancrède de Hauteville",
-    "titre": "Prince de Galilée, Régent d’Antioche",
+    "titre": "Tancrède de Hauteville",
     "naissance": "1072-01-01",
     "mort": "1112-01-01",
-    "lieu_naissance": "Italie méridionale",
+    "lieu_naissance": "Italie",
     "lieu_mort": "Antioche",
     "fonction": "Chef militaire de la Première croisade, Régent d’Antioche",
     "pays_principaux": [
@@ -85,19 +99,5 @@
     "bio_courte": "Neveu ou cousin de Bohémond de Tarente, Tancrède fut l’un des chefs les plus populaires et les plus actifs de la Première croisade. Conquérant audacieux en Cilicie, acteur majeur du siège de Jérusalem et régent d’Antioche, il incarna le modèle du chevalier croisé, attaché à la fois à la gloire militaire, aux intérêts normands et à la construction politique des premiers États latins d’Orient.",
     "bio_longue": "## Origines et identité politique\n\nTancrède de Hauteville apparaît dans les sources comme un jeune membre d’une branche collatérale de la dynastie normande installée en Italie méridionale. Né entre 1072 et 1075, fils d’Emma (dont la filiation, fille ou sœur de Robert Guiscard, demeure discutée) et du « bon marquis » Odon, il appartient à un milieu aristocratique où l’expérience militaire, la mobilité et l’ambition constituent les voies naturelles d’ascension. Cette incertitude généalogique, loin d’être un détail, éclaire la position intermédiaire qu’il occupe dans le système normand : soit neveu, soit cousin de Bohémond de Tarente, il n’est pas un vassal subalterne, mais un parent dont la proximité autorise à la fois coopération et opposition. Avant la croisade, les éléments biographiques sont ténus ; rien ne distingue Tancrède sinon son insertion dans une lignée rompu aux campagnes balkaniques et à la politique d’expansion des Normands d’Italie. C’est cette absence de perspectives en Italie, où l’aristocratie militaire est saturée, qui explique sa décision de suivre Bohémond lorsqu’est proclamée la croisade. Mais l’adhésion n’est ni docile ni passive : Tancrède jouit d’une forte popularité dans les contingents normands, au point que certains chroniqueurs notent qu’elle surpassait celle de Bohémond lui-même. Cette position initiale, chef naturel, apprécié des hommes, mais jaloux d’indépendance, conditionnera tout son parcours.\n\nSur le plan spirituel et idéologique, Tancrède reflète l’ambivalence de la chevalerie normande : attiré par la gloire guerrière, il se reconnaît aussi dans le cadre moral fourni par l’Église. La croisade lui permet d’unifier ces deux horizons, comme le souligne Raoul de Caen : il peut être un « soldat du Christ » sans renoncer aux impératifs de réputation et de butin qui structurent la société chevaleresque. Ainsi se dessine, dès l’origine, un profil complexe : velléitaire face à toute autorité qui limiterait son champ d’action, mais capable d’une discipline intérieure lorsque l’entreprise le justifie.\n\n## Un acteur central de la Première croisade\n\nDès les premiers mois, Tancrède refuse de se comporter en simple lieutenant. Son attitude envers l’Empire byzantin en fournit l’indice le plus net : il cherche systématiquement à échapper au serment d’hommage exigé par Alexis Ier, traversant le Bosphore en avance, s’opposant frontalement à Bohémond lorsque celui-ci choisit la conciliation, et adoptant des positions ouvertement provocatrices lors des tentatives de négociation. Cette défiance inaugurale vis-à-vis de Byzance conditionne les relations futures entre la principauté d’Antioche et Constantinople. En Cilicie, son autonomie s’affirme pleinement. L’expédition parallèle menée avec Baudouin de Boulogne révèle la profondeur de leur antagonisme : rivalités de conquête, refus d’ouvrir les portes des villes, affrontements directs entre troupes latines, puis massacre de contingents normands à Tarse, événement qui marque durablement Tancrède et son entourage. La compétition entre les deux hommes, qui se prolongera jusque dans la politique du royaume de Jérusalem, s’enracine dans cette séquence où chacun cherche à se tailler une base territoriale.\n\nSur le plan militaire, Tancrède se distingue par une mobilité et une audace constantes. Il sécurise les voies d’accès à Antioche par la prise du col de Belën, tient avec ténacité les tours avancées autour de la ville assiégée, puis s’illustre lors de la marche vers Jérusalem, notamment à Bethléem où il entre le premier, à l’invitation des chrétiens locaux. Durant le siège de Jérusalem, il prend part aux opérations de reconnaissance, participe à la recherche des matériaux nécessaires aux machines de siège et entre dans la ville presque aussitôt après Godefroy, portant son étendard au Haram al-Sharif. Son attitude lors du sac de la ville, complexe à analyser, révèle encore une fois cette tension entre ambition et prudence politique. S’il tente d’organiser la rançon de prisonniers regroupés dans la mosquée al-Aqsa, il ne s’oppose pas, en définitive, à leur mise à mort lorsque le contexte stratégique l’impose. La chronique de l’Anonyme normand, qui le présente comme indigné par cette exécution, relève de la construction idéalisée : d’autres sources, moins favorables, décrivent un rapport plus pragmatique à la violence.\n\nUne fois Jérusalem prise, Tancrède participe activement à la structuration du jeune royaume : il devient prince de Galilée, administre la région autour de Tibériade et de Nazareth, s’emploie à protéger les voies stratégiques et attire à lui une noblesse normande fidèle. Mais son autonomie croissante inquiète Baudouin Ier, alors nouveau roi : leurs relations deviennent rapidement conflictuelles, d’autant que Tancrède avait publiquement soutenu le patriarche Daimbert contre Baudouin dans la crise de succession de 1100.\n\n## Régence\n\nEn 1101, la capture de Bohémond par les Seldjoukides permet à Tancrède d’accéder à une position centrale : la régence de la principauté d’Antioche. Il s’y impose avec une autorité incontestée. Les Normands d’Antioche, profondément attachés à la lignée de Hauteville, exigent qu’il prête serment à Bohémond absent, mais reconnaissent immédiatement en lui un chef énergique, capable de maintenir la cohésion interne et d’assurer la défense extérieure. Sa politique diffère cependant de celle de son oncle : Tancrède concentre son action sur l’espace régional plutôt que sur de vastes ambitions impériales. Il s’emploie à consolider les frontières, à affermir les liens de dépendance avec les seigneuries locales et à stabiliser les rapports entre Latins, Arméniens, Syriaques, Maronites et Grecs. Les sources relèvent en particulier son sens du compromis religieux : il confirme les possessions arméniennes de la montagne de l’Amanus, favorise les institutions monastiques orientales et adopte une titulature bilingue (grecque et latine) sur certaines monnaies, geste à forte valeur symbolique qui montre sa capacité à manier les codes culturels locaux tout en affirmant la souveraineté latine.\n\nSur le plan militaire, sa régence se caracterise par une grande activité : reconquête de la Cilicie au détriment des Byzantins ; siège victorieux de Laodicée après une longue résistance byzantine ; défense régulière contre les raids de Ridwân d’Alep ; interventions vers Djabala, Marqab et les ports du littoral. Cette énergie, combinée à une diplomatie pragmatique, renforce considérablement la principauté, qui atteint sous lui un niveau de cohésion inconnu depuis la prise d’Antioche. Ses relations avec Baudouin Ier restent néanmoins tendues. Tancrède refuse d’abord de reconnaître son autorité sur la Galilée, puis sur certains territoires disputés. Lorsque Bernard de Valence, patriarche d’Antioche et fidèle de Bohémond, intervient dans ces querelles, Tancrède doit composer avec une opposition ecclésiastique qui n’affaiblit pas sa position militaire mais limite parfois sa liberté d’action. La libération de Bohémond en 1103 force Tancrède à céder la principauté, mais il conserve d’importants domaines. Sa seconde régence, après la défaite de Bohémond face aux Byzantins en 1104 (traité de Déabolis), est encore plus structurante : Tancrède devient alors le véritable souverain d’Antioche, réaffirmant son autorité par une politique résolue et souvent indépendante des orientations latines venues de Jérusalem.\n\nTancrède meurt en 1112, laissant une principauté consolidée et un modèle politique normand durable : autorité militaire forte, coexistence religieuse pragmatique, capacité d’adaptation aux sociétés locales. Sa postérité fut paradoxale : célébré dans la littérature (Tasse, Monteverdi, Voltaire) comme l’archétype du chevalier croisé, il fut pourtant longtemps sous-estimé par l’historiographie au profit de figures plus spectaculaires comme Bohémond. Les travaux contemporains tendent à réévaluer son rôle fondamental dans la structuration des États latins d’Orient.",
     "sources": null
-  },
-  {
-    "nom": "personne",
-    "titre": "",
-    "naissance": null,
-    "mort": null,
-    "lieu_naissance": "",
-    "lieu_mort": "",
-    "fonction": "",
-    "pays_principaux": [],
-    "image": "images/napoleon.jpg",
-    "bio_courte": "Général de la Révolution française devenu empereur, figure majeure de l’Europe du tournant XVIIIe–XIXe siècle.",
-    "bio_longue": "# Jeunesse\n\nTexte…\n\n# Carrière militaire\n\nTexte…\n\n# Empire\n\nTexte…",
-    "sources": "Thiers, Tulard, etc."
   }
 ]
