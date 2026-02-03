@@ -18,8 +18,8 @@
             --couleur-fond: #ffffff;
             --couleur-texte: #0f172a;
             --couleur-texte-secondaire: #64748b;
-            --couleur-accent: #3b82f6;
-            --couleur-accent-hover: #2563eb;
+            --couleur-accent: #FFC5D3;
+            --couleur-accent-hover: #e8b0bd;
             --couleur-bordure: #e2e8f0;
             --couleur-panneau: #f8fafc;
             --couleur-succes: #10b981;
@@ -339,34 +339,6 @@
 
         .timeline {
             flex-shrink: 0;   /* la timeline garde sa hauteur, la carte s'adapte */
-        }
-
-        /* Sidebar avec section Obsidian */
-        .sidebar {
-            flex: 0 0 320px;              /* largeur de base dans le flex */
-            max-width: 320px;
-            background: var(--couleur-panneau);
-            border-right: 1px solid var(--couleur-bordure);
-            overflow-y: auto;
-            transition: transform var(--transition-normale), 
-                        flex-basis var(--transition-normale), 
-                        max-width var(--transition-normale), 
-                        padding var(--transition-normale), 
-                        border var(--transition-normale);
-            position: relative;
-            z-index: 100;
-        }
-
-        .sidebar.collapsed {
-            transform: translateX(-100%);
-            flex-basis: 0;       /* ne prend plus de place dans le flex */
-            max-width: 0;
-            padding: 0;
-            border-right: none;
-        }
-
-        .sidebar-content {
-            padding: var(--espacement-lg);
         }
 
         .control-section {
@@ -3464,6 +3436,41 @@
             color: var(--couleur-accent);
         }
 
+        /* Sidebar avec section Obsidian */
+        .sidebar {
+            flex: 0 0 320px;              /* largeur de base dans le flex */
+            width: 320px;                 /* ✅ AJOUT : largeur fixe explicite */
+            min-width: 320px;             /* ✅ AJOUT : empêche le rétrécissement */
+            max-width: 320px;
+            background: var(--couleur-panneau);
+            border-right: 1px solid var(--couleur-bordure);
+            overflow-y: auto;
+            transition: transform var(--transition-normale), 
+                        flex-basis var(--transition-normale), 
+                        max-width var(--transition-normale), 
+                        padding var(--transition-normale), 
+                        border var(--transition-normale);
+            position: relative;
+            z-index: 100;
+            height: 100%;                 /* ✅ AJOUT : prend toute la hauteur */
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-100%);
+            flex-basis: 0;
+            width: 0;                     /* ✅ AJOUT */
+            min-width: 0;                 /* ✅ AJOUT */
+            max-width: 0;
+            padding: 0;
+            border-right: none;
+        }
+
+        .sidebar-content {
+            padding: var(--espacement-lg);
+            width: 100%;                  /* ✅ AJOUT : force le contenu à prendre toute la largeur */
+            box-sizing: border-box;       /* ✅ AJOUT : inclut le padding dans la largeur */
+        }
+
         /* =========================
         CARTE + CONTROLES LEAFLET
         ========================= */
@@ -3744,6 +3751,45 @@
         }
         body.dark .preview-open-btn{
             background: rgba(17,24,39,0.45);
+        }
+
+        /* ===== FIX : Fiche pays/événement dans sidebar ===== */
+        #sidebar-country-detail,
+        #sidebar-country-sheet,
+        #sidebar-person-sheet,
+        #sidebar-event-sheet {
+            display: flex;
+            flex-direction: column;
+            height: auto !important;
+            min-height: 0;
+            max-height: none;
+            overflow: visible;
+            padding-bottom: 16px;
+        }
+
+        /* Empêche l'espace vide en bas */
+        #sidebar-country-detail > *:last-child,
+        #sidebar-country-sheet > *:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        /* La section detail-section ne doit pas créer d'espace */
+        .sidebar-content .detail-section:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Fix scroll de la sidebar entière */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding-bottom: 20px;
         }
     </style>
 
