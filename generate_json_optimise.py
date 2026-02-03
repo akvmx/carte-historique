@@ -501,8 +501,12 @@ def generate_html_note(title, content, filepath):
     html_content = re.sub(r'^# (.*)', r'<h1>\1</h1>', html_content, flags=re.MULTILINE)
     html_content = re.sub(r'\*\*(.*?)\*\*', r'<strong>\1</strong>', html_content)
     html_content = re.sub(r'\*(.*?)\*', r'<em>\1</em>', html_content)
+    # Nettoyer les espaces en début et fin
+    html_content = html_content.strip()
     html_content = re.sub(r'\n\n', r'</p><p>', html_content)
     html_content = '<p>' + html_content + '</p>'
+    # Nettoyer les paragraphes vides
+    html_content = re.sub(r'<p>\s*</p>', '', html_content)
 
     html = f"""<!DOCTYPE html>
 <html lang="fr">
