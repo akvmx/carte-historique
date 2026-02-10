@@ -5705,18 +5705,25 @@
         </div>
     </footer>
 
-        <!-- Onglets mobile en bas -->
-    <nav class="mobile-tabs" id="mobile-tabs">
-        <button class="mobile-tab active" data-mobile-view="map">
-            🗺 carte
-        </button>
-        <button class="mobile-tab" data-mobile-view="events">
-            📜 événements
-        </button>
-        <button class="mobile-tab" data-mobile-view="timeline">
-            ⏱ chronologie
-        </button>
-    </nav>
+        <!-- Navigation mobile - avant </body> -->
+        <nav class="mobile-nav">
+            <button class="mobile-nav-btn active" data-view="map">
+                <span class="nav-icon">🗺️</span>
+                <span>Carte</span>
+            </button>
+            <button class="mobile-nav-btn" data-view="timeline">
+                <span class="nav-icon">📅</span>
+                <span>Chrono</span>
+            </button>
+            <button class="mobile-nav-btn" data-view="notes">
+                <span class="nav-icon">📝</span>
+                <span>Notes</span>
+            </button>
+            <button class="mobile-nav-btn" data-action="menu">
+                <span class="nav-icon">☰</span>
+                <span>Menu</span>
+            </button>
+        </nav>
 
     <!-- Popup annuaire (événements / personnages) -->
     <div class="directory-overlay" id="directory-overlay">
