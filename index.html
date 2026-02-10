@@ -3791,6 +3791,1635 @@
             overflow-x: hidden;
             padding-bottom: 20px;
         }
+
+        /* ===== FIX : Espace rose en bas de la page ===== */
+
+        /* Le body doit remplir exactement la fenêtre, sans plus */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Empêche le scroll sur le body */
+        }
+
+        /* Main prend toute la hauteur disponible */
+        main {
+            display: flex;
+            height: 100%;
+            min-height: 0;
+            overflow: hidden;
+        }
+
+        /* La carte remplit tout l'espace restant */
+        .map-container {
+            flex: 1;
+            height: 100%;
+            min-height: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #carte {
+            flex: 1;
+            width: 100%;
+            min-height: 0;
+        }
+
+        /* La sidebar ne crée pas d'espace en plus */
+        .sidebar {
+            height: 100%;
+            max-height: 100%;
+            overflow-y: auto;
+        }
+
+        /* Fix pour quand la fiche pays est ouverte */
+        #sidebar-country-detail {
+            height: auto;
+            max-height: none;
+            overflow: visible;
+        }
+
+        /* ============================================
+        FENÊTRES FLOTTANTES - Design Rose Épuré
+        ============================================ */
+
+        .floating-window {
+            position: fixed;
+            background: linear-gradient(135deg, #fdf2f8 0%, #fce7f3 50%, #fbcfe8 100%);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 20px;
+            box-shadow: 
+                0 20px 60px rgba(236, 72, 153, 0.15),
+                0 8px 25px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            min-width: 380px;
+            min-height: 250px;
+            max-width: 90vw;
+            max-height: 85vh;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            resize: both;
+            backdrop-filter: blur(10px);
+        }
+
+        .floating-window.active {
+            z-index: 2001;
+            box-shadow: 
+                0 25px 80px rgba(236, 72, 153, 0.25),
+                0 12px 35px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            border-color: rgba(236, 72, 153, 0.5);
+        }
+
+        /* En-tête de la fenêtre */
+        .floating-window-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(219, 39, 119, 0.08) 100%);
+            border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+            cursor: move;
+            user-select: none;
+            gap: 12px;
+        }
+
+        .floating-window-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #9d174d;
+            margin: 0;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            letter-spacing: -0.01em;
+        }
+
+        .floating-window-controls {
+            display: flex;
+            gap: 6px;
+            flex-shrink: 0;
+        }
+
+        .floating-window-btn {
+            width: 28px;
+            height: 28px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.7);
+            color: #9d174d;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .floating-window-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        }
+
+        .floating-window-btn.minimize:hover {
+            background: #fbbf24;
+            color: white;
+        }
+
+        .floating-window-btn.maximize:hover {
+            background: #34d399;
+            color: white;
+        }
+
+        .floating-window-btn.close:hover {
+            background: #f43f5e;
+            color: white;
+        }
+
+        /* Corps de la fenêtre */
+        .floating-window-body {
+            flex: 1;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Scrollbar personnalisée */
+        .floating-window-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .floating-window-body::-webkit-scrollbar-track {
+            background: rgba(236, 72, 153, 0.05);
+            border-radius: 4px;
+        }
+
+        .floating-window-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #f9a8d4, #ec4899);
+            border-radius: 4px;
+        }
+
+        .floating-window-body::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(180deg, #ec4899, #db2777);
+        }
+
+        /* Fenêtre minimisée */
+        .floating-window.minimized {
+            height: auto !important;
+            min-height: 0;
+            resize: none;
+        }
+
+        .floating-window.minimized .floating-window-body {
+            display: none;
+        }
+
+        /* Fenêtre maximisée - CENTRÉE */
+        .floating-window.maximized {
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: calc(100vw - 40px) !important;
+            height: calc(100vh - 40px) !important;
+            max-width: 1400px;
+            max-height: 900px;
+            resize: none;
+            border-radius: 16px;
+        }
+
+
+        /* ============================================
+        CONTENU DES FICHES - Style Rose Épuré
+        ============================================ */
+
+        .floating-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* En-tête avec image */
+        .floating-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 16px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(236, 72, 153, 0.15);
+        }
+
+        .floating-portrait {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid white;
+            box-shadow: 
+                0 8px 30px rgba(236, 72, 153, 0.2),
+                0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .floating-portrait img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-portrait-placeholder {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+        }
+
+        .floating-header-info {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .floating-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #831843;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .floating-subtitle {
+            font-size: 0.9rem;
+            color: #9d174d;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .floating-meta {
+            font-size: 0.85rem;
+            color: #be185d;
+            opacity: 0.8;
+            margin: 0;
+        }
+
+        /* Sections */
+        .floating-section {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid rgba(236, 72, 153, 0.12);
+            box-shadow: 0 2px 12px rgba(236, 72, 153, 0.06);
+        }
+
+        .floating-section-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #ec4899;
+            margin: 0 0 14px 0;
+            padding-bottom: 8px;
+            border-bottom: 1px dashed rgba(236, 72, 153, 0.3);
+        }
+
+        /* Biographie */
+        .floating-bio {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: #4a044e;
+        }
+
+        .floating-bio p {
+            margin: 0 0 12px 0;
+        }
+
+        .floating-bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Chips (pays, tags) */
+        .floating-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .floating-chip {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 25px;
+            padding: 8px 18px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #9d174d;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(236, 72, 153, 0.08);
+        }
+
+        .floating-chip:hover {
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Liste d'événements */
+        .floating-events-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .floating-event-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(253,242,248,0.9));
+            border-radius: 14px;
+            border: 1px solid rgba(236, 72, 153, 0.15);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .floating-event-item.clickable {
+            cursor: pointer;
+        }
+
+        .floating-event-item.clickable:hover {
+            border-color: #ec4899;
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            transform: translateX(4px);
+            box-shadow: 0 4px 16px rgba(236, 72, 153, 0.15);
+        }
+
+        .floating-event-icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(236, 72, 153, 0.1);
+            border-radius: 10px;
+        }
+
+        .floating-event-content {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            min-width: 0;
+            flex: 1;
+        }
+
+        .floating-event-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #831843;
+            line-height: 1.3;
+        }
+
+        .floating-event-date {
+            font-size: 0.8rem;
+            color: #be185d;
+            font-weight: 500;
+        }
+
+        /* État vide */
+        .floating-empty {
+            text-align: center;
+            padding: 40px 24px;
+            color: #9d174d;
+        }
+
+        .floating-empty-icon {
+            font-size: 3rem;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .floating-empty-text {
+            font-size: 0.95rem;
+            color: #be185d;
+            margin: 0;
+        }
+
+        /* Iframe pour les fiches événements */
+        .floating-iframe-container {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .floating-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 0;
+            background: white;
+        }
+
+        /* Message de chargement */
+        .floating-loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 24px;
+            gap: 16px;
+            color: #9d174d;
+        }
+
+        .floating-loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(236, 72, 153, 0.2);
+            border-top-color: #ec4899;
+            border-radius: 50%;
+            animation: floatingSpin 0.8s linear infinite;
+        }
+
+        @keyframes floatingSpin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+        RESPONSIVE
+        ============================================ */
+
+        @media (max-width: 768px) {
+            .floating-window {
+                min-width: 300px;
+                max-width: 95vw;
+                border-radius: 16px;
+            }
+            
+            .floating-content {
+                padding: 18px;
+                gap: 16px;
+            }
+            
+            .floating-portrait {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .floating-name {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* ============================================
+        FENÊTRE FLOTTANTE ÉVÉNEMENT - Style harmonisé
+        ============================================ */
+
+        /* Conteneur principal du contenu événement */
+        .floating-window-body .md-content,
+        .floating-window-body .event-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #4a044e;
+        }
+
+        /* En-tête de l'événement */
+        .floating-window-body .event-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 12px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid rgba(236, 72, 153, 0.15);
+        }
+
+        .floating-window-body .event-date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .floating-window-body .event-category-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 12px;
+            background: rgba(236, 72, 153, 0.1);
+            color: #9d174d;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Titres dans le contenu */
+        .floating-window-body h1,
+        .floating-window-body h2,
+        .floating-window-body h3,
+        .floating-window-body h4 {
+            color: #831843;
+            font-weight: 700;
+            margin: 0 0 12px 0;
+        }
+
+        .floating-window-body h1 { font-size: 1.5rem; }
+        .floating-window-body h2 { font-size: 1.3rem; }
+        .floating-window-body h3 { font-size: 1.1rem; }
+        .floating-window-body h4 { font-size: 1rem; }
+
+        /* Paragraphes */
+        .floating-window-body p {
+            margin: 0 0 16px 0;
+            color: #4a044e;
+        }
+
+        .floating-window-body p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Listes */
+        .floating-window-body ul,
+        .floating-window-body ol {
+            margin: 0 0 16px 0;
+            padding-left: 24px;
+        }
+
+        .floating-window-body li {
+            margin-bottom: 8px;
+            color: #4a044e;
+        }
+
+        /* Liens dans le contenu */
+        .floating-window-body a {
+            color: #db2777;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px solid rgba(219, 39, 119, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .floating-window-body a:hover {
+            color: #9d174d;
+            border-bottom-color: #9d174d;
+            background: rgba(236, 72, 153, 0.1);
+            padding: 2px 4px;
+            margin: -2px -4px;
+            border-radius: 4px;
+        }
+
+        /* Citations */
+        .floating-window-body blockquote {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.08), rgba(219, 39, 119, 0.05));
+            border-left: 4px solid #ec4899;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #831843;
+        }
+
+        /* Images dans le contenu */
+        .floating-window-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            margin: 16px 0;
+        }
+
+        /* Code inline */
+        .floating-window-body code {
+            background: rgba(236, 72, 153, 0.1);
+            color: #9d174d;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9em;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Blocs de code */
+        .floating-window-body pre {
+            background: linear-gradient(135deg, #fdf2f8, #fce7f3);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 12px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 16px 0;
+        }
+
+        .floating-window-body pre code {
+            background: none;
+            padding: 0;
+        }
+
+        /* Tableaux */
+        .floating-window-body table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .floating-window-body th,
+        .floating-window-body td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.15);
+        }
+
+        .floating-window-body th {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(219, 39, 119, 0.1));
+            color: #831843;
+            font-weight: 600;
+        }
+
+        .floating-window-body tr:hover {
+            background: rgba(236, 72, 153, 0.05);
+        }
+
+        /* Séparateurs */
+        .floating-window-body hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.3), transparent);
+            margin: 24px 0;
+        }
+
+        /* ============================================
+        CHIPS PERSONNAGES/PAYS DANS LES ÉVÉNEMENTS
+        ============================================ */
+
+        .floating-window-body .persons-chips,
+        .floating-window-body .countries-chips,
+        .floating-window-body .event-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 12px 0;
+        }
+
+        .floating-window-body .person-chip,
+        .floating-window-body .country-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #9d174d;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 8px rgba(236, 72, 153, 0.1);
+        }
+
+        .floating-window-body .person-chip:hover,
+        .floating-window-body .country-chip:hover {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            border-color: #ec4899;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(236, 72, 153, 0.25);
+        }
+
+        .floating-window-body .person-chip:active,
+        .floating-window-body .country-chip:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* ============================================
+        SECTIONS DANS L'ÉVÉNEMENT
+        ============================================ */
+
+        .floating-window-body .event-section {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+        }
+
+        .floating-window-body .event-section:last-child {
+            border-bottom: none;
+        }
+
+        .floating-window-body .event-section-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #831843;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ============================================
+        LOADING DANS LES FENÊTRES
+        ============================================ */
+
+        .floating-window-body .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 16px;
+            color: #9d174d;
+        }
+
+        .floating-window-body .loading::before {
+            content: '';
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(236, 72, 153, 0.2);
+            border-top-color: #ec4899;
+            border-radius: 50%;
+            animation: floatingSpinner 0.8s linear infinite;
+        }
+
+        @keyframes floatingSpinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ============================================
+        ERREUR DANS LES FENÊTRES
+        ============================================ */
+
+        .floating-window-body .error-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .floating-window-body .error-message::before {
+            content: '⚠️';
+            font-size: 2.5rem;
+        }
+
+        .floating-window-body .error-message p {
+            color: #9d174d;
+            font-size: 0.95rem;
+        }
+
+        /* ============================================
+        FICHE ÉVÉNEMENT - STYLE UNIFIÉ ROSE
+        ============================================ */
+
+        /* Container principal du contenu événement */
+        .floating-window-body .event-content,
+        .floating-window-body .md-content {
+            padding: 24px;
+            background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 100%);
+            min-height: 100%;
+        }
+
+        /* Titre principal de l'événement (h1) */
+        .floating-window-body .event-content h1,
+        .floating-window-body .md-content h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #831843;
+            margin: 0 0 8px 0;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(236, 72, 153, 0.2);
+            line-height: 1.3;
+        }
+
+        /* Sous-titres (h2, h3) */
+        .floating-window-body .event-content h2,
+        .floating-window-body .md-content h2 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #9d174d;
+            margin: 24px 0 12px 0;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, rgba(251, 207, 232, 0.4), rgba(252, 231, 243, 0.6));
+            border-left: 3px solid #ec4899;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .floating-window-body .event-content h3,
+        .floating-window-body .md-content h3 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #be185d;
+            margin: 20px 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Paragraphes */
+        .floating-window-body .event-content p,
+        .floating-window-body .md-content p {
+            font-size: 0.92rem;
+            line-height: 1.75;
+            color: #4a044e;
+            margin: 0 0 14px 0;
+            text-align: justify;
+        }
+
+        /* Liens dans le contenu */
+        .floating-window-body .event-content a,
+        .floating-window-body .md-content a {
+            color: #db2777;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dotted rgba(219, 39, 119, 0.4);
+            transition: all 0.2s ease;
+        }
+
+        .floating-window-body .event-content a:hover,
+        .floating-window-body .md-content a:hover {
+            color: #9d174d;
+            border-bottom-color: #9d174d;
+            background: rgba(251, 207, 232, 0.3);
+            padding: 0 4px;
+            margin: 0 -4px;
+            border-radius: 3px;
+        }
+
+        /* Listes */
+        .floating-window-body .event-content ul,
+        .floating-window-body .md-content ul {
+            margin: 12px 0;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .floating-window-body .event-content ul li,
+        .floating-window-body .md-content ul li {
+            position: relative;
+            padding: 8px 0 8px 24px;
+            font-size: 0.9rem;
+            color: #4a044e;
+            border-bottom: 1px dashed rgba(236, 72, 153, 0.15);
+        }
+
+        .floating-window-body .event-content ul li:last-child,
+        .floating-window-body .md-content ul li:last-child {
+            border-bottom: none;
+        }
+
+        .floating-window-body .event-content ul li::before,
+        .floating-window-body .md-content ul li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            color: #ec4899;
+            font-size: 0.6rem;
+        }
+
+        /* Listes ordonnées */
+        .floating-window-body .event-content ol,
+        .floating-window-body .md-content ol {
+            margin: 12px 0;
+            padding-left: 24px;
+            counter-reset: item;
+            list-style: none;
+        }
+
+        .floating-window-body .event-content ol li,
+        .floating-window-body .md-content ol li {
+            position: relative;
+            padding: 8px 0 8px 8px;
+            font-size: 0.9rem;
+            color: #4a044e;
+            counter-increment: item;
+        }
+
+        .floating-window-body .event-content ol li::before,
+        .floating-window-body .md-content ol li::before {
+            content: counter(item);
+            position: absolute;
+            left: -24px;
+            top: 8px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #ec4899, #db2777);
+            color: white;
+            font-size: 0.7rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Citations / blockquote */
+        .floating-window-body .event-content blockquote,
+        .floating-window-body .md-content blockquote {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, rgba(251, 207, 232, 0.3), rgba(252, 231, 243, 0.5));
+            border-left: 4px solid #ec4899;
+            border-radius: 0 12px 12px 0;
+            font-style: italic;
+            color: #831843;
+        }
+
+        .floating-window-body .event-content blockquote p,
+        .floating-window-body .md-content blockquote p {
+            margin: 0;
+            color: inherit;
+        }
+
+        /* Images dans le contenu */
+        .floating-window-body .event-content img,
+        .floating-window-body .md-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 16px 0;
+            box-shadow: 0 4px 20px rgba(236, 72, 153, 0.15);
+            border: 2px solid rgba(236, 72, 153, 0.1);
+        }
+
+        /* Texte en gras */
+        .floating-window-body .event-content strong,
+        .floating-window-body .md-content strong {
+            font-weight: 600;
+            color: #9d174d;
+        }
+
+        /* Texte en italique */
+        .floating-window-body .event-content em,
+        .floating-window-body .md-content em {
+            font-style: italic;
+            color: #be185d;
+        }
+
+        /* Code inline */
+        .floating-window-body .event-content code,
+        .floating-window-body .md-content code {
+            background: rgba(251, 207, 232, 0.4);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.85em;
+            color: #9d174d;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        /* Séparateurs */
+        .floating-window-body .event-content hr,
+        .floating-window-body .md-content hr {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(236, 72, 153, 0.3), transparent);
+            margin: 24px 0;
+        }
+
+        /* Tableaux */
+        .floating-window-body .event-content table,
+        .floating-window-body .md-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.88rem;
+        }
+
+        .floating-window-body .event-content th,
+        .floating-window-body .md-content th {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+            color: #831843;
+            font-weight: 600;
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 2px solid #ec4899;
+        }
+
+        .floating-window-body .event-content td,
+        .floating-window-body .md-content td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.15);
+            color: #4a044e;
+        }
+
+        .floating-window-body .event-content tr:hover td,
+        .floating-window-body .md-content tr:hover td {
+            background: rgba(251, 207, 232, 0.2);
+        }
+
+        /* ============================================
+        MÉTADONNÉES D'ÉVÉNEMENT (date, lieu, etc.)
+        ============================================ */
+
+        .event-meta-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding: 16px;
+            background: linear-gradient(135deg, rgba(251, 207, 232, 0.4), rgba(252, 231, 243, 0.6));
+            border-radius: 14px;
+            border: 1px solid rgba(236, 72, 153, 0.15);
+        }
+
+        .event-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: #831843;
+            box-shadow: 0 2px 8px rgba(236, 72, 153, 0.1);
+        }
+
+        .event-meta-item .meta-icon {
+            font-size: 1rem;
+        }
+
+        .event-meta-item .meta-label {
+            font-weight: 500;
+            color: #9d174d;
+        }
+
+        .event-meta-item .meta-value {
+            color: #4a044e;
+        }
+
+        /* ============================================
+        LOADING & ERREUR - STYLE ROSE
+        ============================================ */
+
+        .floating-window-body .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            gap: 20px;
+            background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 100%);
+            min-height: 200px;
+        }
+
+        .floating-window-body .loading::before {
+            content: '';
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(236, 72, 153, 0.2);
+            border-top-color: #ec4899;
+            border-radius: 50%;
+            animation: floatingSpinner 0.8s linear infinite;
+        }
+
+        .floating-window-body .loading-text {
+            color: #9d174d;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        @keyframes floatingSpinner {
+            to { transform: rotate(360deg); }
+        }
+
+        .floating-window-body .error-message {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            gap: 16px;
+            text-align: center;
+            background: linear-gradient(180deg, #fdf2f8 0%, #ffffff 100%);
+            min-height: 200px;
+        }
+
+        .floating-window-body .error-message::before {
+            content: '⚠️';
+            font-size: 3rem;
+        }
+
+        .floating-window-body .error-message p {
+            color: #9d174d;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .floating-window-body .error-message small {
+            color: #be185d;
+            opacity: 0.7;
+            font-size: 0.8rem;
+        }
+
+        /* ========================================
+        📱 RESPONSIVE - MOBILE & TABLETTE
+        ======================================== */
+
+        /* ===== TABLETTE (max 1024px) ===== */
+        @media (max-width: 1024px) {
+            :root {
+                --espacement-md: 12px;
+                --espacement-lg: 18px;
+            }
+            
+            .sidebar {
+                width: 320px;
+            }
+            
+            .continent-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ===== MOBILE (max 768px) ===== */
+        @media (max-width: 768px) {
+            /* ----- LAYOUT PRINCIPAL ----- */
+            body {
+                padding-bottom: 60px; /* Place pour la nav mobile */
+            }
+            
+            .app-container {
+                flex-direction: column;
+            }
+            
+            /* ----- SIDEBAR ----- */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2000;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .sidebar.open {
+                transform: translateX(0);
+            }
+            
+            .sidebar-close-btn {
+                display: flex;
+            }
+            
+            /* ----- HEADER ----- */
+            header {
+                padding: var(--espacement-sm) var(--espacement-md);
+            }
+            
+            header .logo h1 {
+                font-size: 1.2rem;
+            }
+            
+            .header-actions {
+                gap: var(--espacement-xs);
+            }
+            
+            .header-actions .btn span {
+                display: none; /* Cache le texte, garde l'icône */
+            }
+            
+            /* ----- CARTE ----- */
+            .map-container {
+                min-height: 250px;
+                height: calc(100vh - 240px);
+            }
+            
+            /* ----- TIMELINE ----- */
+            .timeline {
+                height: 160px;
+                padding: var(--espacement-sm);
+            }
+            
+            .timeline.collapsed {
+                height: 50px;
+            }
+            
+            .timeline-header {
+                flex-wrap: wrap;
+                gap: var(--espacement-xs);
+            }
+            
+            .timeline-header-left {
+                flex: 1 1 100%;
+                justify-content: space-between;
+            }
+            
+            .timeline-header-right {
+                flex: 1 1 100%;
+                justify-content: flex-start;
+                overflow-x: auto;
+            }
+            
+            .timeline-filters {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: var(--espacement-xs);
+            }
+            
+            .timeline-combobox-input {
+                min-width: 100px;
+                font-size: 0.75rem;
+            }
+            
+            .timeline-track {
+                height: 60px;
+            }
+            
+            .timeline-dot {
+                width: 10px;
+                height: 10px;
+            }
+            
+            /* ----- GRILLES ----- */
+            .continent-grid,
+            .stats-grid,
+            .quick-access-grid {
+                grid-template-columns: 1fr;
+                gap: var(--espacement-sm);
+            }
+            
+            .country-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* ----- FENÊTRES FLOTTANTES ----- */
+            .floating-window {
+                position: fixed !important;
+                top: 5% !important;
+                left: 2.5% !important;
+                width: 95% !important;
+                height: 85% !important;
+                max-width: none !important;
+                max-height: none !important;
+                transform: none !important;
+                border-radius: var(--arrondi-lg);
+            }
+            
+            .floating-window.maximized {
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 0;
+            }
+            
+            .floating-window-header {
+                padding: var(--espacement-sm) var(--espacement-md);
+            }
+            
+            .floating-window-title {
+                font-size: 0.9rem;
+            }
+            
+            .floating-window-body {
+                padding: var(--espacement-md);
+            }
+            
+            .floating-header {
+                flex-direction: column;
+                text-align: center;
+                gap: var(--espacement-md);
+            }
+            
+            .floating-portrait {
+                width: 80px;
+                height: 80px;
+            }
+            
+            /* ----- FICHE DÉTAIL (OVERLAY) ----- */
+            .detail-overlay {
+                padding: 0;
+            }
+            
+            .detail-modal {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
+            
+            .detail-header {
+                padding: var(--espacement-md);
+                flex-wrap: wrap;
+            }
+            
+            .detail-title {
+                font-size: 1.3rem;
+            }
+            
+            .detail-body {
+                padding: var(--espacement-md);
+            }
+            
+            .detail-main {
+                flex-direction: column;
+            }
+            
+            .detail-map {
+                height: 200px;
+                min-height: 200px;
+            }
+            
+            .detail-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            /* ----- ANNUAIRE (DIRECTORY) ----- */
+            .directory-overlay {
+                padding: var(--espacement-sm);
+            }
+            
+            .directory-modal {
+                width: 100%;
+                height: 95%;
+                max-width: none;
+            }
+            
+            .directory-header {
+                padding: var(--espacement-md);
+            }
+            
+            .directory-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* ----- NOTES ----- */
+            #notes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .note-card {
+                padding: var(--espacement-md);
+            }
+            
+            /* ----- RECHERCHE GLOBALE ----- */
+            #global-search {
+                width: 100%;
+                max-width: none;
+            }
+            
+            #global-search-input {
+                font-size: 0.9rem;
+            }
+            
+            .search-results {
+                max-height: 60vh;
+            }
+            
+            /* ----- NAVIGATION MOBILE ----- */
+            .mobile-nav {
+                display: flex;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 56px;
+                background: var(--couleur-fond);
+                border-top: 1px solid var(--couleur-bordure);
+                box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+                z-index: 1500;
+                justify-content: space-around;
+                align-items: center;
+                padding: 0 var(--espacement-sm);
+            }
+            
+            .mobile-nav-btn {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 2px;
+                padding: var(--espacement-xs);
+                background: none;
+                border: none;
+                color: var(--couleur-texte-secondaire);
+                font-size: 0.65rem;
+                cursor: pointer;
+                transition: color 0.2s ease;
+                flex: 1;
+                max-width: 80px;
+            }
+            
+            .mobile-nav-btn svg,
+            .mobile-nav-btn .nav-icon {
+                font-size: 1.3rem;
+                margin-bottom: 2px;
+            }
+            
+            .mobile-nav-btn.active {
+                color: var(--couleur-accent-hover);
+            }
+            
+            .mobile-nav-btn:hover {
+                color: var(--couleur-accent);
+            }
+            
+            /* ----- ONGLETS PRINCIPAUX ----- */
+            .main-tabs {
+                overflow-x: auto;
+                gap: var(--espacement-xs);
+                padding: var(--espacement-xs);
+            }
+            
+            .main-tab {
+                font-size: 0.75rem;
+                padding: var(--espacement-xs) var(--espacement-sm);
+                white-space: nowrap;
+            }
+            
+            /* ----- BOUTONS ----- */
+            .btn {
+                padding: var(--espacement-xs) var(--espacement-sm);
+                font-size: 0.8rem;
+            }
+            
+            .btn-primary {
+                padding: var(--espacement-sm) var(--espacement-md);
+            }
+            
+            /* ----- TYPOGRAPHIE ----- */
+            h2 {
+                font-size: 1.3rem;
+            }
+            
+            h3 {
+                font-size: 1.1rem;
+            }
+            
+            h4 {
+                font-size: 1rem;
+            }
+            
+            /* ----- EVENTS LIST ----- */
+            .events-list {
+                max-height: 250px;
+            }
+            
+            .event-item {
+                padding: var(--espacement-sm);
+            }
+            
+            /* ----- CHIPS / TAGS ----- */
+            .floating-chips {
+                gap: var(--espacement-xs);
+            }
+            
+            .chip {
+                font-size: 0.7rem;
+                padding: 4px 8px;
+            }
+        }
+
+        /* ===== PETIT MOBILE (max 480px) ===== */
+        @media (max-width: 480px) {
+            :root {
+                --espacement-sm: 6px;
+                --espacement-md: 10px;
+                --espacement-lg: 16px;
+            }
+            
+            /* Header encore plus compact */
+            header {
+                padding: var(--espacement-xs) var(--espacement-sm);
+            }
+            
+            header .logo h1 {
+                font-size: 1rem;
+            }
+            
+            .sync-indicator span {
+                display: none;
+            }
+            
+            /* Carte plus grande */
+            .map-container {
+                height: calc(100vh - 200px);
+            }
+            
+            /* Timeline très compacte */
+            .timeline {
+                height: 140px;
+            }
+            
+            .timeline.collapsed {
+                height: 40px;
+            }
+            
+            .timeline-filters {
+                display: none; /* Cache les filtres sur très petit écran */
+            }
+            
+            /* Country grid en 1 colonne */
+            .country-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Stats en 1 colonne */
+            .detail-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Fenêtres plein écran */
+            .floating-window {
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                border-radius: 0 !important;
+            }
+            
+            .floating-window-body {
+                padding: var(--espacement-sm);
+            }
+            
+            /* Masquer boutons minimize/maximize sur petit écran */
+            .floating-window-btn.minimize-btn,
+            .floating-window-btn.maximize-btn {
+                display: none;
+            }
+            
+            /* Navigation mobile plus compacte */
+            .mobile-nav {
+                height: 50px;
+            }
+            
+            .mobile-nav-btn {
+                font-size: 0.6rem;
+            }
+            
+            .mobile-nav-btn .nav-icon {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* ===== ORIENTATION PAYSAGE MOBILE ===== */
+        @media (max-width: 768px) and (orientation: landscape) {
+            body {
+                padding-bottom: 50px;
+            }
+            
+            .map-container {
+                height: calc(100vh - 150px);
+            }
+            
+            .timeline {
+                height: 100px;
+            }
+            
+            .timeline.collapsed {
+                height: 40px;
+            }
+            
+            .floating-window {
+                height: 90% !important;
+            }
+            
+            .detail-modal {
+                flex-direction: row;
+            }
+            
+            .mobile-nav {
+                height: 45px;
+            }
+        }
+
+        /* ===== ÉCRAN LARGE (min 1400px) ===== */
+        @media (min-width: 1400px) {
+            .sidebar {
+                width: 380px;
+            }
+            
+            .floating-window.maximized {
+                max-width: 1400px;
+                max-height: 900px;
+            }
+            
+            .detail-modal {
+                max-width: 1200px;
+            }
+        }
     </style>
 
 </head>
@@ -4110,11 +5739,7 @@
             <header class="detail-header">
                 <div class="detail-header-left">
                     <button type="button" class="back-link" aria-label="Retour"
-                        onclick="
-                            const target = sessionStorage.getItem('returnTo') || 'index.html';
-                            sessionStorage.removeItem('returnTo');
-                            window.location.href = target;
-                        ">
+                        onclick="history.back()">
                         ←
                     </button>
                     <div class="detail-header-main">
@@ -4160,6 +5785,212 @@
         // CLASSE PRINCIPALE AVEC SYNC OBSIDIAN
         // ========================================
         
+        // ========================================
+        // GESTIONNAIRE DE FENÊTRES FLOTTANTES
+        // ========================================
+
+        class WindowManager {
+            constructor() {
+                this.windows = new Map(); // id -> { element, state }
+                this.windowCounter = 0;
+                this.offsetX = 0;
+                this.offsetY = 0;
+                this.activeWindow = null;
+                
+                // Créer le conteneur de fenêtres
+                this.container = document.createElement('div');
+                this.container.id = 'floating-windows-container';
+                document.body.appendChild(this.container);
+            }
+
+            createWindow(options = {}) {
+                const {
+                    title = 'Fenêtre',
+                    content = '',
+                    width = 450,
+                    height = 400,
+                    x = null,
+                    y = null,
+                    onClose = null
+                } = options;
+
+                const id = `floating-window-${++this.windowCounter}`;
+                
+                // Calculer la position (cascade si non spécifiée)
+                const posX = x ?? 100 + (this.windows.size * 30);
+                const posY = y ?? 100 + (this.windows.size * 30);
+
+                // Créer l'élément
+                const windowEl = document.createElement('div');
+                windowEl.className = 'floating-window active';
+                windowEl.id = id;
+                windowEl.style.cssText = `
+                    left: ${posX}px;
+                    top: ${posY}px;
+                    width: ${width}px;
+                    height: ${height}px;
+                `;
+
+                windowEl.innerHTML = `
+                    <div class="floating-window-header">
+                        <span class="floating-window-title">${title}</span>
+                        <div class="floating-window-controls">
+                            <button class="floating-window-btn minimize" title="Réduire">−</button>
+                            <button class="floating-window-btn maximize" title="Agrandir">□</button>
+                            <button class="floating-window-btn close" title="Fermer">×</button>
+                        </div>
+                    </div>
+                    <div class="floating-window-body">
+                        ${content}
+                    </div>
+                `;
+
+                this.container.appendChild(windowEl);
+
+                // Stocker la fenêtre
+                this.windows.set(id, {
+                    element: windowEl,
+                    state: 'normal', // normal | minimized | maximized
+                    prevState: null,
+                    onClose
+                });
+
+                // Setup interactions
+                this.setupWindowInteractions(id);
+                this.bringToFront(id);
+
+                return id;
+            }
+
+            setupWindowInteractions(id) {
+                const win = this.windows.get(id);
+                if (!win) return;
+
+                const el = win.element;
+                const header = el.querySelector('.floating-window-header');
+                const minimizeBtn = el.querySelector('.floating-window-btn.minimize');
+                const maximizeBtn = el.querySelector('.floating-window-btn.maximize');
+                const closeBtn = el.querySelector('.floating-window-btn.close');
+
+                // Clic pour mettre au premier plan
+                el.addEventListener('mousedown', () => this.bringToFront(id));
+
+                // Drag
+                let isDragging = false;
+                let startX, startY, initialLeft, initialTop;
+
+                header.addEventListener('mousedown', (e) => {
+                    if (e.target.closest('.floating-window-btn')) return;
+                    if (win.state === 'maximized') return;
+
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    initialLeft = el.offsetLeft;
+                    initialTop = el.offsetTop;
+                    
+                    el.style.transition = 'none';
+                    this.bringToFront(id);
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    
+                    el.style.left = `${initialLeft + dx}px`;
+                    el.style.top = `${initialTop + dy}px`;
+                });
+
+                document.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        el.style.transition = '';
+                    }
+                });
+
+                // Boutons
+                minimizeBtn.addEventListener('click', () => this.toggleMinimize(id));
+                maximizeBtn.addEventListener('click', () => this.toggleMaximize(id));
+                closeBtn.addEventListener('click', () => this.closeWindow(id));
+            }
+
+            bringToFront(id) {
+                // Retirer la classe active de toutes les fenêtres
+                this.windows.forEach((win) => {
+                    win.element.classList.remove('active');
+                });
+                
+                // Activer celle-ci
+                const win = this.windows.get(id);
+                if (win) {
+                    win.element.classList.add('active');
+                    this.activeWindow = id;
+                }
+            }
+
+            toggleMinimize(id) {
+                const win = this.windows.get(id);
+                if (!win) return;
+
+                if (win.state === 'minimized') {
+                    win.element.classList.remove('minimized');
+                    win.state = 'normal';
+                } else {
+                    win.element.classList.remove('maximized');
+                    win.element.classList.add('minimized');
+                    win.state = 'minimized';
+                }
+            }
+
+            toggleMaximize(id) {
+                const win = this.windows.get(id);
+                if (!win) return;
+
+                if (win.state === 'maximized') {
+                    win.element.classList.remove('maximized');
+                    win.state = 'normal';
+                } else {
+                    win.element.classList.remove('minimized');
+                    win.element.classList.add('maximized');
+                    win.state = 'maximized';
+                }
+            }
+
+            closeWindow(id) {
+                const win = this.windows.get(id);
+                if (!win) return;
+
+                if (win.onClose) win.onClose();
+                
+                win.element.remove();
+                this.windows.delete(id);
+            }
+
+            closeAll() {
+                this.windows.forEach((_, id) => this.closeWindow(id));
+            }
+
+            // Mettre à jour le contenu d'une fenêtre
+            setContent(id, html) {
+                const win = this.windows.get(id);
+                if (!win) return;
+                
+                const body = win.element.querySelector('.floating-window-body');
+                if (body) body.innerHTML = html;
+            }
+
+            // Mettre à jour le titre d'une fenêtre
+            setTitle(id, title) {
+                const win = this.windows.get(id);
+                if (!win) return;
+                
+                const titleEl = win.element.querySelector('.floating-window-title');
+                if (titleEl) titleEl.textContent = title;
+            }
+        }
+
         class HistoricalMapWithSync {
             constructor() {
                 this.map = null;
@@ -4189,6 +6020,7 @@
                 this.timelineFilterMode = 'union'; // 'union' | 'intersection'
                 this.detailMap = null;              // mini-carte dans la fiche
                 this.sidebarCountryMap = null;
+                this.closeSidebarDetail = null;
 
                 // Cache et données
                 this.cache = {
@@ -4221,6 +6053,9 @@
 
                 this.timelineMiniMap = null;
                 this.timelineMiniLayer = null;
+
+                // Gestionnaire de fenêtres flottantes
+                this.windowManager = new WindowManager();
             }
             
             async init() {
@@ -4237,17 +6072,20 @@
                 this.initControls();
                 this.initObsidianSync();
 
+                // Gestionnaire global des clics pour fenêtres flottantes
+                this.setupGlobalClickHandlers();
+
                 // ✅ Clic sur une carte évènement dans la timeline => ouvre la fiche HTML dans le même onglet
                 const timelineView = document.getElementById('timeline-view');
                 if (timelineView) {
-                timelineView.addEventListener('click', (e) => {
-                    const card = e.target.closest('.timeline-event-card');
-                    if (!card) return;
-
-                    const lien = (card.dataset && card.dataset.lien) ? card.dataset.lien.trim() : '';
-                    if (lien) {
-                    this.openEventUrl(lien);
-                    }
+                card.addEventListener('click', () => {
+                    const lien = card.getAttribute('data-lien');
+                    const titre = card.querySelector('.event-title')?.textContent || 'Événement';
+                    this.openInFloatingWindow({ 
+                        type: 'event', 
+                        event: { titre }, 
+                        lien 
+                    });
                 });
                 }
                 
@@ -4409,9 +6247,9 @@
                         if (!this.currentTimelineContext) return;
 
                         if (this.currentTimelineContext.type === 'country') {
-                            this.showCountrySheet(this.currentTimelineContext.name);
+                            this.openInFloatingWindow({ type: 'country', name: this.currentTimelineContext.name });
                         } else if (this.currentTimelineContext.type === 'person') {
-                            this.showPersonSheet(this.currentTimelineContext.name);
+                            this.openInFloatingWindow({ type: 'person', name: this.currentTimelineContext.name });
                         }
                     });
                 }
@@ -4570,6 +6408,40 @@
                     }
                 });
 
+                // ============================
+                // Boutons d'ouverture des annuaires
+                // ============================
+
+                // Bouton "tous les événements"
+                const btnOpenEvents = document.getElementById('open-events-directory');
+                if (btnOpenEvents) {
+                    btnOpenEvents.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openEventsDirectory();
+                    });
+                }
+
+                // Bouton "tous les personnages"
+                const btnOpenPersons = document.getElementById('open-persons-directory');
+                if (btnOpenPersons) {
+                    btnOpenPersons.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openPersonsDirectory();
+                    });
+                }
+
+                // Bouton "tous les pays"
+                const btnOpenCountries = document.getElementById('open-countries-directory');
+                if (btnOpenCountries) {
+                    btnOpenCountries.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        this.openCountriesDirectory();
+                    });
+                }
+
                 // --- Timeline : filtres cumulables (multi) + mode UNION/INTERSECTION + reset ---
                 // ✅ Version compatible avec ton HTML (inputs + datalist + chips)
 
@@ -4724,6 +6596,502 @@
                     this.setMainView('timeline');
                 }
             }
+            }
+
+            openInFloatingWindow(options = {}) {
+                const { type, name, event, lien } = options;
+
+                let title = '';
+                let content = '<p>Chargement...</p>';
+
+                if (type === 'country') {
+                    title = `🌍 ${name}`;
+                    const windowId = this.windowManager.createWindow({ title, content, width: 500, height: 450 });
+
+                    const countryHtml = this.buildCountryWindowContent(name);
+                    this.windowManager.setContent(windowId, countryHtml);
+
+                    this.attachFloatingWindowInteractions(windowId);
+
+                } else if (type === 'person') {
+                    title = `👤 ${name}`;
+                    const windowId = this.windowManager.createWindow({ title, content, width: 500, height: 450 });
+
+                    const personHtml = this.buildPersonWindowContent(name);
+                    this.windowManager.setContent(windowId, personHtml);
+
+                    this.attachFloatingWindowInteractions(windowId);
+
+                } else if (type === 'event') {
+                    const eventTitle = event?.titre || 'Événement';
+                    title = `📜 ${eventTitle}`;
+
+                    const windowId = this.windowManager.createWindow({ 
+                        title, 
+                        content: `
+                            <div class="loading">
+                                <span class="loading-text">Chargement de l'événement...</span>
+                            </div>
+                        `, 
+                        width: 550, 
+                        height: 500 
+                    });
+
+                    if (lien && lien !== '#') {
+                        this.loadEventHtml(lien).then(eventHtml => {
+                            this.windowManager.setContent(windowId, eventHtml);
+                            this.attachFloatingWindowInteractions(windowId);
+                        });
+                    } else {
+                        this.windowManager.setContent(windowId, `
+                            <article class="event-content">
+                                <h1>${eventTitle}</h1>
+                                <p class="floating-empty-text">
+                                    Aucun contenu détaillé disponible pour cet événement.
+                                </p>
+                                ${event?.description ? `<p>${event.description}</p>` : ''}
+                                ${event?.date ? `
+                                    <div class="event-meta-box">
+                                        <div class="event-meta-item">
+                                            <span class="meta-icon">📅</span>
+                                            <span class="meta-value">${event.date}</span>
+                                        </div>
+                                        ${event?.pays ? `
+                                            <div class="event-meta-item">
+                                                <span class="meta-icon">🌍</span>
+                                                <span class="meta-value">${event.pays}</span>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                ` : ''}
+                            </article>
+                        `);
+                    }
+
+                // ✅ NOUVEAU : Support des notes
+                } else if (type === 'note') {
+                    title = `📝 ${name}`;
+
+                    const windowId = this.windowManager.createWindow({ 
+                        title, 
+                        content: `
+                            <div class="loading">
+                                <span class="loading-text">Chargement de la note...</span>
+                            </div>
+                        `, 
+                        width: 550, 
+                        height: 500 
+                    });
+
+                    if (lien && lien !== '#') {
+                        // Charger le contenu HTML de la note (réutilise la même méthode que les events)
+                        this.loadEventHtml(lien).then(noteHtml => {
+                            this.windowManager.setContent(windowId, noteHtml);
+                            this.attachFloatingWindowInteractions(windowId);
+                        }).catch(err => {
+                            console.error('Erreur chargement note:', err);
+                            this.windowManager.setContent(windowId, `
+                                <article class="note-content">
+                                    <h1>${name}</h1>
+                                    <p class="floating-empty-text">
+                                        Impossible de charger cette note.
+                                    </p>
+                                </article>
+                            `);
+                        });
+                    } else {
+                        this.windowManager.setContent(windowId, `
+                            <article class="note-content">
+                                <h1>${name}</h1>
+                                <p class="floating-empty-text">
+                                    Aucun contenu disponible pour cette note.
+                                </p>
+                            </article>
+                        `);
+                    }
+                }
+            }
+
+            setupGlobalClickHandlers() {
+                document.addEventListener('click', (e) => {
+                    
+                    // ❌ Ignorer les clics dans les fenêtres flottantes
+                    if (e.target.closest('.floating-window')) {
+                        return;
+                    }
+
+                    // 1. Clic sur un pays
+                    const countryEl = e.target.closest('[data-country]');
+                    if (countryEl) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const name = countryEl.getAttribute('data-country');
+                        if (name) {
+                            // ✅ Fermer l'annuaire s'il est ouvert
+                            this.closeDirectory();
+                            this.openInFloatingWindow({ type: 'country', name });
+                        }
+                        return;
+                    }
+
+                    // 2. Clic sur un personnage
+                    const personEl = e.target.closest('[data-person]');
+                    if (personEl) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const name = personEl.getAttribute('data-person');
+                        if (name) {
+                            // ✅ Fermer l'annuaire s'il est ouvert
+                            this.closeDirectory();
+                            this.openInFloatingWindow({ type: 'person', name });
+                        }
+                        return;
+                    }
+
+                    // 3. Clic sur une note
+                    const noteEl = e.target.closest('[data-note]');
+                    if (noteEl) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const titre = noteEl.getAttribute('data-note');
+                        const lien = noteEl.getAttribute('data-lien');
+                        if (lien && lien !== '#') {
+                            this.openInFloatingWindow({ 
+                                type: 'note', 
+                                name: titre,
+                                lien 
+                            });
+                        }
+                        return;
+                    }
+                    
+                    // 4. Clic sur un événement avec lien
+                    const eventEl = e.target.closest('[data-lien]');
+                    if (eventEl) {
+                        const lien = eventEl.getAttribute('data-lien');
+                        if (lien && lien !== '#') {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            const titre = eventEl.querySelector('.event-title, .timeline-event-title, .floating-event-title')?.textContent || 'Événement';
+                            this.openInFloatingWindow({ 
+                                type: 'event', 
+                                event: { titre }, 
+                                lien 
+                            });
+                        }
+                        return;
+                    }
+                });
+            }
+
+            buildCountryWindowContent(countryName) {
+                // 1) Trouver le pays dans le cache
+                const country = (this.cache.countries || []).find(
+                    c => c.pays.toLowerCase() === countryName.toLowerCase()
+                );
+
+                // 2) Récupérer les événements du pays
+                const events = (this.cache.events || [])
+                    .filter(ev => this.eventBelongsToCountry(ev, countryName))
+                    .sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                // 3) Extraire les personnages liés à ce pays
+                const personsSet = new Set();
+                events.forEach(ev => {
+                    let persons = ev.personnages || ev.personnages_list || ev.persons;
+                    if (!persons) return;
+                    if (typeof persons === 'string') {
+                        persons = persons.split(',').map(p => p.trim()).filter(Boolean);
+                    }
+                    if (Array.isArray(persons)) {
+                        persons.forEach(p => personsSet.add(p));
+                    }
+                });
+                const relatedPersons = Array.from(personsSet);
+
+                // 4) Construire le HTML des personnages
+                const personsHtml = relatedPersons.length > 0 
+                    ? relatedPersons.map(p => 
+                        `<button class="floating-chip" data-person="${p}">👤 ${p}</button>`
+                    ).join('')
+                    : '';
+
+                // 5) Construire le HTML des événements (avec classes cliquables)
+                const eventsHtml = events.length === 0
+                    ? `<p class="floating-empty-text">Aucun événement référencé pour ce pays.</p>`
+                    : events.slice(0, 20).map(ev => {
+                        const icon = this.getCategoryIcon ? this.getCategoryIcon(ev.categorie) : '📌';
+                        const dateStr = ev.date ? this.formatDateHuman(ev.date) : '';
+                        const lien = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        
+                        return `
+                            <li class="floating-event-item ${lien ? 'clickable' : ''}" 
+                                ${lien ? `data-lien="${lien}"` : ''}>
+                                <span class="floating-event-icon">${icon}</span>
+                                <div class="floating-event-content">
+                                    <span class="floating-event-title">${ev.titre || '(sans titre)'}</span>
+                                    ${dateStr ? `<span class="floating-event-date">${dateStr}</span>` : ''}
+                                </div>
+                            </li>
+                        `;
+                    }).join('');
+
+                // 6) Informations supplémentaires du pays
+                const continent = country?.continent || '';
+                const coordonnees = country?.coordonnees || null;
+
+                // 7) Assemblage final
+                return `
+                    <div class="floating-content">
+                        <header class="floating-header">
+                            <div class="floating-portrait">
+                                <div class="floating-portrait-placeholder">🌍</div>
+                            </div>
+                            <div class="floating-header-info">
+                                <h2 class="floating-name">${countryName}</h2>
+                                ${continent ? `<p class="floating-subtitle">${continent}</p>` : ''}
+                                <p class="floating-meta">
+                                    <strong>${events.length}</strong> événement${events.length > 1 ? 's' : ''} · 
+                                    <strong>${relatedPersons.length}</strong> personnage${relatedPersons.length > 1 ? 's' : ''}
+                                </p>
+                            </div>
+                        </header>
+
+                        ${personsHtml ? `
+                            <section class="floating-section">
+                                <h4 class="floating-section-title">👤 Personnages liés</h4>
+                                <div class="floating-chips">${personsHtml}</div>
+                            </section>
+                        ` : ''}
+
+                        <section class="floating-section">
+                            <h4 class="floating-section-title">📅 Chronologie${events.length > 20 ? ` (20 premiers sur ${events.length})` : ''}</h4>
+                            ${events.length > 0 
+                                ? `<ul class="floating-events-list">${eventsHtml}</ul>`
+                                : `<p class="floating-empty-text">Aucun événement référencé.</p>`
+                            }
+                        </section>
+                    </div>
+                `;
+            }
+
+            buildPersonWindowContent(personName) {
+                // 1) Construire l'index des personnages
+                const index = {};
+                
+                (this.cache.persons || []).forEach(meta => {
+                    if (!meta || !meta.nom) return;
+                    index[meta.nom.toLowerCase()] = {
+                        nom: meta.nom,
+                        titre: meta.titre || meta.nom,
+                        naissance: meta.naissance || null,
+                        mort: meta.mort || null,
+                        lieuNaissance: meta.lieu_naissance || null,
+                        lieuMort: meta.lieu_mort || null,
+                        fonction: meta.fonction || null,
+                        paysPrincipaux: Array.isArray(meta.pays_principaux) ? meta.pays_principaux : [],
+                        image: meta.image || null,
+                        bioCourte: meta.bio_courte || null,
+                        bioLongue: meta.bio_longue || null,
+                        events: []
+                    };
+                });
+
+                (this.cache.events || []).forEach(ev => {
+                    let persons = ev.personnages || ev.personnages_list || ev.persons;
+                    if (!persons) return;
+                    if (typeof persons === 'string') {
+                        persons = persons.split(',').map(p => p.trim()).filter(Boolean);
+                    }
+                    persons.forEach(name => {
+                        const key = name.toLowerCase();
+                        if (!index[key]) {
+                            index[key] = { nom: name, titre: name, events: [] };
+                        }
+                        index[key].events.push(ev);
+                    });
+                });
+
+                // 2) Récupérer le personnage
+                const key = personName.toLowerCase();
+                const person = index[key];
+
+                if (!person) {
+                    return `
+                        <div class="floating-empty">
+                            <div class="floating-empty-icon">👤</div>
+                            <p class="floating-empty-text">Aucune information trouvée pour <strong>${personName}</strong>.</p>
+                        </div>
+                    `;
+                }
+
+                // 3) Métadonnées
+                const metaParts = [];
+                if (person.naissance) metaParts.push(`★ ${person.naissance}`);
+                if (person.mort) metaParts.push(`✝ ${person.mort}`);
+                if (person.fonction) metaParts.push(person.fonction);
+                const metaText = metaParts.join(' · ');
+
+                // 4) Image ou placeholder
+                const imageHtml = person.image 
+                    ? `<img src="${person.image}" alt="${person.nom}">`
+                    : `<div class="floating-portrait-placeholder">👤</div>`;
+
+                // 5) Biographie
+                const bio = person.bioLongue || person.bioCourte || '';
+                const bioHtml = bio 
+                    ? (typeof marked !== 'undefined' ? marked.parse(bio) : `<p>${bio}</p>`)
+                    : '';
+
+                // 6) Pays
+                const paysHtml = person.paysPrincipaux.length > 0 
+                    ? person.paysPrincipaux.map(p => 
+                        `<button class="floating-chip" data-country="${p}">${p}</button>`
+                    ).join('')
+                    : '';
+
+                // 7) Événements
+                const eventsHtml = person.events.length > 0 
+                    ? person.events.map(ev => {
+                        const icon = this.getCategoryIcon ? this.getCategoryIcon(ev.categorie) : '📌';
+                        const dateStr = ev.date ? this.formatDateHuman(ev.date) : '';
+                        const lien = ev.lien && ev.lien !== '#' ? ev.lien : null;
+                        
+                        return `
+                            <li class="floating-event-item ${lien ? 'clickable' : ''}" 
+                                ${lien ? `data-lien="${lien}"` : ''}>
+                                <span class="floating-event-icon">${icon}</span>
+                                <div class="floating-event-content">
+                                    <span class="floating-event-title">${ev.titre || '(sans titre)'}</span>
+                                    ${dateStr ? `<span class="floating-event-date">${dateStr}</span>` : ''}
+                                </div>
+                            </li>
+                        `;
+                    }).join('')
+                    : '';
+
+                // 8) Assemblage
+                return `
+                    <div class="floating-content">
+                        <header class="floating-header">
+                            <div class="floating-portrait">
+                                ${imageHtml}
+                            </div>
+                            <div class="floating-header-info">
+                                <h2 class="floating-name">${person.nom}</h2>
+                                ${person.titre && person.titre !== person.nom 
+                                    ? `<p class="floating-subtitle">${person.titre}</p>` 
+                                    : ''}
+                                ${metaText ? `<p class="floating-meta">${metaText}</p>` : ''}
+                            </div>
+                        </header>
+
+                        ${bioHtml ? `
+                            <section class="floating-section">
+                                <h4 class="floating-section-title">📜 Biographie</h4>
+                                <div class="floating-bio">${bioHtml}</div>
+                            </section>
+                        ` : ''}
+
+                        ${paysHtml ? `
+                            <section class="floating-section">
+                                <h4 class="floating-section-title">🌍 Pays associés</h4>
+                                <div class="floating-chips">${paysHtml}</div>
+                            </section>
+                        ` : ''}
+
+                        ${eventsHtml ? `
+                            <section class="floating-section">
+                                <h4 class="floating-section-title">📅 Événements (${person.events.length})</h4>
+                                <ul class="floating-events-list">${eventsHtml}</ul>
+                            </section>
+                        ` : `
+                            <section class="floating-section">
+                                <p class="floating-empty-text">Aucun événement associé à ce personnage.</p>
+                            </section>
+                        `}
+                    </div>
+                `;
+            }
+            
+            attachFloatingWindowInteractions(windowId) {
+                const win = this.windowManager.windows.get(windowId);
+                if (!win) return;
+                
+                const container = win.element.querySelector('.floating-window-body');
+                if (!container) return;
+
+                // 1) Clic sur un événement dans la liste
+                container.querySelectorAll('.floating-event-item.clickable').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const lien = item.getAttribute('data-lien');
+                        const titre = item.querySelector('.floating-event-title')?.textContent || 'Événement';
+                        
+                        if (lien && lien !== '#') {
+                            this.openInFloatingWindow({ 
+                                type: 'event', 
+                                lien,
+                                event: { titre }
+                            });
+                        }
+                    });
+                });
+
+                // 2) Clic sur un chip de pays
+                container.querySelectorAll('.floating-chip[data-country]').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const country = chip.getAttribute('data-country');
+                        if (country) {
+                            this.openInFloatingWindow({ type: 'country', name: country });
+                        }
+                    });
+                });
+
+                // 3) Clic sur un chip de personnage
+                container.querySelectorAll('.floating-chip[data-person]').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        const person = chip.getAttribute('data-person');
+                        if (person) {
+                            this.openInFloatingWindow({ type: 'person', name: person });
+                        }
+                    });
+                });
+
+                // 4) Clic sur les liens dans le contenu markdown (événements)
+                container.querySelectorAll('a[href^="#"]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = link.getAttribute('href');
+                        
+                        // Lien vers un personnage: #person:NomPersonnage
+                        if (href.startsWith('#person:')) {
+                            const name = href.replace('#person:', '');
+                            this.openInFloatingWindow({ type: 'person', name });
+                        }
+                        // Lien vers un pays: #country:NomPays
+                        else if (href.startsWith('#country:')) {
+                            const name = href.replace('#country:', '');
+                            this.openInFloatingWindow({ type: 'country', name });
+                        }
+                    });
+                });
+            }
+
+            closeSidebarDetail() {
+                const main = document.getElementById('sidebar-main');
+                const detail = document.getElementById('sidebar-detail');
+                
+                if (main && detail) {
+                    main.style.display = '';
+                    detail.style.display = 'none';
+                    detail.innerHTML = '';
+                }
+                
+                // Nettoyer la mini-carte si elle existe
+                if (this.sidebarCountryMap) {
+                    this.sidebarCountryMap.remove();
+                    this.sidebarCountryMap = null;
+                }
             }
 
             closeDetailOverlay() {
@@ -5492,50 +7860,16 @@
 
                 container.querySelectorAll('.timeline-event-card').forEach(card => {
                     card.addEventListener('click', () => {
-                        // 1) ouvrir la fiche évènement HTML en pleine page (même onglet)
-                        const url = (card.getAttribute('data-lien') || '').trim();
-                        if (url && url !== '#') {
-                            this.openEventUrl(url);
-                            return;
+                        const lien = card.getAttribute('data-lien');
+                        const titre = card.querySelector('.event-title')?.textContent || 'Événement';
+                        
+                        if (lien && lien !== '#') {
+                            this.openInFloatingWindow({ 
+                                type: 'event', 
+                                event: { titre }, 
+                                lien 
+                            });
                         }
-
-                        // 2) fallback : focus si pas de lien
-                        const idx = parseInt(card.getAttribute('data-global-index'), 10);
-                        if (!isNaN(idx)) {
-                            if (mode === 'world') this.focusGlobalTimelineEvent(idx);
-                            else this.focusTimelineEvent(idx);
-                        }
-
-                        if (hasMiniMap) {
-                            const lat = parseFloat(card.getAttribute('data-lat'));
-                            const lng = parseFloat(card.getAttribute('data-lng'));
-                            if (!isNaN(lat) && !isNaN(lng)) {
-                                this.updateTimelineMiniMap([{ latitude: lat, longitude: lng }]);
-                            }
-                        }
-                    });
-                });
-
-                // mini-carte initiale sur l'ensemble de la période (uniquement si présente)
-                if (hasMiniMap) {
-                    this.updateTimelineMiniMap(events);
-                }
-
-                // Clic sur un personnage dans la vue chronologie (inline sous le résumé)
-                container.querySelectorAll('.timeline-inline-person-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const name = btn.getAttribute('data-person');
-                        if (!name) return;
-                        this.showPersonSheet(name);
-                    });
-                });
-
-                // Clic sur un pays dans la vue chronologie (inline sous le résumé d'un personnage)
-                container.querySelectorAll('.timeline-inline-country-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const country = btn.getAttribute('data-country');
-                        if (!country) return;
-                        this.showCountrySheet(country);
                     });
                 });
             }
@@ -5643,13 +7977,6 @@
 
                 container.innerHTML = html;
 
-                // Gestion du clic : ouvrir la "page" du personnage
-                container.querySelectorAll('.person-item').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const name = el.getAttribute('data-person');
-                        this.showPersonPage(name);
-                    });
-                });
             }
 
             updateCountriesList() {
@@ -5724,29 +8051,6 @@
                 });
 
                 container.innerHTML = html;
-
-                // Clic sur un pays de la liste = ouvre la fiche pays dans la sidebar
-                container.querySelectorAll('.country-item').forEach(el => {
-                    el.addEventListener('click', () => {
-                        const name = el.getAttribute('data-country');
-                        if (!name) return;
-                        if (typeof this.showCountrySidebarSheet === 'function') {
-                            this.showCountrySidebarSheet(name);
-                        } else {
-                            // fallback si un jour tu veux : this.showCountrySheet(name);
-                            this.showCountrySheet && this.showCountrySheet(name);
-                        }
-                    });
-                });
-            }
-
-            showPersonPage(name) {
-                this.currentTimelineContext = {
-                    type: 'person',
-                    name: name
-                };
-
-                this.showPersonSheet(name);
             }
             
             showPersonTimeline(personName) {
@@ -5904,14 +8208,6 @@
                         `;
                     }).join('');
                 }
-                
-                // Clic sur un événement de la chronologie = ouvrir la fiche individuelle (si lien dispo)
-                timelineEl.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const url = btn.getAttribute('data-lien');
-                        if (url) this.openEventPage(url)
-                    });
-                });
 
                 // --- Personnages majeurs (triés par nb d’événements) ---
                 const personsStats = [];
@@ -5941,14 +8237,6 @@
                             `).join('')}
                         </div>
                     `;
-
-                    // Clic sur une pastille = ouvrir fiche personnage
-                    personsEl.querySelectorAll('.detail-person-chip').forEach(btn => {
-                        btn.addEventListener('click', () => {
-                            const name = btn.getAttribute('data-person');
-                            this.showPersonSheet(name);
-                        });
-                    });
                 }
 
                 // --- Mini-carte centrée sur le pays ---
@@ -6072,11 +8360,7 @@
                 // HTML de la fiche dans la sidebar
                 detail.innerHTML = `
                     <button type="button" class="back-link" aria-label="Retour"
-                        onclick="
-                            const target = sessionStorage.getItem('returnTo') || 'index.html';
-                            sessionStorage.removeItem('returnTo');
-                            window.location.href = target;
-                        ">
+                        onclick="history.back()">
                         ←
                     </button>
 
@@ -6140,15 +8424,6 @@
                     });
                 }
 
-                // Clic sur un personnage = fiche personnage popup
-                detail.querySelectorAll('.detail-person-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const name = btn.getAttribute('data-person');
-                        if (!name) return;
-                        this.showPersonSheet(name);
-                    });
-                });
-
                 // Clic sur le titre "chronologie condensée." = ouvre l'index des événements
                 const chronoTitle = detail.querySelector('.detail-section-title-clickable');
                 if (chronoTitle && typeof this.openEventsDirectory === 'function') {
@@ -6164,10 +8439,13 @@
                         .querySelectorAll('.detail-timeline-item[data-lien]')
                         .forEach(btn => {
                             btn.addEventListener('click', () => {
-                                const url = btn.getAttribute('data-lien');
-                                if (url) {
-                                    this.openEventUrl(url);
-                                }
+                                const lien = card.getAttribute('data-lien');
+                                const titre = card.querySelector('.event-title')?.textContent || 'Événement';
+                                this.openInFloatingWindow({ 
+                                    type: 'event', 
+                                    event: { titre }, 
+                                    lien 
+                                });
                             });
                         });
                 }
@@ -6250,17 +8528,14 @@
                 ` : '';
 
                 // Contenu de la fiche évènement dans la sidebar (sans iframe)
-                detail.innerHTML = `
-                    <div class="sidebar-detail-inner sidebar-event-mode">
-                        <div class="sidebar-detail-header">
-                            <button type="button" class="back-link" aria-label="Retour"
-                                onclick="
-                                    const target = sessionStorage.getItem('returnTo') || 'index.html';
-                                    sessionStorage.removeItem('returnTo');
-                                    window.location.href = target;
-                                ">
-                                ←
-                            </button>
+                // HTML de la fiche dans la sidebar
+                    detail.innerHTML = `
+                        <div class="sidebar-detail-inner sidebar-event-mode">
+                            <div class="sidebar-detail-header">
+                                <button type="button" class="back-link" id="sidebar-back-btn" aria-label="Retour">
+                                    ←
+                                </button>
+
                             <div class="sidebar-detail-titles">
                                 <h3 class="detail-title">${titre}</h3>
                                 ${metaTxt ? `<p class="detail-subtitle">${metaTxt}</p>` : ''}
@@ -6287,19 +8562,11 @@
                 `;
 
                 // Bouton retour : on ré-affiche la vue principale de la sidebar
-                const backBtn = detail.querySelector('#sidebar-back-btn');
+                const backBtn = document.getElementById('sidebar-back-btn');
                 if (backBtn) {
                     backBtn.addEventListener('click', () => {
                         detail.style.display = 'none';
                         main.style.display = 'block';
-                    });
-                }
-
-                // Bouton "ouvrir en grand" = fiche événement au centre (overlay existant)
-                const openFullBtn = detail.querySelector('#sidebar-event-open-full');
-                if (openFullBtn && typeof this.openEventPage === 'function') {
-                    openFullBtn.addEventListener('click', () => {
-                        this.openEventPage(lien);
                     });
                 }
 
@@ -6322,17 +8589,6 @@
                         }
                     });
                 }
-
-                // Pays associés cliquables : on ouvre la fiche pays au centre (overlay)
-                detail.querySelectorAll('.detail-country-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const name = btn.getAttribute('data-country');
-                        if (!name) return;
-                        if (typeof this.showCountrySheet === 'function') {
-                            this.showCountrySheet(name);
-                        }
-                    });
-                });
 
                 // Afficher la vue détail dans la sidebar
                 main.style.display   = 'none';
@@ -6624,14 +8880,6 @@
                     timelineEl.innerHTML = timelineHtml;
                 }
 
-                // Évènements cliquables -> fiche évènement
-                timelineEl.querySelectorAll('.detail-timeline-item[data-lien]').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const url = btn.getAttribute('data-lien');
-                        if (url) this.openEventPage(url);
-                    });
-                });
-
                 // Pays associés en pastilles
                 if (personsTitleEl) {
                     personsTitleEl.textContent = 'pays associés.';
@@ -6687,48 +8935,58 @@
                     }, 150);
                 }
 
-                // Clic sur un pays lié = ouvrir la fiche pays (popup)
-                personsEl.querySelectorAll('.detail-country-chip').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const country = btn.getAttribute('data-country');
-                        if (!country) return;
-                        this.showCountrySheet(country);
-                    });
-                });
-
                 overlay.classList.add('open');
             }
 
             async loadEventHtml(lien) {
-                if (!lien) return '<p class="no-events">Aucun contenu disponible.</p>';
-
-                // On tolère un "./" au début
-                const url = (lien || '').replace(/^\.\//, '');
-
                 try {
-                    const resp = await fetch(url);
-                    if (!resp.ok) {
-                        throw new Error('HTTP ' + resp.status);
+                    const response = await fetch(lien);
+                    if (!response.ok) throw new Error(`Erreur ${response.status}`);
+                    
+                    let html = await response.text();
+                    
+                    // Si c'est un fichier markdown, le parser
+                    if (lien.endsWith('.md') && typeof marked !== 'undefined') {
+                        html = marked.parse(html);
                     }
-
-                    const text = await resp.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
-
-                    // Dans les fiches générées par generate_json_optimise.py,
-                    // le texte est dans <section class="content">…</section>
-                    const contentSection = doc.querySelector('section.content');
-
-                    if (contentSection) {
-                        return contentSection.innerHTML;
+                    
+                    // Si le HTML contient un <body>, extraire uniquement son contenu
+                    const bodyMatch = html.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+                    if (bodyMatch) {
+                        html = bodyMatch[1];
                     }
-
-                    // Fallback : on renvoie tout le body si jamais la structure change
-                    const body = doc.querySelector('body');
-                    return body ? body.innerHTML : text;
-                } catch (err) {
-                    console.error('Erreur lors du chargement de la fiche événement', err);
-                    return '<p class="no-events">Impossible de charger le contenu de la fiche événement.</p>';
+                    
+                    // Si le HTML contient un <main> ou <article>, extraire son contenu
+                    const mainMatch = html.match(/<main[^>]*>([\s\S]*?)<\/main>/i);
+                    if (mainMatch) {
+                        html = mainMatch[1];
+                    }
+                    
+                    const articleMatch = html.match(/<article[^>]*>([\s\S]*?)<\/article>/i);
+                    if (articleMatch) {
+                        html = articleMatch[1];
+                    }
+                    
+                    // Supprimer les balises <style> et <script> qui pourraient interférer
+                    html = html.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
+                    html = html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+                    html = html.replace(/<link[^>]*>/gi, '');
+                    
+                    // Wrapper le contenu avec notre classe
+                    return `
+                        <article class="event-content floating-event-article">
+                            ${html}
+                        </article>
+                    `;
+                    
+                } catch (error) {
+                    console.error('Erreur chargement événement:', error);
+                    return `
+                        <div class="error-message">
+                            <p>Impossible de charger le contenu de cet événement.</p>
+                            <small>${lien}</small>
+                        </div>
+                    `;
                 }
             }
 
@@ -6819,13 +9077,13 @@
                 const clean = (url || '').trim();
                 if (!clean || clean === '#') return;
 
-                // ✅ Retour : on mémorise la vue courante (map / timeline / notes)
-                const currentView = this.mainView || 'map';
-                sessionStorage.setItem('returnTo', `index.html#view=${currentView}`);
-
-                window.location.href = clean;
+                // 🔥 Ouvrir dans une fenêtre flottante au lieu de changer de page
+                this.openInFloatingWindow({ 
+                    type: 'event', 
+                    lien: clean,
+                    event: { titre: 'Événement' }
+                });
             }
-
 
             saveTimelineStateToSession() {
                 try {
@@ -7069,13 +9327,7 @@
                 
                 // Clic = fiche pays dans la sidebar
                 marker.on('click', () => {
-                    const sidebarEl = document.getElementById('sidebar');
-                    if (sidebarEl) {
-                        sidebarEl.classList.remove('collapsed'); // au cas où elle est fermée
-                    }
-                    if (typeof this.showCountrySidebarSheet === 'function') {
-                        this.showCountrySidebarSheet(country.pays);
-                    }
+                    this.openInFloatingWindow({ type: 'country', name: country.pays });
                 });
 
                 this.markers[country.pays] = marker;
@@ -7171,26 +9423,25 @@
                     return;
                 }
 
-                // "kicker" type: si jamais tu ajoutes plus tard un champ "type" dans notes.json, il sera utilisé
+                // ✅ MODIFIÉ : utilise data-note et data-lien au lieu de <a href>
                 grid.innerHTML = sorted.map(n => {
                     const title = n.titre || 'Sans titre';
                     const href = n.html || '#';
                     const kicker = (n.type || 'note').toString();
-
-                    // Optionnel : affichage de la source si tu la mets dans notes.json
                     const source = (n.source || '').toString();
                     const rightMeta = source ? source : 'wiki-export';
 
                     return `
-                        <a class="note-card" href="${href}"
-                            onclick="sessionStorage.setItem('returnTo', 'index.html')">
+                        <div class="note-card" 
+                            data-note="${title.replace(/"/g, '&quot;')}" 
+                            data-lien="${href}">
                             <div class="note-card-kicker">✦ ${kicker}</div>
                             <h3 class="note-card-title">${title}</h3>
                             <div class="note-card-meta">
                                 <span></span>
                                 <span>${rightMeta}</span>
                             </div>
-                        </a>
+                        </div>
                     `;
                 }).join('');
             }
@@ -7653,8 +9904,12 @@
                 const openBtn = body.querySelector('.preview-open-btn');
                 if (openBtn && lien && lien !== '#') {
                     openBtn.onclick = () => {
-                        if (typeof this.openEventUrl === 'function') this.openEventUrl(lien);
-                        else window.location.href = lien;
+                        box.style.display = 'none'; // Ferme la preview
+                        this.openInFloatingWindow({ 
+                            type: 'event', 
+                            event: ev, 
+                            lien 
+                        });
                     };
                 }
 
@@ -7860,14 +10115,6 @@
                 });
 
                 eventsList.innerHTML = html;
-
-                // Unification : clic sur un évènement (sidebar) => ouvre la fiche HTML (pleine page)
-                eventsList.querySelectorAll('.sidebar-event-item').forEach(item => {
-                    item.addEventListener('click', () => {
-                        const lien = item.getAttribute('data-lien');
-                        if (lien) this.openEventUrl(lien);
-                    });
-                });
 
                 // 👉 Nouveau comportement : clic = centre la carte + ouvre la fiche évènement
                 eventsList.querySelectorAll('.sidebar-event-item').forEach(item => {
@@ -8248,16 +10495,17 @@
                         const type = btn.getAttribute('data-type');
 
                         if (type === 'event') {
-                            const url = btn.getAttribute('data-lien');
-                            if (url) {
-                                // 👉 fiche événement
-                                this.openEventPage(url);
+                            const lien = btn.getAttribute('data-lien');
+                            const titre = btn.querySelector('.global-search-item-title')?.textContent || 'Événement';
+                            if (lien) {
+                                // 👉 Fenêtre flottante
+                                this.openInFloatingWindow({ type: 'event', event: { titre }, lien });
                             }
                         } else if (type === 'person') {
                             const name = btn.getAttribute('data-person');
                             if (name) {
-                                // 👉 fiche personnage (popup)
-                                this.showPersonSheet(name);
+                                // 👉 Fenêtre flottante
+                                this.openInFloatingWindow({ type: 'person', name });
                             }
                         }
 
@@ -8407,15 +10655,22 @@
 
                 this.openDirectory('tous les événements par pays', html);
 
-                // Clic sur un événement = ouvrir la fiche événement dans la popup
+                // Clic sur un événement = ouvrir la fiche événement dans la fenêtre flottante
                 if (this.directoryContentElem) {
                     this.directoryContentElem
                         .querySelectorAll('.directory-item-title-link[data-lien]')
                         .forEach(btn => {
                             btn.addEventListener('click', () => {
                                 const lien = btn.getAttribute('data-lien');
+                                const titre = btn.textContent.trim() || 'Événement';
                                 this.closeDirectory();
-                                if (lien) this.openEventUrl(lien);
+                                if (lien) {
+                                    this.openInFloatingWindow({ 
+                                        type: 'event', 
+                                        event: { titre }, 
+                                        lien 
+                                    });
+                                }
                             });
                         });
                 }
@@ -8485,19 +10740,6 @@
                 });
 
                 this.openDirectory('tous les personnages', html);
-
-                // Brancher les clics pour ouvrir la fiche personnage (popup unifiée)
-                if (this.directoryContentElem) {
-                    this.directoryContentElem
-                        .querySelectorAll('.directory-person-link')
-                        .forEach(btn => {
-                            btn.addEventListener('click', () => {
-                                const name = btn.getAttribute('data-person');
-                                this.closeDirectory();
-                                this.showPersonSheet(name);
-                            });
-                        });
-                }
             }
 
             // Annuaire : tous les pays (ordre alphabétique + lettres)
@@ -8578,21 +10820,6 @@
                 });
 
                 this.openDirectory('tous les pays', html);
-
-                // Clic sur un pays = ouvrir la fiche pays dans la sidebar
-                if (this.directoryContentElem) {
-                    this.directoryContentElem
-                        .querySelectorAll('.directory-country-link')
-                        .forEach(btn => {
-                            btn.addEventListener('click', () => {
-                                const countryName = btn.getAttribute('data-country');
-                                this.closeDirectory();
-                                this.showCountrySidebarSheet(countryName);
-                                // Si un jour tu veux la version popup :
-                                // this.showCountrySheet(countryName);
-                            });
-                        });
-                }
             }
 
             // ============================
