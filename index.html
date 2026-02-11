@@ -168,108 +168,405 @@
             flex-shrink: 0;
         }
 
-        /* 🕵️‍♀️ Barre de recherche globale */
-
+        /* ========================================
+        RECHERCHE GLOBALE AMÉLIORÉE
+        ======================================== */
         .global-search {
             position: relative;
             flex: 1;
             max-width: 420px;
-            min-width: 220px;
+            margin: 0 var(--espacement-lg);
+        }
+
+        .global-search::before {
+            content: '🔍';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 2;
+            transition: opacity 0.2s ease;
+        }
+
+        .global-search:focus-within::before {
+            opacity: 0.7;
         }
 
         .global-search-input {
             width: 100%;
-            padding: 8px 12px;
+            padding: 11px 16px 11px 42px;
             border-radius: 999px;
             border: 1px solid var(--couleur-bordure);
-            background: rgba(255, 255, 255, 0.9);
-            font-size: 0.85rem;
-            outline: none;
-            transition: box-shadow var(--transition-rapide),
-                        border-color var(--transition-rapide),
-                        background-color var(--transition-rapide);
-        }
-
-        body.theme-sombre .global-search-input {
-            background: rgba(15, 23, 42, 0.9);
+            background: var(--couleur-fond);
             color: var(--couleur-texte);
-            border-color: var(--couleur-bordure);
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
         }
 
         .global-search-input:focus {
+            outline: none;
             border-color: var(--couleur-accent);
-            box-shadow: 0 0 0 2px rgba(255, 197, 211, 0.4);
+            box-shadow: 0 0 0 4px rgba(255, 197, 211, 0.25);
+            background: #fff;
         }
 
-        .global-search-results {
-            position: absolute;
-            top: calc(100% + 4px);
-            left: 0;
-            right: 0;
-            max-height: 420px;
-            background: var(--couleur-panneau);
-            border-radius: 12px;
-            border: 1px solid var(--couleur-bordure);
-            box-shadow: var(--ombre-lg);
-            padding: 6px 0;
-            display: none;
-            overflow-y: auto;
-            z-index: 2000;
-        }
-
-        .global-search-results.open {
-            display: block;
-        }
-
-        .global-search-group {
-            padding: 4px 0 6px;
-        }
-
-        .global-search-group-title {
-            padding: 4px 14px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
+        .global-search-input::placeholder {
+            color: var(--couleur-texte-secondaire);
             opacity: 0.6;
         }
 
-        .global-search-list {
-            list-style: none;
-            margin: 0;
-            padding: 0;
+        /* Hint raccourci clavier */
+        .global-search::after {
+            content: '⌘K';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.7rem;
+            color: var(--couleur-texte-secondaire);
+            background: var(--couleur-panneau);
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid var(--couleur-bordure);
+            opacity: 0.7;
+            pointer-events: none;
+            transition: opacity 0.2s ease;
         }
 
+        .global-search:focus-within::after {
+            opacity: 0;
+        }
+
+        /* ===== RÉSULTATS DE RECHERCHE ===== */
+        .global-search-results {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: var(--couleur-panneau);
+            border: 1px solid var(--couleur-bordure);
+            border-radius: var(--arrondi-lg);
+            box-shadow: var(--ombre-lg);
+            max-height: 420px;
+            overflow-y: auto;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            z-index: 5000;
+        }
+
+        .global-search-results.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        
+
+        /* Catégories dans les résultats */
+        .search-category {
+            padding: 8px 16px 6px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--couleur-texte-secondaire);
+            background: var(--couleur-fond);
+            border-bottom: 1px solid var(--couleur-bordure);
+            position: sticky;
+            top: 0;
+        }
+
+        /* Items de résultat */
+        .search-result-item {
+            padding: 12px 16px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.15s ease;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover,
+        .search-result-item.selected {
+            background: rgba(255, 197, 211, 0.15);
+        }
+
+        .search-result-item.selected {
+            border-left: 3px solid var(--couleur-accent);
+            padding-left: 13px;
+        }
+
+        .search-result-icon {
+            font-size: 1.3rem;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--couleur-fond);
+            border-radius: 50%;
+            border: 1px solid var(--couleur-bordure);
+            flex-shrink: 0;
+        }
+
+        .search-result-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-result-title {
+            font-weight: 500;
+            color: var(--couleur-texte);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 0.9rem;
+        }
+
+        .search-result-title mark {
+            background: rgba(255, 197, 211, 0.5);
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
+        }
+
+        .search-result-meta {
+            font-size: 0.75rem;
+            color: var(--couleur-texte-secondaire);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-result-meta span {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+        }
+
+        /* État vide / pas de résultats */
+        .search-no-results {
+            padding: 32px 24px;
+            text-align: center;
+            color: var(--couleur-texte-secondaire);
+        }
+
+        .search-no-results-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            opacity: 0.4;
+        }
+
+        .search-no-results-text {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .search-no-results-hint {
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+
+        /* État de chargement */
+        .search-loading {
+            padding: 24px;
+            text-align: center;
+        }
+
+        .search-loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--couleur-bordure);
+            border-top-color: var(--couleur-accent);
+            border-radius: 50%;
+            animation: search-spin 0.8s linear infinite;
+        }
+
+        @keyframes search-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ===== RECHERCHE GLOBALE AMÉLIORÉE ===== */
+
+        /* Icône loupe */
+        .global-search::before {
+            content: '🔍';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.85rem;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .global-search-input {
+            padding-left: 42px !important;
+        }
+
+        /* Hint raccourci clavier */
+        .global-search::after {
+            content: '⌘K';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.65rem;
+            color: var(--couleur-texte-secondaire);
+            background: var(--couleur-fond);
+            padding: 3px 8px;
+            border-radius: 4px;
+            border: 1px solid var(--couleur-bordure);
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .global-search:focus-within::after {
+            opacity: 0;
+        }
+
+        /* Items améliorés */
         .global-search-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
             width: 100%;
+            padding: 10px 14px;
             border: none;
             background: transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-align: left;
-            padding: 6px 14px;
-            gap: 2px;
             cursor: pointer;
-            font-size: 0.85rem;
+            text-align: left;
+            transition: background 0.15s ease;
+            border-radius: 8px;
+            margin: 2px 4px;
         }
 
-        .global-search-item:hover {
-            background: rgba(148, 163, 184, 0.18);
+        .global-search-item:hover,
+        .global-search-item.selected {
+            background: rgba(255, 197, 211, 0.15);
+        }
+
+        .global-search-item.selected {
+            background: rgba(255, 197, 211, 0.25);
+            outline: 2px solid var(--couleur-accent);
+            outline-offset: -2px;
+        }
+
+        .search-item-icon {
+            font-size: 1.2rem;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--couleur-fond);
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .search-item-content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
         }
 
         .global-search-item-title {
             font-weight: 500;
+            color: var(--couleur-texte);
+            font-size: 0.9rem;
+        }
+
+        .global-search-item-title mark {
+            background: rgba(255, 197, 211, 0.5);
+            color: inherit;
+            padding: 0 2px;
+            border-radius: 2px;
         }
 
         .global-search-item-meta {
             font-size: 0.75rem;
-            opacity: 0.7;
+            color: var(--couleur-texte-secondaire);
+            display: flex;
+            gap: 6px;
         }
 
-        .global-search-empty {
-            padding: 6px 14px;
+        /* Compteur de résultats */
+        .search-count {
+            background: var(--couleur-fond);
+            padding: 2px 8px;
+            border-radius: 999px;
+            font-size: 0.7rem;
+            margin-left: auto;
+        }
+
+        /* État vide */
+        .search-no-results {
+            padding: 32px 24px;
+            text-align: center;
+        }
+
+        .search-no-results-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            opacity: 0.3;
+        }
+
+        .search-no-results-text {
+            font-size: 0.9rem;
+            color: var(--couleur-texte);
+            margin-bottom: 4px;
+        }
+
+        .search-no-results-hint {
             font-size: 0.8rem;
-            opacity: 0.7;
+            color: var(--couleur-texte-secondaire);
+        }
+
+        /* Hint clavier en bas */
+        .search-keyboard-hint {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            padding: 10px;
+            border-top: 1px solid var(--couleur-bordure);
+            font-size: 0.7rem;
+            color: var(--couleur-texte-secondaire);
+        }
+
+        .search-keyboard-hint kbd {
+            background: var(--couleur-fond);
+            padding: 2px 6px;
+            border-radius: 4px;
+            border: 1px solid var(--couleur-bordure);
+            font-family: inherit;
+            font-size: 0.65rem;
+        }
+
+        /* Mobile : cacher le hint clavier */
+        @media (max-width: 768px) {
+            .global-search::after {
+                display: none;
+            }
+            
+            .search-keyboard-hint {
+                display: none;
+            }
         }
 
         @media (max-width: 768px) {
@@ -4828,6 +5125,109 @@
             background: rgba(251, 207, 232, 0.2);
         }
 
+        /* ========================================
+        ONGLETS PRINCIPAUX REDESIGNÉS
+        ======================================== */
+        .main-tabs {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--couleur-fond);
+            padding: 5px;
+            border-radius: 999px;
+            border: 1px solid var(--couleur-bordure);
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+        }
+
+        .main-tab {
+            position: relative;
+            padding: 9px 22px;
+            border: none;
+            background: transparent;
+            color: var(--couleur-texte-secondaire);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 999px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            z-index: 1;
+        }
+
+        .main-tab:hover:not(.active) {
+            color: var(--couleur-texte);
+            background: rgba(255, 197, 211, 0.12);
+        }
+
+        .main-tab.active {
+            background: var(--couleur-accent);
+            color: #1a202c;
+            font-weight: 600;
+            box-shadow: 
+                0 2px 8px rgba(255, 197, 211, 0.4),
+                0 1px 2px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Animation subtile au hover sur tab actif */
+        .main-tab.active:hover {
+            background: var(--couleur-accent-hover);
+            transform: translateY(-1px);
+            box-shadow: 
+                0 4px 12px rgba(255, 197, 211, 0.5),
+                0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Indicateur sous l'onglet actif (optionnel - décommente si tu veux) */
+        /*
+        .main-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--couleur-accent);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--couleur-accent);
+        }
+        */
+
+        /* Effet de transition fluide entre onglets */
+        .main-tabs {
+            position: relative;
+        }
+
+        /* Badge de notification sur un onglet (optionnel) */
+        .main-tab .tab-badge {
+            position: absolute;
+            top: 4px;
+            right: 8px;
+            min-width: 16px;
+            height: 16px;
+            padding: 0 5px;
+            background: var(--couleur-erreur);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            border-radius: 999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* ===== DESKTOP TABS SPÉCIFIQUE ===== */
+        #desktop-tabs {
+            /* Déjà stylé par .main-tabs */
+        }
+
+        /* Masquer sur mobile */
+        @media (max-width: 768px) {
+            #desktop-tabs {
+                display: none;
+            }
+        }
+
         /* ============================================
         MÉTADONNÉES D'ÉVÉNEMENT (date, lieu, etc.)
         ============================================ */
@@ -5419,6 +5819,116 @@
             .detail-modal {
                 max-width: 1200px;
             }
+        }
+
+        /* ===== RECHERCHE GLOBALE - FIX COMPLET ===== */
+
+        .global-search {
+            position: relative !important;
+            z-index: 1000;
+        }
+
+        .global-search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            background: white;
+        }
+
+        .global-search-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        /* CONTAINER DES RÉSULTATS - IMPORTANT ! */
+        .global-search-results {
+            display: none;
+            position: absolute !important;
+            top: 100% !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 99999 !important;
+            background: white !important;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+            max-height: 450px;
+            overflow-y: auto;
+            margin-top: 4px;
+        }
+
+        .global-search-results.open {
+            display: block !important;
+        }
+
+        /* Groupes de résultats */
+        .global-search-groups {
+            padding: 8px 0;
+        }
+
+        .global-search-group {
+            padding: 0;
+        }
+
+        .global-search-group + .global-search-group {
+            border-top: 1px solid #eee;
+            margin-top: 8px;
+            padding-top: 8px;
+        }
+
+        .global-search-group-title {
+            padding: 8px 16px 4px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 0.5px;
+        }
+
+        /* Liste de résultats */
+        .global-search-list {
+            list-style: none !important;
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        .global-search-list li {
+            margin: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Boutons de résultat */
+        .global-search-item {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+            transition: background 0.15s;
+        }
+
+        .global-search-item:hover,
+        .global-search-item.selected {
+            background: #f0f4ff !important;
+        }
+
+        .global-search-item:active {
+            background: #e0e8ff !important;
+        }
+
+        /* Message aucun résultat */
+        .search-no-results {
+            padding: 24px 16px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
         }
     </style>
 
@@ -6082,6 +6592,10 @@
                 // Gestionnaire global des clics pour fenêtres flottantes
                 this.setupGlobalClickHandlers();
 
+                this.searchSelectedIndex = -1;
+                this.currentSearchResults = [];
+                this.setupSearchKeyboardNavigation();
+
                 // ✅ Clic sur une carte évènement dans la timeline => ouvre la fiche HTML dans le même onglet
                 const timelineView = document.getElementById('timeline-view');
                 if (timelineView) {
@@ -6221,6 +6735,38 @@
                                 // fallback au cas où
                                 this.showGlobalTimeline();
                             }
+                        }
+                    });
+                });
+
+                // ========================================
+                // ✅ NAVIGATION MOBILE (AJOUTE ÇA ICI)
+                // ========================================
+                const mobileNavBtns = document.querySelectorAll('.mobile-nav-btn');
+                mobileNavBtns.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        const view = btn.dataset.view;
+                        const action = btn.dataset.action;
+                        
+                        // Action menu : toggle sidebar
+                        if (action === 'menu') {
+                            const sidebar = document.getElementById('sidebar');
+                            if (sidebar) {
+                                sidebar.classList.toggle('collapsed');
+                            }
+                            return;
+                        }
+                        
+                        // Changement de vue
+                        if (view) {
+                            this.setMobileView(view);
+                            
+                            // Mettre à jour l'état actif
+                            mobileNavBtns.forEach(b => b.classList.remove('active'));
+                            btn.classList.add('active');
                         }
                     });
                 });
@@ -6939,11 +7485,6 @@
                 if (person.fonction) metaParts.push(person.fonction);
                 const metaText = metaParts.join(' · ');
 
-                // 4) Image ou placeholder
-                const imageHtml = person.image 
-                    ? `<img src="${person.image}" alt="${person.nom}">`
-                    : `<div class="floating-portrait-placeholder">👤</div>`;
-
                 // 5) Biographie
                 const bio = person.bioLongue || person.bioCourte || '';
                 const bioHtml = bio 
@@ -6981,9 +7522,6 @@
                 return `
                     <div class="floating-content">
                         <header class="floating-header">
-                            <div class="floating-portrait">
-                                ${imageHtml}
-                            </div>
                             <div class="floating-header-info">
                                 <h2 class="floating-name">${person.nom}</h2>
                                 ${person.titre && person.titre !== person.nom 
@@ -10396,131 +10934,347 @@
                 return parts.join(' · ');
             }
 
-            // Met à jour la liste des résultats de la barre de recherche globale
+            // ========================================
+            // RECHERCHE GLOBALE AMÉLIORÉE
+            // ========================================
+
             updateGlobalSearchResults(query) {
-                const input     = document.getElementById('global-search-input');
+                const input = document.getElementById('global-search-input');
                 const container = document.getElementById('global-search-results');
+
+                // 🔍 DEBUG - À supprimer après
+                console.log('🔍 Recherche:', query);
+                console.log('📦 Events cache:', this.cache.events?.length || 0);
+                console.log('👤 PersonIndex:', Object.keys(this.personIndex || {}).length);
+                console.log('🌍 Countries:', this.cache.countries?.length || 0);
+
                 if (!input || !container) return;
 
                 const trimmed = (query || '').trim();
+                
+                // Reset de la sélection clavier
+                this.searchSelectedIndex = -1;
+
                 if (trimmed.length < 2) {
                     container.innerHTML = '';
                     container.classList.remove('open');
+                    this.currentSearchResults = [];
                     return;
                 }
 
                 const q = trimmed.toLowerCase();
 
-                // Événements : filtre sur le titre
-                const events = (this.cache.events || []).filter(ev => {
-                    const title = (ev.titre || '').toString().toLowerCase();
-                    return title.includes(q);
-                });
+                // ===== RECHERCHE AMÉLIORÉE AVEC SCORE =====
+                
+                // Événements : recherche dans titre, description, pays
+                const events = (this.cache.events || []).map(ev => {
+                    let score = 0;
+                    const title = (ev.titre || '').toLowerCase();
+                    const desc = (ev.description || '').toLowerCase();
+                    
+                    // ✅ Gérer pays string OU tableau
+                    let pays = '';
+                    if (Array.isArray(ev.pays)) {
+                        pays = ev.pays.join(' ').toLowerCase();
+                    } else if (typeof ev.pays === 'string') {
+                        pays = ev.pays.toLowerCase();
+                    }
+                    
+                    // Score basé sur la pertinence
+                    if (title.startsWith(q)) score += 100;
+                    else if (title.includes(q)) score += 50;
+                    if (desc.includes(q)) score += 10;
+                    if (pays.includes(q)) score += 20;
+                    
+                    return { ...ev, _type: 'event', _score: score };
+                }).filter(ev => ev._score > 0)
+                .sort((a, b) => b._score - a._score);
 
-                // Personnages : filtre sur le nom
-                const persons = Object.values(this.personIndex || {}).filter(p => {
-                    const name = (p.nom || '').toString().toLowerCase();
-                    return name.includes(q);
-                });
+                // Personnages : recherche dans nom, fonction, bio
+                const persons = Object.values(this.personIndex || {}).map(p => {
+                    let score = 0;
+                    const name = (p.nom || '').toLowerCase();
+                    const fonction = (p.fonction || '').toLowerCase();
+                    const bio = (p.bioCourte || '').toLowerCase();
+                    
+                    if (name.startsWith(q)) score += 100;
+                    else if (name.includes(q)) score += 50;
+                    if (fonction.includes(q)) score += 30;
+                    if (bio.includes(q)) score += 10;
+                    
+                    return { ...p, _type: 'person', _score: score };
+                }).filter(p => p._score > 0)
+                .sort((a, b) => b._score - a._score);
 
-                if (!events.length && !persons.length) {
-                    container.innerHTML = `<div class="global-search-empty">Aucun résultat</div>`;
+                // Pays : recherche dans le nom
+                const countries = (this.cache.countries || []).map(c => {
+                    let score = 0;
+                    const name = (c.pays || '').toLowerCase();
+                    
+                    if (name.startsWith(q)) score += 100;
+                    else if (name.includes(q)) score += 50;
+                    
+                    return { ...c, _type: 'country', _score: score };
+                }).filter(c => c._score > 0)
+                .sort((a, b) => b._score - a._score);
+
+                // Stocker tous les résultats pour la navigation clavier
+                this.currentSearchResults = [
+                    ...events.slice(0, 8),
+                    ...persons.slice(0, 8),
+                    ...countries.slice(0, 5)
+                ];
+
+                if (!this.currentSearchResults.length) {
+                    container.innerHTML = `
+                        <div class="search-no-results">
+                            <div class="search-no-results-icon">🔎</div>
+                            <div class="search-no-results-text">Aucun résultat pour "${trimmed}"</div>
+                            <div class="search-no-results-hint">Essayez un autre terme</div>
+                        </div>
+                    `;
                     container.classList.add('open');
                     return;
                 }
 
-                const maxEvents  = 15;
-                const maxPersons = 15;
-
+                // ===== GÉNÉRATION DU HTML =====
                 let html = '<div class="global-search-groups">';
+                let globalIndex = 0;
+
+                // Fonction pour surligner le terme recherché
+                const highlight = (text) => {
+                    if (!text) return '';
+                    const regex = new RegExp(`(${this.escapeRegex(trimmed)})`, 'gi');
+                    return text.replace(regex, '<mark>$1</mark>');
+                };
 
                 // Groupe ÉVÉNEMENTS
                 if (events.length) {
                     html += `
                         <div class="global-search-group">
-                            <div class="global-search-group-title">événements</div>
+                            <div class="global-search-group-title">
+                                <span>📅</span> événements
+                                <span class="search-count">${events.length}</span>
+                            </div>
                             <ul class="global-search-list">
                     `;
-                    events.slice(0, maxEvents).forEach(ev => {
-                        const title   = ev.titre || '(sans titre)';
+                    events.slice(0, 8).forEach(ev => {
+                        const title = ev.titre || '(sans titre)';
                         const dateStr = ev.date ? this.formatDateHuman(ev.date) : '';
-                        const lien    = ev.lien && ev.lien !== '#' ? ev.lien : '';
+                        const pays = Array.isArray(ev.pays) ? ev.pays.join(', ') : (ev.pays || '');
+                        const lien = ev.lien && ev.lien !== '#' ? ev.lien : '';
 
                         html += `
                             <li>
                                 <button type="button"
                                         class="global-search-item"
+                                        data-index="${globalIndex}"
                                         data-type="event"
                                         ${lien ? `data-lien="${lien}"` : ''}>
-                                    <span class="global-search-item-title">${title}</span>
-                                    ${dateStr ? `<span class="global-search-item-meta">${dateStr}</span>` : ''}
+                                    <span class="search-item-icon">📅</span>
+                                    <span class="search-item-content">
+                                        <span class="global-search-item-title">${highlight(title)}</span>
+                                        <span class="global-search-item-meta">
+                                            ${dateStr ? `<span>${dateStr}</span>` : ''}
+                                            ${pays ? `<span>• ${pays}</span>` : ''}
+                                        </span>
+                                    </span>
                                 </button>
                             </li>
                         `;
+                        globalIndex++;
                     });
-                    html += `
-                            </ul>
-                        </div>
-                    `;
+                    html += '</ul></div>';
                 }
 
                 // Groupe PERSONNAGES
                 if (persons.length) {
                     html += `
                         <div class="global-search-group">
-                            <div class="global-search-group-title">personnages</div>
+                            <div class="global-search-group-title">
+                                <span>👤</span> personnages
+                                <span class="search-count">${persons.length}</span>
+                            </div>
                             <ul class="global-search-list">
                     `;
-                    persons.slice(0, maxPersons).forEach(p => {
+                    persons.slice(0, 8).forEach(p => {
                         const meta = this.formatPersonMeta(p);
                         html += `
                             <li>
                                 <button type="button"
                                         class="global-search-item"
+                                        data-index="${globalIndex}"
                                         data-type="person"
                                         data-person="${p.nom}">
-                                    <span class="global-search-item-title">${p.nom}</span>
-                                    ${meta ? `<span class="global-search-item-meta">${meta}</span>` : ''}
+                                    <span class="search-item-icon">👤</span>
+                                    <span class="search-item-content">
+                                        <span class="global-search-item-title">${highlight(p.nom)}</span>
+                                        ${meta ? `<span class="global-search-item-meta">${meta}</span>` : ''}
+                                    </span>
                                 </button>
                             </li>
                         `;
+                        globalIndex++;
                     });
-                    html += `
-                            </ul>
-                        </div>
-                    `;
+                    html += '</ul></div>';
                 }
+
+                // Groupe PAYS
+                if (countries.length) {
+                    html += `
+                        <div class="global-search-group">
+                            <div class="global-search-group-title">
+                                <span>🌍</span> pays
+                                <span class="search-count">${countries.length}</span>
+                            </div>
+                            <ul class="global-search-list">
+                    `;
+                    countries.slice(0, 5).forEach(c => {
+                        const eventsCount = (this.cache.events || []).filter(e => e.pays === c.pays).length;
+                        html += `
+                            <li>
+                                <button type="button"
+                                        class="global-search-item"
+                                        data-index="${globalIndex}"
+                                        data-type="country"
+                                        data-country="${c.pays}">
+                                    <span class="search-item-icon">🌍</span>
+                                    <span class="search-item-content">
+                                        <span class="global-search-item-title">${highlight(c.pays)}</span>
+                                        <span class="global-search-item-meta">${eventsCount} événement${eventsCount > 1 ? 's' : ''}</span>
+                                    </span>
+                                </button>
+                            </li>
+                        `;
+                        globalIndex++;
+                    });
+                    html += '</ul></div>';
+                }
+
+                // Hint clavier en bas
+                html += `
+                    <div class="search-keyboard-hint">
+                        <span><kbd>↑</kbd><kbd>↓</kbd> naviguer</span>
+                        <span><kbd>↵</kbd> ouvrir</span>
+                        <span><kbd>esc</kbd> fermer</span>
+                    </div>
+                `;
 
                 html += '</div>';
                 container.innerHTML = html;
                 container.classList.add('open');
 
-                // Gestion des clics sur les résultats
+                // ===== GESTION DES CLICS =====
                 container.querySelectorAll('.global-search-item').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.stopPropagation();
-                        const type = btn.getAttribute('data-type');
-
-                        if (type === 'event') {
-                            const lien = btn.getAttribute('data-lien');
-                            const titre = btn.querySelector('.global-search-item-title')?.textContent || 'Événement';
-                            if (lien) {
-                                // 👉 Fenêtre flottante
-                                this.openInFloatingWindow({ type: 'event', event: { titre }, lien });
-                            }
-                        } else if (type === 'person') {
-                            const name = btn.getAttribute('data-person');
-                            if (name) {
-                                // 👉 Fenêtre flottante
-                                this.openInFloatingWindow({ type: 'person', name });
-                            }
-                        }
-
-                        container.innerHTML = '';
-                        container.classList.remove('open');
-                        input.blur();
+                        this.handleSearchItemClick(btn);
                     });
                 });
+            }
+
+            // Nouvelle méthode : gérer le clic sur un résultat
+            handleSearchItemClick(btn) {
+                const input = document.getElementById('global-search-input');
+                const container = document.getElementById('global-search-results');
+                const type = btn.getAttribute('data-type');
+
+                if (type === 'event') {
+                    const lien = btn.getAttribute('data-lien');
+                    const titre = btn.querySelector('.global-search-item-title')?.textContent || 'Événement';
+                    if (lien) {
+                        this.openInFloatingWindow({ type: 'event', event: { titre }, lien });
+                    }
+                } else if (type === 'person') {
+                    const name = btn.getAttribute('data-person');
+                    if (name) {
+                        this.openInFloatingWindow({ type: 'person', name });
+                    }
+                } else if (type === 'country') {
+                    const country = btn.getAttribute('data-country');
+                    if (country) {
+                        // Centrer la carte sur ce pays
+                        const countryData = (this.cache.countries || []).find(c => c.pays === country);
+                        if (countryData && countryData.coordonnees) {
+                            this.map.setView(countryData.coordonnees, 5);
+                        }
+                        // Filtrer les événements par ce pays
+                        this.setMainView('map');
+                    }
+                }
+
+                // Fermer la recherche
+                if (container) {
+                    container.innerHTML = '';
+                    container.classList.remove('open');
+                }
+                if (input) {
+                    input.value = '';
+                    input.blur();
+                }
+            }
+
+            // Nouvelle méthode : échapper les caractères spéciaux regex
+            escapeRegex(string) {
+                return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            }
+
+            // Nouvelle méthode : navigation clavier dans les résultats
+            setupSearchKeyboardNavigation() {
+                const input = document.getElementById('global-search-input');
+                const container = document.getElementById('global-search-results');
+                
+                if (!input) return;
+
+                input.addEventListener('keydown', (e) => {
+                    if (!container?.classList.contains('open')) return;
+                    
+                    const items = container.querySelectorAll('.global-search-item');
+                    if (!items.length) return;
+
+                    if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        this.searchSelectedIndex = Math.min(
+                            this.searchSelectedIndex + 1, 
+                            items.length - 1
+                        );
+                        this.updateSearchSelection(items);
+                    } 
+                    else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        this.searchSelectedIndex = Math.max(this.searchSelectedIndex - 1, 0);
+                        this.updateSearchSelection(items);
+                    } 
+                    else if (e.key === 'Enter' && this.searchSelectedIndex >= 0) {
+                        e.preventDefault();
+                        const selectedBtn = items[this.searchSelectedIndex];
+                        if (selectedBtn) {
+                            this.handleSearchItemClick(selectedBtn);
+                        }
+                    }
+                });
+
+                // Raccourci Ctrl/Cmd + K pour focus
+                document.addEventListener('keydown', (e) => {
+                    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                        e.preventDefault();
+                        input.focus();
+                        input.select();
+                    }
+                });
+            }
+
+            // Nouvelle méthode : mettre à jour la sélection visuelle
+            updateSearchSelection(items) {
+                items.forEach((item, i) => {
+                    item.classList.toggle('selected', i === this.searchSelectedIndex);
+                });
+                
+                // Scroll into view
+                const selected = items[this.searchSelectedIndex];
+                if (selected) {
+                    selected.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+                }
             }
 
             exportData() {
@@ -10829,6 +11583,71 @@
                 this.openDirectory('tous les pays', html);
             }
 
+            openNotesDirectory() {
+                if (!this.directoryOverlay) return;
+                
+                this.directoryTitleElem.textContent = '📝 Toutes les notes';
+                
+                const notes = this.cache.notes || [];
+                
+                if (notes.length === 0) {
+                    this.directoryContentElem.innerHTML = '<p class="directory-empty">Aucune note disponible</p>';
+                    this.directoryOverlay.classList.add('open');
+                    return;
+                }
+                
+                const sorted = [...notes].sort((a, b) => {
+                    const titleA = (a.titre || '').toLowerCase();
+                    const titleB = (b.titre || '').toLowerCase();
+                    return titleA.localeCompare(titleB);
+                });
+                
+                this.directoryContentElem.innerHTML = sorted.map(note => {
+                    const title = note.titre || 'Sans titre';
+                    const type = note.type || 'note';
+                    const source = note.source || 'wiki-export';
+                    const lien = note.html || '#';
+                    
+                    return `
+                        <div class="directory-item" data-lien="${lien}">
+                            <div class="directory-item-header">
+                                <strong>${title}</strong>
+                                <span class="directory-item-badge">${type}</span>
+                            </div>
+                            <div class="directory-item-meta">Source: ${source}</div>
+                        </div>
+                    `;
+                }).join('');
+                
+                // Gestion des clics sur les notes
+                this.directoryContentElem.querySelectorAll('.directory-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const lien = item.dataset.lien;
+                        const titre = item.querySelector('strong').textContent;
+                        
+                        // Fermer l'annuaire
+                        this.directoryOverlay.classList.remove('open');
+                        
+                        // Ouvrir dans une fenêtre flottante
+                        this.openInFloatingWindow({ 
+                            type: 'event', 
+                            event: { titre }, 
+                            lien 
+                        });
+                    });
+                });
+                
+                // Fermer l'annuaire
+                const closeBtn = document.getElementById('directory-close');
+                if (closeBtn) {
+                    closeBtn.onclick = () => {
+                        this.directoryOverlay.classList.remove('open');
+                    };
+                }
+                
+                this.directoryOverlay.classList.add('open');
+            }
+
             // ============================
             // Gestion des vues (desktop / mobile)
             // ============================
@@ -10877,31 +11696,50 @@
                 } catch (e) {}
             }
 
-            setMobileMode(mode) {
-                // mobile : 'map' | 'events' | 'timeline'
-                this.mobileMode = (mode === 'events' || mode === 'timeline') ? mode : 'map';
-
-                document.body.classList.remove('mobile-mode-map', 'mobile-mode-events', 'mobile-mode-timeline');
-                document.body.classList.add('mobile-mode-' + this.mobileMode);
-
-                // Les onglets mobile
-                document.querySelectorAll('.mobile-tab').forEach(btn => {
-                    const v = btn.dataset.mobileView || 'map';
-                    btn.classList.toggle('active', v === this.mobileMode);
-                });
-
-                // La vue principale associée
-                if (this.mobileMode === 'timeline') {
-                    this.setMainView('timeline');
+            setMobileView(view) {
+                const mapContainer = document.querySelector('.map-container');
+                const timelineWrapper = document.querySelector('.timeline-wrapper');
+                const sidebar = document.getElementById('sidebar');
+                
+                // Masquer tout d'abord
+                if (mapContainer) mapContainer.style.display = 'none';
+                if (timelineWrapper) timelineWrapper.style.display = 'none';
+                if (sidebar) sidebar.classList.add('collapsed');
+                
+                // Afficher la vue demandée
+                switch(view) {
+                    case 'map':
+                        if (mapContainer) {
+                            mapContainer.style.display = 'flex';
+                            // Forcer Leaflet à recalculer
+                            setTimeout(() => {
+                                if (this.map) this.map.invalidateSize();
+                            }, 100);
+                        }
+                        break;
+                        
+                    case 'timeline':
+                        if (timelineWrapper) {
+                            timelineWrapper.style.display = 'block';
+                        }
+                        // Afficher la timeline mondiale par défaut
+                        const worldTab = document.querySelector('.timeline-tab[data-mode="world"]');
+                        if (worldTab) {
+                            worldTab.click();
+                        } else {
+                            this.showGlobalTimeline();
+                        }
+                        break;
+                        
+                    case 'notes':
+                        // Ouvrir l'annuaire des notes
+                        this.openNotesDirectory();
+                        // Revenir à la carte en arrière-plan
+                        if (mapContainer) mapContainer.style.display = 'flex';
+                        break;
                 }
-
-                // Mode "événements" : forcer la sidebar ouverte
-                const sidebarEl = document.getElementById('sidebar');
-                if (sidebarEl) {
-                    if (this.mobileMode === 'events') {
-                        sidebarEl.classList.remove('collapsed');
-                    }
-                }
+                
+                console.log(`📱 Vue mobile changée : ${view}`);
             }
         }
         
