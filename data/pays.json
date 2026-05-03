@@ -1,18 +1,18 @@
 [
   {
-    "pays": "République tchèque",
+    "pays": "Belgique",
     "continent": "europe",
     "coordonnees": [
-      49.1281,
-      16.9118
+      50.697477,
+      4.3828378
     ]
   },
   {
-    "pays": "Russie",
+    "pays": "Turquie",
     "continent": "europe",
     "coordonnees": [
-      54.71467,
-      20.43912
+      38.9320501,
+      35.448558
     ]
   },
   {
@@ -24,19 +24,27 @@
     ]
   },
   {
-    "pays": "Belgique",
+    "pays": "Empire ottoman",
     "continent": "europe",
     "coordonnees": [
-      50.697477,
-      4.3828378
+      39.41626,
+      35.379558
     ]
   },
   {
-    "pays": "Espagne",
+    "pays": "Russie",
     "continent": "europe",
     "coordonnees": [
-      40.4168,
-      -3.7038
+      54.71467,
+      20.43912
+    ]
+  },
+  {
+    "pays": "Slovaquie",
+    "continent": "europe",
+    "coordonnees": [
+      48.14685,
+      17.09731
     ]
   },
   {
@@ -45,6 +53,38 @@
     "coordonnees": [
       46.2276,
       2.2137
+    ]
+  },
+  {
+    "pays": "République démocratique du Congo",
+    "continent": "afrique",
+    "coordonnees": [
+      -2.88,
+      23.656
+    ]
+  },
+  {
+    "pays": "République tchèque",
+    "continent": "europe",
+    "coordonnees": [
+      49.1281,
+      16.9118
+    ]
+  },
+  {
+    "pays": "Syrie",
+    "continent": "afrique",
+    "coordonnees": [
+      34.96176,
+      38.20598
+    ]
+  },
+  {
+    "pays": "Etats-Unis",
+    "continent": "amerique",
+    "coordonnees": [
+      40.7056297,
+      -74.0080942
     ]
   },
   {
@@ -64,59 +104,11 @@
     ]
   },
   {
-    "pays": "République démocratique du Congo",
-    "continent": "afrique",
-    "coordonnees": [
-      -2.88,
-      23.656
-    ]
-  },
-  {
-    "pays": "Etats-Unis",
-    "continent": "amerique",
-    "coordonnees": [
-      40.7056297,
-      -74.0080942
-    ]
-  },
-  {
-    "pays": "Empire ottoman",
+    "pays": "Espagne",
     "continent": "europe",
     "coordonnees": [
-      39.41626,
-      35.379558
-    ]
-  },
-  {
-    "pays": "Turquie",
-    "continent": "europe",
-    "coordonnees": [
-      38.9320501,
-      35.448558
-    ]
-  },
-  {
-    "pays": "Syrie",
-    "continent": "afrique",
-    "coordonnees": [
-      34.96176,
-      38.20598
-    ]
-  },
-  {
-    "pays": "Sultanat mamluk d'Egypte",
-    "continent": "afrique",
-    "coordonnees": [
-      30.02399,
-      31.25946
-    ]
-  },
-  {
-    "pays": "Slovaquie",
-    "continent": "europe",
-    "coordonnees": [
-      48.14685,
-      17.09731
+      40.4168,
+      -3.7038
     ]
   },
   {
@@ -125,6 +117,14 @@
     "coordonnees": [
       35.73834183660386,
       51.357234044865045
+    ]
+  },
+  {
+    "pays": "Sultanat mamluk d'Egypte",
+    "continent": "afrique",
+    "coordonnees": [
+      30.02399,
+      31.25946
     ]
   }
 ]

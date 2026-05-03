@@ -1,3 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Historique</title>
+    
+    <!-- Leaflet CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <link rel="stylesheet" href="2-css/style.css" />
+
+</head>
+<body class="view-map mobile-mode-map">
+    <!-- Overlay de chargement -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Header avec indicateur de sync -->
+    <header>
+        <div class="logo">
+            <h1>carte.</h1>
+            <div class="sync-indicator" id="sync-indicator">
+                <div class="sync-dot"></div>
+                <span>Synchronisé</span>
+            </div>
+        </div>
+
+        <!-- Onglets desktop : carte / chronologie -->
+        <nav class="main-tabs" id="desktop-tabs">
+            <button class="main-tab active" data-main-view="map">
+                carte.
+            </button>
+            <button class="main-tab" data-main-view="timeline">
+                chronologie.
+            </button>
+            <button class="main-tab" data-main-view="notes">
+                notes.
+            </button>
+        </nav>
+
+        <!-- Barre de recherche globale -->
+        <div class="global-search" id="global-search">
+            <input
+                type="search"
+                id="global-search-input"
+                class="global-search-input"
+                placeholder="Rechercher un évènement ou un personnage…"
+                autocomplete="off"
+                spellcheck="false"
+            >
+            <div id="global-search-results" class="global-search-results"></div>
+        </div>
+
+        <div class="header-controls">
+            <button id="refresh-btn" class="btn btn-secondary" title="Actualiser les données">
+                🔄
+            </button>
+            <button id="export-btn" class="btn btn-secondary" title="Exporter les données">
+                📁
+            </button>
+            <button id="theme-btn" class="btn" title="Changer le thème">
+                🌓
+            </button>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main>
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-content">
+
+                <!-- Vue principale de la sidebar -->
+                <div id="sidebar-main">
+                    <!-- Continents -->
+                    <section class="control-section control-section-compact">
+                        <h3>continents.</h3>
+                        <div class="continent-grid" role="group" aria-label="Filtres par continent">
+                            <button class="btn-continent active" data-continent="tous">🌍 Tous</button>
+                            <button class="btn-continent" data-continent="europe">🌏 Europe</button>
+                            <button class="btn-continent" data-continent="asie">🌏 Asie</button>
+                            <button class="btn-continent" data-continent="afrique">🌍 Afrique</button>
+                            <button class="btn-continent" data-continent="amerique">🌎 Amérique</button>
+                            <button class="btn-continent" data-continent="oceanie">🌏 Océanie</button>
+                        </div>
+                    </section>
+
+                    <!-- Filtre année -->
+                    <section class="control-section control-section-compact">
+                        <h3>période.</h3>
+                        <div class="range-control">
+                            <div class="range-label" style="flex-direction: column; align-items: stretch; gap: 10px;">
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <input type="number"
+                                        id="input-annee"
+                                        class="year-input"
+                                        min="-2000"
+                                        max="2024"
+                                        value="2024"
+                                        placeholder="Année (ex: 1099)"
+                                        inputmode="numeric">
+                                    <button type="button" class="btn btn-secondary btn-year-reset" data-year="2024" title="Revenir à 2024">
+                                        aujourd’hui.
+                                    </button>
+                                </div>
+
+                                <div class="year-stepper">
+                                    <button type="button" class="btn btn-secondary btn-year-step" data-step="-100">-100</button>
+                                    <button type="button" class="btn btn-secondary btn-year-step" data-step="-10">-10</button>
+                                    <button type="button" class="btn btn-secondary btn-year-step" data-step="10">+10</button>
+                                    <button type="button" class="btn btn-secondary btn-year-step" data-step="100">+100</button>
+                                </div>
+                            </div>
+                    </section>
+
+                    <!-- Liste des événements de l'année -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-events-directory">
+                                tous les événements.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="events-list">
+                            <p class="no-events">Aucun événement.</p>
+                        </div>
+                    </section>
+
+                    <!-- Liste des personnages -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-persons-directory">
+                                tous les personnages.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="persons-list">
+                            <p class="no-events">Aucun personnage référencé.</p>
+                        </div>
+                    </section>
+
+                    <!-- Liste des pays -->
+                    <section class="control-section">
+                        <h3>
+                            <button type="button" class="link-title" id="open-countries-directory">
+                                tous les pays.
+                            </button>
+                        </h3>
+                        <div class="events-list" id="countries-list">
+                            <p class="no-events">Aucun pays référencé.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section Obsidian -->
+                    <section class="obsidian-section">
+                        <h3>obsidian</h3>
+                        <div class="obsidian-status">
+                            <span>Dernière sync:</span>
+                            <span id="last-sync">Jamais</span>
+                        </div>
+                        <div class="obsidian-actions">
+                            <button class="btn btn-obsidian" id="sync-now" title="Synchroniser maintenant">
+                                🔄
+                            </button>
+                            <button class="btn btn-obsidian" id="watch-toggle" title="Activer/désactiver la surveillance">
+                                👁️
+                            </button>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Vue fiche pays (remplie en JS) -->
+                <div id="sidebar-detail" style="display:none;"></div>
+            </div>
+        </aside>
+
+        <!-- Zone carte -->
+        <section class="map-container">
+            <button class="toggle-sidebar" id="toggle-sidebar" title="Afficher/Masquer le panneau">
+                ☰
+            </button>
+            <div id="carte"></div>
+        </section>
+
+        <section class="notes-container" id="notes-view" aria-label="Annuaire des notes">
+            <header class="notes-hero">
+                <div class="notes-hero-left">
+                    <h2>notes.</h2>
+                    <div class="notes-meta">
+                        <span id="notes-count">0</span> notes
+                    </div>
+                </div>
+
+                <div class="notes-hero-right">
+                    <div class="notes-search">
+                        <input id="notes-search" type="search" placeholder="Rechercher une note…" autocomplete="off" />
+                    </div>
+                </div>
+            </header>
+
+            <div class="notes-grid" id="notes-grid"></div>
+        </section>
+    </main>
+
+    <!-- Timeline -->
+    <footer class="timeline collapsed" id="timeline">
+        <div class="timeline-header">
+            <div class="timeline-header-left">
+                <h2>timeline.</h2>
+            </div>
+
+            <div class="timeline-header-right">
+                <div class="timeline-filters" id="timeline-filters">
+                    <!-- ✅ Combobox (input + datalist) : clic pour dérouler + recherche au clavier -->
+                    <div class="timeline-combobox" aria-label="Filtrer par pays">
+                        <input
+                            id="timeline-country-input"
+                            class="timeline-combobox-input"
+                            list="timeline-country-list"
+                            placeholder="pays…"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <datalist id="timeline-country-list"></datalist>
+                    </div>
+
+                    <div class="timeline-combobox" aria-label="Filtrer par personnage">
+                        <input
+                            id="timeline-person-input"
+                            class="timeline-combobox-input"
+                            list="timeline-person-list"
+                            placeholder="personnage…"
+                            autocomplete="off"
+                            spellcheck="false"
+                        />
+                        <datalist id="timeline-person-list"></datalist>
+                    </div>
+
+                    <!-- ✅ FIX : class + aria-label séparés (sinon DOM cassé) -->
+                    <div class="timeline-range-inputs" aria-label="Filtrer par période">
+                        <input id="timeline-from-year" type="number" inputmode="numeric" placeholder="de" />
+                        <span class="timeline-range-sep">→</span>
+                        <input id="timeline-to-year" type="number" inputmode="numeric" placeholder="à" />
+                    </div>
+
+                    <button type="button" class="btn btn-secondary timeline-reset" id="timeline-reset">
+                        réinitialiser.
+                    </button>
+                </div>
+
+                <!-- Chips (multi-sélection) -->
+                <div class="timeline-chips-row">
+                    <div class="timeline-chips" id="timeline-country-chips" aria-label="Pays sélectionnés"></div>
+                    <div class="timeline-chips" id="timeline-person-chips" aria-label="Personnages sélectionnés"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TIMELINE PAYS (ton bloc existant, juste enveloppé) -->
+        <div class="timeline-country" id="timeline-country">
+            <!-- Navigation + frise horizontale -->
+            <div class="timeline-nav">
+                <button class="timeline-arrow" id="timeline-prev" title="Événement précédent">◀</button>
+
+                <div class="timeline-track" id="timeline-track">
+                    <!-- rempli en JS -->
+                </div>
+
+                <button class="timeline-arrow" id="timeline-next" title="Événement suivant">▶</button>
+            </div>
+
+            <!-- Liste des événements du pays -->
+            <div class="timeline-content" id="timeline-content">
+                <p>Cliquez sur un pays pour voir sa timeline...</p>
+            </div>
+        </div>
+
+        <!-- TIMELINE MONDIALE (nouveau bloc, caché au début) -->
+        <div class="timeline-global" id="timeline-global" style="display: none;">
+            <div class="timeline-nav">
+                <button class="timeline-arrow" id="timeline-global-prev" title="Événement précédent">◀</button>
+
+                <div class="timeline-track" id="timeline-global-track">
+                    <!-- sera rempli en JS avec tous les événements -->
+                </div>
+
+                <button class="timeline-arrow" id="timeline-global-next" title="Événement suivant">▶</button>
+            </div>
+
+            <div class="timeline-content" id="timeline-global-content">
+                <p>Chronologie mondiale de tous les événements...</p>
+            </div>
+        </div>
+    </footer>
+
+        <!-- Navigation mobile - avant </body> -->
+        <nav class="mobile-nav">
+            <button class="mobile-nav-btn active" data-view="map">
+                <span class="nav-icon">🗺️</span>
+                <span>Carte</span>
+            </button>
+            <button class="mobile-nav-btn" data-view="timeline">
+                <span class="nav-icon">📅</span>
+                <span>Chrono</span>
+            </button>
+            <button class="mobile-nav-btn" data-view="notes">
+                <span class="nav-icon">📝</span>
+                <span>Notes</span>
+            </button>
+            <button class="mobile-nav-btn" data-action="menu">
+                <span class="nav-icon">☰</span>
+                <span>Menu</span>
+            </button>
+        </nav>
+
+    <!-- Popup annuaire (événements / personnages) -->
+    <div class="directory-overlay" id="directory-overlay">
+        <div class="directory-modal">
+            <header class="directory-header">
+                <h2 class="directory-title" id="directory-title"></h2>
+                <button type="button" class="directory-close" id="directory-close" aria-label="Fermer">
+                    ✕
+                </button>
+            </header>
+            <div class="directory-content" id="directory-content">
+                <!-- contenu rempli en JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup fiche pays / personnage -->
+    <div class="detail-overlay" id="detail-overlay">
+        <div class="detail-modal">
+            <header class="detail-header">
+                <div class="detail-header-left">
+                    <button type="button" class="back-link" aria-label="Retour"
+                        onclick="history.back()">
+                        ←
+                    </button>
+                    <div class="detail-header-main">
+                        <h2 class="detail-title" id="detail-title">Titre</h2>
+                        <p class="detail-subtitle" id="detail-subtitle">Sous-titre</p>
+                    </div>
+                </div>
+                <button class="detail-close-btn" id="detail-close-btn" aria-label="Fermer">
+                    ✕
+                </button>
+            </header>
+
+            <div class="detail-body">
+                <div class="detail-main">
+                    <div id="detail-map" class="detail-map"></div>
+                    <div id="detail-stats" class="detail-stats"></div>
+                </div>
+
+                <section class="detail-section" id="detail-bio-section" style="display:none;">
+                    <h3>biographie.</h3>
+                    <div id="detail-bio"></div>
+                </section>
+                
+                <section class="detail-section" id="detail-timeline-section">
+                    <h3>chronologie condensée.</h3>
+                    <div id="detail-timeline"></div>
+                </section>
+
+
+
+                <section class="detail-section" id="detail-persons-section">
+                    <h3 id="detail-persons-title">personnages majeurs.</h3>
+                    <div id="detail-persons"></div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
         // ========================================
         // CLASSE PRINCIPALE AVEC SYNC OBSIDIAN
         // ========================================
@@ -5520,3 +5899,6 @@
                 historicalMap.showNotification('❌ Une erreur est survenue', 'error');
             }
         });
+    </script>
+</body>
+</html>

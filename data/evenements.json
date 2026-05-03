@@ -1,48 +1,37 @@
 [
   {
-    "titre": "La bataille d'Austerlitz",
-    "date": "1805-12-02",
-    "date_fin": false,
+    "titre": "La bataille de Waterloo",
+    "date": "1815-06-18",
+    "date_fin": "1815-06-19",
     "perpetuel": false,
-    "pays": "République tchèque",
+    "pays": "Belgique",
     "coords": [
-      49.1281,
-      16.9118
+      50.697477,
+      4.3828378
     ],
-    "description": "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien.",
+    "description": "C’est la dernière grande bataille de Napoléon, où l’armée française est vaincue par les forces anglaises et leurs alliés.",
     "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/bataille-austerlitz.html"
+    "lien": "fiches/bataille-waterloo.html"
   },
   {
-    "titre": "La bataille d'Eylau",
-    "date": "1809-10-01",
-    "date_fin": "1807-02-01",
+    "titre": "La première croisade, en Anatolie",
+    "date": "1097-01-01",
+    "date_fin": "1099-01-01",
     "perpetuel": false,
-    "pays": "Russie",
+    "pays": "Turquie",
     "coords": [
-      54.71467,
-      20.43912
+      38.9320501,
+      35.448558
     ],
-    "description": "La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis.",
-    "categorie": "politique",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/bataille-eylau.html"
-  },
-  {
-    "titre": "L'après Eylau",
-    "date": "1807-02-01",
-    "date_fin": "1808-01-01",
-    "perpetuel": false,
-    "pays": "Russie",
-    "coords": [
-      54.44668,
-      21.01586
+    "description": "Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum.",
+    "categorie": "croisade",
+    "personnages": [
+      "Godefroy de Bouillon",
+      "Raymond de Saint-Gilles",
+      "Tancrède de Hauteville"
     ],
-    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de *clore* les guerres de la Révolution.",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/bataille-friedland.html"
+    "lien": "fiches/première-croisade.html"
   },
   {
     "titre": "La bataille de Leipzig",
@@ -60,94 +49,49 @@
     "lien": "fiches/bataille-leipzig.html"
   },
   {
-    "titre": "La bataille de Waterloo",
-    "date": "1815-06-18",
-    "date_fin": "1815-06-19",
+    "titre": "Les origines de l'Empire Ottoman",
+    "date": "1299-01-01",
+    "date_fin": "1453-01-01",
     "perpetuel": false,
-    "pays": "Belgique",
+    "pays": "Empire ottoman",
     "coords": [
-      50.697477,
-      4.3828378
+      39.41626,
+      35.379558
     ],
-    "description": "C’est la dernière grande bataille de Napoléon, où l’armée française est vaincue par les forces anglaises et leurs alliés.",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/bataille-waterloo.html"
-  },
-  {
-    "titre": "La campagne d'Espagne",
-    "date": "1808-05-02",
-    "date_fin": "1814-04-17",
-    "perpetuel": false,
-    "pays": "Espagne",
-    "coords": [
-      40.4168,
-      -3.7038
-    ],
-    "description": "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique.",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/campagne-espagne-napoléon.html"
-  },
-  {
-    "titre": "La campagne de France",
-    "date": "1814-01-01",
-    "date_fin": "1814-01-01",
-    "perpetuel": false,
-    "pays": "France",
-    "coords": [
-      46.2276,
-      2.2137
-    ],
-    "description": "La campagne de France, c'est les armes, la lassitude d’un pays exténué, les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi un système impérial qui n’a pas survécu à la catastrophe russe. ",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/campagne-france.html"
-  },
-  {
-    "titre": "La campagne d'Allemagne par Napoléon",
-    "date": "1813-01-01",
-    "date_fin": "1814-01-01",
-    "perpetuel": false,
-    "pays": "Allemagne",
-    "coords": [
-      51.18446,
-      14.42367
-    ],
-    "description": "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/campagne-napoléon-allemagne.html"
-  },
-  {
-    "titre": "Les cent jours",
-    "date": "1814-01=01",
-    "date_fin": "1815-01_01",
-    "perpetuel": false,
-    "pays": "France",
-    "coords": [
-      46.2276,
-      2.2137
-    ],
-    "description": "Les Cent-Jours commencent comme une crise de légitimité, se poursuivent comme une crise militaire, et ne peuvent se terminer que dans le choc inévitable avec l’Europe coalisée",
-    "categorie": "guerre",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/cent-jours.html"
-  },
-  {
-    "titre": "Le Congrès de Vienne",
-    "date": "1814-09-18",
-    "date_fin": "1815-06-08",
-    "perpetuel": false,
-    "pays": "Autriche",
-    "coords": [
-      48.21,
-      16.37
-    ],
-    "description": "\"C’est la réorganisation de l’Europe après la chute de Napoléon. En France, la monarchie conservatrice revient au pouvoir et doit trouver un équilibre avec les idées révolutionnaires",
+    "description": "Sur les marges byzantines se forment des beyliks frontaliers, peu structurés mais animés par une idéologie de frontière : celle des *ghazi*, combattants de la foi chargés de défendre l’islam et d’entretenir la guerre.",
     "categorie": "politique",
-    "personnages": "Alexandre Pavlovitch Romanov",
-    "lien": "fiches/congres-vienne.html"
+    "personnages": null,
+    "lien": "fiches/origines-ottoman.html"
+  },
+  {
+    "titre": "La bataille d'Eylau",
+    "date": "1809-10-01",
+    "date_fin": "1807-02-01",
+    "perpetuel": false,
+    "pays": "Russie",
+    "coords": [
+      54.71467,
+      20.43912
+    ],
+    "description": "La chute prussienne, le blocus continental et la Pologne mobilisée dessinent un système impérial qui prétend refaçonner l’Europe par le droit, l’administration et le marché. Mais Eylau rappelle que la modernité exportée rencontre des frontières : celles du climat, de la logistique, de la démographie politique des peuples conquis.",
+    "categorie": "politique",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/bataille-eylau.html"
+  },
+  {
+    "titre": "La signature du traité de Presbourg par Napoléon et son impact",
+    "date": "1805-12-26",
+    "date_fin": false,
+    "perpetuel": false,
+    "pays": "Slovaquie",
+    "coords": [
+      48.14685,
+      17.09731
+    ],
+    "description": "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse.",
+    "categorie": "politique",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/traité-presbourg.html"
   },
   {
     "titre": "Croisades de secours",
@@ -169,83 +113,64 @@
     "lien": "fiches/croisades-de-secours.html"
   },
   {
-    "titre": "La guerre du sucre",
-    "date": "1419-01-01",
-    "date_fin": false,
-    "perpetuel": true,
-    "pays": "Portugal",
+    "titre": "La campagne de France",
+    "date": "1814-01-01",
+    "date_fin": "1814-01-01",
+    "perpetuel": false,
+    "pays": "France",
     "coords": [
-      32.73772323339855,
-      -17.00895629428063
+      46.2276,
+      2.2137
     ],
-    "description": "Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...",
-    "categorie": "politiques",
-    "personnages": null,
-    "lien": "fiches/docu-sucre.html"
+    "description": "La campagne de France, c'est les armes, la lassitude d’un pays exténué, les intrigues diplomatiques de Metternich et de Talleyrand, mais aussi un système impérial qui n’a pas survécu à la catastrophe russe. ",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/campagne-france.html"
   },
   {
-    "titre": "Les guerres du Congo et l'immunité européenne, de 1996 à 2019",
-    "date": "1996-10-01",
-    "date_fin": false,
+    "titre": "Léopold II dans l'Etat indépendant du Congo",
+    "date": "1885-01-01",
+    "date_fin": "1908-01-01",
     "perpetuel": false,
     "pays": "République démocratique du Congo",
     "coords": [
       -2.88,
       23.656
     ],
-    "description": "Le cycle de guerres causé par la prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale.",
-    "categorie": "guerre",
+    "description": "les ravages de Léopold II au Congo",
+    "categorie": "politique",
     "personnages": "Léopold II",
-    "lien": "fiches/guerres-congo.html"
+    "lien": "fiches/état-indépendant-du-congo.html"
   },
   {
-    "titre": "Le développement de New York",
-    "date": "1664-01-01",
+    "titre": "La bataille d'Austerlitz",
+    "date": "1805-12-02",
     "date_fin": false,
-    "perpetuel": true,
-    "pays": "Etats-Unis",
+    "perpetuel": false,
+    "pays": "République tchèque",
     "coords": [
-      40.7056297,
-      -74.0080942
+      49.1281,
+      16.9118
     ],
-    "description": "Le développement de New York à l'époque de la Nouvelle Amsterdam.",
-    "categorie": "politique",
+    "description": "D’un côté, la France napoléonienne porte les valeurs révolutionnaires ; de l’autre, les monarchies européennes défendent la légitimité dynastique et la stabilité de l’ordre ancien.",
+    "categorie": "guerre",
     "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/nouvelle-amsterdam-débuts.html"
+    "lien": "fiches/bataille-austerlitz.html"
   },
   {
-    "titre": "Les origines de l'Empire Ottoman",
-    "date": "1299-01-01",
-    "date_fin": "1453-01-01",
+    "titre": "Les cent jours",
+    "date": "1814-01=01",
+    "date_fin": "1815-01_01",
     "perpetuel": false,
-    "pays": "Empire ottoman",
+    "pays": "France",
     "coords": [
-      39.41626,
-      35.379558
+      46.2276,
+      2.2137
     ],
-    "description": "Sur les marges byzantines se forment des beyliks frontaliers, peu structurés mais animés par une idéologie de frontière : celle des *ghazi*, combattants de la foi chargés de défendre l’islam et d’entretenir la guerre.",
-    "categorie": "politique",
-    "personnages": null,
-    "lien": "fiches/origines-ottoman.html"
-  },
-  {
-    "titre": "La première croisade, en Anatolie",
-    "date": "1097-01-01",
-    "date_fin": "1099-01-01",
-    "perpetuel": false,
-    "pays": "Turquie",
-    "coords": [
-      38.9320501,
-      35.448558
-    ],
-    "description": "Après leur arrivée à Constantinople, les soixante à cent mille croisés se dirigent vers l’Anatolie et mettent le siège devant Nicée, capitale du sultanat turc de Roum.",
-    "categorie": "croisade",
-    "personnages": [
-      "Godefroy de Bouillon",
-      "Raymond de Saint-Gilles",
-      "Tancrède de Hauteville"
-    ],
-    "lien": "fiches/première-croisade.html"
+    "description": "Les Cent-Jours commencent comme une crise de légitimité, se poursuivent comme une crise militaire, et ne peuvent se terminer que dans le choc inévitable avec l’Europe coalisée",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/cent-jours.html"
   },
   {
     "titre": "La première croisade, de Tripoli à Jérusalem",
@@ -269,6 +194,111 @@
     "lien": "fiches/première-croisade2.html"
   },
   {
+    "titre": "Le développement de New York",
+    "date": "1664-01-01",
+    "date_fin": false,
+    "perpetuel": true,
+    "pays": "Etats-Unis",
+    "coords": [
+      40.7056297,
+      -74.0080942
+    ],
+    "description": "Le développement de New York à l'époque de la Nouvelle Amsterdam.",
+    "categorie": "politique",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/nouvelle-amsterdam-débuts.html"
+  },
+  {
+    "titre": "Le Congrès de Vienne",
+    "date": "1814-09-18",
+    "date_fin": "1815-06-08",
+    "perpetuel": false,
+    "pays": "Autriche",
+    "coords": [
+      48.21,
+      16.37
+    ],
+    "description": "\"C’est la réorganisation de l’Europe après la chute de Napoléon. En France, la monarchie conservatrice revient au pouvoir et doit trouver un équilibre avec les idées révolutionnaires",
+    "categorie": "politique",
+    "personnages": "Alexandre Pavlovitch Romanov",
+    "lien": "fiches/congres-vienne.html"
+  },
+  {
+    "titre": "L'après Eylau",
+    "date": "1807-02-01",
+    "date_fin": "1808-01-01",
+    "perpetuel": false,
+    "pays": "Russie",
+    "coords": [
+      54.44668,
+      21.01586
+    ],
+    "description": "De la boucherie d’Eylau à la victoire de Friedland et à la prétention napoléonienne de *clore* les guerres de la Révolution.",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/bataille-friedland.html"
+  },
+  {
+    "titre": "La guerre du sucre",
+    "date": "1419-01-01",
+    "date_fin": false,
+    "perpetuel": true,
+    "pays": "Portugal",
+    "coords": [
+      32.73772323339855,
+      -17.00895629428063
+    ],
+    "description": "Pendant la majeure partie de l’histoire humaine, l’alimentation s’est passée de sucre raffiné. Ce n’est qu’à partir des XIIIᵉ et XIVᵉ siècles que le sucre commence à être commercialisé à plus grande échelle. Et quel flop...",
+    "categorie": "politiques",
+    "personnages": null,
+    "lien": "fiches/docu-sucre.html"
+  },
+  {
+    "titre": "La campagne d'Espagne",
+    "date": "1808-05-02",
+    "date_fin": "1814-04-17",
+    "perpetuel": false,
+    "pays": "Espagne",
+    "coords": [
+      40.4168,
+      -3.7038
+    ],
+    "description": "Guerre opposant la France napoléonienne aux résistances espagnoles et à leurs alliés britanniques et portugais dans la péninsule Ibérique.",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/campagne-espagne-napoléon.html"
+  },
+  {
+    "titre": "Les guerres du Congo et l'immunité européenne, de 1996 à 2019",
+    "date": "1996-10-01",
+    "date_fin": false,
+    "perpetuel": false,
+    "pays": "République démocratique du Congo",
+    "coords": [
+      -2.88,
+      23.656
+    ],
+    "description": "Le cycle de guerres causé par la prédation minière en RDC depuis 1996, marqué par l’implication de voisins, de groupes armés et de l’État, et par une impunité quasi totale.",
+    "categorie": "guerre",
+    "personnages": "Léopold II",
+    "lien": "fiches/guerres-congo.html"
+  },
+  {
+    "titre": "La campagne d'Allemagne par Napoléon",
+    "date": "1813-01-01",
+    "date_fin": "1814-01-01",
+    "perpetuel": false,
+    "pays": "Allemagne",
+    "coords": [
+      51.18446,
+      14.42367
+    ],
+    "description": "Napoléon prouve une dernière fois sa maîtrise du champ de bataille, sans parvenir pour autant à empêcher que la coalition, désormais unie autour de la destruction du système napoléonien, poursuive son œuvre jusqu’au bout.",
+    "categorie": "guerre",
+    "personnages": "Napoléon Bonaparte",
+    "lien": "fiches/campagne-napoléon-allemagne.html"
+  },
+  {
     "titre": "Le siège d'Antioche",
     "date": "1097-01-01",
     "date_fin": false,
@@ -282,36 +312,6 @@
     "categorie": "politique",
     "personnages": null,
     "lien": "fiches/siège-antioche.html"
-  },
-  {
-    "titre": "Montée au pouvoir du Sultanat Mamluk",
-    "date": "1250-01-01",
-    "date_fin": "1580-01-01",
-    "perpetuel": false,
-    "pays": "Sultanat mamluk d'Egypte",
-    "coords": [
-      30.02399,
-      31.25946
-    ],
-    "description": "Comment les Mamluks ont dead ça.",
-    "categorie": "politique",
-    "personnages": "",
-    "lien": "fiches/sultanat-mamluk.html"
-  },
-  {
-    "titre": "La signature du traité de Presbourg par Napoléon et son impact",
-    "date": "1805-12-26",
-    "date_fin": false,
-    "perpetuel": false,
-    "pays": "Slovaquie",
-    "coords": [
-      48.14685,
-      17.09731
-    ],
-    "description": "Le traité de Presbourg est l’acte diplomatique par lequel Napoléon convertit Austerlitz en ordre continental provisoire. En soumettant l’Autriche et en remodelant l’Italie et l’Allemagne, il fabrique un glacis, un marché et un théâtre d’opérations d’où lancer la campagne contre la Prusse.",
-    "categorie": "politique",
-    "personnages": "Napoléon Bonaparte",
-    "lien": "fiches/traité-presbourg.html"
   },
   {
     "titre": "Les Turcs seljukides dans le contexte des croisades",
@@ -329,18 +329,18 @@
     "lien": "fiches/turcs-seljukides-croisades.html"
   },
   {
-    "titre": "Léopold II dans l'Etat indépendant du Congo",
-    "date": "1885-01-01",
-    "date_fin": "1908-01-01",
+    "titre": "Montée au pouvoir du Sultanat Mamluk",
+    "date": "1250-01-01",
+    "date_fin": "1580-01-01",
     "perpetuel": false,
-    "pays": "République démocratique du Congo",
+    "pays": "Sultanat mamluk d'Egypte",
     "coords": [
-      -2.88,
-      23.656
+      30.02399,
+      31.25946
     ],
-    "description": "les ravages de Léopold II au Congo",
+    "description": "Comment les Mamluks ont dead ça.",
     "categorie": "politique",
-    "personnages": "Léopold II",
-    "lien": "fiches/état-indépendant-du-congo.html"
+    "personnages": "",
+    "lien": "fiches/sultanat-mamluk.html"
   }
 ]
